@@ -11,6 +11,7 @@ export default function () {
     height: 180,
     show: true,
     resizable: false,
+    alwaysOnTop: true,
   };
 
   const browserWindow = new BrowserWindow(options);
