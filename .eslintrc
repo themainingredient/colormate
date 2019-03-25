@@ -1,0 +1,68 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": ["jest"],
+  "rules": {
+    "arrow-body-style": "off",
+    "class-methods-use-this": "off",
+    "consistent-return": 1,
+    "function-paren-newline": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default": "off",
+    "max-len": [1, 120],
+    "no-else-return": 1,
+    "no-underscore-dangle": "off",
+    "no-unused-expressions": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/forbid-prop-types": "off",
+    "react/jsx-curly-brace-presence": {
+      "props": "always",
+      "children": "off"
+    },
+    "react/jsx-filename-extension": 1,
+    "react/no-array-index-key": "off",
+    "react/prop-types": 1,
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-unescaped-entities": "off",
+    "react/destructuring-assignment": 1,
+    "import/first": 1,
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/containers/**/*Container.jsx"],
+      "rules": {
+        "react/prop-types": false
+      }
+    }
+  ],
+  "globals": {
+    "Headers": true,
+    "document": true,
+    "window": true,
+    "navigator": true,
+    "fetch": true
+  },
+  "env": {
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

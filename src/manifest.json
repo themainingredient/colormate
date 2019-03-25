@@ -10,8 +10,6 @@
   ],
   "menu": {
     "title": "Colormate",
-    "items": [
-      "my-command-identifier"
-    ]
+    "items": ["my-command-identifier"]
   }
 }
