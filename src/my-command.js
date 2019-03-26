@@ -1,14 +1,14 @@
 import BrowserWindow from 'sketch-module-web-view';
-
 import { UI } from 'sketch';
+import getColors from './get-colors';
 
 const webview = require('../resources/webview.html');
 
 export default function () {
   const options = {
     identifier: 'unique.id',
-    width: 240,
-    height: 180,
+    width: 640,
+    height: 480,
     show: true,
     resizable: false,
     alwaysOnTop: true,
@@ -33,6 +33,14 @@ export default function () {
     UI.message(s);
     webContents
       .executeJavaScript(`setRandomNumber(${Math.random()})`)
+      .catch(console.error); // eslint-disable-line no-console
+  });
+
+
+  webContents.on('getColors', (s) => {
+    const colors = () => getColors();
+    webContents
+      .executeJavaScript(`setUsedColors(${JSON.stringify(colors())})`)
       .catch(console.error); // eslint-disable-line no-console
   });
 
