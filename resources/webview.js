@@ -1,3 +1,5 @@
+import './app';
+
 // Disable the context menu to have a more native feel
 document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
@@ -14,8 +16,4 @@ document.getElementById('button-clrs').addEventListener('click', () => {
 // called from the plugin
 window.setRandomNumber = (randomNumber) => {
   document.getElementById('answer').innerHTML = `Random number from the plugin: ${randomNumber}`;
-};
-
-window.setUsedColors = (message) => {
-  document.getElementById('colors').innerHTML = `${message}`;
 };

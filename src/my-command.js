@@ -12,6 +12,7 @@ export default function () {
     show: true,
     resizable: false,
     alwaysOnTop: true,
+    acceptsFirstMouse: true,
   };
 
   const browserWindow = new BrowserWindow(options);
@@ -38,9 +39,9 @@ export default function () {
 
 
   webContents.on('getColors', (s) => {
-    const colors = () => getColors();
+    UI.message(s);
     webContents
-      .executeJavaScript(`setUsedColors(${JSON.stringify(colors())})`)
+      .executeJavaScript('setUsedColors(3)')
       .catch(console.error); // eslint-disable-line no-console
   });
 
