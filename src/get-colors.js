@@ -2,62 +2,23 @@ import sketch from 'sketch';
 
 const colors = [];
 
-const getColor = (type, layer) => {
-  if (layer.style.fills.length > 0) {
-    colors[type].push(layer.style.fills[0].color);
-
-    // console.log('Found a color!', colors);
-  }
-};
-
 const traverse = (layer) => {
-  for (let i = 0; i < layer.layers.length; i++) {
-    // console.log(`processing layer ${i}`);
-    // console.log(layer.layers[i]);
-    nextStep(layer.layers[i]);
+  if (('layers' in layer) && layer.layers.length) {
+    layer.layers.forEach(subLayers => traverse(subLayers));
   }
-};
 
-const nextStep = (layer) => {
-  switch (layer.type) {
-    case 'Artboard':
-      traverse(layer);
-      break;
-    case 'Group':
-      traverse(layer);
-      break;
-    case 'ShapePath':
-      getColor(layer);
-      break;
-    case 'Shape':
-      getColor(layer);
-      break;
-    case 'Image':
-      // console.log(layer.type);
-      break;
-    default:
-      // console.log(layer.type);
-      break;
+  // TODO: Make a function for this
+  if (layer.style.fills.length) {
+    colors.push(layer.style.fills[0].color);
+  }
+
+  if (layer.style.borders.length) {
+    colors.push(layer.style.borders[0].color);
   }
 };
 
 export default function () {
-  const doc = sketch.getSelectedDocument();
+  traverse(sketch.getSelectedDocument().pages[0]);
 
-  const { pages } = doc;
-
-  // console.log(pages[0].layers[0]);
-  traverse(pages[0].layers[0]);
+  return colors;
 }
-
-// Layer types:
-// * Artboard
-// * Group
-// * Shape
-// * Image
-// * ShapePath
-// * Text
-// * Symbol Master
-// * Symbol Instance
-// * Hotspot
-// * Slice

@@ -39,9 +39,10 @@ export default function () {
 
 
   webContents.on('getColors', (s) => {
+    const colors = getColors();
     UI.message(s);
     webContents
-      .executeJavaScript('setUsedColors(3)')
+      .executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
       .catch(console.error); // eslint-disable-line no-console
   });
 
