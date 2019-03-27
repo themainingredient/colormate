@@ -1,6 +1,6 @@
 import sketch from 'sketch';
 
-const colors = [];
+const _colors = {};
 
 const traverse = (layer) => {
   if (('layers' in layer) && layer.layers.length) {
@@ -9,16 +9,21 @@ const traverse = (layer) => {
 
   // TODO: Make a function for this
   if (layer.style.fills.length) {
-    colors.push(layer.style.fills[0].color);
+    const { color } = layer.style.fills[0];
+
+    _colors[color] = _colors[color] ? [..._colors[color], layer.id] : [layer.id];
   }
 
   if (layer.style.borders.length) {
-    colors.push(layer.style.borders[0].color);
+    const { color } = layer.style.borders[0];
+
+    _colors[color] = _colors[color] ? [..._colors[color], layer.id] : [layer.id];
   }
 };
 
 export default function () {
+  console.log('IM CALLED');
   traverse(sketch.getSelectedDocument().pages[0]);
 
-  return colors;
+  return _colors;
 }
