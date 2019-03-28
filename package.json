@@ -16,12 +16,17 @@
     "build": "skpm-build",
     "watch": "skpm-build --watch",
     "start": "skpm-build --watch",
-    "postinstall": "npm run build && skpm-link"
+    "postinstall": "npm run build && skpm-link",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
     "@skpm/builder": "^0.5.11",
     "@skpm/extract-loader": "^2.0.2",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.5.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
@@ -29,7 +34,8 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "html-loader": "^0.5.1"
+    "html-loader": "^0.5.1",
+    "jest": "^24.5.0"
   },
   "resources": [
     "resources/**/*.js"
@@ -40,5 +46,10 @@
     "sketch": "^0.2.0",
     "sketch-module-web-view": "^2.1.5"
   },
-  "author": "jeroennknol <jeroen-knol@live.nl>"
+  "author": "jeroennknol <jeroen-knol@live.nl>",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
 }
