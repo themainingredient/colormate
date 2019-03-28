@@ -7,8 +7,8 @@ const webview = require('../resources/webview.html');
 export default function () {
   const options = {
     identifier: 'unique.id',
-    width: 640,
-    height: 480,
+    width: 320,
+    height: 534,
     show: true,
     resizable: false,
     alwaysOnTop: true,

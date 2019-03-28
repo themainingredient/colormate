@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+
+import Header from './components/Header';
+import List from './components/List/List';
+import Footer from './components/Footer';
+
+const PluginWrapper = styled.div`
+  height: 534px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const App = () => {
   const [colors, setColors] = useState([]);
@@ -14,29 +26,11 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Colormate</h2>
-      {Object.keys(colors).map(color => (
-        <p style={{ color }}>
-          {color}: {colors[color].length} instances
-        </p>
-      ))}
-      {Object.keys(colors).map(color => (
-        <p style={{ color }}>
-          {color}:{' '}
-          {colors[color].map(instance => (
-            <>
-              <p>&nbsp;&nbsp;{instance.colorType}</p>
-              <ul>
-                {instance.parents.map(parent => (
-                  <li>&nbsp;&nbsp;•&nbsp;{parent}</li>
-                ))}
-              </ul>
-            </>
-          ))}
-        </p>
-      ))}
-    </div>
+    <PluginWrapper>
+      <Header />
+      <List colorList={colors} />
+      <Footer />
+    </PluginWrapper>
   );
 };
 

@@ -27,6 +27,7 @@
     "@skpm/extract-loader": "^2.0.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
@@ -35,7 +36,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "html-loader": "^0.5.1",
-    "jest": "^24.5.0"
+    "jest": "^24.5.0",
+    "react-svg-loader": "^2.1.0"
   },
   "resources": [
     "resources/**/*.js"
@@ -44,7 +46,8 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "sketch": "^0.2.0",
-    "sketch-module-web-view": "^2.1.5"
+    "sketch-module-web-view": "^2.1.5",
+    "styled-components": "^4.2.0"
   },
   "author": "jeroennknol <jeroen-knol@live.nl>",
   "jest": {
