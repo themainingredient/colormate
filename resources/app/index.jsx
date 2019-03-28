@@ -28,8 +28,8 @@ const App = () => {
             <>
               <p>&nbsp;&nbsp;{instance.colorType}</p>
               <ul>
-                {instance.ancestry.map(ancestor => (
-                  <li>&nbsp;&nbsp;•&nbsp;{ancestor}</li>
+                {instance.parents.map(parent => (
+                  <li>&nbsp;&nbsp;•&nbsp;{parent}</li>
                 ))}
               </ul>
             </>

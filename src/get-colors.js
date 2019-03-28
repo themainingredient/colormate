@@ -1,45 +1,35 @@
 import sketch from 'sketch';
-
-const _colors = {};
-
-const applyStrategy = (layer, ancestry) => {
-  if (layer.style.fills.length) {
-    const { color } = layer.style.fills[0];
-
-    const layerData = {
-      id: layer.id,
-      colorType: 'fill',
-      ancestry,
-    };
-
-    _colors[color] = _colors[color] ? [..._colors[color], layerData] : [layerData];
-  }
-
-  if (layer.style.borders.length) {
-    const { color } = layer.style.borders[0];
-
-    const layerData = {
-      id: layer.id,
-      colorType: 'border',
-      ancestry,
-    };
-
-    console.log('ANCESTRY ', ancestry);
-
-    _colors[color] = _colors[color] ? [..._colors[color], layerData] : [layerData];
-  }
-};
-
-const traverse = (layer, ancestry = []) => {
-  if (('layers' in layer) && layer.layers.length) {
-    layer.layers.forEach(subLayers => traverse(subLayers, [...ancestry, layer.id]));
-  }
-
-  applyStrategy(layer, ancestry);
-};
+import { traverse } from './helpers/traverse';
+import {
+  hasBorder,
+  hasFill,
+  createDataStructure,
+  getColorArray,
+} from './helpers/get-colors';
 
 export default function () {
-  traverse(sketch.getSelectedDocument().pages[0]);
-  console.log(_colors);
-  return _colors;
+  const colorsObject = {};
+  const layers = traverse(sketch.getSelectedDocument().pages[0]);
+
+  layers.forEach((layerWithParents) => {
+    const { layer, parents } = layerWithParents;
+
+    if ('style' in layer) {
+      if (hasBorder(layer)) {
+        const { color } = layer.style.borders[0];
+
+        const dataStructure = createDataStructure(layer, 'border', parents);
+        colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
+      }
+
+      if (hasFill(layer)) {
+        const { color } = layer.style.fills[0];
+
+        const dataStructure = createDataStructure(layer, 'fill', parents);
+        colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
+      }
+    }
+  });
+
+  return colorsObject;
 }
