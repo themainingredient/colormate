@@ -1,0 +1,186 @@
+{
+  "type": "ShapePath",
+  "id": "C0CA5E54-4EF4-46B5-A142-7905EA7E4C37",
+  "frame": {
+    "x": 1032,
+    "y": 108,
+    "width": 237,
+    "height": 216
+  },
+  "name": "Rectangle Copy 5",
+  "selected": false,
+  "hidden": false,
+  "locked": false,
+  "exportFormats": [],
+  "transform": {
+    "rotation": 0,
+    "flippedHorizontally": false,
+    "flippedVertically": false
+  },
+  "style": {
+    "type": "Style",
+    "id": "D23B17FF-5695-4710-BC1C-1A0944F2F794",
+    "opacity": 1,
+    "blendingMode": "Normal",
+    "borderOptions": {
+      "startArrowhead": "None",
+      "endArrowhead": "None",
+      "dashPattern": [],
+      "lineEnd": "Butt",
+      "lineJoin": "Miter"
+    },
+    "blur": {
+      "center": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "motionAngle": 0,
+      "radius": 10,
+      "enabled": false,
+      "blurType": "Gaussian"
+    },
+    "fills": [
+      {
+        "fill": "Color",
+        "color": "#5f3e10ff",
+        "gradient": {
+          "gradientType": "Linear",
+          "from": {
+            "x": 0.5,
+            "y": 0
+          },
+          "to": {
+            "x": 0.5,
+            "y": 1
+          },
+          "stops": [
+            {
+              "position": 0,
+              "color": "#ffffffff"
+            },
+            {
+              "position": 1,
+              "color": "#000000ff"
+            }
+          ]
+        },
+        "pattern": {
+          "patternType": "Fill",
+          "image": null,
+          "tileScale": 1
+        },
+        "noise": {
+          "noiseType": "Original",
+          "intensity": 0
+        },
+        "enabled": true
+      }
+    ],
+    "borders": [
+      {
+        "fillType": "Color",
+        "position": "Inside",
+        "color": "#979797ff",
+        "gradient": {
+          "gradientType": "Linear",
+          "from": {
+            "x": 0.5,
+            "y": 0
+          },
+          "to": {
+            "x": 0.5,
+            "y": 1
+          },
+          "stops": [
+            {
+              "position": 0,
+              "color": "#ffffffff"
+            },
+            {
+              "position": 1,
+              "color": "#000000ff"
+            }
+          ]
+        },
+        "thickness": 1,
+        "enabled": true
+      }
+    ],
+    "shadows": [],
+    "innerShadows": [],
+    "styleType": "Layer"
+  },
+  "sharedStyleId": null,
+  "shapeType": "Rectangle",
+  "points": [
+    {
+      "type": "CurvePoint",
+      "cornerRadius": 0,
+      "curveFrom": {
+        "x": 0,
+        "y": 0
+      },
+      "curveTo": {
+        "x": 0,
+        "y": 0
+      },
+      "point": {
+        "x": 0,
+        "y": 0
+      },
+      "pointType": "Straight"
+    },
+    {
+      "type": "CurvePoint",
+      "cornerRadius": 0,
+      "curveFrom": {
+        "x": 1,
+        "y": 0
+      },
+      "curveTo": {
+        "x": 1,
+        "y": 0
+      },
+      "point": {
+        "x": 1,
+        "y": 0
+      },
+      "pointType": "Straight"
+    },
+    {
+      "type": "CurvePoint",
+      "cornerRadius": 0,
+      "curveFrom": {
+        "x": 1,
+        "y": 1
+      },
+      "curveTo": {
+        "x": 1,
+        "y": 1
+      },
+      "point": {
+        "x": 1,
+        "y": 1
+      },
+      "pointType": "Straight"
+    },
+    {
+      "type": "CurvePoint",
+      "cornerRadius": 0,
+      "curveFrom": {
+        "x": 0,
+        "y": 1
+      },
+      "curveTo": {
+        "x": 0,
+        "y": 1
+      },
+      "point": {
+        "x": 0,
+        "y": 1
+      },
+      "pointType": "Straight"
+    }
+  ],
+  "closed": true
+}

@@ -1,0 +1,2360 @@
+{
+  "type": "Document",
+  "id": "A1C9C73C-857A-4D52-ABDF-3F0109908AFC",
+  "pages": [
+    {
+      "type": "Page",
+      "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "name": "Page 1",
+      "selected": true,
+      "sharedStyleId": null,
+      "layers": [
+        {
+          "type": "Artboard",
+          "id": "45445BB5-4928-40A0-8C4A-38760BE23D05",
+          "frame": {
+            "x": -131,
+            "y": -69,
+            "width": 1440,
+            "height": 1024
+          },
+          "name": "Desktop HD",
+          "selected": false,
+          "exportFormats": [
+            {
+              "type": "ExportFormat",
+              "fileFormat": "png",
+              "suffix": "",
+              "size": "1x"
+            }
+          ],
+          "sharedStyleId": null,
+          "layers": [
+            {
+              "type": "ShapePath",
+              "id": "C5E79A03-EE69-44FD-A02E-07709756E03A",
+              "frame": {
+                "x": 164,
+                "y": 237,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "563A3A15-E655-4423-B81D-37C97D340B6E",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#d8d8d8ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "96321D1C-90B2-41CA-B05A-751A25076143",
+              "frame": {
+                "x": 672,
+                "y": 237,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 2",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "6C61D015-C4F8-4986-B3EF-482C2C37EC7C",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#dbd284ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "Group",
+              "id": "0A1FC6C4-6843-4343-B5C9-6D8C2B16DF0B",
+              "frame": {
+                "x": 554,
+                "y": 544,
+                "width": 677,
+                "height": 282
+              },
+              "name": "Group",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "5A7D48FD-CE19-4594-A889-264B76DD11FE",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [],
+                "borders": [],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "layers": [
+                {
+                  "type": "ShapePath",
+                  "id": "82AC35C6-8F48-49F9-8C6D-FE5745756B1B",
+                  "frame": {
+                    "x": 0,
+                    "y": 66,
+                    "width": 237,
+                    "height": 216
+                  },
+                  "name": "Rectangle Copy 3",
+                  "selected": false,
+                  "hidden": false,
+                  "locked": false,
+                  "exportFormats": [],
+                  "transform": {
+                    "rotation": 0,
+                    "flippedHorizontally": false,
+                    "flippedVertically": false
+                  },
+                  "style": {
+                    "type": "Style",
+                    "id": "9122A5B9-E322-497A-9FEB-2DFF06B10978",
+                    "opacity": 1,
+                    "blendingMode": "Normal",
+                    "borderOptions": {
+                      "startArrowhead": "None",
+                      "endArrowhead": "None",
+                      "dashPattern": [],
+                      "lineEnd": "Butt",
+                      "lineJoin": "Miter"
+                    },
+                    "blur": {
+                      "center": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "motionAngle": 0,
+                      "radius": 10,
+                      "enabled": false,
+                      "blurType": "Gaussian"
+                    },
+                    "fills": [
+                      {
+                        "fill": "Color",
+                        "color": "#5d2063ff",
+                        "gradient": {
+                          "gradientType": "Linear",
+                          "from": {
+                            "x": 0.5,
+                            "y": 0
+                          },
+                          "to": {
+                            "x": 0.5,
+                            "y": 1
+                          },
+                          "stops": [
+                            {
+                              "position": 0,
+                              "color": "#ffffffff"
+                            },
+                            {
+                              "position": 1,
+                              "color": "#000000ff"
+                            }
+                          ]
+                        },
+                        "pattern": {
+                          "patternType": "Fill",
+                          "image": null,
+                          "tileScale": 1
+                        },
+                        "noise": {
+                          "noiseType": "Original",
+                          "intensity": 0
+                        },
+                        "enabled": true
+                      }
+                    ],
+                    "borders": [
+                      {
+                        "fillType": "Color",
+                        "position": "Inside",
+                        "color": "#979797ff",
+                        "gradient": {
+                          "gradientType": "Linear",
+                          "from": {
+                            "x": 0.5,
+                            "y": 0
+                          },
+                          "to": {
+                            "x": 0.5,
+                            "y": 1
+                          },
+                          "stops": [
+                            {
+                              "position": 0,
+                              "color": "#ffffffff"
+                            },
+                            {
+                              "position": 1,
+                              "color": "#000000ff"
+                            }
+                          ]
+                        },
+                        "thickness": 1,
+                        "enabled": true
+                      }
+                    ],
+                    "shadows": [],
+                    "innerShadows": [],
+                    "styleType": "Layer"
+                  },
+                  "sharedStyleId": null,
+                  "shapeType": "Rectangle",
+                  "points": [
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "curveTo": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "point": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "curveTo": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "point": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "curveTo": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "point": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "curveTo": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "point": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "pointType": "Straight"
+                    }
+                  ],
+                  "closed": true
+                },
+                {
+                  "type": "ShapePath",
+                  "id": "90949147-07CD-46E0-9CDB-1E0236E5BFB7",
+                  "frame": {
+                    "x": 440,
+                    "y": 0,
+                    "width": 237,
+                    "height": 216
+                  },
+                  "name": "Rectangle Copy 4",
+                  "selected": false,
+                  "hidden": false,
+                  "locked": false,
+                  "exportFormats": [],
+                  "transform": {
+                    "rotation": 0,
+                    "flippedHorizontally": false,
+                    "flippedVertically": false
+                  },
+                  "style": {
+                    "type": "Style",
+                    "id": "B9576BB2-5DD6-4054-BABA-E7D17EA490F0",
+                    "opacity": 1,
+                    "blendingMode": "Normal",
+                    "borderOptions": {
+                      "startArrowhead": "None",
+                      "endArrowhead": "None",
+                      "dashPattern": [],
+                      "lineEnd": "Butt",
+                      "lineJoin": "Miter"
+                    },
+                    "blur": {
+                      "center": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "motionAngle": 0,
+                      "radius": 10,
+                      "enabled": false,
+                      "blurType": "Gaussian"
+                    },
+                    "fills": [
+                      {
+                        "fill": "Color",
+                        "color": "#26cbcdff",
+                        "gradient": {
+                          "gradientType": "Linear",
+                          "from": {
+                            "x": 0.5,
+                            "y": 0
+                          },
+                          "to": {
+                            "x": 0.5,
+                            "y": 1
+                          },
+                          "stops": [
+                            {
+                              "position": 0,
+                              "color": "#ffffffff"
+                            },
+                            {
+                              "position": 1,
+                              "color": "#000000ff"
+                            }
+                          ]
+                        },
+                        "pattern": {
+                          "patternType": "Fill",
+                          "image": null,
+                          "tileScale": 1
+                        },
+                        "noise": {
+                          "noiseType": "Original",
+                          "intensity": 0
+                        },
+                        "enabled": true
+                      }
+                    ],
+                    "borders": [
+                      {
+                        "fillType": "Color",
+                        "position": "Inside",
+                        "color": "#979797ff",
+                        "gradient": {
+                          "gradientType": "Linear",
+                          "from": {
+                            "x": 0.5,
+                            "y": 0
+                          },
+                          "to": {
+                            "x": 0.5,
+                            "y": 1
+                          },
+                          "stops": [
+                            {
+                              "position": 0,
+                              "color": "#ffffffff"
+                            },
+                            {
+                              "position": 1,
+                              "color": "#000000ff"
+                            }
+                          ]
+                        },
+                        "thickness": 1,
+                        "enabled": true
+                      }
+                    ],
+                    "shadows": [],
+                    "innerShadows": [],
+                    "styleType": "Layer"
+                  },
+                  "sharedStyleId": null,
+                  "shapeType": "Rectangle",
+                  "points": [
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "curveTo": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "poin\nt": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "curveTo": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "point": {
+                        "x": 1,
+                        "y": 0
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "curveTo": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "point": {
+                        "x": 1,
+                        "y": 1
+                      },
+                      "pointType": "Straight"
+                    },
+                    {
+                      "type": "CurvePoint",
+                      "cornerRadius": 0,
+                      "curveFrom": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "curveTo": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "point": {
+                        "x": 0,
+                        "y": 1
+                      },
+                      "pointType": "Straight"
+                    }
+                  ],
+                  "closed": true
+                }
+              ]
+            },
+            {
+              "type": "ShapePath",
+              "id": "3D4F563C-A00D-4A32-9299-F9A0587DF91F",
+              "frame": {
+                "x": 114,
+                "y": 572,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "4D5C26C4-D08B-4CC2-8F68-DD47EF0F755E",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#df2b2bff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "CBB5C7DD-1145-466F-BC68-3522EC63A4F2",
+              "frame": {
+                "x": 164,
+                "y": 718,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 6",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "A2C20AEF-577F-4EDD-927A-044D14508957",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#df2b2bff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "87877A72-6CBE-45F4-B1DF-2F769CFEBE08",
+              "frame": {
+                "x": 672,
+                "y": 544,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 7",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "EC60BA13-2817-4D43-B482-C4D8BC1D72D7",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "C0CA5E54-4EF4-46B5-A142-7905EA7E4C37",
+              "frame": {
+                "x": 1032,
+                "y": 108,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 5",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "D23B17FF-5695-4710-BC1C-1A0944F2F794",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#5f3e10ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            }
+          ],
+          "flowStartPoint": false,
+          "background": {
+            "enabled": false,
+            "includedInExport": true,
+            "color": "#ffffffff"
+          }
+        },
+        {
+          "type": "Artboard",
+          "id": "E9600003-2F70-44B8-BF0B-379E8F3C470E",
+          "frame": {
+            "x": 1857,
+            "y": -69,
+            "width": 1997,
+            "height": 1024
+          },
+          "name": "MOAR COLORSS",
+          "selected": false,
+          "exportFormats": [],
+          "shar\nedStyleId": null,
+          "layers": [
+            {
+              "type": "ShapePath",
+              "id": "147194A8-9324-4ECC-A1C5-2098D99BF995",
+              "frame": {
+                "x": 762,
+                "y": 296,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 6",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "5A1150C8-5C9C-452A-AE62-54C99598CBB0",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#e89827ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "AB4C1D67-2D9A-4F46-954C-5E63EBE15988",
+              "frame": {
+                "x": 0,
+                "y": 629,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 8",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "5D2BDD32-3813-4D3A-98D3-0EA4BC0D594C",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#df2b2bff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            },
+            {
+              "type": "ShapePath",
+              "id": "EB1096C9-1389-468E-9D6E-A7805338A0C3",
+              "frame": {
+                "x": 1245,
+                "y": 521,
+                "width": 237,
+                "height": 216
+              },
+              "name": "Rectangle Copy 9",
+              "selected": false,
+              "hidden": false,
+              "locked": false,
+              "exportFormats": [],
+              "transform": {
+                "rotation": 0,
+                "flippedHorizontally": false,
+                "flippedVertically": false
+              },
+              "style": {
+                "type": "Style",
+                "id": "52343342-D6A1-48B0-AE90-49D3E39E84DA",
+                "opacity": 1,
+                "blendingMode": "Normal",
+                "borderOptions": {
+                  "startArrowhead": "None",
+                  "endArrowhead": "None",
+                  "dashPattern": [],
+                  "lineEnd": "Butt",
+                  "lineJoin": "Miter"
+                },
+                "blur": {
+                  "center": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "motionAngle": 0,
+                  "radius": 10,
+                  "enabled": false,
+                  "blurType": "Gaussian"
+                },
+                "fills": [
+                  {
+                    "fill": "Color",
+                    "color": "#df2b2bff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "pattern": {
+                      "patternType": "Fill",
+                      "image": null,
+                      "tileScale": 1
+                    },
+                    "noise": {
+                      "noiseType": "Original",
+                      "intensity": 0
+                    },
+                    "enabled": true
+                  }
+                ],
+                "borders": [
+                  {
+                    "fillType": "Color",
+                    "position": "Inside",
+                    "color": "#979797ff",
+                    "gradient": {
+                      "gradientType": "Linear",
+                      "from": {
+                        "x": 0.5,
+                        "y": 0
+                      },
+                      "to": {
+                        "x": 0.5,
+                        "y": 1
+                      },
+                      "stops": [
+                        {
+                          "position": 0,
+                          "color": "#ffffffff"
+                        },
+                        {
+                          "position": 1,
+                          "color": "#000000ff"
+                        }
+                      ]
+                    },
+                    "thickness": 1,
+                    "enabled": true
+                  }
+                ],
+                "shadows": [],
+                "innerShadows": [],
+                "styleType": "Layer"
+              },
+              "sharedStyleId": null,
+              "shapeType": "Rectangle",
+              "points": [
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                },
+                {
+                  "type": "CurvePoint",
+                  "cornerRadius": 0,
+                  "curveFrom": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "curveTo": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "point": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "pointType": "Straight"
+                }
+              ],
+              "closed": true
+            }
+          ],
+          "flowStartPoint": false,
+          "background": {
+            "enabled": false,
+            "includedInExport": true,
+            "color": "#ffffffff"
+          }
+        },
+        {
+          "type": "ShapePath",
+          "id": "3467F8BB-0488-4805-B9CE-23260C8EEF15",
+          "frame": {
+            "x": 3523,
+            "y": -704,
+            "width": 237,
+            "height": 216
+          },
+          "name": "Rectangle Copy 10",
+          "selected": false,
+          "hidden": false,
+          "locked": false,
+          "exportFormats": [],
+          "transform": {
+            "rotation": 0,
+            "flippedHorizontally": false,
+            "flippedVertically": false
+          },
+          "style": {
+            "type": "Style",
+            "id": "8B66391F-A804-4340-8228-CD49D52F9A59",
+            "opacity": 1,
+            "blendingMode": "Normal",
+            "borderOptions": {
+              "startArrowhead": "None",
+              "endArrowhead": "None",
+              "dashPattern": [],
+              "lineEnd": "Butt",
+              "lineJoin": "Miter"
+            },
+            "blur": {
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "motionAngle": 0,
+              "radius": 10,
+              "enabled": false,
+              "blurType": "Gaussian"
+            },
+            "fills": [
+              {
+                "fill": "Color",
+                "color": "#df2b2bff",
+                "gradient": {
+                  "gradientType": "Linear",
+                  "from": {
+                    "x": 0.5,
+                    "y": 0
+                  },
+                  "to": {
+                    "x": 0.5,
+                    "y": 1
+                  },
+                  "stops": [
+                    {
+                      "position": 0,
+                      "color": "#ffffffff"
+                    },
+                    {
+                      "position": 1,
+                      "color": "#000000ff"
+                    }
+                  ]
+                },
+                "pattern": {
+                  "patternType": "Fill",
+                  "image": null,
+                  "tileScale": 1
+                },
+                "noise": {
+                  "noiseType": "Original",
+                  "intensity": 0
+                },
+                "enabled": true
+              }
+            ],
+            "borders": [
+              {
+                "fillType": "Color",
+                "position": "Inside",
+                "color": "#979797ff",
+                "gradient": {
+                  "gradientType": "Linear",
+                  "from": {
+                    "x": 0.5,
+                    "y": 0
+                  },
+                  "to": {
+                    "x": 0.5,
+                    "y": 1
+                  },
+                  "stops": [
+                    {
+                      "position": 0,
+                      "color": "#ffffffff"
+                    },
+                    {
+                      "position": 1,
+                      "color": "#000000ff"
+                    }
+                  ]
+                },
+                "thickness": 1,
+                "enabled": true
+              }
+            ],
+            "shadows": [],
+            "innerShadows": [],
+            "styleType": "Layer"
+          },
+          "sharedStyleId": null,
+          "shapeType": "Rectangle",
+          "points": [
+            {
+              "type": "CurvePoint",
+              "cornerRadius": 0,
+              "curveFrom": {
+                "x": 0,
+                "y": 0
+              },
+              "curveTo": {
+                "x": 0,
+                "y": 0
+              },
+              "point": {
+                "x": 0,
+                "y": 0
+              },
+              "pointType": "Straight"
+            },
+            {
+              "type": "CurvePoint",
+              "cornerRadius": 0,
+              "curveFrom": {
+                "x": 1,
+                "y": 0
+              },
+              "curveTo": {
+                "x": 1,
+                "y": 0
+              },
+              "point": {
+                "x": 1,
+                "y": 0
+              },
+              "pointType": "Straight"
+            },
+            {
+              "type": "CurvePoint",
+              "cornerRadius": 0,
+              "curveFrom": {
+                "x": 1,
+                "y": 1
+              },
+              "curveTo": {
+                "x": 1,
+                "y": 1
+              },
+              "point": {
+                "x": 1,
+                "y": 1
+              },
+              "pointType": "Straight"
+            },
+            {
+              "type": "CurvePoint",
+              "cornerRadius": 0,
+              "curveFrom": {
+                "x": 0,
+                "y": 1
+              },
+              "curveTo": {
+                "x": 0,
+                "y": 1
+              },
+              "point": {
+                "x": 0,
+                "y": 1
+              },
+              "pointType": "Straight"
+            }
+          ],
+          "closed": true
+        }
+      ]
+    }
+  ],
+  "path": "/Users/jeroenknol/Library/Mobile%20Documents/WUGMZZ5K46~com~bohemiancoding~sketch/Documents/Untitled.sketch",
+  "colors": [],
+  "gradients": [],
+  "sharedLayerStyles": [],
+  "sharedTextStyles": []
+}

@@ -1,11 +1,7 @@
+import TreeMock from '../src/__mocks__/MockSketchDocument.json';
+
 module.exports = {
   getSelectedDocument: () => {
-    return {
-      pages: [
-        {
-          id: 1,
-        },
-      ],
-    };
+    return TreeMock;
   },
 };
