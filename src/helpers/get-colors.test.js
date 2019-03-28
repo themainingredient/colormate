@@ -1,0 +1,93 @@
+import MockLayer from '../__mocks__/MockLayer';
+import {
+  getParents,
+  hasBorder,
+  hasFill,
+  createDataStructure,
+  getColorArray,
+} from './get-colors';
+
+describe('Helpers / get-colors', () => {
+  test('getParents returns an array of the parents and the current layer id', () => {
+    const parents = ['grandfatherID', 'motherID'];
+    const currentLayer = 'myID';
+    const expectedParentsArray = [...parents, currentLayer];
+    const parentsArray = getParents(parents, currentLayer);
+
+    expect(parentsArray).toEqual(expectedParentsArray);
+  });
+
+  describe('hasBorder', () => {
+    test('returns true if the layer has a border', () => {
+      expect(hasBorder(MockLayer)).toBeTruthy();
+    });
+
+    test('returns false if the layer has no border', () => {
+      const UnborderedMockLayer = {
+        ...MockLayer,
+        style: {
+          ...MockLayer.style,
+          borders: [],
+        },
+      };
+
+      expect(hasBorder(UnborderedMockLayer)).toBeFalsy();
+    });
+  });
+
+  describe('hasFill', () => {
+    test('returns true if the layer has a fill', () => {
+      expect(hasFill(MockLayer)).toBeTruthy();
+    });
+
+    test('returns false if the layer has no fill', () => {
+      const UnfilledMockLayer = {
+        ...MockLayer,
+        style: {
+          ...MockLayer.style,
+          fills: [],
+        },
+      };
+
+      expect(hasFill(UnfilledMockLayer)).toBeFalsy();
+    });
+  });
+
+  test('createDataStructure returns an object containing layer.id as id, colorType and parents', () => {
+    const layer = { id: 'imalayer' };
+    const colorType = 'border';
+    const parents = ['id1', 'id2'];
+    const dataStructure = createDataStructure(layer, colorType, parents);
+
+    expect(dataStructure).toEqual({ id: layer.id, colorType, parents });
+  });
+
+  describe('getColorArray', () => {
+    let colorsObject;
+    let includedColor;
+    let excludedColor;
+    let includedColorArray;
+    let dataStructureValue;
+
+    beforeEach(() => {
+      includedColor = '#123456';
+      excludedColor = '#ABCDEF';
+      includedColorArray = ['datastructure1', 'datastructure2'];
+      dataStructureValue = 'datastructure3';
+      colorsObject = { [includedColor]: includedColorArray };
+    });
+
+    test('adds the datastructure to an already existing colorArray', () => {
+      const colorArray = getColorArray(colorsObject, includedColor, dataStructureValue);
+
+      expect(colorArray).toEqual([...includedColorArray, dataStructureValue]);
+    });
+
+    test('creates a new key value with the given color as key and the given datastructure as value in an array', () => {
+      const colorArray = getColorArray(colorsObject, excludedColor, dataStructureValue);
+      const expectedColorsObject = [dataStructureValue];
+
+      expect(colorArray).toEqual(expectedColorsObject);
+    });
+  });
+});

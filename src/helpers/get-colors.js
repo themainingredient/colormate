@@ -10,6 +10,6 @@ export const createDataStructure = (layer, colorType, parents) => ({
   parents,
 });
 
-export const getColorArray = (colors, color, dataStructure) => (
-  colors[color] ? [...colors[color], dataStructure] : [dataStructure]
+export const getColorArray = (colorsObject, color, dataStructure) => (
+  colorsObject[color] ? [...colorsObject[color], dataStructure] : [dataStructure]
 );
