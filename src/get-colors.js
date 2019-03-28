@@ -9,6 +9,7 @@ import {
 
 export default function () {
   const colorsObject = {};
+  // TODO: Make this work for all pages
   const layers = traverse(sketch.getSelectedDocument().pages[0]);
 
   layers.forEach((layerWithParents) => {
