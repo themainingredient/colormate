@@ -3,13 +3,14 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "my-command",
-      "identifier": "my-command-identifier",
+      "name": "List all used colors",
+      "identifier": "listAll",
+      "shortcut": "cmd shift 8",
       "script": "./my-command.js"
     }
   ],
   "menu": {
     "title": "Colormate",
-    "items": ["my-command-identifier"]
+    "items": ["listAll"]
   }
 }
