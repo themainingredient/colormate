@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ListItem from './ListItem';
@@ -8,7 +9,6 @@ const ListWrapper = styled.div`
   overflow-y: scroll;
 `;
 
-// TODO: Add propTypes
 const List = ({ colorList }) => (
   <ListWrapper>
     {Object.keys(colorList).map(color => (
@@ -16,5 +16,12 @@ const List = ({ colorList }) => (
     ))}
   </ListWrapper>
 );
+
+List.propTypes = {
+  colorList: PropTypes.shape({
+    layer: PropTypes.object,
+    parents: PropTypes.array,
+  }).isRequired,
+};
 
 export default List;

@@ -1,28 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import Globals, { flexCenter } from '../Global.styles';
 
 import ColormateLogo from '../assets/colormateLogo.svg';
 
+const { colors, fonts } = Globals;
+
 // TODO: Put recurring css in global file
 const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${flexCenter};
   height: 87px;
   width: 320px;
-  background-color: #e7ebec;
+  background-color: ${colors.LightGrey};
 `;
 
 const Tag = styled.div`
   height: 22px;
   width: 39px;
-  background-color: #4e41ff;
+  background-color: ${colors.TMIBlue};
   border-radius: 11px;
   position: absolute;
   top: 8px;
   right: 8px;
-  color: white;
-  font-family: 'SFProDisplay-Regular';
+  color: ${colors.White};
+  font-family: ${fonts.SFPro.reg};
   font-size: 11px;
   line-height: 24px;
   text-align: center;

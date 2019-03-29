@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Globals from '../Global.styles';
+
+const { colors, fonts } = Globals;
 
 const FooterWrapper = styled.div`
   display: flex;
@@ -10,12 +13,12 @@ const FooterWrapper = styled.div`
   padding-right: 18px;
   height: 78px;
   width: 320px;
-  background-color: #e7ebec;
+  background-color: ${colors.LightGrey};
 `;
 
 const MadeBy = styled.p`
-  color: #4d4f59;
-  font-family: 'SFProDisplay-Regular';
+  color: ${colors.MediumGrey};
+  font-family: ${fonts.SFPro.reg};
   font-size: 11px;
 `;
 
@@ -26,11 +29,11 @@ const Bold = styled.span`
 const Button = styled.button`
   height: 37px;
   width: 92px;
-  font-family: 'SFProDisplay-Bold';
+  font-family: ${fonts.SFPro.bold};
   font-size: 14px;
-  color: #ffffff;
+  color: ${colors.White};
   border-radius: 23px;
-  background-color: #4e41ff;
+  background-color: ${colors.TMIBlue};
   border: none;
 `;
 

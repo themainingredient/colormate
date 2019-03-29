@@ -1,45 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const ListItemWrapper = styled.div`
-  border-bottom: 1px solid #9b9b9b19;
-  padding-left: 24px;
-  padding-right: 24px;
-  width: 100%;
-  height: 72px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-`;
-
-const Dot = styled.div`
-  height: 35px;
-  width: 35px;
-  border-radius: 35px;
-  background-color: ${props => props.color};
-`;
-
-const Title = styled.p`
-  color: #4e41ff;
-  font-size: 16px;
-  font-family: 'SFProDisplay-Bold';
-  font-weight: bold;
-`;
-
-const Instances = styled.p`
-  color: #4d4f59;
-  font-size: 14px;
-  font-family: 'SFProDisplay-Regular';
-  font-weight: normal;
-`;
+import PropTypes from 'prop-types';
+import {
+  ListItemWrapper, ColorDataWrapper, Dot, Title, Instances,
+} from './ListItem.styles';
 
 const ListItem = ({ color, instances }) => (
   <ListItemWrapper>
-    <Dot color={color} />
-    <Title>{color}</Title>
+    <ColorDataWrapper>
+      <Dot color={color} />
+      <Title>{color.toUpperCase().slice(0, -2)}</Title>
+    </ColorDataWrapper>
     <Instances>{instances}x</Instances>
   </ListItemWrapper>
 );
+
+ListItem.propTypes = {
+  color: PropTypes.string.isRequired,
+  instances: PropTypes.array.isRequired,
+};
 
 export default ListItem;

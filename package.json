@@ -43,6 +43,7 @@
     "resources/**/*.js"
   ],
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "sketch": "^0.2.0",
