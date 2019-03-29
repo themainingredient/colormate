@@ -37,13 +37,21 @@ const Button = styled.button`
   border: none;
 `;
 
-const Footer = () => (
-  <FooterWrapper>
-    <MadeBy>
-      Made by <Bold>The Main Ingredient</Bold>
-    </MadeBy>
-    <Button type='button'>Done</Button>
-  </FooterWrapper>
-);
+const Footer = () => {
+  const handleCloseButton = () => {
+    window.postMessage('closeWindow');
+  };
+
+  return (
+    <FooterWrapper>
+      <MadeBy>
+        Made by <Bold>The Main Ingredient</Bold>
+      </MadeBy>
+      <Button type='button' onClick={() => handleCloseButton()}>
+        Done
+      </Button>
+    </FooterWrapper>
+  );
+};
 
 export default Footer;
