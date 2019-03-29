@@ -9,28 +9,37 @@ import {
 
 export default function () {
   const colorsObject = {};
-  // TODO: Make this work for all pages
-  const layers = traverse(sketch.getSelectedDocument().pages[0]);
+  const documentPages = sketch.getSelectedDocument().pages;
 
-  layers.forEach((layerWithParents) => {
-    const { layer, parents } = layerWithParents;
+  const traversedPages = [];
 
-    if ('style' in layer) {
-      if (hasBorder(layer)) {
-        const { color } = layer.style.borders[0];
-
-        const dataStructure = createDataStructure(layer, 'border', parents);
-        colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
-      }
-
-      if (hasFill(layer)) {
-        const { color } = layer.style.fills[0];
-
-        const dataStructure = createDataStructure(layer, 'fill', parents);
-        colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
-      }
-    }
+  documentPages.forEach((page) => {
+    const traversedPage = traverse(page);
+    traversedPages.push(traversedPage);
   });
 
+  traversedPages.forEach((pageWithLayers) => {
+    pageWithLayers.forEach((layerWithParents) => {
+      const { layer, parents } = layerWithParents;
+
+      if ('style' in layer) {
+        if (hasBorder(layer)) {
+          const { color } = layer.style.borders[0];
+
+          const dataStructure = createDataStructure(layer, 'border', parents);
+          colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
+        }
+
+        if (hasFill(layer)) {
+          const { color } = layer.style.fills[0];
+
+          const dataStructure = createDataStructure(layer, 'fill', parents);
+          colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
+        }
+      }
+    });
+  });
+
+  console.log(JSON.stringify(traversedPages, null, 2));
   return colorsObject;
 }

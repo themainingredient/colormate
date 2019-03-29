@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ListItemWrapper, ColorDataWrapper, Dot, Title, Instances,
+  ListItemWrapper, ColorDataWrapper, DotWrapper, DotBG, DotColor, Title, Instances,
 } from './ListItem.styles';
+
+const Dot = ({ color }) => (
+  <DotWrapper>
+    <DotBG />
+    <DotColor color={color} />
+  </DotWrapper>
+);
 
 const ListItem = ({ color, instances }) => (
   <ListItemWrapper>

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Globals from '../../Global.styles';
 
+import CheckeredBackground from '../../assets/checkered_small.svg';
+
 const { colors, fonts } = Globals;
 
 // TODO: Get a non opacity grey for the border-bottom
@@ -21,12 +23,27 @@ export const ListItemWrapper = styled.div`
   }
 `;
 
-export const Dot = styled.div`
+export const DotWrapper = styled.div`
   height: 39px;
   width: 39px;
-  border-radius: 39px;
-  background-color: ${props => props.color};
+`;
+
+export const DotBG = styled(CheckeredBackground)`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 35px;
   border: 2px solid ${colors.White};
+`;
+
+export const DotColor = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 35px;
+  background-color: ${props => props.color};
 `;
 
 export const Title = styled.p`
