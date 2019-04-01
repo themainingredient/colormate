@@ -32,7 +32,7 @@ const Tag = styled.div`
 const Header = () => (
   <HeaderWrapper>
     <ColormateLogo height={66} width={186} />
-    <Tag>v1.0</Tag>
+    <Tag>v0.1</Tag>
   </HeaderWrapper>
 );
 
