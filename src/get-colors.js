@@ -3,6 +3,7 @@ import { traverse } from './helpers/traverse';
 import {
   hasBorder,
   hasFill,
+  hasTextColor,
   createDataStructure,
   getColorArray,
 } from './helpers/get-colors';
@@ -36,10 +37,16 @@ export default function () {
           const dataStructure = createDataStructure(layer, 'fill', parents);
           colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
         }
+
+        if (hasTextColor(layer)) {
+          const color = layer.style.textColor;
+
+          const dataStructure = createDataStructure(layer, 'text', parents);
+          colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
+        }
       }
     });
   });
 
-  console.log(JSON.stringify(traversedPages, null, 2));
   return colorsObject;
 }

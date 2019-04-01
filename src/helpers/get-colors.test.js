@@ -1,10 +1,12 @@
 import MockLayer from '../__mocks__/MockLayer';
+import MockTextLayer from '../__mocks__/MockTextLayer.json';
 import {
   getParents,
   hasBorder,
   hasFill,
   createDataStructure,
   getColorArray,
+  hasTextColor,
 } from './get-colors';
 
 describe('Helpers / get-colors', () => {
@@ -50,6 +52,24 @@ describe('Helpers / get-colors', () => {
       };
 
       expect(hasFill(UnfilledMockLayer)).toBeFalsy();
+    });
+  });
+
+  describe('hasTextColor', () => {
+    test('returns true if the layer has a textColor', () => {
+      expect(hasTextColor(MockTextLayer)).toBeTruthy();
+    });
+
+    test('returns false if the layer has no text color', () => {
+      const UncoloredTextLayer = {
+        ...MockTextLayer,
+        style: {
+          ...MockTextLayer.style,
+          textColor: '',
+        },
+      };
+
+      expect(hasTextColor(UncoloredTextLayer)).toBeFalsy();
     });
   });
 

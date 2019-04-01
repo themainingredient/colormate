@@ -1,0 +1,62 @@
+{
+  "type": "Text",
+  "id": "B1927734-E157-49C6-AB17-CA5585AC5A17",
+  "frame": {
+    "x": 709,
+    "y": 262,
+    "width": 332,
+    "height": 159
+  },
+  "name": "TEST",
+  "selected": false,
+  "hidden": false,
+  "locked": false,
+  "exportFormats": [],
+  "transform": {
+    "rotation": 0,
+    "flippedHorizontally": false,
+    "flippedVertically": false
+  },
+  "style": {
+    "type": "Style",
+    "id": "83407BF6-9184-45AA-9FDD-34D45B849979",
+    "opacity": 1,
+    "blendingMode": "Normal",
+    "borderOptions": {
+      "startArrowhead": "None",
+      "endArrowhead": "None",
+      "dashPattern": [],
+      "lineEnd": "Butt",
+      "lineJoin": "Miter"
+    },
+    "blur": {
+      "center": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "motionAngle": 0,
+      "radius": 10,
+      "enabled": false,
+      "blurType": "Gaussian"
+    },
+    "fills": [],
+    "borders": [],
+    "shadows": [],
+    "innerShadows": [],
+    "styleType": "Text",
+    "alignment": "right",
+    "verticalAlignment": "center",
+    "kerning": 0,
+    "lineHeight": null,
+    "paragraphSpacing": 0,
+    "textColor": "#09536bff",
+    "fontSize": 20,
+    "textTransform": "none",
+    "fontFamily": "QuadraatSansComp",
+    "fontWeight": 5
+  },
+  "sharedStyleId": null,
+  "text": "TEST",
+  "lineSpacing": "constantBaseline",
+  "fixedWidth": false
+}
