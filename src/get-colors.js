@@ -48,5 +48,14 @@ export default function () {
     });
   });
 
-  return colorsObject;
+  const orderedColorsObject = {};
+
+  Object.keys(colorsObject)
+    .sort()
+    .reverse()
+    .forEach((key) => {
+      orderedColorsObject[key] = colorsObject[key];
+    });
+
+  return orderedColorsObject;
 }
