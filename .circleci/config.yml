@@ -47,15 +47,18 @@ jobs:
           name: Install again (fix bindings)
           command: npm install
       - run:
-          name: Build & zip plugin
+          name: Build project
           commane: npm run build
-
       - run:
-          name: Notify slack channel
-          command: |
-            curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> Build deployed '"$CIRCLE_JOB"'"}' \
-            $SLACK_WEBHOOK
+          name: Zip project
+          commane: zip -r colormate.zip colormate.sketchplugin
+
+      # - run:
+      #     name: Notify slack channel
+      #     command: |
+      #       curl --header "Content-Type: application/json" --request POST --data \
+      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> Build deployed '"$CIRCLE_JOB"'"}' \
+      #       $SLACK_WEBHOOK
       # - run:
       #     name: Run semantic-release
       #     command: |
