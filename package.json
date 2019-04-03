@@ -9,7 +9,8 @@
     "manifest": "src/manifest.json",
     "main": "colormate.sketchplugin",
     "assets": [
-      "assets/**/*"
+      "assets/**/*",
+      "resources/app/assets/**/*"
     ]
   },
   "scripts": {
@@ -35,6 +36,7 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "file-loader": "^3.0.1",
     "html-loader": "^0.5.1",
     "jest": "^24.5.0",
     "react-svg-loader": "^2.1.0"

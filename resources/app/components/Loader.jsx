@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Globals, { flexCenter } from '../Global.styles';
 
+const loader = require('../assets/washingTransparent.gif');
+
 const { colors, fonts } = Globals;
 
 const LoaderWrapper = styled.div`
@@ -26,10 +28,15 @@ const LoaderContent = styled(TextBase)`
   font-size: 16px;
 `;
 
+const LoaderImage = styled.img`
+  height: 195px;
+  margin: 50px 0;
+`;
+
 const Loader = () => (
   <LoaderWrapper>
     <LoaderTitle>Scanning whole file...</LoaderTitle>
-
+    <LoaderImage src={loader} alt='Loading...' />
     <LoaderContent>
       Sorting, cleaning and <br />
       separating your colors. <br />
