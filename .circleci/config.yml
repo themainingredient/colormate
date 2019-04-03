@@ -35,8 +35,7 @@ jobs:
 
   deploy-test:
     docker:
-      - image: circleci/node:11.6
-      - image: circleci/python:2.7-jessie
+      - image: nikolaik/python-nodejs
     working_directory: ~/repo
     steps:
       - checkout
