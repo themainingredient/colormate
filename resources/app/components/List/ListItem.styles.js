@@ -51,7 +51,6 @@ export const Title = styled.p`
   color: ${colors.TMIBlue};
   font-size: 16px;
   font-family: ${fonts.SFPro.bold};
-  font-weight: bold;
 
   ${ListItemWrapper}:hover & {
     color: ${colors.White};

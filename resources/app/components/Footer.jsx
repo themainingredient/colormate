@@ -23,7 +23,7 @@ const MadeBy = styled.p`
 `;
 
 const Bold = styled.span`
-  font-weight: 700;
+  font-family: ${fonts.SFPro.bold};
 `;
 
 const Button = styled.button`

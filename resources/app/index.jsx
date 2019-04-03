@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
+import { GlobalFonts } from './Global.styles';
+
 import Header from './components/Header';
 import List from './components/List/List';
 import Footer from './components/Footer';
@@ -28,6 +30,7 @@ const App = () => {
 
   return (
     <PluginWrapper>
+      <GlobalFonts />
       {colors.length !== 0 ? (
         <>
           <Header />

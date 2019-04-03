@@ -44,7 +44,7 @@ module.exports = (config) => {
     ]
   });
   config.module.rules.push({
-    test: /\.(gif|png)$/,
+    test: /\.(gif|png|otf)$/,
     use: [
       {
         loader: 'file-loader',
