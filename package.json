@@ -38,7 +38,8 @@
     "eslint-plugin-react": "^7.12.4",
     "html-loader": "^0.5.1",
     "jest": "^24.5.0",
-    "react-svg-loader": "^2.1.0"
+    "react-svg-loader": "^2.1.0",
+    "semantic-release": "^15.13.3"
   },
   "resources": [
     "resources/**/*.js"
@@ -56,6 +57,7 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
+      "@semantic-release/git",
       "@semantic-release/github",
       "@semantic-release/changelog"
     ]
