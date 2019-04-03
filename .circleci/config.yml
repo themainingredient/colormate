@@ -61,6 +61,7 @@ workflows:
       - deploy-test:
           requires:
             - testing
+            - linting
           filters:
             branches:
               only:
