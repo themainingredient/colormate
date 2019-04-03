@@ -12,6 +12,8 @@ import {
   Spacer,
 } from './ListItem.styles';
 
+import { getOpacityPercentage } from '../../helpers';
+
 const Dot = ({ color }) => (
   <DotWrapper>
     <DotBG />
@@ -19,17 +21,21 @@ const Dot = ({ color }) => (
   </DotWrapper>
 );
 
-const ListItem = ({ color, instances }) => (
-  <ListItemWrapper>
-    <ColorDataWrapper>
-      <Dot color={color} />
-      <Title>{color.toUpperCase().slice(0, -2)}</Title>
-      <Spacer />
-      <Label>30%</Label>
-    </ColorDataWrapper>
-    <Instances>{instances}x</Instances>
-  </ListItemWrapper>
-);
+const ListItem = ({ color, instances }) => {
+  const opacityPercentage = getOpacityPercentage(color);
+
+  return (
+    <ListItemWrapper>
+      <ColorDataWrapper>
+        <Dot color={color} />
+        <Title>{color.toUpperCase().slice(0, -2)}</Title>
+        <Spacer />
+        {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+      </ColorDataWrapper>
+      <Instances>{instances}x</Instances>
+    </ListItemWrapper>
+  );
+};
 
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
