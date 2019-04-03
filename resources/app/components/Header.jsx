@@ -31,6 +31,13 @@ const Tag = styled.div`
   text-align: center;
 `;
 
+const StyledColormateLogo = styled(ColormateLogo)`
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+`;
+
 const BigBubble = styled(Bubble)`
   position: absolute;
   right: 2px;
@@ -49,7 +56,7 @@ const SmallBubble = styled(Bubble)`
 
 const Header = () => (
   <HeaderWrapper>
-    <ColormateLogo height={66} width={186} />
+    <StyledColormateLogo height={66} width={186} />
     <BigBubble />
     <SmallBubble />
     <Tag>v0.1</Tag>
