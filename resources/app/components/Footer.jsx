@@ -16,10 +16,15 @@ const FooterWrapper = styled.div`
   background-color: ${colors.LightGrey};
 `;
 
-const MadeBy = styled.p`
+const MadeBy = styled.a`
   color: ${colors.MediumGrey};
   font-family: ${fonts.SFPro.reg};
   font-size: 11px;
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.TMIBlue};
+  }
 `;
 
 const Bold = styled.span`
@@ -37,6 +42,19 @@ const Button = styled.button`
   border: none;
 `;
 
+const FeedbackMadeByWrapper = styled.div``;
+
+const Feedback = styled.a`
+  font-family: ${fonts.SFPro.bold};
+  color: ${colors.DarkGrey};
+  font-size: 12px;
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.TMIBlue};
+  }
+`;
+
 const Footer = () => {
   const handleCloseButton = () => {
     window.postMessage('closeWindow');
@@ -44,9 +62,18 @@ const Footer = () => {
 
   return (
     <FooterWrapper>
-      <MadeBy>
-        Made by <Bold>The Main Ingredient</Bold>
-      </MadeBy>
+      <FeedbackMadeByWrapper>
+        <Feedback href='mailto:colormate@themainingredient.co'>
+          <span role='img' aria-label='letter-with-heart'>
+            💌
+          </span>{' '}
+          Report & support here
+        </Feedback>
+        <br />
+        <MadeBy href='http://www.themainingredient.co' target='_blank'>
+          Made by <Bold>The Main Ingredient</Bold>
+        </MadeBy>
+      </FeedbackMadeByWrapper>
       <Button type='button' onClick={() => handleCloseButton()}>
         Done
       </Button>

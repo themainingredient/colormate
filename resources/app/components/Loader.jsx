@@ -17,7 +17,7 @@ const LoaderWrapper = styled.div`
 
 const TextBase = styled.h2`
   color: ${colors.White};
-  font-family: ${fonts.Futura.bold};
+  font-family: sans-serif;
 `;
 
 const LoaderTitle = styled(TextBase)`
@@ -40,6 +40,7 @@ const Loader = () => (
     <LoaderContent>
       Sorting, cleaning and <br />
       separating your colors. <br />
+      <br />
       Damnnn, you messy{' '}
       <span role='img' aria-label='WinkyFace'>
         😉

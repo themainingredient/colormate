@@ -17,7 +17,7 @@ const PluginWrapper = styled.div`
 `;
 
 const App = () => {
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState({});
 
   useEffect(() => {
     window.sendUsedColors = (incomingColors) => {
@@ -31,7 +31,7 @@ const App = () => {
   return (
     <PluginWrapper>
       <GlobalFonts />
-      {colors.length !== 0 ? (
+      {Object.keys(colors).length !== 0 ? (
         <>
           <Header />
           <List colorList={colors} />

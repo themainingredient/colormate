@@ -24,9 +24,9 @@ export default {
   colors: {
     White: '#FFFFFF',
     TMIBlue: '#4E41FF',
-    LightGrey: '#E7EBEC',
-    MediumGrey: '#4d4f59',
-
+    LightGrey: '#E8E9EF',
+    MediumGrey: '#B5B8C6',
+    DarkGrey: '#4d4f59',
   },
   fonts: {
     SFPro: {

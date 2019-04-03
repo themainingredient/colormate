@@ -58,7 +58,7 @@ export const Title = styled.p`
 `;
 
 export const Instances = styled.p`
-  color: ${colors.MediumGrey};
+  color: ${colors.DarkGrey};
   font-size: 14px;
   font-family: ${fonts.SFPro.reg};
   font-weight: normal;
