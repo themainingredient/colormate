@@ -86,12 +86,12 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - testing
-      - linting
+      # - testing
+      # - linting
       - deploy-test:
-          requires:
-            # - testing
-            - linting
+          # requires:
+          # - testing
+          # - linting
           filters:
             branches:
               only:
