@@ -90,8 +90,8 @@ workflows:
       - linting
       - deploy-test:
           requires:
-          # - testing
-          # - linting
+            # - testing
+            - linting
           filters:
             branches:
               only:
