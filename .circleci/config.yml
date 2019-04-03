@@ -48,10 +48,10 @@ jobs:
           command: npm install
       - run:
           name: Build project
-          commane: npm run build
+          command: npm run build
       - run:
           name: Zip project
-          commane: zip -r colormate.zip colormate.sketchplugin
+          command: zip -r colormate.zip colormate.sketchplugin
 
       # - run:
       #     name: Notify slack channel
