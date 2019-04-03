@@ -36,8 +36,6 @@ jobs:
   deploy-test:
     docker:
       - image: circleci/node:11.6
-        # environment:
-        #   REACT_APP_DTAP: test
     working_directory: ~/repo
     steps:
       - checkout
@@ -49,10 +47,22 @@ jobs:
           name: Install again (fix bindings)
           command: npm install
       - run:
-          name: Run semantic-release
+          name: Build & zip plugin
+          commane: npm run build
+      - run:
+          name: Store it somewhere
+
+      - run:
+          name: Notify slack channel
           command: |
-            npm i
-            npx semantic-release
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> Build deployed '"$CIRCLE_JOB"'"}' \
+            $SLACK_WEBHOOK
+      # - run:
+      #     name: Run semantic-release
+      #     command: |
+      #       npm i
+      #       npx semantic-release
 
 workflows:
   version: 2
@@ -71,7 +81,7 @@ workflows:
       # - approve-production:
       #     type: approval
       #     requires:
-      #       - deploy-acceptance
+      #       - deploy-test
       # - deploy-production:
       #     requires:
       #       - approve-production
