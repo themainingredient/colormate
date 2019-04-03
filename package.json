@@ -51,6 +51,16 @@
     "sketch-module-web-view": "^2.1.5",
     "styled-components": "^4.2.0"
   },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/git",
+    "@semantic-release/github",
+    "@semantic-release/changelog"
+  ],
+  "release": {
+    "branch": "develop"
+  },
   "author": "jeroennknol <jeroen-knol@live.nl>",
   "jest": {
     "transform": {
