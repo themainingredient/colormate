@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Globals, { flexCenter } from '../Global.styles';
 
 import ColormateLogo from '../assets/colormateLogo.svg';
+import Bubble from '../assets/bubble.svg';
 
 const { colors, fonts } = Globals;
 
@@ -12,6 +13,7 @@ const HeaderWrapper = styled.div`
   height: 87px;
   width: 320px;
   background-color: ${colors.LightGrey};
+  overflow: hidden;
 `;
 
 const Tag = styled.div`
@@ -29,9 +31,27 @@ const Tag = styled.div`
   text-align: center;
 `;
 
+const BigBubble = styled(Bubble)`
+  position: absolute;
+  right: 2px;
+  bottom: -20px;
+  height: 43px;
+  width: 43px;
+`;
+
+const SmallBubble = styled(Bubble)`
+  position: absolute;
+  right: 4px;
+  bottom: 26px;
+  height: 18px;
+  width: 18px;
+`;
+
 const Header = () => (
   <HeaderWrapper>
     <ColormateLogo height={66} width={186} />
+    <BigBubble />
+    <SmallBubble />
     <Tag>v0.1</Tag>
   </HeaderWrapper>
 );
