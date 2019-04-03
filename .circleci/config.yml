@@ -33,24 +33,24 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-    deploy-test:
-      docker:
-        - image: circleci/node:11.6
-          # environment:
-          #   REACT_APP_DTAP: test
-      working_directory: ~/repo
-      steps:
-        - checkout
-        - restore_cache:
-            keys:
-              - v1-dep-{{ checksum "package.json" }}
-              - v1-dep-
-        - run:
-            name: Install again (fix bindings)
-            command: npm install
-        - run:
-            name: Run semantic-release
-            command: npx semantic-release
+  deploy-test:
+    docker:
+      - image: circleci/node:11.6
+        # environment:
+        #   REACT_APP_DTAP: test
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Install again (fix bindings)
+          command: npm install
+      - run:
+          name: Run semantic-release
+          command: npx semantic-release
 
 workflows:
   version: 2
