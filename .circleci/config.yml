@@ -33,21 +33,10 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  deploy_to_aws:
-    docker:
-      - image: circleci/python:2.7-jessie
-    working_directory: ~/repo
-    steps:
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync jekyll/_site/docs s3://colormate/
-
   deploy-test:
     docker:
       - image: circleci/node:11.6
+      - image: circleci/python:2.7-jessie
     working_directory: ~/repo
     steps:
       - checkout
@@ -64,6 +53,12 @@ jobs:
       - run:
           name: Zip project
           command: zip -r colormate.zip colormate.sketchplugin
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 sync jekyll/_site/docs s3://colormate/
       # - run:
       #     name: Notify slack channel
       #     command: |
@@ -90,9 +85,6 @@ workflows:
             branches:
               only:
                 - develop
-      - deploy_to_aws:
-          requires:
-            - deploy-test
       # - approve-production:
       #     type: approval
       #     requires:
