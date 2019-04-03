@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Header from './components/Header';
 import List from './components/List/List';
 import Footer from './components/Footer';
+import Loader from './components/Loader';
 
 const PluginWrapper = styled.div`
   height: 534px;
@@ -27,9 +28,15 @@ const App = () => {
 
   return (
     <PluginWrapper>
-      <Header />
-      <List colorList={colors} />
-      <Footer />
+      {colors.length !== 0 ? (
+        <>
+          <Header />
+          <List colorList={colors} />
+          <Footer />
+        </>
+      ) : (
+        <Loader />
+      )}
     </PluginWrapper>
   );
 };

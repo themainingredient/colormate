@@ -13,6 +13,9 @@ export default {
       reg: 'SFProDisplay-Regular',
       bold: 'SFProDisplay-Bold',
     },
+    Futura: {
+      bold: 'Futura-Bold',
+    },
   },
 };
 
