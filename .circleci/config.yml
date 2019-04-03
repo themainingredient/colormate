@@ -65,10 +65,10 @@ workflows:
             branches:
               only:
                 - develop
-      - approve-production:
-          type: approval
-          requires:
-            - deploy-acceptance
-      - deploy-production:
-          requires:
-            - approve-production
+      # - approve-production:
+      #     type: approval
+      #     requires:
+      #       - deploy-acceptance
+      # - deploy-production:
+      #     requires:
+      #       - approve-production
