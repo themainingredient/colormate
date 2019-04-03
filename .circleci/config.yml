@@ -49,8 +49,6 @@ jobs:
       - run:
           name: Build & zip plugin
           commane: npm run build
-      - run:
-          name: Store it somewhere
 
       - run:
           name: Notify slack channel

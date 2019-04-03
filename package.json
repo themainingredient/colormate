@@ -54,7 +54,7 @@
     "styled-components": "^4.2.0"
   },
   "release": {
-    "branch": "develop",
+    "branch": "master",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
