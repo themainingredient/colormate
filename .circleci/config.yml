@@ -49,6 +49,7 @@ jobs:
       - run:
           name: Build project
           command: npm run build
+      - run: apt-get update
       - run: apt-get install zip
       - run:
           name: Zip project
