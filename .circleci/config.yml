@@ -60,12 +60,12 @@ jobs:
       - run:
           name: Deploy to S3
           command: aws s3 cp colormate.zip s3://colormate-testing
-      # - run:
-      #     name: Notify slack channel
-      #     command: |
-      #       curl --header "Content-Type: application/json" --request POST --data \
-      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> Build deployed '"$CIRCLE_JOB"'"}' \
-      #       $SLACK_WEBHOOK
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
+            $SLACK_WEBHOOK_URL
       # - run:
       #     name: Run semantic-release
       #     command: |
@@ -76,12 +76,10 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      # - testing
-      # - linting
       - deploy-test:
-          # requires:
-          # - testing
-          # - linting
+          requires:
+            - testing
+            - linting
           filters:
             branches:
               only:
