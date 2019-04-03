@@ -1,6 +1,6 @@
 {
   "name": "colormate",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "engines": {
     "sketch": ">=3.0"
   },
@@ -18,7 +18,8 @@
     "start": "skpm-build --watch",
     "postinstall": "npm run build && skpm-link",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "./node_modules/.bin/eslint src --ext .jsx --ext .js ."
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
@@ -29,6 +30,7 @@
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
@@ -37,7 +39,8 @@
     "eslint-plugin-react": "^7.12.4",
     "html-loader": "^0.5.1",
     "jest": "^24.5.0",
-    "react-svg-loader": "^2.1.0"
+    "react-svg-loader": "^2.1.0",
+    "semantic-release": "^15.13.3"
   },
   "resources": [
     "resources/**/*.js"
@@ -50,10 +53,23 @@
     "sketch-module-web-view": "^2.1.5",
     "styled-components": "^4.2.0"
   },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ]
+  },
   "author": "jeroennknol <jeroen-knol@live.nl>",
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
