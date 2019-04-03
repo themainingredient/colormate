@@ -59,7 +59,7 @@ jobs:
           command: pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync jekyll/_site/docs s3://colormate/
+          command: aws s3 sync colormate.zip s3://colormate/
       # - run:
       #     name: Notify slack channel
       #     command: |
