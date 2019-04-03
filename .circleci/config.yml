@@ -35,7 +35,7 @@ jobs:
 
   deploy-test:
     docker:
-      - image: nikolaik/python3.7-nodejs11
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
     steps:
       - checkout
