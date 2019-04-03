@@ -1,0 +1,74 @@
+version: 2
+jobs:
+  testing:
+    docker:
+      - image: circleci/node:11.6
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run: npm install
+      - run:
+          name: Run tests
+          command: npm run test
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dep-{{ checksum "package.json" }}
+
+  linting:
+    docker:
+      - image: circleci/node:11.6
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run ESLint
+          command: npm run lint
+
+    deploy-test:
+      docker:
+        - image: circleci/node:11.6
+          # environment:
+          #   REACT_APP_DTAP: test
+      working_directory: ~/repo
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - v1-dep-{{ checksum "package.json" }}
+              - v1-dep-
+        - run:
+            name: Install again (fix bindings)
+            command: npm install
+        - run:
+            name: Run semantic-release
+            command: npx semantic-release
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - testing
+      - linting
+      - deploy-test:
+          requires:
+            - testing
+          filters:
+            branches:
+              only:
+                - develop
+      - approve-production:
+          type: approval
+          requires:
+            - deploy-acceptance
+      - deploy-production:
+          requires:
+            - approve-production
