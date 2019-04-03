@@ -43,7 +43,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/
+          command: aws s3 sync jekyll/_site/docs s3://colormate/
 
   deploy-test:
     docker:
@@ -64,12 +64,6 @@ jobs:
       - run:
           name: Zip project
           command: zip -r colormate.zip colormate.sketchplugin
-      - run: apk add --update python python-dev py-pip build-base
-      - run: pip install awscli
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync colormate.zip s3://colormate-internal/
-
       # - run:
       #     name: Notify slack channel
       #     command: |
@@ -96,6 +90,9 @@ workflows:
             branches:
               only:
                 - develop
+      - deploy_to_aws:
+          requires:
+            - deploy-test
       # - approve-production:
       #     type: approval
       #     requires:
