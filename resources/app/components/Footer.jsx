@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Globals from '../Global.styles';
 
@@ -40,6 +40,10 @@ const Button = styled.button`
   border-radius: 23px;
   background-color: ${colors.TMIBlue};
   border: none;
+
+  &:hover {
+    background-color: ${colors.TMIBlueDark};
+  }
 `;
 
 const FeedbackMadeByWrapper = styled.div``;
@@ -60,6 +64,8 @@ const openUrlInBrowser = (url) => {
 };
 
 const Footer = () => {
+  const [isHoveringButton, setHoveringButton] = useState(false);
+
   const handleCloseButton = () => {
     window.postMessage('closeWindow');
   };
@@ -78,8 +84,19 @@ const Footer = () => {
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>
-      <Button type='button' onClick={() => handleCloseButton()}>
-        Done
+      <Button
+        onMouseEnter={() => setHoveringButton(true)}
+        onMouseLeave={() => setHoveringButton(false)}
+        type='button'
+        onClick={() => handleCloseButton()}
+      >
+        {isHoveringButton ? (
+          <span role='img' aria-label='ThumbsUp'>
+            👍
+          </span>
+        ) : (
+          'Done'
+        )}
       </Button>
     </FooterWrapper>
   );

@@ -8,8 +8,8 @@ const { colors, fonts } = Globals;
 // TODO: Get a non opacity grey for the border-bottom
 export const ListItemWrapper = styled.div`
   border-bottom: 1px solid #9b9b9b19;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
   background-color: ${colors.White};
   width: 100%;
   height: 72px;
@@ -47,7 +47,7 @@ export const DotColor = styled.div`
 `;
 
 export const Title = styled.p`
-  margin-left: 16px;
+  margin-left: 8px;
   color: ${colors.TMIBlue};
   font-size: 16px;
   font-family: ${fonts.SFPro.bold};
@@ -72,4 +72,26 @@ export const ColorDataWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 172px;
+`;
+
+export const Spacer = styled.div`
+  flex: 1;
+`;
+
+export const Label = styled.p`
+  color: ${colors.MediumGrey};
+  font-family: ${fonts.SFPro.bold};
+  font-size: 11px;
+  width: 36px;
+  height: 24px;
+  line-height: 26px;
+  text-align: center;
+  background-color: ${colors.LightGrey};
+  border-radius: 2px;
+
+  ${ListItemWrapper}:hover & {
+    color: ${colors.TMIBlue};
+    background-color: ${colors.White};
+  }
 `;

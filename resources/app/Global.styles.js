@@ -27,6 +27,7 @@ export default {
     LightGrey: '#E8E9EF',
     MediumGrey: '#B5B8C6',
     DarkGrey: '#4d4f59',
+    TMIBlueDark: '#3B2EEB',
   },
   fonts: {
     SFPro: {
