@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Globals from '../Global.styles';
+import useHover from '../hooks/useHover';
 
 const { colors, fonts } = Globals;
 
@@ -64,7 +65,7 @@ const openUrlInBrowser = (url) => {
 };
 
 const Footer = () => {
-  const [isHoveringButton, setHoveringButton] = useState(false);
+  const [isHovered, hoverRef] = useHover();
 
   const handleCloseButton = () => {
     window.postMessage('closeWindow');
@@ -84,19 +85,8 @@ const Footer = () => {
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>
-      <Button
-        onMouseEnter={() => setHoveringButton(true)}
-        onMouseLeave={() => setHoveringButton(false)}
-        type='button'
-        onClick={() => handleCloseButton()}
-      >
-        {isHoveringButton ? (
-          <span role='img' aria-label='ThumbsUp'>
-            👍
-          </span>
-        ) : (
-          'Done'
-        )}
+      <Button ref={hoverRef} type='button' onClick={() => handleCloseButton()}>
+        {isHovered ? '👍' : 'Done'}
       </Button>
     </FooterWrapper>
   );
