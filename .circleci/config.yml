@@ -2,7 +2,7 @@ version: 2
 jobs:
   testing:
     docker:
-      - image: circleci/node:11.6
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
     steps:
       - checkout
@@ -21,7 +21,7 @@ jobs:
 
   linting:
     docker:
-      - image: circleci/node:11.6
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
     steps:
       - checkout
@@ -33,7 +33,7 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  deploy-test:
+  deploy-staging:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
@@ -60,36 +60,70 @@ jobs:
       - run:
           name: Deploy to S3
           command: aws s3 cp colormate.zip s3://colormate-testing
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
+            $SLACK_WEBHOOK_URL
+  release:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Release
+          command: |
+            npm i
+            npx semantic-release
+
+  deploy-production:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
+    steps:
+      - checkout
       # - run:
-      #     name: Notify slack channel
-      #     command: |
-      #       curl --header "Content-Type: application/json" --request POST --data \
-      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> Build deployed '"$CIRCLE_JOB"'"}' \
-      #       $SLACK_WEBHOOK
-      # - run:
-      #     name: Run semantic-release
-      #     command: |
-      #       npm i
-      #       npx semantic-release
+      #     name: Deploy to sketch environment
+      #     command: npm run publish
+
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed"}' \
+            $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      # - testing
-      # - linting
-      - deploy-test:
-          # requires:
-          # - testing
-          # - linting
+      - testing
+      - linting
+      - deploy-staging:
+          requires:
+            - testing
+            - linting
           filters:
             branches:
               only:
                 - develop
-      # - approve-production:
-      #     type: approval
-      #     requires:
-      #       - deploy-test
-      # - deploy-production:
-      #     requires:
-      #       - approve-production
+      - release:
+          requires:
+            - testing
+            - linting
+          filters:
+            branches:
+              only:
+                - master
+      - approve-production:
+          type: approval
+          requires:
+            - release
+      - deploy-production:
+          requires:
+            - approve-production
