@@ -33,6 +33,10 @@ export default function () {
       .catch(console.error); // eslint-disable-line no-console
   });
 
+  webContents.on('openUrlInBrowser', (url) => {
+    NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url)); // eslint-disable-line no-undef
+  });
+
   webContents.on('closeWindow', () => {
     browserWindow.close();
   });

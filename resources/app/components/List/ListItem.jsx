@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ListItemWrapper, ColorDataWrapper, DotWrapper, DotBG, DotColor, Title, Instances,
+  ListItemWrapper,
+  ColorDataWrapper,
+  DotWrapper,
+  DotBG,
+  DotColor,
+  Title,
+  Instances,
+  Label,
+  Spacer,
 } from './ListItem.styles';
+
+import { calcOpacityPercentage } from '../../helpers';
 
 const Dot = ({ color }) => (
   <DotWrapper>
@@ -11,19 +21,29 @@ const Dot = ({ color }) => (
   </DotWrapper>
 );
 
-const ListItem = ({ color, instances }) => (
-  <ListItemWrapper>
-    <ColorDataWrapper>
-      <Dot color={color} />
-      <Title>{color.toUpperCase().slice(0, -2)}</Title>
-    </ColorDataWrapper>
-    <Instances>{instances}x</Instances>
-  </ListItemWrapper>
-);
+const ListItem = ({ color, instances }) => {
+  const opacityPercentage = calcOpacityPercentage(color);
+
+  return (
+    <ListItemWrapper>
+      <ColorDataWrapper>
+        <Dot color={color} />
+        <Title>{color.toUpperCase().slice(0, -2)}</Title>
+        <Spacer />
+        {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+      </ColorDataWrapper>
+      <Instances>{instances}x</Instances>
+    </ListItemWrapper>
+  );
+};
+
+Dot.propTypes = {
+  color: PropTypes.string.isRequired,
+};
 
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
-  instances: PropTypes.array.isRequired,
+  instances: PropTypes.number.isRequired,
 };
 
 export default ListItem;

@@ -9,7 +9,8 @@
     "manifest": "src/manifest.json",
     "main": "colormate.sketchplugin",
     "assets": [
-      "assets/**/*"
+      "assets/**/*",
+      "resources/app/assets/**/*"
     ]
   },
   "scripts": {
@@ -20,7 +21,7 @@
     "postinstall": "npm run build && skpm-link",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "./node_modules/.bin/eslint src --ext .jsx --ext .js ."
+    "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
@@ -38,9 +39,12 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "file-loader": "^3.0.1",
     "html-loader": "^0.5.1",
     "jest": "^24.5.0",
+    "react-hooks-testing-library": "^0.4.0",
     "react-svg-loader": "^2.1.0",
+    "react-testing-library": "^6.0.4",
     "semantic-release": "^15.13.3"
   },
   "resources": [
