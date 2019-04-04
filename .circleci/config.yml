@@ -1,0 +1,129 @@
+version: 2
+jobs:
+  testing:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run: npm install
+      - run:
+          name: Run tests
+          command: npm run test
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dep-{{ checksum "package.json" }}
+
+  linting:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run ESLint
+          command: npm run lint
+
+  deploy-staging:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Install again (fix bindings)
+          command: npm install
+      - run:
+          name: Build project
+          command: npm run build
+      - run: apt-get update
+      - run: apt-get install zip
+      - run:
+          name: Zip project
+          command: zip -r colormate.zip colormate.sketchplugin
+      - run:
+          name: Install awscli
+          command: pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp colormate.zip s3://colormate-testing
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
+            $SLACK_WEBHOOK_URL
+  release:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "./assets/package-lock.json" }}
+            - v1-dep-
+      - run:
+          name: Release
+          command: |
+            npm i
+            npx semantic-release
+
+  deploy-production:
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # - run:
+      #     name: Deploy to sketch environment
+      #     command: npm run publish
+
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed' \
+            $SLACK_WEBHOOK_URL
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - testing
+      - linting
+      - deploy-staging:
+          requires:
+            - testing
+            - linting
+          filters:
+            branches:
+              only:
+                - develop
+      - release:
+          requires:
+            - testing
+            - linting
+          filters:
+            branches:
+              only:
+                - master
+      - approve-production:
+          type: approval
+          requires:
+            - release
+      - deploy-production:
+          requires:
+            - approve-production
