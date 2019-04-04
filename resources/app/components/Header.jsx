@@ -7,7 +7,6 @@ import Bubble from '../assets/bubble.svg';
 
 const { colors, fonts } = Globals;
 
-// TODO: Put recurring css in global file
 const HeaderWrapper = styled.div`
   ${flexCenter};
   height: 87px;
