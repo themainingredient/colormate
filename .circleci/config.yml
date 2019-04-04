@@ -73,7 +73,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dep-{{ checksum "./assets/package-lock.json" }}
+            - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
       - run:
           name: Release
