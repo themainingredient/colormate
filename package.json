@@ -13,6 +13,7 @@
     ]
   },
   "scripts": {
+    "publish": "skpm publish",
     "build": "skpm-build",
     "watch": "skpm-build --watch",
     "start": "skpm-build --watch",
