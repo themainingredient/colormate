@@ -10,6 +10,7 @@ export default () => {
 
   useEffect(() => {
     const node = ref.current;
+
     if (node) {
       node.addEventListener('mouseover', handleMouseOver);
       node.addEventListener('mouseout', handleMouseOut);
@@ -19,7 +20,7 @@ export default () => {
         node.removeEventListener('mouseout', handleMouseOut);
       };
     }
-    return null;
+    return () => null;
   }, [ref.current]);
 
   return [value, ref];

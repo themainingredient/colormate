@@ -42,7 +42,9 @@
     "file-loader": "^3.0.1",
     "html-loader": "^0.5.1",
     "jest": "^24.5.0",
+    "react-hooks-testing-library": "^0.4.0",
     "react-svg-loader": "^2.1.0",
+    "react-testing-library": "^6.0.4",
     "semantic-release": "^15.13.3"
   },
   "resources": [
