@@ -33,7 +33,7 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  deploy-test:
+  deploy-staging:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
@@ -78,14 +78,17 @@ workflows:
     jobs:
       - testing
       - linting
-      - deploy-test:
+      - deploy-staging:
           requires:
             - testing
             - linting
           filters:
             branches:
               only:
-                - develop
+                - feature/circleci # TODO: change to develop
+      - deploy-production:
+          requires:
+            - deploy-test
       # - approve-production:
       #     type: approval
       #     requires:
