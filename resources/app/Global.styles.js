@@ -4,6 +4,7 @@ export default {
   colors: {
     White: '#FFFFFF',
     TMIBlue: '#4E41FF',
+    TMIBlueDark: '#3B2EEB',
     LightGrey: '#E7EBEC',
     MediumGrey: '#4d4f59',
 

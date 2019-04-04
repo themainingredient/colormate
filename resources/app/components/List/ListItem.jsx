@@ -37,6 +37,10 @@ const ListItem = ({ color, instances }) => {
   );
 };
 
+Dot.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
   instances: PropTypes.array.isRequired,
