@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Globals from '../Global.styles';
+import useHover from '../hooks/useHover';
 
 const { colors, fonts } = Globals;
 
@@ -16,14 +17,19 @@ const FooterWrapper = styled.div`
   background-color: ${colors.LightGrey};
 `;
 
-const MadeBy = styled.p`
+const MadeBy = styled.a`
   color: ${colors.MediumGrey};
   font-family: ${fonts.SFPro.reg};
   font-size: 11px;
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.TMIBlue};
+  }
 `;
 
 const Bold = styled.span`
-  font-weight: 700;
+  font-family: ${fonts.SFPro.bold};
 `;
 
 const Button = styled.button`
@@ -41,8 +47,25 @@ const Button = styled.button`
   }
 `;
 
+const FeedbackMadeByWrapper = styled.div``;
+
+const Feedback = styled.a`
+  font-family: ${fonts.SFPro.bold};
+  color: ${colors.DarkGrey};
+  font-size: 12px;
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.TMIBlue};
+  }
+`;
+
+const openUrlInBrowser = (url) => {
+  window.postMessage('openUrlInBrowser', url);
+};
+
 const Footer = () => {
-  const [isHoveringButton, setHoveringButton] = useState(false);
+  const [isHovered, hoverRef] = useHover();
 
   const handleCloseButton = () => {
     window.postMessage('closeWindow');
@@ -50,22 +73,20 @@ const Footer = () => {
 
   return (
     <FooterWrapper>
-      <MadeBy>
-        Made by <Bold>The Main Ingredient</Bold>
-      </MadeBy>
-      <Button
-        onMouseEnter={() => setHoveringButton(true)}
-        onMouseLeave={() => setHoveringButton(false)}
-        type='button'
-        onClick={() => handleCloseButton()}
-      >
-        {isHoveringButton ? (
-          <span role='img' aria-label='ThumbsUp'>
-            👍
-          </span>
-        ) : (
-          'Done'
-        )}
+      <FeedbackMadeByWrapper>
+        <Feedback href='mailto:colormate@themainingredient.co'>
+          <span role='img' aria-label='letter-with-heart'>
+            💌
+          </span>{' '}
+          Report & support here
+        </Feedback>
+        <br />
+        <MadeBy onClick={() => openUrlInBrowser('http://www.themainingredient.co')}>
+          Made by <Bold>The Main Ingredient</Bold>
+        </MadeBy>
+      </FeedbackMadeByWrapper>
+      <Button ref={hoverRef} type='button' onClick={() => handleCloseButton()}>
+        {isHovered ? '👍' : 'Done'}
       </Button>
     </FooterWrapper>
   );

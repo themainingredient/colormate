@@ -43,7 +43,7 @@ Dot.propTypes = {
 
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
-  instances: PropTypes.array.isRequired,
+  instances: PropTypes.number.isRequired,
 };
 
 export default ListItem;

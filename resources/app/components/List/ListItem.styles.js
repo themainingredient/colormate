@@ -51,7 +51,6 @@ export const Title = styled.p`
   color: ${colors.TMIBlue};
   font-size: 16px;
   font-family: ${fonts.SFPro.bold};
-  font-weight: bold;
 
   ${ListItemWrapper}:hover & {
     color: ${colors.White};
@@ -59,7 +58,7 @@ export const Title = styled.p`
 `;
 
 export const Instances = styled.p`
-  color: ${colors.MediumGrey};
+  color: ${colors.DarkGrey};
   font-size: 14px;
   font-family: ${fonts.SFPro.reg};
   font-weight: normal;

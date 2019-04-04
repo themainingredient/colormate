@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
+import { GlobalFonts } from './Global.styles';
+
 import Header from './components/Header';
 import List from './components/List/List';
 import Footer from './components/Footer';
+import Loader from './components/Loader';
 
 const PluginWrapper = styled.div`
   height: 534px;
@@ -14,7 +17,7 @@ const PluginWrapper = styled.div`
 `;
 
 const App = () => {
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState({});
 
   useEffect(() => {
     window.sendUsedColors = (incomingColors) => {
@@ -27,9 +30,16 @@ const App = () => {
 
   return (
     <PluginWrapper>
-      <Header />
-      <List colorList={colors} />
-      <Footer />
+      <GlobalFonts />
+      {Object.keys(colors).length !== 0 ? (
+        <>
+          <Header />
+          <List colorList={colors} />
+          <Footer />
+        </>
+      ) : (
+        <Loader />
+      )}
     </PluginWrapper>
   );
 };

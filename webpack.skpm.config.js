@@ -43,6 +43,18 @@ module.exports = (config) => {
       }
     ]
   });
+  config.module.rules.push({
+    test: /\.(gif|png|otf)$/,
+    use: [
+      {
+        loader: 'file-loader',
+        options:{
+          name: '[name].[ext]',
+          publicPath: '..'
+        }
+      }
+    ]
+  })
 };
 
 /* eslint-enable */
