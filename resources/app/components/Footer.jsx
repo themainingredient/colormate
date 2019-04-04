@@ -55,6 +55,10 @@ const Feedback = styled.a`
   }
 `;
 
+const openUrlInBrowser = (url) => {
+  window.postMessage('openUrlInBrowser', url);
+};
+
 const Footer = () => {
   const handleCloseButton = () => {
     window.postMessage('closeWindow');
@@ -70,7 +74,7 @@ const Footer = () => {
           Report & support here
         </Feedback>
         <br />
-        <MadeBy href='http://www.themainingredient.co' target='_blank'>
+        <MadeBy onClick={() => openUrlInBrowser('http://www.themainingredient.co')}>
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>
