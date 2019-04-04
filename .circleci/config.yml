@@ -95,7 +95,7 @@ jobs:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed"}' \
             $SLACK_WEBHOOK_URL
 
 workflows:
