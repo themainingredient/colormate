@@ -12,7 +12,7 @@ import {
   Spacer,
 } from './ListItem.styles';
 
-import { getOpacityPercentage } from '../../helpers';
+import { calcOpacityPercentage } from '../../helpers';
 
 const Dot = ({ color }) => (
   <DotWrapper>
@@ -22,7 +22,7 @@ const Dot = ({ color }) => (
 );
 
 const ListItem = ({ color, instances }) => {
-  const opacityPercentage = getOpacityPercentage(color);
+  const opacityPercentage = calcOpacityPercentage(color);
 
   return (
     <ListItemWrapper>
