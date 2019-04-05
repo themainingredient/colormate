@@ -2,7 +2,11 @@ import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
 import getColors from './get-colors';
 
+const track = require('sketch-module-google-analytics');
 const webview = require('../resources/webview.html');
+
+console.log(track('UA-54328644-8', 'pageview'));
+track('UA-54328644-8', 'pageview', {});
 
 export default function () {
   const options = {
@@ -28,9 +32,7 @@ export default function () {
   webContents.on('getColors', (s) => {
     const colors = getColors();
     UI.message(s);
-    webContents
-      .executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
-      .catch(console.error); // eslint-disable-line no-console
+    webContents.executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`).catch(console.error); // eslint-disable-line no-console
   });
 
   webContents.on('openUrlInBrowser', (url) => {
