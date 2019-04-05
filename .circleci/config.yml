@@ -87,9 +87,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      # - run:
-      #     name: Deploy to sketch environment
-      #     command: npm run publish
 
       - run:
           name: Notify slack channel
@@ -111,11 +108,10 @@ workflows:
           filters:
             branches:
               only:
-                - develop
+                - master
       - release:
           requires:
-            - testing
-            - linting
+            - deploy-staging
           filters:
             branches:
               only:
