@@ -111,11 +111,10 @@ workflows:
           filters:
             branches:
               only:
-                - develop
+                - master
       - release:
           requires:
-            - testing
-            - linting
+            - deploy-staging
           filters:
             branches:
               only:
