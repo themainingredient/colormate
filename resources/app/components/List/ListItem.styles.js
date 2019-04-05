@@ -26,23 +26,26 @@ export const ListItemWrapper = styled.div`
 export const DotWrapper = styled.div`
   height: 39px;
   width: 39px;
+  background-color: ${colors.White};
+  border-radius: 39px;
+  overflow: hidden;
+  border: 2px solid ${colors.White};
 `;
 
 export const DotBG = styled(CheckeredBackground)`
   position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 35px;
-  border: 2px solid ${colors.White};
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
 `;
 
 export const DotColor = styled.div`
   position: absolute;
-  top: 2px;
-  right: 2px;
-  bottom: 2px;
-  left: 2px;
-  border-radius: 35px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
   background-color: ${props => props.color};
 `;
 
