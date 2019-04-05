@@ -58,7 +58,7 @@ const Header = () => (
     <StyledColormateLogo height={66} width={186} />
     <BigBubble />
     <SmallBubble />
-    <Tag>v0.1</Tag>
+    <Tag>BETA</Tag>
   </HeaderWrapper>
 );
 
