@@ -81,7 +81,7 @@ jobs:
             npm i
             npx semantic-release
 
-  deploy-production:
+  deploy-production: # TODO: setup production deployment [npm run build & npm run publish]
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
@@ -108,10 +108,11 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - /release/.*/
       - release:
           requires:
-            - deploy-staging
+            - testing
+            - linting
           filters:
             branches:
               only:
