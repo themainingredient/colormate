@@ -24,25 +24,30 @@ export const ListItemWrapper = styled.div`
 `;
 
 export const DotWrapper = styled.div`
-  height: 39px;
-  width: 39px;
+  height: 37px;
+  width: 37px;
 `;
 
 export const DotBG = styled(CheckeredBackground)`
   position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 35px;
-  border: 2px solid ${colors.White};
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  right: 1px;
+  background-size: 50px;
+  border-radius: 39px;
 `;
 
 export const DotColor = styled.div`
   position: absolute;
-  top: 2px;
-  right: 2px;
-  bottom: 2px;
-  left: 2px;
-  border-radius: 35px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 1px;
+  background-clip: content-box;
+  border-radius: 39px;
+  box-shadow: 0 0 0 2px white inset;
   background-color: ${props => props.color};
 `;
 
@@ -80,7 +85,7 @@ export const Spacer = styled.div`
 `;
 
 export const Label = styled.p`
-  color: ${colors.MediumGrey};
+  color: ${colors.DarkGrey};
   font-family: ${fonts.SFPro.bold};
   font-size: 11px;
   width: 36px;

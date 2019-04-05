@@ -25,6 +25,7 @@ const MadeBy = styled.a`
 
   &:hover {
     color: ${colors.TMIBlue};
+    cursor: pointer;
   }
 `;
 
@@ -44,6 +45,7 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${colors.TMIBlueDark};
+    cursor: pointer;
   }
 `;
 
