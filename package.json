@@ -46,8 +46,7 @@
     "react-hooks-testing-library": "^0.4.0",
     "react-svg-loader": "^2.1.0",
     "react-testing-library": "^6.0.4",
-    "semantic-release": "^15.13.3",
-    "sketch-module-settings": "0.0.4"
+    "semantic-release": "^15.13.3"
   },
   "resources": [
     "resources/**/*.js"
@@ -57,7 +56,6 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "sketch": "^0.2.0",
-    "sketch-module-google-analytics": "^0.2.0",
     "sketch-module-web-view": "^2.1.5",
     "styled-components": "^4.2.0"
   },
