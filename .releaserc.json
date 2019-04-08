@@ -7,7 +7,7 @@
     [
       "@semantic-release/exec",
       {
-        "verifyReleaseCmd": "./prepareRelease.sh ${nextRelease.version} ${options.branch}"
+        "verifyReleaseCmd": "bash ./prepareRelease.sh ${nextRelease.version} ${options.branch}"
       }
     ]
   ]
