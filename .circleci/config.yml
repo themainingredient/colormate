@@ -81,11 +81,6 @@ jobs:
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
             $SLACK_WEBHOOK_URL
 
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - colormate_${REACT_APP_VERSION}.zip
-
   release:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11

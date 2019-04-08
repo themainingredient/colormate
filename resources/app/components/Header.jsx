@@ -53,12 +53,14 @@ const SmallBubble = styled(Bubble)`
   width: 18px;
 `;
 
+console.log(process.env.REACT_APP_VERSION);
+
 const Header = () => (
   <HeaderWrapper>
     <StyledColormateLogo height={66} width={186} />
     <BigBubble />
     <SmallBubble />
-    <Tag>BETA</Tag>
+    <Tag>{process.env.REACT_APP_VERSION}</Tag>
   </HeaderWrapper>
 );
 
