@@ -81,7 +81,6 @@ jobs:
       #       $SLACK_WEBHOOK_URL
 
       - persist_to_workspace:
-          root: /root/repo
           paths:
             - colormate_${REACT_APP_VERSION}.zip
 
