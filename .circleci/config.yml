@@ -125,7 +125,7 @@ workflows:
           filters:
             branches:
               only:
-                - /release/.*/
+                - develop
       - release:
           requires:
             - testing
