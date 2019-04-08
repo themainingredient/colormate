@@ -1,12 +1,10 @@
 import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
+import { trackAppStart } from './helpers/commands/analytics';
 import getColors from './get-colors';
+import { TRACKING_ID } from './constants';
 
-const track = require('sketch-module-google-analytics');
 const webview = require('../resources/webview.html');
-
-console.log(track('UA-54328644-8', 'pageview'));
-track('UA-54328644-8', 'pageview', {});
 
 export default function () {
   const options = {
@@ -18,6 +16,7 @@ export default function () {
     alwaysOnTop: true,
     acceptsFirstMouse: true,
   };
+
 
   const browserWindow = new BrowserWindow(options);
 
@@ -44,4 +43,6 @@ export default function () {
   });
 
   browserWindow.loadURL(webview);
+
+  trackAppStart(TRACKING_ID);
 }
