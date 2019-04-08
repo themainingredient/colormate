@@ -36,10 +36,6 @@ jobs:
   deploy-staging:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
-    environment:
-      REACT_APP_VERSION: 1.0.0
-      GH_TOKEN: 9e9c74aff269ec9b2c019cb94d9b49ba2bed49c9
-      NPM_TOKEN: 9e9c74aff269ec9b2c019cb94d9b49ba2bed49c9
     working_directory: ~/repo
     steps:
       - checkout
@@ -57,16 +53,15 @@ jobs:
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            GH_TOKEN=9e9c74aff269ec9b2c019cb94d9b49ba2bed49c9 NPM_TOKEN=9e9c74aff269ec9b2c019cb94d9b49ba2bed49c9 npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
+            npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
-      - run: echo REACT_APP_VERSION
+      - run: echo ${REACT_APP_VERSION}
       # - run:
       #     name: Build project
       #     command: npm run build
-      - run:
-          name: Zip project
-          command: zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
-
+      # - run:
+      #     name: Zip project
+      #     command: zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
       # - run:
       #     name: Deploy to S3
       #     command: aws s3 cp colormate.zip s3://colormate-testing
@@ -112,8 +107,8 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - testing
-      - linting
+      # - testing
+      # - linting
       - deploy-staging:
           requires:
           # - testing
