@@ -57,7 +57,9 @@ jobs:
 
       - run: |
           echo "REACT_APP_VERSION:" $(jq '.version' package.json)
-          $REACT_APP_VERSION=$(jq '.version' package.json)
+          environment:
+            REACT_APP_VERSION: $(jq '.version' package.json)
+
       - run:
           name: Build project
           command: npm run build
