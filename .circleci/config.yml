@@ -126,7 +126,6 @@ workflows:
             branches:
               only:
                 - /release/.*/
-                - feature/ship-to-production
       - release:
           requires:
             - testing
