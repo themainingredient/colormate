@@ -56,8 +56,8 @@ jobs:
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
       - run: |
-          echo "REACT_APP_VERSION:" jq '.version' package.json
-          $REACT_APP_VERSION= jq '.version' package.json
+          echo "REACT_APP_VERSION:" $(jq '.version' package.json)
+          $REACT_APP_VERSION=$(jq '.version' package.json)
       - run:
           name: Build project
           command: npm run build
