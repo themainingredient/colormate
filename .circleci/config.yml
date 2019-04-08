@@ -56,7 +56,7 @@ jobs:
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
       - run:
-          name: Setup Environment Variables
+          name: "Setup Environment Variables"
           command: |
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
