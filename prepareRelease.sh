@@ -8,7 +8,7 @@ then
   jq --arg h "$1" '.version=$h' package.json | sponge package.json
   jq --arg h "$1" '.version=$h' src/manifest.json | sponge src/manifest.json
   touch .env
-  echo REACT_APP_VERSION=$1 >> .env
+  echo REACT_APP_VERSION=$1-beta >> .env
 fi
 
 
