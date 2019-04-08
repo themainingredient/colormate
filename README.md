@@ -89,3 +89,24 @@ You will need to specify a `repository` in the `package.json`:
 +  }
 ...
 ```
+
+## Deployment
+
+For deployments we are using git-flow with circleci to execute the CI/CD strategy.
+
+For this purpose we have two pipelines
+
+- deploy-staging
+  - will setup a `beta` tag within the version being build
+  - will setup the versions within the files
+- deploy-production
+  - will setup the app for production
+  - deploys to Sketch environment
+
+### Branch guidelines
+
+To execute a new production deployment follow the following steps:
+
+- create a release branch out of develop `release/THE_RELEASE_NAME_OR_VERSION_HERE`
+- this will trigger a new beta build and notify internal testers
+- merge release branch into master to trigger a production build
