@@ -47,9 +47,9 @@ export const DotColor = styled.div`
   padding: 1px;
   background-clip: content-box;
   border-radius: 39px;
-  background-color: ${props => props.color};
-  box-shadow: ${(props) => {
-    if (props.isBorderNeeded) {
+  background-color: ${({ color }) => color};
+  box-shadow: ${({ isBorderNeeded }) => {
+    if (isBorderNeeded) {
       return `0 0 0 2px ${colors.White} inset`;
     }
     return `0 0 0 1px ${colors.MediumGrey} inset`;
