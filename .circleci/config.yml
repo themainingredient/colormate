@@ -72,7 +72,7 @@ jobs:
             zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
       - run:
           name: Deploy to S3
-          command: aws s3 cp colormate.zip s3://colormate-testing/staging/
+          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
       # - run:
       #     name: Notify slack channel
       #     command: |
