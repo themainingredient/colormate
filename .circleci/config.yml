@@ -55,7 +55,7 @@ jobs:
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
-      - run: echo ${REACT_APP_VERSION}
+      - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       # - run:
       #     name: Build project
       #     command: npm run build
