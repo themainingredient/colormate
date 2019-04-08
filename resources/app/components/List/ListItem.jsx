@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   ListItemWrapper,
@@ -10,9 +10,10 @@ import {
   Instances,
   Label,
   Spacer,
+  Copied,
 } from './ListItem.styles';
 
-import { calcOpacityPercentage } from '../../helpers';
+import { calcOpacityPercentage, copyToClipboard } from '../../helpers';
 
 const Dot = ({ color }) => (
   <DotWrapper>
@@ -22,15 +23,28 @@ const Dot = ({ color }) => (
 );
 
 const ListItem = ({ color, instances }) => {
+  const [copied, setCopied] = useState(false);
+
   const opacityPercentage = calcOpacityPercentage(color);
 
+  const wrapperClickHandler = () => {
+    copyToClipboard(color);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   return (
-    <ListItemWrapper>
+    <ListItemWrapper onClick={() => wrapperClickHandler()}>
       <ColorDataWrapper>
         <Dot color={color} />
-        <Title>{color.toUpperCase().slice(0, -2)}</Title>
-        <Spacer />
-        {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+        {copied && <Copied>Copied to clipboard</Copied>}
+        {!copied && (
+          <>
+            <Title>{color.toUpperCase().slice(0, -2)}</Title>
+            <Spacer />
+            {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+          </>
+        )}
       </ColorDataWrapper>
       <Instances>{instances}x</Instances>
     </ListItemWrapper>

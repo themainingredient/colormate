@@ -100,3 +100,14 @@ export const Label = styled.p`
     background-color: ${colors.White};
   }
 `;
+
+export const Copied = styled.p`
+  margin-left: 8px;
+  color: ${colors.DarkGrey};
+  font-size: 14px;
+  font-family: ${fonts.SFPro.reg};
+
+  ${ListItemWrapper}:hover & {
+    color: ${colors.White};
+  }
+`;
