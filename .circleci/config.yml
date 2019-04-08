@@ -46,7 +46,7 @@ jobs:
 
       - run: apt-get update
       - run: apt-get -y install jq zip moreutils
-      # - run: pip install awscli
+      - run: pip install awscli
 
       - run:
           name: "Run semantic-release"
@@ -70,9 +70,9 @@ jobs:
           command: |
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
             zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
-      # - run:
-      #     name: Deploy to S3
-      #     command: aws s3 cp colormate.zip s3://colormate-testing
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp colormate.zip s3://colormate-testing/staging/
       # - run:
       #     name: Notify slack channel
       #     command: |
@@ -80,8 +80,15 @@ jobs:
       #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
       #       $SLACK_WEBHOOK_URL
 
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"https://s3.eu-central-1.amazonaws.com/colormate-testing/staging/colormate_${REACT_APP_VERSION}.zip"'"}' \
+            $SLACK_WEBHOOK_URL
+
       - persist_to_workspace:
-          root: /repo
+          root: /
           paths:
             - colormate_${REACT_APP_VERSION}.zip
 
