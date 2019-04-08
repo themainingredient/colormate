@@ -54,7 +54,7 @@ jobs:
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
-      # $(jq '.version' package.json)
+
       - run:
           name: Setup Environment Variables
           command: |
@@ -66,8 +66,10 @@ jobs:
           name: Build project
           command: npm run build
       - run:
-          name: Zip project
-          command: zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+          name: Zipping project
+          command: |
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
       # - run:
       #     name: Deploy to S3
       #     command: aws s3 cp colormate.zip s3://colormate-testing
@@ -79,7 +81,7 @@ jobs:
       #       $SLACK_WEBHOOK_URL
 
       - persist_to_workspace:
-          root: /root/project
+          root: /root/repo
           paths:
             - colormate_${REACT_APP_VERSION}.zip
 
