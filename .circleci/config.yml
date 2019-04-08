@@ -55,13 +55,15 @@ jobs:
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
-      - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
-      # - run:
-      #     name: Build project
-      #     command: npm run build
-      # - run:
-      #     name: Zip project
-      #     command: zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+      - run: |
+          echo "REACT_APP_VERSION:" jq '.version' package.json
+          $REACT_APP_VERSION= jq '.version' package.json
+      - run:
+          name: Build project
+          command: npm run build
+      - run:
+          name: Zip project
+          command: zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
       # - run:
       #     name: Deploy to S3
       #     command: aws s3 cp colormate.zip s3://colormate-testing
@@ -71,6 +73,11 @@ jobs:
       #       curl --header "Content-Type: application/json" --request POST --data \
       #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
       #       $SLACK_WEBHOOK_URL
+
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - colormate_${REACT_APP_VERSION}.zip
 
   release:
     docker:
