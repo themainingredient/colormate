@@ -7,6 +7,10 @@ import Bubble from '../assets/bubble.svg';
 
 const { colors, fonts } = Globals;
 
+const isBeta = () => {
+  return process.env.REACT_APP_VERSION.includes('beta');
+};
+
 const HeaderWrapper = styled.div`
   ${flexCenter};
   height: 87px;
@@ -17,7 +21,7 @@ const HeaderWrapper = styled.div`
 
 const Tag = styled.div`
   height: 22px;
-  width: 39px;
+  width: ${isBeta() ? '60px' : '39px'};
   background-color: ${colors.TMIBlue};
   border-radius: 11px;
   position: absolute;
@@ -58,7 +62,7 @@ const Header = () => (
     <StyledColormateLogo height={66} width={186} />
     <BigBubble />
     <SmallBubble />
-    <Tag>BETA</Tag>
+    <Tag>{process.env.REACT_APP_VERSION}</Tag>
   </HeaderWrapper>
 );
 

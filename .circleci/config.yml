@@ -43,29 +43,44 @@ jobs:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+      - run: pip install awscli
+
       - run:
-          name: Install again (fix bindings)
-          command: npm install
+          name: "Run semantic-release"
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+
+      - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       - run:
           name: Build project
           command: npm run build
-      - run: apt-get update
-      - run: apt-get install zip
       - run:
-          name: Zip project
-          command: zip -r colormate.zip colormate.sketchplugin
-      - run:
-          name: Install awscli
-          command: pip install awscli
+          name: Zipping project
+          command: |
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
       - run:
           name: Deploy to S3
-          command: aws s3 cp colormate.zip s3://colormate-testing
+          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
+
       - run:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download '"$COLORMATE_ZIP_S3_URL"'"}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
             $SLACK_WEBHOOK_URL
+
   release:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
@@ -87,6 +102,8 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
 
       - run:
           name: Notify slack channel
