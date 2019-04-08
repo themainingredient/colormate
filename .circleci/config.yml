@@ -54,12 +54,14 @@ jobs:
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
+      # $(jq '.version' package.json)
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(jq '.version' package.json)"' >> $BASH_ENV
 
-      - run: |
-          echo "REACT_APP_VERSION:" $(jq '.version' package.json)
-          environment:
-            REACT_APP_VERSION: $(jq '.version' package.json)
-
+      - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       - run:
           name: Build project
           command: npm run build
