@@ -160,4 +160,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - feature/skpm-publish
