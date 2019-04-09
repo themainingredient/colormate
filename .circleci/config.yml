@@ -104,7 +104,7 @@ jobs:
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
+            npx semantic-release --branch ${CIRCLE_BRANCH}
 
       - run:
           name: Setup Environment Variables
@@ -112,10 +112,16 @@ jobs:
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
 
-      - run: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
+      - run:
+          name: Get appcast.xml from S3
+          command: aws s3 cp s3://colormate-testing/appcast.xml appcast.xml
 
       - run:
-          name: Update appcast.xml in S3
+          name: Update appcast file
+          command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
+
+      - run:
+          name: Update appcast.xml in S3 with updated version
           command: aws s3 cp appcast.xml s3://colormate-testing/
 
       - run:
