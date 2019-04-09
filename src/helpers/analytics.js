@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { Settings } from 'sketch';
+import { isProd } from './environment';
 
 const kUUIDKey = 'google.analytics.uuid';
 let uuid = Settings.globalSettingForKey(kUUIDKey);
@@ -16,8 +17,11 @@ function jsonToQueryString(json) {
     .join('&');
 }
 
-// TODO: disable tracking based on env variable
 const track = (trackingId, hitType, props) => {
+  if (!isProd()) {
+    return;
+  }
+
   if (!Settings.globalSettingForKey('analyticsEnabled')) {
     // the user didn't enable sharing analytics
     return;
