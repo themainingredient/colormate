@@ -86,8 +86,6 @@ jobs:
   deploy-production:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
-    environment:
-      AWS_S3_URL_PRODUCTION: https://s3.eu-central-1.amazonaws.com/colormate-testing/production
     working_directory: ~/repo
     steps:
       - checkout
