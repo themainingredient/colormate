@@ -97,6 +97,7 @@ jobs:
             - v1-dep-
       - run: apt-get update
       - run: apt-get -y install jq zip moreutils xmlstarlet
+      - run: pip install awscli
 
       - run:
           name: Release
