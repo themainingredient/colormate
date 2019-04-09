@@ -65,11 +65,13 @@ jobs:
       - run:
           name: Build project
           command: npm run build
+
       - run:
           name: Zipping project
           command: |
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
             zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+
       - run:
           name: Deploy to S3
           command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
@@ -81,35 +83,64 @@ jobs:
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
             $SLACK_WEBHOOK_URL
 
-  release:
+  deploy-production:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils xmlstarlet
+      - run: pip install awscli
+
       - run:
           name: Release
           command: |
             npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release
 
-  deploy-production: # TODO: setup production deployment [npm run build & npm run publish]
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: apt-get update
-      - run: apt-get -y install jq zip moreutils
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+
+      - run:
+          name: Get appcast.xml from S3
+          command: aws s3 cp s3://colormate-testing/appcast.xml appcast.xml
+
+      - run:
+          name: Update appcast file
+          command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
+
+      - run:
+          name: Update appcast.xml in S3 with updated version
+          command: aws s3 cp appcast.xml s3://colormate-testing/
+
+      - run:
+          name: Build project
+          command: npm run build
+
+      - run:
+          name: Zipping project
+          command: |
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/production/
 
       - run:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed"}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
             $SLACK_WEBHOOK_URL
 
 workflows:
@@ -126,7 +157,8 @@ workflows:
             branches:
               only:
                 - /release/.*/
-      - release:
+
+      - deploy-production:
           requires:
             - testing
             - linting
@@ -134,10 +166,3 @@ workflows:
             branches:
               only:
                 - master
-      - approve-production:
-          type: approval
-          requires:
-            - release
-      - deploy-production:
-          requires:
-            - approve-production
