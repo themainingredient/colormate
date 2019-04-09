@@ -9,6 +9,12 @@ export const calculateLuminance = (color) => {
   // Rebasing the incoming hex color to a value between 0 and 1, 0 being 0% intensity, and 1 being 100% intensity
   const rebasedColor = parseInt(color, 16) / 255;
 
+  /**
+   * There are 2 different ways to calculate the Luminance of a color, depending on the input value.
+   * When the color intensity is lower than 3.928%, meaning black or really dark grey, we use the first method.
+   * When the color intensity is higher we use the second method.
+   */
+
   if (rebasedColor <= 0.03928) {
     return rebasedColor / 12.92;
   }
