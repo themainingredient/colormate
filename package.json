@@ -1,6 +1,11 @@
 {
   "name": "colormate",
-  "version": "1.0.0",
+  "version": "1.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themainingredient/colormate.git"
+  },
+  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover. Oops :flushed:",
   "engines": {
     "sketch": ">=3.0"
   },
@@ -26,6 +31,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
+    "@semantic-release/exec": "^3.3.2",
     "@skpm/builder": "^0.5.11",
     "@skpm/extract-loader": "^2.0.2",
     "babel-eslint": "^10.0.1",
@@ -33,6 +39,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
     "cz-conventional-changelog": "^2.1.0",
+    "dotenv": "^7.0.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
@@ -57,14 +64,6 @@
     "sketch": "^0.2.0",
     "sketch-module-web-view": "^2.1.5",
     "styled-components": "^4.2.0"
-  },
-  "release": {
-    "branch": "master",
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/github"
-    ]
   },
   "author": "The Main Ingredient",
   "jest": {
