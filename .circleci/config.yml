@@ -104,7 +104,7 @@ jobs:
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release --branch ${CIRCLE_BRANCH}
+            npx semantic-release
 
       - run:
           name: Setup Environment Variables
@@ -142,7 +142,7 @@ jobs:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate version deployed :rocket: *v'"$REACT_APP_VERSION"'*\n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
             $SLACK_WEBHOOK_URL
 
 workflows:
@@ -167,4 +167,4 @@ workflows:
           filters:
             branches:
               only:
-                - feature/skpm-publish
+                - master

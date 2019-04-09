@@ -11,7 +11,7 @@ then
   echo REACT_APP_VERSION=$1-beta >> .env
 fi
 
-if [[ "$2" == feature/skpm-publish ]]
+if [[ "$2" == master ]]
 then
   jq --arg h "$1" '.version=$h' package.json | sponge package.json
   jq --arg h "$1" '.version=$h' src/manifest.json | sponge src/manifest.json
