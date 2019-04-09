@@ -99,10 +99,11 @@ jobs:
       - run: apt-get -y install jq zip moreutils xmlstarlet
 
       - run:
-        name: Release
-        command: |
-          npm i
-          npx semantic-release
+          name: Release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release
 
       - run:
           name: Setup Environment Variables
