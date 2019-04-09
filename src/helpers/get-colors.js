@@ -8,6 +8,8 @@ export const hasTextColor = layer => !!layer.style.textColor;
 
 export const createDataStructure = (layer, colorType, parents) => ({
   id: layer.id,
+  name: layer.name,
+  type: layer.type,
   colorType,
   parents,
 });
