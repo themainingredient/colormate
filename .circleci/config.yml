@@ -83,9 +83,11 @@ jobs:
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
             $SLACK_WEBHOOK_URL
 
-  deploy-production: # TODO: setup production deployment [npm run build & npm run publish]
+  deploy-production:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
+    environment:
+      AWS_S3_URL_PRODUCTION: https://s3.eu-central-1.amazonaws.com/colormate-testing/production
     working_directory: ~/repo
     steps:
       - checkout
@@ -94,7 +96,7 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
       - run: apt-get update
-      - run: apt-get -y install jq zip moreutils
+      - run: apt-get -y install jq zip moreutils xmlstarlet
 
       - run:
         name: Release
@@ -108,16 +110,32 @@ jobs:
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
 
-      - run:
-          name: Build project
-          command: npm run publish -- -- $REACT_APP_VERSION
+      - run: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
 
       - run:
-          name: Notify slack channel
+          name: Update appcast.xml in S3
+          command: aws s3 cp appcast.xml s3://colormate-testing/
+
+      - run:
+          name: Build project
+          command: npm run build
+
+      - run:
+          name: Zipping project
           command: |
-            curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed"}' \
-            $SLACK_WEBHOOK_URL
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/production/
+
+      # - run:
+      #     name: Notify slack channel
+      #     command: |
+      #       curl --header "Content-Type: application/json" --request POST --data \
+      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New Colormate version deployed"}' \
+      #       $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2

@@ -14,5 +14,5 @@
     "title": "Colormate",
     "items": ["listAll"]
   },
-  "appcast": "https://github.com/themainingredient/colormate/blob/master/.appcast.xml"
+  "appcast": "https://s3.eu-central-1.amazonaws.com/colormate-testing/appcast.xml"
 }
