@@ -26,7 +26,8 @@
     "postinstall": "npm run build && skpm-link",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0"
+    "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0",
+    "log": "skpm log -f"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",

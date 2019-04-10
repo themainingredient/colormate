@@ -65,7 +65,7 @@ const Footer = () => {
           Report & support here
         </Feedback>
         <br />
-        <MadeBy onClick={() => openUrlInBrowser('http://www.themainingredient.co')}>
+        <MadeBy onClick={() => openUrlInBrowser('https://www.themainingredient.co')}>
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>
