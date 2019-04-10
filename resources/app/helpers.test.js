@@ -45,7 +45,6 @@ describe('React | Helpers', () => {
 
   describe('closeWindow', () => {
     let spy;
-
     test('it posts a closeWindow message', () => {
       spy = jest.spyOn(window, 'postMessage').mockImplementation(() => {});
 
