@@ -43,7 +43,7 @@ describe('React | Helpers', () => {
     });
   });
 
-  describe.only('closeWindow', () => {
+  describe('closeWindow', () => {
     let spy;
 
     test('it posts a closeWindow message', () => {
