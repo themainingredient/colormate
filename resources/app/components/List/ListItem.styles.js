@@ -47,8 +47,13 @@ export const DotColor = styled.div`
   padding: 1px;
   background-clip: content-box;
   border-radius: 39px;
-  box-shadow: 0 0 0 2px white inset;
-  background-color: ${props => props.color};
+  background-color: ${({ color }) => color};
+  box-shadow: ${({ isBorderNeeded }) => {
+    if (isBorderNeeded) {
+      return `0 0 0 2px ${colors.White} inset`;
+    }
+    return `0 0 0 1px ${colors.MediumGrey} inset`;
+  }}
 `;
 
 export const Title = styled.p`
