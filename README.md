@@ -2,6 +2,10 @@
 
 _This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
 
+## Installation
+
+Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate_1.3.0.zip).\_, unzip then double-click find-and-replace-text.sketchplugin to install.
+
 ## Getting started
 
 - create a `.env` file and add a REACT_APP_VERSION with dev as key like so `REACT_APP_VERSION=dev`
