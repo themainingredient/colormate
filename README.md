@@ -8,7 +8,7 @@ Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/co
 
 ## Getting started
 
-- create a `.env` file and add a REACT_APP_VERSION with dev as key like so `REACT_APP_VERSION=dev`
+- copy and rename the .env.example, adjusting the keys to your needs.
 
 ## Usage
 
