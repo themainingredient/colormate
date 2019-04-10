@@ -4,7 +4,7 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 
 ## Getting started
 
-- create a `.env` file and add a REACT_APP_VERSION with dev as key like so `REACT_APP_VERSION=dev`
+- copy and rename the .env.example, adjusting the keys to your needs.
 
 ## Usage
 
