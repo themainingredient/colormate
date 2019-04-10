@@ -25,13 +25,12 @@ export default function () {
   const { webContents } = browserWindow;
 
   // add a handler for a call from web content's javascript
-  // TODO: add GA event for error
   webContents.on('getColors', (s) => {
     const colors = getColors();
     UI.message(s);
     webContents
       .executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
-      .catch(e => console.error(e)); // eslint-disable-line no-console
+      .catch(console.error); // eslint-disable-line no-console
   });
 
   webContents.on('openUrlInBrowser', (url) => {
