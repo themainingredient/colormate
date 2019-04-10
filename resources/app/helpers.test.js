@@ -42,4 +42,21 @@ describe('React | Helpers', () => {
       expect(fromHelpers.calculateContrast(color2)).toEqual(3.96);
     });
   });
+
+  describe.only('closeWindow', () => {
+    let spy;
+
+    test('it posts a closeWindow message', () => {
+      spy = jest.spyOn(window, 'postMessage').mockImplementation(() => {});
+
+      fromHelpers.closeWindow();
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith('closeWindow');
+    });
+
+    afterEach(() => {
+      spy.mockRestore();
+    });
+  });
 });

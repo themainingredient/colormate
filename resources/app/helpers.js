@@ -55,3 +55,7 @@ export const calculateContrast = (color) => {
 
   return Number(((whiteLuminance + 0.05) / (colorLuminance + 0.05)).toFixed(2));
 };
+
+export const closeWindow = () => {
+  window.postMessage('closeWindow');
+};
