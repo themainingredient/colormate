@@ -1,7 +1,7 @@
 import { colorsObjectToArray } from './create-tree';
 
-describe.only('createTreeStructure', () => {
-    let input: dddd;
+describe('createTreeStructure', () => {
+    let input: any;
     let output: any;
     afterEach(() => { expect(colorsObjectToArray(input)).toEqual(output); });
 
