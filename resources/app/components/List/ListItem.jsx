@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import _ from 'lodash';
 import {
   ListItemWrapper,
   ColorDataWrapper,
@@ -21,19 +23,40 @@ const Dot = ({ color }) => (
   </DotWrapper>
 );
 
+const LayerTree = styled.p`
+  margin-left: ${props => props.i * 20}px;
+`;
+
+const Layer = ({ data }) => {
+  const { parents } = data;
+
+  return (
+    <>
+      {parents.map((ancestors, i) => (
+        <LayerTree i={i}>{ancestors.name}</LayerTree>
+      ))}
+    </>
+  );
+};
+
 const ListItem = ({ color, instances }) => {
   const opacityPercentage = calcOpacityPercentage(color);
 
   return (
-    <ListItemWrapper>
-      <ColorDataWrapper>
-        <Dot color={color} />
-        <Title>{color.toUpperCase().slice(0, -2)}</Title>
-        <Spacer />
-        {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
-      </ColorDataWrapper>
-      <Instances>{instances}x</Instances>
-    </ListItemWrapper>
+    <>
+      <ListItemWrapper>
+        <ColorDataWrapper>
+          <Dot color={color} />
+          <Title>{color.toUpperCase().slice(0, -2)}</Title>
+          <Spacer />
+          {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+        </ColorDataWrapper>
+        <Instances>{instances.length}x</Instances>
+      </ListItemWrapper>
+      {instances.map(instance => (
+        <Layer data={instance} />
+      ))}
+    </>
   );
 };
 

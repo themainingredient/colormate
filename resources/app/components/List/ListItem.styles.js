@@ -7,7 +7,7 @@ const { colors, fonts } = Globals;
 
 // TODO: Get a non opacity grey for the border-bottom
 export const ListItemWrapper = styled.div`
-  border-bottom: 1px solid #9b9b9b19;
+  border-bottom: 1px solid ${colors.LightGrey};
   padding-left: 16px;
   padding-right: 16px;
   background-color: ${colors.White};

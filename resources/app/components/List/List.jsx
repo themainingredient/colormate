@@ -9,13 +9,15 @@ const ListWrapper = styled.div`
   overflow-y: scroll;
 `;
 
-const List = ({ colorList }) => (
-  <ListWrapper>
-    {Object.keys(colorList).map(color => (
-      <ListItem color={color} instances={colorList[color].length} />
-    ))}
-  </ListWrapper>
-);
+const List = ({ colorList }) => {
+  return (
+    <ListWrapper>
+      {Object.keys(colorList).map(color => (
+        <ListItem color={color} instances={colorList[color]} />
+      ))}
+    </ListWrapper>
+  );
+};
 
 List.propTypes = {
   colorList: PropTypes.shape({

@@ -1,0 +1,158 @@
+{
+  "#e9e9e9ff": [
+    {
+      "id": "6D474D4A-39CA-462E-9725-A66FE0C4F82D",
+      "name": "Rectangle Copy 1327",
+      "type": "ShapePath",
+      "colorType": "fill",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        },
+        {
+          "id": "C69481E2-00E1-4F86-AD08-9DD696072E1C",
+          "type": "Group",
+          "name": "Group"
+        }
+      ]
+    }
+  ],
+  "#e9111180": [
+    {
+      "id": "31255A02-6584-4489-9251-302E07657572",
+      "name": "Rectangle Copy 1322",
+      "type": "ShapePath",
+      "colorType": "fill",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        }
+      ]
+    }
+  ],
+  "#979797ff": [
+    {
+      "id": "6D474D4A-39CA-462E-9725-A66FE0C4F82D",
+      "name": "Rectangle Copy 1327",
+      "type": "ShapePath",
+      "colorType": "border",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        },
+        {
+          "id": "C69481E2-00E1-4F86-AD08-9DD696072E1C",
+          "type": "Group",
+          "name": "Group"
+        }
+      ]
+    },
+    {
+      "id": "F6BCADBC-6757-4110-B561-C7566A6E2CAF",
+      "name": "Rectangle Copy 1324",
+      "type": "ShapePath",
+      "colorType": "border",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        },
+        {
+          "id": "C69481E2-00E1-4F86-AD08-9DD696072E1C",
+          "type": "Group",
+          "name": "Group"
+        }
+      ]
+    },
+    {
+      "id": "31255A02-6584-4489-9251-302E07657572",
+      "name": "Rectangle Copy 1322",
+      "type": "ShapePath",
+      "colorType": "border",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        }
+      ]
+    }
+  ],
+  "#8db65aff": [
+    {
+      "id": "73A1B8F3-A3D5-43B2-A638-1C3C800CD376",
+      "name": "hi mom",
+      "type": "Text",
+      "colorType": "text",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        }
+      ]
+    }
+  ],
+  "#3c6778ff": [
+    {
+      "id": "F6BCADBC-6757-4110-B561-C7566A6E2CAF",
+      "name": "Rectangle Copy 1324",
+      "type": "ShapePath",
+      "colorType": "fill",
+      "parents": [
+        {
+          "id": "FF29A9D3-282A-4446-BF66-FD889B1DF905",
+          "type": "Page",
+          "name": "Page 1"
+        },
+        {
+          "id": "73F57CCA-4B9A-4E1E-A382-3792D6896C59",
+          "type": "Artboard",
+          "name": "Desktop HD Copy 2"
+        },
+        {
+          "id": "C69481E2-00E1-4F86-AD08-9DD696072E1C",
+          "type": "Group",
+          "name": "Group"
+        }
+      ]
+    }
+  ]
+}
