@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from './Button';
 import Globals from '../Global.styles';
 import useHover from '../hooks/useHover';
+import { closeWindow } from '../helpers';
 
 const { colors, fonts } = Globals;
 
@@ -33,22 +35,6 @@ const Bold = styled.span`
   font-family: ${fonts.SFPro.bold};
 `;
 
-const Button = styled.button`
-  height: 37px;
-  width: 92px;
-  font-family: ${fonts.SFPro.bold};
-  font-size: 14px;
-  color: ${colors.White};
-  border-radius: 23px;
-  background-color: ${colors.TMIBlue};
-  border: none;
-
-  &:hover {
-    background-color: ${colors.TMIBlueDark};
-    cursor: pointer;
-  }
-`;
-
 const FeedbackMadeByWrapper = styled.div``;
 
 const Feedback = styled.a`
@@ -69,10 +55,6 @@ const openUrlInBrowser = (url) => {
 const Footer = () => {
   const [isHovered, hoverRef] = useHover();
 
-  const handleCloseButton = () => {
-    window.postMessage('closeWindow');
-  };
-
   return (
     <FooterWrapper>
       <FeedbackMadeByWrapper>
@@ -87,7 +69,7 @@ const Footer = () => {
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>
-      <Button ref={hoverRef} type='button' onClick={() => handleCloseButton()}>
+      <Button ref={hoverRef} type='button' onClick={() => closeWindow()}>
         {isHovered ? '👍' : 'Done'}
       </Button>
     </FooterWrapper>
