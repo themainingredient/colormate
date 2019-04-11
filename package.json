@@ -35,6 +35,7 @@
     "@semantic-release/exec": "^3.3.2",
     "@skpm/builder": "^0.5.11",
     "@skpm/extract-loader": "^2.0.2",
+    "@types/jest": "^24.0.11",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
@@ -55,6 +56,7 @@
     "react-testing-library": "^6.0.4",
     "semantic-release": "^15.13.3",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
     "typescript": "^3.4.3"
   },
