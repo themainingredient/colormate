@@ -28,6 +28,7 @@ export default {
     MediumGrey: '#B5B8C6',
     DarkGrey: '#4d4f59',
     TMIBlueDark: '#3B2EEB',
+    Black25: '#00000040',
   },
   fonts: {
     SFPro: {

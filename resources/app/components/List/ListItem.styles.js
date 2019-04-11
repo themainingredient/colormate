@@ -5,12 +5,10 @@ import CheckeredBackground from '../../assets/checkered_small.svg';
 
 const { colors, fonts } = Globals;
 
-// TODO: Get a non opacity grey for the border-bottom
 export const ListItemWrapper = styled.div`
   border-bottom: 1px solid ${colors.LightGrey};
   padding-left: 16px;
   padding-right: 16px;
-  background-color: ${colors.White};
   width: 100%;
   height: 72px;
   display: flex;

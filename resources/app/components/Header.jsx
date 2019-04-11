@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Globals, { flexCenter } from '../Global.styles';
 
 import ColormateLogo from '../assets/colormateLogo.svg';
-import Bubble from '../assets/bubble.svg';
 
 const { colors, fonts } = Globals;
 
@@ -16,7 +15,7 @@ const HeaderWrapper = styled.div`
   height: 87px;
   width: 320px;
   background-color: ${colors.LightGrey};
-  overflow: hidden;
+  box-shadow: 0 5px 10px 2px ${colors.Black25};
 `;
 
 const Tag = styled.div`
@@ -41,27 +40,9 @@ const StyledColormateLogo = styled(ColormateLogo)`
   transform: translate(-50%, -50%);
 `;
 
-const BigBubble = styled(Bubble)`
-  position: absolute;
-  right: 2px;
-  bottom: -20px;
-  height: 43px;
-  width: 43px;
-`;
-
-const SmallBubble = styled(Bubble)`
-  position: absolute;
-  right: 4px;
-  bottom: 26px;
-  height: 18px;
-  width: 18px;
-`;
-
 const Header = () => (
   <HeaderWrapper>
     <StyledColormateLogo height={66} width={186} />
-    <BigBubble />
-    <SmallBubble />
     <Tag>{process.env.REACT_APP_VERSION}</Tag>
   </HeaderWrapper>
 );
