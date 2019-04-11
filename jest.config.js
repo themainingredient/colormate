@@ -63,9 +63,9 @@ module.exports = {
   },
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+  moduleDirectories: [
+    'node_modules',
+  ],
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
@@ -114,10 +114,7 @@ module.exports = {
   // rootDir: null,
 
   // A list of paths to directories that Jest should use to search for files in
-  roots: [
-    '<rootDir>/src',
-    '<rootDir>/resources',
-  ],
+  // roots: [],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -152,10 +149,7 @@ module.exports = {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-  testRegex: [
-    '((\\.|/)(test|spec))\\.tsx?$',
-    '((\\.|/)(test|spec))\\.js?$',
-  ],
+  // testRegex: [],
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: null,
@@ -172,6 +166,7 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.jsx?$': 'babel-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
