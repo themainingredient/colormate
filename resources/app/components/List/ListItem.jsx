@@ -14,12 +14,14 @@ import {
   Spacer,
 } from './ListItem.styles';
 
-import { calcOpacityPercentage } from '../../helpers';
+import { calcOpacityPercentage, calculateContrast } from '../../helpers';
+
+const isColorContrasting = color => calculateContrast(color) > 1.2;
 
 const Dot = ({ color }) => (
   <DotWrapper>
     <DotBG />
-    <DotColor color={color} />
+    <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
   </DotWrapper>
 );
 

@@ -1,6 +1,8 @@
 import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
+import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
+import { TRACKING_ID } from './constants';
 
 const webview = require('../resources/webview.html');
 
@@ -15,6 +17,7 @@ export default function () {
     acceptsFirstMouse: true,
   };
 
+
   const browserWindow = new BrowserWindow(options);
 
   // only show the window when the page has loaded
@@ -28,8 +31,7 @@ export default function () {
   webContents.on('getColors', (s) => {
     const colors = getColors();
     UI.message(s);
-    webContents
-      .executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
+    webContents.executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
       .catch(console.error); // eslint-disable-line no-console
   });
 
@@ -42,4 +44,6 @@ export default function () {
   });
 
   browserWindow.loadURL(webview);
+
+  trackAppStart(TRACKING_ID);
 }

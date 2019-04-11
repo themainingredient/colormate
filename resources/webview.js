@@ -1,6 +1,9 @@
 import './app';
+import { isDev } from '../src/helpers/environment';
 
 // Disable the context menu to have a more native feel
-// document.addEventListener('contextmenu', (e) => {
-//   e.preventDefault();
-// });
+if (!isDev()) {
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  });
+}
