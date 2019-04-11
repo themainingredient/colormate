@@ -135,7 +135,7 @@ describe('React | Helpers', () => {
       }];
     });
 
-    test('should convert a tree with 2 layers with the same parents', () => {
+    test.only('should convert a tree with 2 layers with the same parents', () => {
       input = {
         red: [{
           name: 'Rectangle1',
