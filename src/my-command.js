@@ -2,7 +2,7 @@ import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
 import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
-import { TRACKING_ID } from './constants';
+import { TRACKING_ID } from './constants.ts';
 
 const webview = require('../resources/webview.html');
 
