@@ -5,7 +5,7 @@ describe('createTreeStructure', () => {
     let output: any;
     afterEach(() => { expect(mapColorMapToColors(input)).toEqual(output); });
 
-    test('transform colors object to an array', () => {
+    test('transform color map with no layers to an array of colors with no layers', () => {
       input = {
         red: [],
         yellow: [],
@@ -17,7 +17,7 @@ describe('createTreeStructure', () => {
       ];
     });
 
-    test('should convert a basic tree', () => {
+    test('transform color map with no parents to an array of colors with a layer without children', () => {
       input = {
         red: [{
           name: 'Rectangle1',
@@ -32,12 +32,13 @@ describe('createTreeStructure', () => {
       }];
     });
 
-    test.only('should convert a tree with one parent', () => {
+    test('transform color map with parents to an array of colors with layers', () => {
       input = {
         red: [{
-          name: 'Rectangle1',
+          name: 'Rectangle',
           parents: [
             { name: 'Page' },
+            { name: 'Group' },
           ],
         }],
       };
@@ -48,47 +49,25 @@ describe('createTreeStructure', () => {
           {
             name: 'Page',
             children: [
-              { name: 'Rectangle1' },
+              { 
+                name: 'Group',
+                children: [
+                  { name: 'Rectangle' },
+                ],
+               },
             ],
           },
         ],
       }];
     });
 
-    test('should convert a tree with 1 layer with 2 parents', () => {
+    test('transform color map with different parents to an array of colors with layers', () => {
       input = {
         red: [{
           name: 'Rectangle1',
           parents: [
-            { name: 'Page' },
-            { name: 'Artboard' },
-          ],
-        }],
-      };
-
-      output = [{
-        color: 'red',
-        layers: [
-          {
-            name: 'Page',
-            children: [{
-              name: 'Artboard',
-              children: [
-                { name: 'Rectangle1' },
-              ],
-            }],
-          },
-        ],
-      }];
-    });
-
-    test('should convert a tree with 2 layers with different parents', () => {
-      input = {
-        red: [{
-          name: 'Rectangle1',
-          parents: [
-            { name: 'Page' },
-            { name: 'Artboard' },
+            { name: 'Page1' },
+            { name: 'Artboard1' },
           ],
         }, {
           name: 'Rectangle2',
@@ -103,9 +82,9 @@ describe('createTreeStructure', () => {
         color: 'red',
         layers: [
           {
-            name: 'Page',
+            name: 'Page1',
             children: [{
-              name: 'Artboard',
+              name: 'Artboard1',
               children: [
                 { name: 'Rectangle1' },
               ],
@@ -124,7 +103,7 @@ describe('createTreeStructure', () => {
       }];
     });
 
-    test.skip('should convert a tree with 2 layers with the same parents', () => {
+    test.skip('transform color map with common parents to an array of colors with grouped layers', () => {
       input = {
         red: [{
           name: 'Rectangle1',
