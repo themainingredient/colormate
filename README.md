@@ -38,5 +38,6 @@ We're not going to sit back and let the plugin work its magic. We're continously
 
 If you can think of any other functionalities, please let us know! 🤩
 
-## 
+
+Made with ❤️ by [The Main Ingredient](https://themainingredient.co)
 
