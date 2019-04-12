@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Globals from '../../Global.styles';
 
 import CheckeredBackground from '../../assets/checkered_small.svg';
+import Arrow from '../../assets/arrowWhite.svg';
 
 const { colors, fonts } = Globals;
 
@@ -9,6 +10,7 @@ export const ListItemWrapper = styled.div`
   border-bottom: 1px solid ${colors.LightGrey};
   padding-left: 16px;
   padding-right: 16px;
+  background-color: ${({ isActive }) => (isActive ? colors.TMIBlue : '')};
   width: 100%;
   height: 72px;
   display: flex;
@@ -51,7 +53,7 @@ export const DotColor = styled.div`
 
 export const Title = styled.p`
   margin-left: 8px;
-  color: ${colors.TMIBlue};
+  color: ${({ isActive }) => (isActive ? colors.White : colors.TMIBlue)};
   font-size: 16px;
   font-family: ${fonts.SFPro.bold};
 
@@ -61,7 +63,7 @@ export const Title = styled.p`
 `;
 
 export const Instances = styled.p`
-  color: ${colors.DarkGrey};
+  color: ${({ isActive }) => (isActive ? colors.White : colors.DarkGrey)};
   font-size: 14px;
   font-family: ${fonts.SFPro.reg};
   font-weight: normal;
@@ -83,18 +85,23 @@ export const Spacer = styled.div`
 `;
 
 export const Label = styled.p`
-  color: ${colors.DarkGrey};
+  color: ${({ isActive }) => (isActive ? colors.TMIBlue : colors.DarkGrey)};
   font-family: ${fonts.SFPro.bold};
   font-size: 11px;
   width: 36px;
   height: 24px;
   line-height: 26px;
   text-align: center;
-  background-color: ${colors.LightGrey};
+  background-color: ${({ isActive }) => (isActive ? colors.White : colors.LightGrey)};
   border-radius: 2px;
 
   ${ListItemWrapper}:hover & {
     color: ${colors.TMIBlue};
     background-color: ${colors.White};
   }
+`;
+
+export const IndicatorArrow = styled(Arrow)`
+  transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
+  transition: transform 150ms ease-in-out;
 `;
