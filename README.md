@@ -20,7 +20,7 @@ Did we peak your interest already? 🧐
 
 Did you already download the plugin? Good. Let's get started then!
 
-Open your Sketch file and run the plugin by using the shortcut "CMND+Shift+8" on Mac or "CTRL+Shift+8" on Windows. You're also able to run the plugin by going to "Plugins" in the top nav bar and then select the Colormate plugin. 
+Open your Sketch file and run the plugin by using the shortcut "CMD+Shift+8" on Mac or "CTRL+Shift+8" on Windows. You're also able to run the plugin by going to "Plugins" in the top nav bar and then select the Colormate plugin. 
 
 The plugin starts with scanning every layer in the file and gathering all the colours that are being used in text, symbols & objects. This may take some seconds if you have a really big file. (But we provided you with a nice gif to look at while waiting 😎) 
 
