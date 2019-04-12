@@ -1,9 +1,9 @@
-import { colorsObjectToArray } from './create-tree';
+import { mapColorMapToColors } from './create-tree';
 
 describe('createTreeStructure', () => {
     let input: any;
     let output: any;
-    afterEach(() => { expect(colorsObjectToArray(input)).toEqual(output); });
+    afterEach(() => { expect(mapColorMapToColors(input)).toEqual(output); });
 
     test('transform colors object to an array', () => {
       input = {
@@ -32,7 +32,7 @@ describe('createTreeStructure', () => {
       }];
     });
 
-    test('should convert a tree with one parent', () => {
+    test.only('should convert a tree with one parent', () => {
       input = {
         red: [{
           name: 'Rectangle1',

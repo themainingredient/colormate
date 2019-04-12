@@ -1,42 +1,40 @@
-const mapLevelArrayToTreeObject = (inputArray) => {
-    if (inputArray.length === 1) {
-      return ({
-        name: inputArray[0].name,
-      });
+const getHierarchy = (layer: InputLayer): Layer[] => {
+  if ('parents' in layer && layer.parents!.length) {
+    return [
+      ...layer.parents,
+      { name: layer.name },
+    ];
+  }
+
+  return [{ name: layer.name }];
+};
+
+const getLayers = (hierarchy: {name: string}[]): Layer => {
+    if (hierarchy.length === 1) {
+      return hierarchy[0];
     }
   
     return ({
-      name: inputArray[0].name,
-      children: [mapLevelArrayToTreeObject(inputArray.splice(1))],
+      name: hierarchy[0].name,
+      children: [getLayers(hierarchy.splice(1))],
     });
-  };
+};
   
-  const mapInstanceToLevelsArray = (instance) => {
-    if ('parents' in instance && instance.parents.length) {
-      return [
-        ...instance.parents,
-        { name: instance.name },
-      ];
-    }
-  
-    return [{ name: instance.name }];
-  };
-  
-  const createTreeObjectFromLevelsArray = (levelsArray) => {
-    if (levelsArray.length === 1) {
-      return ({
-        name: levelsArray[0].name,
-      });
-    }
-  
-    return mapLevelArrayToTreeObject(levelsArray);
-  };
+// const createTreeObjectFromLevelsArray = (levelsArray) => {
+//   if (levelsArray.length === 1) {
+//     return ({
+//       name: levelsArray[0].name,
+//     });
+//   }
+
+//   return getLayers(levelsArray);
+// };
   
 //   export const colorsObjectToArray = (colorsObject) => {
 //     const output = Object.entries(colorsObject).map(([color, instances]) => ({
 //       color,
 //       layers: instances.reduce((acc, instance) => {
-//         const levelsArray = mapInstanceToLevelsArray(instance);
+//         const levelsArray = getHierarchy(instance);
   
 //         if (acc.length === 0) {
 //           return [
@@ -81,25 +79,36 @@ const mapLevelArrayToTreeObject = (inputArray) => {
 //     return output;
 //   };
 
-export const colorsObjectToArray = (colorsObject) => {
-  const output = Object.entries(colorsObject).map(([color, instances]) => ({
+export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
+
+  const output = Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: instances.map((instance) => {
-      const levelsArray = mapInstanceToLevelsArray(instance);
-
-      if (levelsArray.length === 1) {
-        return ({
-          name: levelsArray[0].name,
-        });
-      }
-
-      const returnObj = mapLevelArrayToTreeObject(levelsArray);
+    layers: inputLayers.map((inputLayer) => {
+      const hierarchy = getHierarchy(inputLayer);
+      const returnObj = getLayers(hierarchy);
 
       return returnObj;
     }),
   }));
 
-//   console.log('helpers.js - output ', JSON.stringify(output, null, 2));
-
   return output;
 };
+
+interface ColorMap {
+  [hexColor: string]: InputLayer[]
+}
+
+interface InputLayer {
+  name: string;
+  parents?: {name: string}[];
+}
+
+interface Layer {
+  name: string;
+  children?: Layer[];
+}
+
+interface Color {
+  color: string;
+  layers: Layer[];
+}
