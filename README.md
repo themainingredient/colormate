@@ -4,7 +4,7 @@ _This plugin was created using `skpm`. For a detailed explanation on how things 
 
 ## Installation
 
-Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip).\_, unzip then double-click find-and-replace-text.sketchplugin to install.
+Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip), unzip then double-click find-and-replace-text.sketchplugin to install.
 
 ## Getting started
 
