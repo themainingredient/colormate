@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import sketch from 'sketch';
 import { traverse } from './helpers/traverse';
 import {

@@ -5,10 +5,8 @@ import Globals, { flexCenter } from '../Global.styles';
 import ColormateLogo from '../assets/colormateLogo.svg';
 
 const { colors, fonts } = Globals;
-
-const isBeta = () => {
-  return process.env.REACT_APP_VERSION.includes('beta');
-};
+const isBeta = process.env.REACT_APP_IS_BETA;
+const VERSION = isBeta ? `${process.env.REACT_APP_VERSION}-beta` : process.env.REACT_APP_VERSION;
 
 const HeaderWrapper = styled.div`
   ${flexCenter};
@@ -20,7 +18,7 @@ const HeaderWrapper = styled.div`
 
 const Tag = styled.div`
   height: 22px;
-  width: ${isBeta() ? '60px' : '39px'};
+  width: ${isBeta ? '60px' : '39px'};
   background-color: ${colors.TMIBlue};
   border-radius: 11px;
   position: absolute;
@@ -43,7 +41,7 @@ const StyledColormateLogo = styled(ColormateLogo)`
 const Header = () => (
   <HeaderWrapper>
     <StyledColormateLogo height={66} width={186} />
-    <Tag>{process.env.REACT_APP_VERSION}</Tag>
+    <Tag>{VERSION}</Tag>
   </HeaderWrapper>
 );
 

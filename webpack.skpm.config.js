@@ -57,6 +57,12 @@ module.exports = config => {
     ],
   });
 
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    loader: 'ts-loader'
+  });
+
   const env = dotenv.config().parsed;
 
   // reduce it to a nice object, the same as before

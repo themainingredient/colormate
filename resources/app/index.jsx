@@ -8,6 +8,7 @@ import Header from './components/Header';
 import List from './components/List/List';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
+import NoColorsFound from './components/NoColorsFound';
 
 const PluginWrapper = styled.div`
   height: 534px;
@@ -18,9 +19,11 @@ const PluginWrapper = styled.div`
 
 const App = () => {
   const [colors, setColors] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     window.sendUsedColors = (incomingColors) => {
+      setIsLoading(false);
       setColors(incomingColors);
     };
 
@@ -28,18 +31,20 @@ const App = () => {
     window.postMessage('getColors', 'Loading all colors');
   }, []);
 
+  const content = Object.keys(colors).length !== 0 ? (
+    <>
+      <Header />
+      <List colorList={colors} />
+      <Footer />
+    </>
+  ) : (
+    <NoColorsFound />
+  );
+
   return (
     <PluginWrapper>
       <GlobalFonts />
-      {Object.keys(colors).length !== 0 ? (
-        <>
-          <Header />
-          <List colorList={colors} />
-          <Footer />
-        </>
-      ) : (
-        <Loader />
-      )}
+      {isLoading ? <Loader /> : content }
     </PluginWrapper>
   );
 };
