@@ -1,26 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import GlobalStyles from '../../Global.styles';
 
 import ColorLayer from './Tree/ColorLayer';
-
-const { colors } = GlobalStyles;
-
-const LayerWrapper = styled.div`
-  padding-left: ${({ generation }) => 16 * generation}px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  &:hover {
-    background-color: ${colors.LightGrey};
-  }
-`;
-
-const Layer = ({ name, generation, children }) => (
-  <LayerWrapper generation={generation}>
-    {name}
-    {children || null}
-  </LayerWrapper>
-);
+import WrapperLayer from './Tree/WrapperLayer';
 
 const ListItemTreeWrapper = styled.div`
   margin: 16px 0;
@@ -38,8 +20,9 @@ const renderLayer = (tree, generation = 0) => {
   if ('children' in tree && tree.children.length) {
     return (
       <>
-        <Layer name={tree.name} generation={generation} />
-        {tree.children.map(layert => renderLayer(layert, generation + 1))}
+        <WrapperLayer layer={tree} generation={generation}>
+          {tree.children.map(child => renderLayer(child, generation + 1))}
+        </WrapperLayer>
       </>
     );
   }
