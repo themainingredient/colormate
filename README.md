@@ -1,6 +1,6 @@
 # Colormate Sketch Plugin 🌈
 
-This free plugin gives you an impression of all the colours being used in your Sketch file, how many times a certain colour is being used and gives you the opportunity to see where the colours are being used.   
+This free plugin gives you an impression of _all the colours_ being used in your Sketch file, _how many times_ a certain colour is being used and gives you the opportunity to see _where_ the colours are being used.   
 
 ## Why this Plugin? 🤔
 
