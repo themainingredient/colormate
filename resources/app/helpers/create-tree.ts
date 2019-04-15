@@ -1,3 +1,22 @@
+interface ColorMap {
+  [hexColor: string]: InputLayer[]
+}
+
+interface InputLayer {
+  name: string;
+  parents?: {name: string}[];
+}
+
+interface Layer {
+  name: string;
+  children?: Layer[];
+}
+
+interface Color {
+  color: string;
+  layers: Layer[];
+}
+
 const getHierarchy = (layer: InputLayer): Layer[] => {
   if ('parents' in layer && layer.parents!.length) {
     return [
@@ -79,9 +98,25 @@ const getLayers = (hierarchy: {name: string}[]): Layer => {
 //     return output;
 //   };
 
+// const isMatching = (candidates: Layer[], layerToSearch: Layer): boolean => {
+//   for (var property in candidates) {
+//     if (property === 'name') {
+//       if ()
+//     }
+//     if (candidates[property] === layerToSearch.name) {
+//       return true;
+//     }
+//   }
+
+  
+//   if ('children' in candidate && candidate.children!.length) {
+//     return isMatching(candidate.children, layerToSearch)
+//   }
+// }
+
 export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
 
-  const output = Object.entries(colorsObject).map(([color, inputLayers]) => ({
+  const colors = Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
     layers: inputLayers.map((inputLayer) => {
       const hierarchy = getHierarchy(inputLayer);
@@ -91,24 +126,86 @@ export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
     }),
   }));
 
-  return output;
+  console.log('create-tree.ts - returnObj: ', JSON.stringify(colors, null, 2));
+
+  const colorsWithGroupedLayers: Color[] = colors.map(color => {
+    return {
+      ...color,
+      layers: color.layers.reduce((acc: Layer[], cur: Layer) => {
+        recursion(acc, cur)
+        return acc;
+      }, [])
+    }
+  })
+
+  return colorsWithGroupedLayers;
 };
 
-interface ColorMap {
-  [hexColor: string]: InputLayer[]
+const recursion = (x: Layer[] | any, objectToFind: Layer) => {
+  console.log('objectToFind', objectToFind);
+      for (var property in x) {
+        if (x.hasOwnProperty(property)) {
+          console.log('Current property', property);
+          console.log('Current value', x[property]);
+
+            if (property == "name") {
+              if (x[property] === objectToFind.name) {
+                console.log('found!', x[property]);
+                      
+                if (!x['children'].length) {
+                  x['children'].push(...objectToFind.children);
+
+                  return;
+                }
+
+                objectToFind.children.forEach(child => {
+                    if (!isLayerInArrayOfLayers(child, x['children'])) {
+                      console.log('Appending child', child);
+                      x['children'].push(child);
+                    } else {
+                      console.log('check on obj children');
+                      recursion(x['children'], child);
+                    }
+                  })
+              }
+            }
+
+            if (typeof x[property] == "object"){
+                console.log('APPLY RECUSION');
+                recursion(x[property], objectToFind);
+            }
+        }
+    }
 }
 
-interface InputLayer {
-  name: string;
-  parents?: {name: string}[];
+const isLayerInArrayOfLayers = (layer: Layer, layers: Layer[]) => {
+  const found = layers.find(cur => cur.name === layer.name);
+
+  return !!found;
 }
 
-interface Layer {
-  name: string;
-  children?: Layer[];
-}
+// const appendChild = (siblingLayer: Layer, matchingLayer: Layer, layerToAppend: Layer) => {
+//   if (siblingLayer.name === matchingLayer.name) {
+//     return {
+//       ...siblingLayer,
+//       children: [
+//         ...siblingLayer.children,
+//         layerToAppend
+//       ]
+//     }
+//   }
 
-interface Color {
-  color: string;
-  layers: Layer[];
-}
+  // siblingLayer.children.
+
+  // return appendChild(siblingLayer!.children, matchingLayer, layerToAppend);
+  // if (siblingLayer.)
+//   for (var property in siblingLayer) {
+//     if (siblingLayer.hasOwnProperty(property)) {
+//       if (typeof siblingLayer[property] == "object"){
+//           recursiveIteration(siblingLayer[property]);
+//       }else{
+//           //found a property which is not an object, check for your conditions here
+//       }
+//   }
+//   }
+// }
