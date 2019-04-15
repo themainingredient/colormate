@@ -10,7 +10,7 @@ const ListWrapper = styled.div`
 `;
 
 const List = ({ colorList }) => {
-  const [activeItem, setActiveItem] = useState();
+  const [activeItem, setActiveItem] = useState(0);
 
   const handleListItemClick = (itemIndex) => {
     setActiveItem(itemIndex === activeItem ? null : itemIndex);
