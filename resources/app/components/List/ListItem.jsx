@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import _ from 'lodash';
 import {
   ListItemWrapper,
   ColorDataWrapper,
@@ -12,11 +10,64 @@ import {
   Instances,
   Label,
   Spacer,
+  IndicatorArrow,
 } from './ListItem.styles';
+import ListItemTree from './ListItemTree';
 
 import { calcOpacityPercentage, calculateContrast } from '../../helpers';
 
 const isColorContrasting = color => calculateContrast(color) > 1.2;
+
+const MockLayers = {
+  color: '#34F378FF',
+  children: [
+    {
+      name: 'Page 1',
+      id: 'FF29A9D3-282A-4446-BF66-FD889B1DF905',
+      type: 'Page',
+      children: [
+        {
+          name: 'Artboard',
+          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C59',
+          type: 'Artboard',
+          children: [
+            {
+              name: 'Rectangle1',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              type: 'ShapePath',
+              colorType: 'fill',
+            },
+            {
+              name: 'Rectangle2',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              type: 'ShapePath',
+              colorType: 'border',
+            },
+          ],
+        },
+        {
+          name: 'Artboard2',
+          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C59',
+          type: 'Artboard',
+          children: [
+            {
+              name: 'Rectangle1',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              type: 'ShapePath',
+              colorType: 'fill',
+            },
+            {
+              name: 'Rectangle2',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              type: 'ShapePath',
+              colorType: 'border',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 const Dot = ({ color }) => (
   <DotWrapper>
@@ -25,39 +76,24 @@ const Dot = ({ color }) => (
   </DotWrapper>
 );
 
-const LayerTree = styled.p`
-  margin-left: ${props => props.i * 20}px;
-`;
-
-const Layer = ({ data }) => {
-  const { parents } = data;
-
-  return (
-    <>
-      {parents.map((ancestors, i) => (
-        <LayerTree i={i}>{ancestors.name}</LayerTree>
-      ))}
-    </>
-  );
-};
-
-const ListItem = ({ color, instances }) => {
+const ListItem = ({
+  color, instances, clickHandler, index, isActive,
+}) => {
   const opacityPercentage = calcOpacityPercentage(color);
 
   return (
     <>
-      <ListItemWrapper>
+      <ListItemWrapper isActive={isActive} onClick={() => clickHandler(index)}>
         <ColorDataWrapper>
           <Dot color={color} />
-          <Title>{color.toUpperCase().slice(0, -2)}</Title>
+          <Title isActive={isActive}>{color.toUpperCase().slice(0, -2)}</Title>
           <Spacer />
-          {opacityPercentage < 100 && <Label>{opacityPercentage}%</Label>}
+          {opacityPercentage < 100 && <Label isActive={isActive}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
-        <Instances>{instances.length}x</Instances>
+        <IndicatorArrow isActive={isActive} />
+        <Instances isActive={isActive}>{instances.length}x</Instances>
       </ListItemWrapper>
-      {instances.map(instance => (
-        <Layer data={instance} />
-      ))}
+      {isActive && <ListItemTree tree={MockLayers} />}
     </>
   );
 };
@@ -69,6 +105,9 @@ Dot.propTypes = {
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
   instances: PropTypes.number.isRequired,
+  clickHandler: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

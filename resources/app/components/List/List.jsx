@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -10,10 +10,24 @@ const ListWrapper = styled.div`
 `;
 
 const List = ({ colorList }) => {
+  const [activeItem, setActiveItem] = useState();
+
+  const handleListItemClick = (itemIndex) => {
+    setActiveItem(itemIndex === activeItem ? null : itemIndex);
+  };
+
   return (
     <ListWrapper>
-      {Object.keys(colorList).map(color => (
-        <ListItem color={color} instances={colorList[color]} />
+      {Object.keys(colorList).map((color, index) => (
+        <ListItem
+          color={color}
+          instances={colorList[color]}
+          clickHandler={(itemIndex) => {
+            handleListItemClick(itemIndex);
+          }}
+          index={index}
+          isActive={index === activeItem}
+        />
       ))}
     </ListWrapper>
   );
