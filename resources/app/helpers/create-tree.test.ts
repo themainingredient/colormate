@@ -103,7 +103,7 @@ describe('createTreeStructure', () => {
       }];
     });
 
-    test.only('transform color map with common parents to an array of colors with grouped layers', () => {
+    test('transform color map with common parents to an array of colors with grouped layers', () => {
       input = {
         red: [{
           name: 'Rectangle1',
