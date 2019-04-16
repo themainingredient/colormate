@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   ListItemWrapper,
@@ -13,6 +13,7 @@ import {
   IndicatorArrow,
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
+import ListContext from '../../ListContext';
 
 import { calcOpacityPercentage, calculateContrast } from '../../helpers';
 
@@ -69,23 +70,27 @@ const MockLayers = {
   ],
 };
 
-const Dot = ({ color }) => (
-  <DotWrapper>
-    <DotBG />
-    <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
-  </DotWrapper>
-);
-
-const ListItem = ({
-  color, instances, clickHandler, layerClickHandler, index, isActive, selectedLayer,
-}) => {
+const ListItem = ({ color, instances, index }) => {
+  const [isActive, setActive] = useState();
+  const { selectedColor, setSelectedColor } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
+
+  useEffect(() => {
+    setActive(selectedColor === index);
+  }, [selectedColor]);
+
+  const handleListItemClick = (itemIndex) => {
+    setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
+  };
 
   return (
     <>
-      <ListItemWrapper isActive={isActive} onClick={() => clickHandler(index)}>
+      <ListItemWrapper isActive={isActive} onClick={() => handleListItemClick(index)}>
         <ColorDataWrapper>
-          <Dot color={color} />
+          <DotWrapper>
+            <DotBG />
+            <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
+          </DotWrapper>
           <Title isActive={isActive}>{color.toUpperCase().slice(0, -2)}</Title>
           <Spacer />
           {opacityPercentage < 100 && <Label isActive={isActive}>{opacityPercentage}%</Label>}
@@ -93,25 +98,15 @@ const ListItem = ({
         <IndicatorArrow isActive={isActive} />
         <Instances isActive={isActive}>{instances.length}x</Instances>
       </ListItemWrapper>
-      {isActive && (
-        <ListItemTree tree={MockLayers} handleLayerClick={layerClickHandler} selectedLayer={selectedLayer} />
-      )}
+      {isActive && <ListItemTree tree={MockLayers} />}
     </>
   );
 };
 
-Dot.propTypes = {
-  color: PropTypes.string.isRequired,
-};
-
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
-  instances: PropTypes.number.isRequired,
-  clickHandler: PropTypes.func.isRequired,
-  layerClickHandler: PropTypes.func.isRequired,
+  instances: PropTypes.array.isRequired,
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  selectedLayer: PropTypes.string.isRequired,
 };
 
 export default ListItem;

@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import { omit } from 'lodash';
 import Globals from '../../Global.styles';
 
 import CheckeredBackground from '../../assets/checkered_small.svg';
@@ -53,7 +55,7 @@ export const DotColor = styled.div`
       return `0 0 0 2px ${colors.White} inset`;
     }
     return `0 0 0 1px ${colors.MediumGrey} inset`;
-  }}
+  }};
 `;
 
 export const Title = styled.p`
@@ -106,7 +108,7 @@ export const Label = styled.p`
   }
 `;
 
-export const IndicatorArrow = styled(Arrow)`
+export const IndicatorArrow = styled(props => <Arrow {...omit(props, ['isActive'])} />)`
   transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
   transition: transform 150ms ease-in-out;
 `;

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import GlobalStyles from '../../../Global.styles';
 import useHover from '../../../hooks/useHover';
+import ListContext from '../../../ListContext';
 
 import ShapePath from '../../../assets/Rectangle.svg';
 
@@ -38,9 +39,8 @@ const Name = styled.p`
   border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-const ColorLayer = ({
-  layer, generation, handleLayerClick, selectedLayer,
-}) => {
+const ColorLayer = ({ layer, generation }) => {
+  const { selectedLayer, setSelectedLayer } = useContext(ListContext);
   const [isHovered, hoverRef] = useHover();
 
   const {
@@ -51,7 +51,7 @@ const ColorLayer = ({
     <ColorLayerWrapper
       ref={hoverRef}
       generation={generation}
-      onClick={() => handleLayerClick(id)}
+      onClick={() => setSelectedLayer(id)}
       isSelected={selectedLayer === id}
     >
       <ColorType type={colorType} />
@@ -73,8 +73,6 @@ const ColorLayer = ({
 ColorLayer.propTypes = {
   layer: PropTypes.object.isRequired,
   generation: PropTypes.number.isRequired,
-  handleLayerClick: PropTypes.func.isRequired,
-  selectedLayer: PropTypes.string.isRequired,
 };
 
 export default ColorLayer;

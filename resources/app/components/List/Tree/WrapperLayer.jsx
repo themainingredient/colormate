@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { omit } from 'lodash';
 import GlobalStyles from '../../../Global.styles';
 import useHover from '../../../hooks/useHover';
+import ListContext from '../../../ListContext';
 
 import Arrow from '../../../assets/arrowGrey.svg';
 import Artboard from '../../../assets/artboard.svg';
@@ -19,7 +21,7 @@ const Wrapper = styled.div`
   background-color: ${({ isSelected }) => (isSelected ? colors.TMIBlueLight : '')};
 `;
 
-const StyledArrow = styled(Arrow)`
+const StyledArrow = styled(props => <Arrow {...omit(props, ['isOpen'])} />)`
   margin-right: 8px;
   transform: ${({ isOpen }) => (isOpen ? 'rotate(0deg)' : 'rotate(-90deg)')};
   transition: transform 150ms ease-in-out;
@@ -36,10 +38,9 @@ const Name = styled.p`
   border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-const WrapperLayer = ({
-  layer, generation, children, handleLayerClick, selectedLayer,
-}) => {
+const WrapperLayer = ({ layer, generation, children }) => {
   const [isOpen, setOpen] = useState(true);
+  const { selectedLayer, setSelectedLayer } = useContext(ListContext);
   const [isHovered, hoverRef] = useHover();
 
   const { name, id, type } = layer;
@@ -49,7 +50,7 @@ const WrapperLayer = ({
       <Wrapper
         ref={hoverRef}
         generation={generation}
-        onClick={() => handleLayerClick(id)}
+        onClick={() => setSelectedLayer(id)}
         isSelected={selectedLayer === id}
       >
         <StyledArrow
@@ -81,9 +82,7 @@ const WrapperLayer = ({
 WrapperLayer.propTypes = {
   layer: PropTypes.object.isRequired,
   generation: PropTypes.number.isRequired,
-  children: PropTypes.element.isRequired,
-  handleLayerClick: PropTypes.func.isRequired,
-  selectedLayer: PropTypes.string.isRequired,
+  children: PropTypes.array.isRequired,
 };
 
 export default WrapperLayer;
