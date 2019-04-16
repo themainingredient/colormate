@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import GlobalStyles from '../../../Global.styles';
 import useHover from '../../../hooks/useHover';
 
@@ -15,10 +16,7 @@ const Wrapper = styled.div`
   padding-left: ${({ generation }) => 16 * generation}px;
   padding-top: 8px;
   padding-bottom: 8px;
-
-  &:hover {
-    background-color: ${colors.LightGrey};
-  }
+  background-color: ${({ isSelected }) => (isSelected ? colors.TMIBlueLight : '')};
 `;
 
 const StyledArrow = styled(Arrow)`
@@ -34,11 +32,13 @@ const StyledArtboard = styled(Artboard)`
 const Name = styled.p`
   font-family: ${fonts.SFPro.reg};
   font-size: 14px;
-  color: ${colors.DarkGrey};
+  color: ${({ isSelected }) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
   border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-const WrapperLayer = ({ layer, generation, children }) => {
+const WrapperLayer = ({
+  layer, generation, children, handleLayerClick, selectedLayer,
+}) => {
   const [isOpen, setOpen] = useState(true);
   const [isHovered, hoverRef] = useHover();
 
@@ -46,8 +46,19 @@ const WrapperLayer = ({ layer, generation, children }) => {
 
   return (
     <>
-      <Wrapper ref={hoverRef} generation={generation} onClick={() => setOpen(!isOpen)}>
-        <StyledArrow isOpen={isOpen} />
+      <Wrapper
+        ref={hoverRef}
+        generation={generation}
+        onClick={() => handleLayerClick(id)}
+        isSelected={selectedLayer === id}
+      >
+        <StyledArrow
+          isOpen={isOpen}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(!isOpen);
+          }}
+        />
         {(() => {
           switch (type) {
             case 'Page':
@@ -58,11 +69,21 @@ const WrapperLayer = ({ layer, generation, children }) => {
               return <p>Unknown type</p>;
           }
         })()}
-        <Name isHovered={isHovered}>{name}</Name>
+        <Name isHovered={isHovered} isSelected={selectedLayer === id}>
+          {name}
+        </Name>
       </Wrapper>
       {isOpen && <>{children || null}</>}
     </>
   );
+};
+
+WrapperLayer.propTypes = {
+  layer: PropTypes.object.isRequired,
+  generation: PropTypes.number.isRequired,
+  children: PropTypes.element.isRequired,
+  handleLayerClick: PropTypes.func.isRequired,
+  selectedLayer: PropTypes.string.isRequired,
 };
 
 export default WrapperLayer;

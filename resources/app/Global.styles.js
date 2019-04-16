@@ -23,11 +23,12 @@ export const GlobalFonts = createGlobalStyle`
 export default {
   colors: {
     White: '#FFFFFF',
+    TMIBlueLight: '#EDECFF',
     TMIBlue: '#4E41FF',
+    TMIBlueDark: '#3B2EEB',
     LightGrey: '#E8E9EF',
     MediumGrey: '#B5B8C6',
     DarkGrey: '#4d4f59',
-    TMIBlueDark: '#3B2EEB',
     Black25: '#00000040',
   },
   fonts: {

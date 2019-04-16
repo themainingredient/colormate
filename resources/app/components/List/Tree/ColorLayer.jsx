@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import GlobalStyles from '../../../Global.styles';
 import useHover from '../../../hooks/useHover';
 
@@ -14,10 +15,7 @@ const ColorLayerWrapper = styled.div`
   padding-left: ${({ generation }) => 16 * generation}px;
   padding-top: 8px;
   padding-bottom: 8px;
-
-  &:hover {
-    background-color: ${colors.LightGrey};
-  }
+  background-color: ${({ isSelected }) => (isSelected ? colors.TMIBlueLight : '')};
 `;
 
 const StyledShapePath = styled(ShapePath)`
@@ -36,11 +34,13 @@ const ColorType = styled.div`
 const Name = styled.p`
   font-family: ${fonts.SFPro.reg};
   font-size: 14px;
-  color: ${colors.DarkGrey};
+  color: ${({ isSelected }) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
   border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-const ColorLayer = ({ layer, generation }) => {
+const ColorLayer = ({
+  layer, generation, handleLayerClick, selectedLayer,
+}) => {
   const [isHovered, hoverRef] = useHover();
 
   const {
@@ -48,7 +48,12 @@ const ColorLayer = ({ layer, generation }) => {
   } = layer;
 
   return (
-    <ColorLayerWrapper ref={hoverRef} generation={generation}>
+    <ColorLayerWrapper
+      ref={hoverRef}
+      generation={generation}
+      onClick={() => handleLayerClick(id)}
+      isSelected={selectedLayer === id}
+    >
       <ColorType type={colorType} />
       {(() => {
         switch (type) {
@@ -58,9 +63,18 @@ const ColorLayer = ({ layer, generation }) => {
             return <p>Unknown type</p>;
         }
       })()}
-      <Name isHovered={isHovered}>{name}</Name>
+      <Name isHovered={isHovered} isSelected={selectedLayer === id}>
+        {name}
+      </Name>
     </ColorLayerWrapper>
   );
+};
+
+ColorLayer.propTypes = {
+  layer: PropTypes.object.isRequired,
+  generation: PropTypes.number.isRequired,
+  handleLayerClick: PropTypes.func.isRequired,
+  selectedLayer: PropTypes.string.isRequired,
 };
 
 export default ColorLayer;

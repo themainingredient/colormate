@@ -28,7 +28,7 @@ const MockLayers = {
       children: [
         {
           name: 'Artboard',
-          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C59',
+          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C58',
           type: 'Artboard',
           children: [
             {
@@ -39,7 +39,7 @@ const MockLayers = {
             },
             {
               name: 'Rectangle2',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82E',
               type: 'ShapePath',
               colorType: 'border',
             },
@@ -52,13 +52,13 @@ const MockLayers = {
           children: [
             {
               name: 'Rectangle1',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82F',
               type: 'ShapePath',
               colorType: 'fill',
             },
             {
               name: 'Rectangle2',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82G',
               type: 'ShapePath',
               colorType: 'border',
             },
@@ -77,7 +77,7 @@ const Dot = ({ color }) => (
 );
 
 const ListItem = ({
-  color, instances, clickHandler, index, isActive,
+  color, instances, clickHandler, layerClickHandler, index, isActive, selectedLayer,
 }) => {
   const opacityPercentage = calcOpacityPercentage(color);
 
@@ -93,7 +93,9 @@ const ListItem = ({
         <IndicatorArrow isActive={isActive} />
         <Instances isActive={isActive}>{instances.length}x</Instances>
       </ListItemWrapper>
-      {isActive && <ListItemTree tree={MockLayers} />}
+      {isActive && (
+        <ListItemTree tree={MockLayers} handleLayerClick={layerClickHandler} selectedLayer={selectedLayer} />
+      )}
     </>
   );
 };
@@ -106,8 +108,10 @@ ListItem.propTypes = {
   color: PropTypes.string.isRequired,
   instances: PropTypes.number.isRequired,
   clickHandler: PropTypes.func.isRequired,
+  layerClickHandler: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  selectedLayer: PropTypes.string.isRequired,
 };
 
 export default ListItem;

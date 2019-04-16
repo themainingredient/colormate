@@ -10,10 +10,15 @@ const ListWrapper = styled.div`
 `;
 
 const List = ({ colorList }) => {
-  const [activeItem, setActiveItem] = useState(0);
+  const [activeColor, setActiveColor] = useState();
+  const [selectedLayer, setSelectedLayer] = useState();
 
-  const handleListItemClick = (itemIndex) => {
-    setActiveItem(itemIndex === activeItem ? null : itemIndex);
+  const handleColorClick = (itemIndex) => {
+    setActiveColor(itemIndex === activeColor ? null : itemIndex);
+  };
+
+  const handleLayerClick = (layerID) => {
+    setSelectedLayer(layerID);
   };
 
   return (
@@ -23,10 +28,14 @@ const List = ({ colorList }) => {
           color={color}
           instances={colorList[color]}
           clickHandler={(itemIndex) => {
-            handleListItemClick(itemIndex);
+            handleColorClick(itemIndex);
           }}
+          layerClickHandler={(layerID) => {
+            handleLayerClick(layerID);
+          }}
+          selectedLayer={selectedLayer}
           index={index}
-          isActive={index === activeItem}
+          isActive={index === activeColor}
         />
       ))}
     </ListWrapper>
