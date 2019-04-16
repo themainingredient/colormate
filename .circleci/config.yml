@@ -73,9 +73,9 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - ~/repo/.env
-            - ~/repo/package.json
-            - ~/repo/src/manifest.json
+            - repo/.env
+            # - repo/package.json
+            # - repo/src/manifest.json
 
   build-staging:
     <<: *defaults
@@ -289,8 +289,8 @@ workflows:
   deploy-staging:
     jobs:
       - install
-      - testing
-      - linting
+      # - testing
+      # - linting
       - set-staging-envs:
           requires:
             - install
