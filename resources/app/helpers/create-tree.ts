@@ -37,24 +37,17 @@ const getLayers = (hierarchy: { name: string }[]): Layer => {
 };
 
 export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
-  const colors = Object.entries(colorsObject).map(([color, inputLayers]) => ({
+  return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers.map((inputLayer) => {
-      const hierarchy = getHierarchy(inputLayer);
-      const returnObj = getLayers(hierarchy);
+    layers: inputLayers
+      .map((inputLayer: InputLayer) => {
+        const hierarchy = getHierarchy(inputLayer);
+        const returnObj = getLayers(hierarchy);
 
-      return returnObj;
-    }),
+        return returnObj;
+      })
+      .reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), [])
   }));
-
-  const colorsWithGroupedLayers: Color[] = colors.map(color => {
-    return {
-      ...color,
-      layers: color.layers.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), [])
-    }
-  })
-
-  return colorsWithGroupedLayers;
 };
 
 const addLayerWithGrouping = (groupedLayers: Layer[], layer: Layer): Layer[]  => {
