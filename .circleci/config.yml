@@ -112,7 +112,7 @@ jobs:
           root: workspace
           paths:
             - .env
-            - colormate.sketchplugin/
+            - colormate.sketchplugin/*
 
   zip-staging:
     <<: *defaults
