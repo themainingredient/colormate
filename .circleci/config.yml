@@ -87,9 +87,9 @@ jobs:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
-      - attach_workspace:
-          at: ~/repo/workspace
       - checkout
+      - attach_workspace:
+          at: workspace
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
