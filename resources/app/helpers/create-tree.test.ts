@@ -106,10 +106,9 @@ describe('createTreeStructure', () => {
     ];
   });
 
-  test.skip('transform color map with common parents to an array of colors with grouped layers', () => {
-    input = {
-      red: [
-        {
+    test('transform color map with common parents to an array of colors with grouped layers', () => {
+      input = {
+        red: [{
           name: 'Rectangle1',
           parents: [{ name: 'Page' }, { name: 'Artboard' }],
         },
