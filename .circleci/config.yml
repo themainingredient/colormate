@@ -70,12 +70,17 @@ jobs:
 
       - run: mkdir -p workspace
 
+      - run: |
+          cat .env > workspace/.env
+          cat package.json > workspace/package.json
+          cat src/manifest.json > workspace/manifest.json
+
       - persist_to_workspace:
           root: workspace
           paths:
             - .env
             - package.json
-            - src/manifest.json
+            - manifest.json
 
   build-staging:
     <<: *defaults
