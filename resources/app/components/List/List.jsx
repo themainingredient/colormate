@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ListItem from './ListItem';
+import { ListProvider } from '../../ListContext';
 
 const ListWrapper = styled.div`
   height: 369px;
@@ -10,26 +11,38 @@ const ListWrapper = styled.div`
 `;
 
 const List = ({ colorList }) => {
-  const [activeItem, setActiveItem] = useState(0);
+  const [activeColor, setActiveColor] = useState();
+  const [selectedLayer, setSelectedLayer] = useState();
 
-  const handleListItemClick = (itemIndex) => {
-    setActiveItem(itemIndex === activeItem ? null : itemIndex);
+  const handleColorClick = (itemIndex) => {
+    setActiveColor(itemIndex === activeColor ? null : itemIndex);
+  };
+
+  const handleLayerClick = (layerID) => {
+    setSelectedLayer(layerID);
   };
 
   return (
-    <ListWrapper>
-      {Object.keys(colorList).map((color, index) => (
-        <ListItem
-          color={color}
-          instances={colorList[color]}
-          clickHandler={(itemIndex) => {
-            handleListItemClick(itemIndex);
-          }}
-          index={index}
-          isActive={index === activeItem}
-        />
-      ))}
-    </ListWrapper>
+    <ListProvider>
+      <ListWrapper>
+        {Object.keys(colorList).map((color, index) => (
+          <ListItem
+            key={index}
+            color={color}
+            instances={colorList[color]}
+            clickHandler={(itemIndex) => {
+              handleColorClick(itemIndex);
+            }}
+            layerClickHandler={(layerID) => {
+              handleLayerClick(layerID);
+            }}
+            selectedLayer={selectedLayer}
+            isActive={index === activeColor}
+            index={index}
+          />
+        ))}
+      </ListWrapper>
+    </ListProvider>
   );
 };
 

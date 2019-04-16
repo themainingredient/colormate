@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   ListItemWrapper,
@@ -13,6 +13,7 @@ import {
   IndicatorArrow,
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
+import ListContext from '../../ListContext';
 
 import { calcOpacityPercentage, calculateContrast } from '../../helpers';
 
@@ -28,7 +29,7 @@ const MockLayers = {
       children: [
         {
           name: 'Artboard',
-          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C59',
+          id: '73F57CCA-4B9A-4E1E-A382-3792D6896C58',
           type: 'Artboard',
           children: [
             {
@@ -39,7 +40,7 @@ const MockLayers = {
             },
             {
               name: 'Rectangle2',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82E',
               type: 'ShapePath',
               colorType: 'border',
             },
@@ -52,13 +53,13 @@ const MockLayers = {
           children: [
             {
               name: 'Rectangle1',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82F',
               type: 'ShapePath',
               colorType: 'fill',
             },
             {
               name: 'Rectangle2',
-              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82D',
+              id: '6D474D4A-39CA-462E-9725-A66FE0C4F82G',
               type: 'ShapePath',
               colorType: 'border',
             },
@@ -69,45 +70,43 @@ const MockLayers = {
   ],
 };
 
-const Dot = ({ color }) => (
-  <DotWrapper>
-    <DotBG />
-    <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
-  </DotWrapper>
-);
-
-const ListItem = ({
-  color, instances, clickHandler, index, isActive,
-}) => {
+const ListItem = ({ color, instances, index }) => {
+  const [isSelected, setSelected] = useState();
+  const { selectedColor, setSelectedColor } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
+
+  useEffect(() => {
+    setSelected(selectedColor === index);
+  }, [selectedColor]);
+
+  const handleListItemClick = (itemIndex) => {
+    setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
+  };
 
   return (
     <>
-      <ListItemWrapper isActive={isActive} onClick={() => clickHandler(index)}>
+      <ListItemWrapper isActive={isSelected} onClick={() => handleListItemClick(index)}>
         <ColorDataWrapper>
-          <Dot color={color} />
-          <Title isActive={isActive}>{color.toUpperCase().slice(0, -2)}</Title>
+          <DotWrapper>
+            <DotBG />
+            <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
+          </DotWrapper>
+          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>
           <Spacer />
-          {opacityPercentage < 100 && <Label isActive={isActive}>{opacityPercentage}%</Label>}
+          {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
-        <IndicatorArrow isActive={isActive} />
-        <Instances isActive={isActive}>{instances.length}x</Instances>
+        <IndicatorArrow isActive={isSelected} />
+        <Instances isActive={isSelected}>{instances.length}x</Instances>
       </ListItemWrapper>
-      {isActive && <ListItemTree tree={MockLayers} />}
+      {isSelected && <ListItemTree tree={MockLayers} />}
     </>
   );
 };
 
-Dot.propTypes = {
-  color: PropTypes.string.isRequired,
-};
-
 ListItem.propTypes = {
   color: PropTypes.string.isRequired,
-  instances: PropTypes.number.isRequired,
-  clickHandler: PropTypes.func.isRequired,
+  instances: PropTypes.array.isRequired,
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
 };
 
 export default ListItem;
