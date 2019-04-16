@@ -108,11 +108,14 @@ jobs:
           name: Build project
           command: npm run build
 
+      - run: mkdir -p workspace/build
+      - run: cp -R colormate.sketchplugin/*  workspace/build
+
       - persist_to_workspace:
           root: workspace
           paths:
             - .env
-            - colormate.sketchplugin/*
+            - build/
 
   zip-staging:
     <<: *defaults
@@ -129,7 +132,7 @@ jobs:
           name: Zipping project
           command: |
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
-            zip -r colormate_${REACT_APP_VERSION}.zip workspace/colormate.sketchplugin
+            zip -r colormate_${REACT_APP_VERSION}.zip workspace/build
 
       - persist_to_workspace:
           root: workspace
