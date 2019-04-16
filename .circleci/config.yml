@@ -135,13 +135,11 @@ jobs:
             zip -r colormate_${REACT_APP_VERSION}.zip workspace/build
 
       - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}_test.zip
-      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_test.zip
 
       - persist_to_workspace:
           root: workspace
           paths:
-            - colormate_${REACT_APP_VERSION}_test.zip
-            - colormate_test.zip
+            - .
 
   release:
     <<: *defaults
