@@ -3,10 +3,10 @@ defaults: &defaults
 
 version: 2
 jobs:
-  testing:
+  install:
+    <<: *defaults
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -14,18 +14,29 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
       - run: npm install
-      - run:
-          name: Run tests
-          command: npm run test
       - save_cache:
           paths:
             - node_modules
           key: v1-dep-{{ checksum "package.json" }}
 
-  linting:
+  testing:
+    <<: *defaults
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run tests
+          command: npm run test
+
+  linting:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -35,6 +46,88 @@ jobs:
       - run:
           name: Run ESLint
           command: npm run lint
+
+  set-staging-envs:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+
+      - run:
+          name: Run semantic-release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
+
+      - run: mkdir -p workspace
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - package.json
+            - src/manifest.json
+
+  build-staging:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - attach_workspace:
+          at: ~/repo/workspace
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: cat workspace/.env > .env
+      - run: cat workspace/package.json > package.json
+      - run: cat workspace/src/manifest.json > src/manifest.json
+
+      - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
+      - run:
+          name: Build project
+          command: npm run build
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - colormate.sketchplugin
+
+  zip-staging:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run: cat workspace/.env >> $BASH_ENV
+
+      - run:
+          name: Zipping project
+          command: |
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            zip -r colormate_${REACT_APP_VERSION}.zip workspace/colormate.sketchplugin
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - colormate_${REACT_APP_VERSION}.zip
 
   release:
     <<: *defaults
@@ -52,6 +145,30 @@ jobs:
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release
+
+  deploy-staging-test:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run: cat workspace/.env >> $BASH_ENV
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+      - run: pip install awscli
+
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}_test.zip s3://colormate-testing/staging/
+
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
+            $SLACK_WEBHOOK_URL
 
   deploy-staging:
     docker:
@@ -168,8 +285,35 @@ jobs:
 
 workflows:
   version: 2
+  deploy-staging:
+    jobs:
+      - install
+      - testing
+      - linting
+      - set-staging-envs:
+          requires:
+            - install
+            - testing
+            - linting
+          filters:
+            branches:
+              only:
+                # - /release/.*/
+                - ci/build-on-tag
+      - build-staging:
+          requires:
+            - set-staging-envs
+      - zip-staging:
+          requires:
+            - build-staging
+      - deploy-staging-test:
+          requires:
+            - zip-staging
+
   untagged-build:
     jobs:
+      - testing
+      - linting
       - release:
           requires:
             - testing
@@ -178,14 +322,7 @@ workflows:
             branches:
               only:
                 - master
-      - deploy-staging:
-          requires:
-            - testing
-            - linting
-          filters:
-            branches:
-              only:
-                - /release/.*/
+
   tagged-build:
     jobs:
       - deploy-production:
@@ -194,15 +331,3 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
-  # build_and_test:
-  #   jobs:
-  #     - testing
-  #     - linting
-  #     - deploy-production:
-  #         requires:
-  #           - testing
-  #           - linting
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
