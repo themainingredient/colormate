@@ -71,11 +71,11 @@ jobs:
       - run: mkdir -p workspace
 
       - persist_to_workspace:
-          root: workspace
+          root: repo
           paths:
-            - repo/.env
-            # - repo/package.json
-            # - repo/src/manifest.json
+            - .env
+            - package.json
+            - src/manifest.json
 
   build-staging:
     <<: *defaults
