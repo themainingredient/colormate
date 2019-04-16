@@ -1,3 +1,6 @@
+defaults: &defaults
+  working_directory: ~/repo
+
 version: 2
 jobs:
   testing:
@@ -32,6 +35,23 @@ jobs:
       - run:
           name: Run ESLint
           command: npm run lint
+
+  release:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run semantic-release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release
 
   deploy-staging:
     docker:
@@ -94,21 +114,20 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
       - run: apt-get update
-      - run: apt-get -y install jq zip moreutils xmlstarlet
+      - run: apt-get -y install jq zip moreutils xmlstarlet git
       - run: pip install awscli
-
-      - run:
-          name: Release
-          command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
 
       - run:
           name: Setup Environment Variables
           command: |
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+
+      - run:
+        name: Prepare dist files
+        command: |
+          jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
+          jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
 
       - run:
           name: Get appcast.xml from S3
@@ -149,10 +168,16 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  untagged-build:
     jobs:
-      - testing
-      - linting
+      - release:
+          requires:
+            - testing
+            - linting
+          filters:
+            branches:
+              only:
+                - master
       - deploy-staging:
           requires:
             - testing
@@ -161,12 +186,23 @@ workflows:
             branches:
               only:
                 - /release/.*/
-
+  tagged-build:
+    jobs:
       - deploy-production:
-          requires:
-            - testing
-            - linting
           filters:
+            tags:
+              only: /^v.*/
             branches:
-              only:
-                - master
+              ignore: /.*/
+  # build_and_test:
+  #   jobs:
+  #     - testing
+  #     - linting
+  #     - deploy-production:
+  #         requires:
+  #           - testing
+  #           - linting
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
