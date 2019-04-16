@@ -140,7 +140,7 @@ jobs:
           root: workspace
           paths:
             - .env
-            - colormate_${REACT_APP_VERSION}.zip
+            - colormate_${REACT_APP_VERSION}_test.zip
 
   release:
     <<: *defaults
