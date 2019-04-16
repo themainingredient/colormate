@@ -260,8 +260,7 @@ workflows:
           filters:
             branches:
               only:
-                - ci/build-on-tag
-                # - /release/.*/
+                - /release/.*/
       - build-staging:
           requires:
             - pre-build-staging
@@ -274,10 +273,12 @@ workflows:
 
   untagged-build:
     jobs:
+      - install
       - testing
       - linting
       - release:
           requires:
+            - install
             - testing
             - linting
           filters:
