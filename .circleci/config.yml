@@ -134,7 +134,7 @@ jobs:
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
             zip -r colormate_${REACT_APP_VERSION}.zip workspace/build
 
-      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}_test.zip
+      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}.zip
 
       - persist_to_workspace:
           root: workspace
@@ -173,13 +173,13 @@ jobs:
 
       - run:
           name: Deploy to S3
-          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}_test.zip s3://colormate-testing/staging/
+          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
 
       - run:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
 
   deploy-staging:
