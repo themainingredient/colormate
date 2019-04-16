@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
-// import { Settings } from 'sketch';
+import { Settings } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { isProd } from './environment';
 
-// const kUUIDKey = 'google.analytics.uuid';
-// let uuid = Settings.globalSettingForKey(kUUIDKey);
-// if (!uuid) {
-//   uuid = NSUUID.UUID().UUIDString();
-//   Settings.setGlobalSettingForKey(uuid, kUUIDKey);
-// }
+const kUUIDKey = 'google.analytics.uuid';
+let uuid = Settings.globalSettingForKey(kUUIDKey);
+if (!uuid) {
+  uuid = NSUUID.UUID().UUIDString();
+  Settings.setGlobalSettingForKey(uuid, kUUIDKey);
+}
 
 function jsonToQueryString(json) {
   return Object.keys(json)
@@ -22,10 +22,10 @@ const track = (trackingId, hitType, props) => {
     return;
   }
 
-  // if (!Settings.globalSettingForKey('analyticsEnabled')) {
-  //   // the user didn't enable sharing analytics
-  //   return;
-  // }
+  if (!Settings.globalSettingForKey('analyticsEnabled')) {
+    // the user didn't enable sharing analytics
+    return;
+  }
 
   const payload = {
     v: 1,
