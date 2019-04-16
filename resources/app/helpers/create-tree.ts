@@ -50,24 +50,14 @@ export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
   const colorsWithGroupedLayers: Color[] = colors.map(color => {
     return {
       ...color,
-      layers: groupLayers([], color.layers)
+      layers: color.layers.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), [])
     }
   })
 
   return colorsWithGroupedLayers;
 };
 
-const groupLayers = (groupedLayers: Layer[], remainingLayers: Layer[]): Layer[] => {
-  if (!remainingLayers.length) {
-      return groupedLayers;
-  }
-
-  return groupLayers(
-      addLayer(groupedLayers, remainingLayers[0]), 
-      remainingLayers.slice(1)
-  );
-}
-const addLayer = (groupedLayers: Layer[], layer: Layer) => {
+const addLayerWithGrouping = (groupedLayers: Layer[], layer: Layer): Layer[]  => {
   if (!groupedLayers.length) {
       return [layer];
   }
@@ -76,10 +66,9 @@ const addLayer = (groupedLayers: Layer[], layer: Layer) => {
   if (filteredGroupedLayers.length) {
       return groupedLayers.map(groupedLayer => {
               if ('children' in layer) {
-
                   let updatedLayers: Layer[] = [];
                   layer.children!.forEach(child => {
-                      updatedLayers = addLayer(groupedLayer.children!, child);
+                      updatedLayers = addLayerWithGrouping(groupedLayer.children!, child);
                   })
 
                   return {
