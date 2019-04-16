@@ -47,7 +47,7 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  set-staging-envs:
+  pre-build-staging:
     <<: *defaults
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
@@ -300,21 +300,21 @@ workflows:
   deploy-staging:
     jobs:
       - install
-      # - testing
-      # - linting
-      - set-staging-envs:
+      - testing
+      - linting
+      - pre-build-staging:
           requires:
             - install
-            # - testing
-            # - linting
+            - testing
+            - linting
           filters:
             branches:
               only:
-                # - /release/.*/
                 - ci/build-on-tag
+                # - /release/.*/
       - build-staging:
           requires:
-            - set-staging-envs
+            - pre-build-staging
       - zip-staging:
           requires:
             - build-staging
