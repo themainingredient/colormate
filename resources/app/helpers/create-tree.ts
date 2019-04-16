@@ -66,22 +66,18 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layer: Layer): Layer[]  =>
   if (filteredGroupedLayers.length) {
       return groupedLayers.map(groupedLayer => {
               if ('children' in layer) {
-                  let updatedLayers: Layer[] = [];
-                  layer.children!.forEach(child => {
-                      updatedLayers = addLayerWithGrouping(groupedLayer.children!, child);
-                  })
-
+                  // each child layer needs to be added with grouping to the children of the current layer
+                  const updatedLayers: Layer[] = layer.children!.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), groupedLayer.children!)
                   return {
                       name: groupedLayer.name,
                       children: updatedLayers
                   }
-
               } else {
-                  //nothing to change: layers have same name and layer to insert has no children
+                  // layers have same name and layer to insert has no children: nothing to change 
                   return groupedLayer;
               }
       })
-  } else {
-      return groupedLayers.concat([layer]);
-  }
+  } 
+
+  return groupedLayers.concat([layer])
 }
