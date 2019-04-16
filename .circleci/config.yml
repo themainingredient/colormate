@@ -71,11 +71,11 @@ jobs:
       - run: mkdir -p workspace
 
       - persist_to_workspace:
-          root: ~/repo/workspace
+          root: workspace
           paths:
-            - .env
-            - package.json
-            - src/manifest.json
+            - ~/repo/.env
+            - ~/repo/package.json
+            - ~/repo/src/manifest.json
 
   build-staging:
     <<: *defaults
@@ -294,8 +294,8 @@ workflows:
       - set-staging-envs:
           requires:
             - install
-            - testing
-            - linting
+            # - testing
+            # - linting
           filters:
             branches:
               only:
