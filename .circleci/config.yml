@@ -101,7 +101,7 @@ jobs:
       - run: cat workspace/.env >> $BASH_ENV
       - run: cat workspace/.env > .env
       - run: cat workspace/package.json > package.json
-      - run: cat workspace/src/manifest.json > src/manifest.json
+      - run: cat workspace/src/manifest.json > manifest.json
 
       - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       - run:
