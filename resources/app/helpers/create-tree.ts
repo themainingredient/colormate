@@ -78,8 +78,8 @@ const addLayer = (groupedLayers: Layer[], layer: Layer) => {
               if ('children' in layer) {
 
                   let updatedLayers: Layer[] = [];
-                  layer!.children.forEach(child => {
-                      updatedLayers = addLayer(groupedLayer!.children, child);
+                  layer.children!.forEach(child => {
+                      updatedLayers = addLayer(groupedLayer.children!, child);
                   })
 
                   return {
