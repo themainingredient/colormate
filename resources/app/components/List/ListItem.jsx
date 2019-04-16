@@ -71,12 +71,12 @@ const MockLayers = {
 };
 
 const ListItem = ({ color, instances, index }) => {
-  const [isActive, setActive] = useState();
+  const [isSelected, setSelected] = useState();
   const { selectedColor, setSelectedColor } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
 
   useEffect(() => {
-    setActive(selectedColor === index);
+    setSelected(selectedColor === index);
   }, [selectedColor]);
 
   const handleListItemClick = (itemIndex) => {
@@ -85,20 +85,20 @@ const ListItem = ({ color, instances, index }) => {
 
   return (
     <>
-      <ListItemWrapper isActive={isActive} onClick={() => handleListItemClick(index)}>
+      <ListItemWrapper isActive={isSelected} onClick={() => handleListItemClick(index)}>
         <ColorDataWrapper>
           <DotWrapper>
             <DotBG />
             <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
           </DotWrapper>
-          <Title isActive={isActive}>{color.toUpperCase().slice(0, -2)}</Title>
+          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>
           <Spacer />
-          {opacityPercentage < 100 && <Label isActive={isActive}>{opacityPercentage}%</Label>}
+          {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
-        <IndicatorArrow isActive={isActive} />
-        <Instances isActive={isActive}>{instances.length}x</Instances>
+        <IndicatorArrow isActive={isSelected} />
+        <Instances isActive={isSelected}>{instances.length}x</Instances>
       </ListItemWrapper>
-      {isActive && <ListItemTree tree={MockLayers} />}
+      {isSelected && <ListItemTree tree={MockLayers} />}
     </>
   );
 };
