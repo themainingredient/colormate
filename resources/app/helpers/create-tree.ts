@@ -17,42 +17,18 @@ interface Color {
   layers: Layer[];
 }
 
-const getHierarchy = (layer: InputLayer): Layer[] => {
-  if ('parents' in layer && layer.parents!.length) {
-    return [...layer.parents, { name: layer.name }];
-  }
-
-  return [{ name: layer.name }];
-};
-
-const getLayers = (hierarchy: { name: string }[]): Layer => {
-  if (hierarchy.length === 1) {
-    return hierarchy[0];
-  }
-
-  return {
-    name: hierarchy[0].name,
-    children: [getLayers(hierarchy.splice(1))],
-  };
-};
-
 export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers
-      .map((inputLayer: InputLayer) => {
-        const hierarchy = getHierarchy(inputLayer);
-        const returnObj = getLayers(hierarchy);
-
-        return returnObj;
-      })
-      .reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), [])
+    layers: inputLayers.reduce((acc: Layer[], cur: InputLayer) => addLayerWithGrouping(acc, cur), [])
   }));
 };
 
-const addLayerWithGrouping = (groupedLayers: Layer[], layer: Layer): Layer[]  => {
+const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | Layer): Layer[]  => {
+  let layer: Layer = isInputLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
+
   if (!groupedLayers.length) {
-      return [layer];
+    return [layer];
   }
 
   const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.name === layer.name)
@@ -73,4 +49,32 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layer: Layer): Layer[]  =>
   } 
 
   return groupedLayers.concat([layer])
+}
+
+const mapInputLayerToLayer = (inputLayer: InputLayer): Layer => {
+  const hierarchy = getHierarchy(inputLayer);
+  return getLayers(hierarchy);
+} 
+
+const getHierarchy = (layer: InputLayer): Layer[] => {
+  if ('parents' in layer && layer.parents!.length) {
+    return [...layer.parents, { name: layer.name }];
+  }
+
+  return [{ name: layer.name }];
+};
+
+const getLayers = (hierarchy: { name: string }[]): Layer => {
+  if (hierarchy.length === 1) {
+    return hierarchy[0];
+  }
+
+  return {
+    name: hierarchy[0].name,
+    children: [getLayers(hierarchy.splice(1))],
+  };
+};
+
+const isInputLayerType = (layer: InputLayer | Layer): layer is InputLayer => {
+  return (<InputLayer>layer).parents !== undefined;
 }
