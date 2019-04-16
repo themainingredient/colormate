@@ -1,41 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import GlobalStyles from '../../Global.styles';
 
-import Arrow from '../../assets/arrowGrey.svg';
-
-const { colors } = GlobalStyles;
-
-const LayerWrapper = styled.div`
-  padding: 8px 24px;
-
-  &:hover {
-    background-color: ${colors.LightGrey};
-  }
-`;
-
-const Layer = ({ name, children }) => (
-  <LayerWrapper>
-    {name}
-    {children || null}
-  </LayerWrapper>
-);
+import ColorLayer from './Tree/ColorLayer';
+import WrapperLayer from './Tree/WrapperLayer';
 
 const ListItemTreeWrapper = styled.div`
   margin: 16px 0;
 `;
 
-const renderLayer = (tree) => {
+const renderLayer = (tree, generation = 0) => {
   if (!('name' in tree)) {
-    return tree.children.map(page => renderLayer(page));
+    return tree.children.map(page => renderLayer(page, generation + 1));
   }
 
   if (!('children' in tree)) {
-    return <Layer name={tree.name} />;
+    return <ColorLayer layer={tree} generation={generation} />;
   }
 
   if ('children' in tree && tree.children.length) {
-    return <Layer name={tree.name}>{tree.children.map(layert => renderLayer(layert))}</Layer>;
+    return (
+      <>
+        <WrapperLayer layer={tree} generation={generation}>
+          {tree.children.map(child => renderLayer(child, generation + 1))}
+        </WrapperLayer>
+      </>
+    );
   }
 };
 

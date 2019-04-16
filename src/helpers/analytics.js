@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Settings } from 'sketch';
+import { Settings } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { isProd } from './environment';
 
 const kUUIDKey = 'google.analytics.uuid';

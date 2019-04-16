@@ -1,5 +1,5 @@
 import BrowserWindow from 'sketch-module-web-view';
-import { UI } from 'sketch';
+import { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
 import { TRACKING_ID } from './constants.ts';

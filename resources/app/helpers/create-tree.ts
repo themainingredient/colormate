@@ -19,24 +19,21 @@ interface Color {
 
 const getHierarchy = (layer: InputLayer): Layer[] => {
   if ('parents' in layer && layer.parents!.length) {
-    return [
-      ...layer.parents,
-      { name: layer.name },
-    ];
+    return [...layer.parents, { name: layer.name }];
   }
 
   return [{ name: layer.name }];
 };
 
-const getLayers = (hierarchy: {name: string}[]): Layer => {
-    if (hierarchy.length === 1) {
-      return hierarchy[0];
-    }
-  
-    return ({
-      name: hierarchy[0].name,
-      children: [getLayers(hierarchy.splice(1))],
-    });
+const getLayers = (hierarchy: { name: string }[]): Layer => {
+  if (hierarchy.length === 1) {
+    return hierarchy[0];
+  }
+
+  return {
+    name: hierarchy[0].name,
+    children: [getLayers(hierarchy.splice(1))],
+  };
 };
 
 export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
