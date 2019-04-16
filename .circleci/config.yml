@@ -139,8 +139,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - .env
-            - colormate_${REACT_APP_VERSION}_test.zip
+            - *.zip
 
   release:
     <<: *defaults
