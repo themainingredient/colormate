@@ -120,7 +120,7 @@ jobs:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - attach_workspace:
-          at: ~/repo/workspace
+          at: workspace
       - run: cat workspace/.env >> $BASH_ENV
 
       - run:
@@ -158,7 +158,7 @@ jobs:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - attach_workspace:
-          at: ~/repo/workspace
+          at: workspace
       - run: cat workspace/.env >> $BASH_ENV
 
       - run: apt-get update
