@@ -3,7 +3,7 @@
 echo 'Building APP with version: ' $1
 echo 'Building app for branch: ' $2
 
-if [[ "$2" =~ release/* ]]
+if [[ "$2" =~ ci/build-on-tag ]] #TODO: change to release/*
 then
   jq --arg h "$1" '.version=$h' package.json | sponge package.json
   jq --arg h "$1" '.version=$h' src/manifest.json | sponge src/manifest.json
