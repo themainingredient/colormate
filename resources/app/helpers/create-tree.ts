@@ -1,45 +1,17 @@
-import {omit} from 'lodash';
+import { omit } from 'lodash';
+import { Layer } from '../models/color-tree/color-with-layers.model';
+import { ColorWithLayers } from '../models/color-tree/color-with-layers.model';
+import { InputColorMap, InputColorMapLayer } from '../models/color-tree/input-color-map.model';
 
-interface ColorMap {
-  [hexColor: string]: InputLayer[]
-}
-
-export interface InputLayer {
-  id: string;
-  name: string;
-  type: string;
-  colorType: string;
-  parents: InputLayerParent[];
-}
-
-export interface InputLayerParent {
-  id: string;
-  name: string;
-  type: string;
-}
-
-export interface Layer {
-  id: string;
-  name: string;
-  type: string;
-  colorType?: string;
-  children?: Layer[];
-}
-
-interface Color {
-  color: string;
-  layers: Layer[];
-}
-
-export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
+export const mapColorMapToColors = (colorsObject: InputColorMap): ColorWithLayers[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers.reduce((acc: Layer[], cur: InputLayer) => addLayerWithGrouping(acc, cur), [])
+    layers: inputLayers.reduce((acc: Layer[], cur: InputColorMapLayer) => addLayerWithGrouping(acc, cur), [])
   }));
 };
 
-const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | Layer): Layer[]  => {
-  let layer: Layer = isInputLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
+const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputColorMapLayer | Layer): Layer[]  => {
+  let layer: Layer = isInputColorMapLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
 
   if (!groupedLayers.length) {
     return [layer];
@@ -65,7 +37,7 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | L
   return groupedLayers.concat([layer])
 }
 
-const mapInputLayerToLayer = (inputLayer: InputLayer): Layer => {
+const mapInputLayerToLayer = (inputLayer: InputColorMapLayer): Layer => {
   const hierarchy = getHierarchy(inputLayer);
   return getChild(hierarchy);
 } 
@@ -90,6 +62,6 @@ const getChild = (hierarchy: Layer[]): Layer => {
   };
 };
 
-const isInputLayerType = (layer: InputLayer | Layer): layer is InputLayer => {
-  return (<InputLayer>layer).parents !== undefined;
+const isInputColorMapLayerType = (layer: InputColorMapLayer | Layer): layer is InputColorMapLayer => {
+  return (<InputColorMapLayer>layer).parents !== undefined;
 }

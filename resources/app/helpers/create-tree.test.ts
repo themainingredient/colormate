@@ -1,13 +1,14 @@
-import { mapColorMapToColors, InputLayer, InputLayerParent } from './create-tree';
+import { InputColorMapLayer, InputColorMapLayerParent } from '../models/color-tree/input-color-map.model';
+import { mapColorMapToColors } from './create-tree';
 
 const createInputLayer = (
-  name: string, type: string, parentNames: {name: string, type: string}[] = []): InputLayer => {
+  name: string, type: string, parentNames: {name: string, type: string}[] = []): InputColorMapLayer => {
   const inputLayer = {
     id: `id-${name}`,
     name,
     type,
     colorType: 'fill',
-    parents: [] as InputLayerParent[]
+    parents: [] as InputColorMapLayerParent[]
   }
 
   if (parentNames.length) {
