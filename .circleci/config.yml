@@ -270,7 +270,7 @@ jobs:
       - run:
           name: Update Release on GitHub
           command: |
-            github-release upload \
+            github-release upload -R \
                 --security-token $GH_TOKEN \
                 --user themainingredient \
                 --repo colormate \
