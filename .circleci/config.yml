@@ -187,19 +187,29 @@ jobs:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
     working_directory: ~/repo
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "89:48:37:04:e6:59:6b:43:78:c2:a6:ac:ed:cb:fe:d3"
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
-      - run: add-apt-repository ppa:longsleep/golang-backports
+
       - run: apt-get update
       - run: apt-get -y install jq zip moreutils xmlstarlet git golang-go
       - run: pip install awscli
 
-      - add_ssh_keys:
-          fingerprints:
-            - "89:48:37:04:e6:59:6b:43:78:c2:a6:ac:ed:cb:fe:d3"
+      - run:
+          name: Install GO
+          command: |
+            wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz
+            tar -xvf go1.12.2.linux-amd64.tar.gz
+            mv go /usr/local
+            export GOROOT=/usr/local/go
+            export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+            echo go version
+
       - run:
           name: Setup Environment Variables
           command: |
