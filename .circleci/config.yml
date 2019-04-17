@@ -215,7 +215,6 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
             echo 'export GOROOT="/usr/lib/go"' >> $BASH_ENV
             echo 'export GOPATH="$HOME/repo/"' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
@@ -244,6 +243,11 @@ jobs:
       # - run:
       #     name: Update appcast.xml in S3 with updated version
       #     command: aws s3 cp appcast.xml s3://colormate-testing/
+      - run:
+          name: create env file
+          command: |
+            touch .env
+            echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
 
       - run:
           name: Build project
@@ -269,7 +273,7 @@ jobs:
             github-release upload \
                 --user themainingredient \
                 --repo colormate \
-                --tag ${REATC_APP_VERSION} \
+                --tag v1.0.0 \
                 --name "colormate.zip" \
                 --file colormate_${REACT_APP_VERSION}.zip
 
