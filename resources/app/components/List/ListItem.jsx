@@ -14,9 +14,9 @@ import {
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
-import { mapColorMapToColors } from '../../helpers/create-tree';
+import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap.ts';
 
-import { calcOpacityPercentage, calculateContrast } from '../../helpers';
+import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations.ts';
 
 const isColorContrasting = color => calculateContrast(color) > 1.2;
 
@@ -78,7 +78,7 @@ const ListItem = ({ color, instances, index }) => {
   const opacityPercentage = calcOpacityPercentage(color);
 
   useEffect(() => {
-    const layers = mapColorMapToColors({ [color]: instances });
+    const layers = transformSketchColorMap({ [color]: instances });
     setRealLayers(layers[0]);
   }, []);
 

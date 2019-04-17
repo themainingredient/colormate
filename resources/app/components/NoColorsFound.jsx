@@ -4,7 +4,7 @@ import Globals from '../Global.styles';
 import Button from './Button';
 
 import MinimalistBubbles from '../assets/minimilistBubbles.svg';
-import { closeWindow } from '../helpers';
+import { closeWindow } from '../helpers/window.ts';
 
 const { colors, fonts } = Globals;
 
