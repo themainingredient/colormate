@@ -141,23 +141,6 @@ jobs:
           paths:
             - .
 
-  release:
-    <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dep-{{ checksum "package.json" }}
-            - v1-dep-
-      - run:
-          name: Run semantic-release
-          command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
-
   deploy-staging:
     <<: *defaults
     docker:
@@ -182,6 +165,23 @@ jobs:
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
 
+  release:
+    <<: *defaults
+    docker:
+      - image: nikolaik/python-nodejs:python3.7-nodejs11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run semantic-release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release
+
   deploy-production:
     docker:
       - image: nikolaik/python-nodejs:python3.7-nodejs11
@@ -192,10 +192,14 @@ jobs:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
+      - run: add-apt-repository ppa:longsleep/golang-backports
       - run: apt-get update
-      - run: apt-get -y install jq zip moreutils xmlstarlet git
+      - run: apt-get -y install jq zip moreutils xmlstarlet git golang-go
       - run: pip install awscli
 
+      - add_ssh_keys:
+          fingerprints:
+            - "89:48:37:04:e6:59:6b:43:78:c2:a6:ac:ed:cb:fe:d3"
       - run:
           name: Setup Environment Variables
           command: |
@@ -208,17 +212,17 @@ jobs:
           jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
           jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
 
-      - run:
-          name: Get appcast.xml from S3
-          command: aws s3 cp s3://colormate-testing/appcast.xml appcast.xml
+      # - run:
+      #     name: Get appcast.xml from S3
+      #     command: aws s3 cp s3://colormate-testing/appcast.xml appcast.xml
 
       - run:
           name: Update appcast file
           command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
 
-      - run:
-          name: Update appcast.xml in S3 with updated version
-          command: aws s3 cp appcast.xml s3://colormate-testing/
+      # - run:
+      #     name: Update appcast.xml in S3 with updated version
+      #     command: aws s3 cp appcast.xml s3://colormate-testing/
 
       - run:
           name: Build project
@@ -230,20 +234,36 @@ jobs:
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
             zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
 
-      - run:
-          name: "Deploy colormate_${REACT_APP_VERSION}.zip to S3"
-          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/production/
+      # - run:
+      #     name: "Deploy colormate_${REACT_APP_VERSION}.zip to S3"
+      #     command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/production/
+
+      # - run:
+      #     name: Deploy colormate.zip to S3
+      #     command: aws s3 cp colormate.zip s3://colormate-testing/production/
 
       - run:
-          name: Deploy colormate.zip to S3
-          command: aws s3 cp colormate.zip s3://colormate-testing/production/
-
-      - run:
-          name: Notify slack channel
+          name: "Update Release on GitHub"
           command: |
-            curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
-            $SLACK_WEBHOOK_URL
+            go get github.com/tcnksm/ghr
+            VERSION=$REACT_APP_VERSION
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${$REACT_APP_VERSION} ./colormate_${REACT_APP_VERSION}.zip
+
+      - run:
+          name: Push files
+          command: |
+            echo """Host *
+              StrictHostKeyChecking no""" >> ~/.ssh/config
+            git config --global user.email "ci@circleci.com"
+            git config --global user.name "Ci Server"
+            git commit -am "New version released ${REACT_APP_VERSION} [ci skip]"
+            git push origin HEAD
+      # - run:
+      #     name: Notify slack channel
+      #     command: |
+      #       curl --header "Content-Type: application/json" --request POST --data \
+      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
+      #       $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2
@@ -290,7 +310,7 @@ workflows:
     jobs:
       - deploy-production:
           filters:
-            tags:
-              only: /^v.*/
+            # tags:
+            # only: /^v.*/
             branches:
-              ignore: /.*/
+              only: ci/github-hosting
