@@ -210,14 +210,17 @@ jobs:
       #       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
       #       echo go version
 
-      # - run: go get github.com/aktau/github-release
       - run: git fetch
 
       - run:
           name: Setup Environment Variables
           command: |
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+            echo 'export GOROOT=/usr/local/go"' >> $BASH_ENV
+            echo 'export GOPATH=$HOME/repo/"' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+
+      - run: go get github.com/aktau/github-release
 
       - run:
           name: Prepare dist files
@@ -256,11 +259,14 @@ jobs:
       #     command: aws s3 cp colormate.zip s3://colormate-testing/production/
 
       - run:
-          name: "Update Release on GitHub"
+          name: Update Release on GitHub
           command: |
-            go get github.com/tcnksm/ghr
-            VERSION=$REACT_APP_VERSION
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${$REACT_APP_VERSION} ./colormate_${REACT_APP_VERSION}.zip
+            github-release upload \
+                --user themainingredient \
+                --repo colormate \
+                --tag ${REATC_APP_VERSION} \
+                --name "colormate.zip" \
+                --file colormate_${REACT_APP_VERSION}.zip
 
       - run:
           name: Push files
