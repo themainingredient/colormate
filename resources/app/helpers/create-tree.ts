@@ -1,3 +1,5 @@
+import {omit} from 'lodash';
+
 interface ColorMap {
   [hexColor: string]: InputLayer[]
 }
@@ -50,9 +52,7 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | L
                   // each child layer needs to be added with grouping to the children of the current layer
                   const updatedLayers: Layer[] = layer.children!.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), groupedLayer.children!)
                   return {
-                      id: groupedLayer.id,
-                      type: groupedLayer.type,
-                      name: groupedLayer.name,
+                      ...groupedLayer,
                       children: updatedLayers
                   }
               } else {
@@ -67,44 +67,26 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | L
 
 const mapInputLayerToLayer = (inputLayer: InputLayer): Layer => {
   const hierarchy = getHierarchy(inputLayer);
-  return getLayers(hierarchy);
+  return getChild(hierarchy);
 } 
 
 const getHierarchy = (inputLayer: InputLayer): Layer[] => {
   if (inputLayer.parents.length) {
-    return [...inputLayer.parents, doMapping(inputLayer)];
+    return [...inputLayer.parents, omit(inputLayer, 'parents')];
   }
 
-  return [doMapping(inputLayer)];
+  return [omit(inputLayer, 'parents')];
 };
 
-
-//TODO: rename
-const doMapping = (inputLayer: InputLayer): Layer => {
-  const temp = {
-    id: inputLayer.id,
-    name: inputLayer.name,
-    type: inputLayer.type,
-  };
-
-  if ('colorType' in inputLayer) {
-    return {
-      ...temp,
-      colorType: inputLayer.colorType
-    }
-  }
-
-  return temp;
-}
-
-const getLayers = (hierarchy: Layer[]): Layer => {
+// there is only one child for each layer in the hierarchy
+const getChild = (hierarchy: Layer[]): Layer => {
   if (hierarchy.length === 1) {
     return hierarchy[0];
   }
 
   return {
     ...hierarchy[0],
-    children: [getLayers(hierarchy.splice(1))],
+    children: [getChild(hierarchy.splice(1))],
   };
 };
 

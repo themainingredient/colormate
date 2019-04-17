@@ -64,6 +64,7 @@
     "resources/**/*.js"
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.123",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
