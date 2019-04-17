@@ -267,6 +267,7 @@ jobs:
       #     name: Deploy colormate.zip to S3
       #     command: aws s3 cp colormate.zip s3://colormate-testing/production/
 
+      #TODO: change to the REACT_VERSION below
       - run:
           name: Update Release on GitHub
           command: |
@@ -274,13 +275,15 @@ jobs:
                 --security-token $GH_TOKEN \
                 --user themainingredient \
                 --repo colormate \
-                --tag v1.0.0 \ #TODO: change to the REACT_VERSION
+                --tag v1.0.0 \
                 --name "colormate.zip" \
                 --file colormate_${REACT_APP_VERSION}.zip
 
       - run:
           name: Push files
           command: |
+            echo """Host *
+              StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
             git commit -am "New version released ${REACT_APP_VERSION} [ci skip]"
