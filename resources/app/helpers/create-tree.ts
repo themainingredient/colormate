@@ -6,8 +6,14 @@ export interface InputLayer {
   id: string;
   name: string;
   type: string;
-  colorType?: string;
-  parents: InputLayer[];
+  colorType: string;
+  parents: InputLayerParent[];
+}
+
+export interface InputLayerParent {
+  id: string;
+  name: string;
+  type: string;
 }
 
 export interface Layer {
