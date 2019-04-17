@@ -1,5 +1,6 @@
-import { InputColorMapLayer, InputColorMapLayerParent } from '../models/color-tree/input-color-map.model';
-import { mapColorMapToColors } from './create-tree';
+import { ColorWithLayers } from './../models/color-with-layers.model';
+import { InputColorMap, InputColorMapLayer, InputColorMapLayerParent } from '../models/input-color-map.model';
+import { transformSketchColorMap } from './transform-sketch-colormap';
 
 const createInputLayer = (
   name: string, type: string, parentNames: {name: string, type: string}[] = []): InputColorMapLayer => {
@@ -22,10 +23,11 @@ const createInputLayer = (
 }
 
 describe('createTreeStructure', () => {
-  let input: any;
-  let output: any;
+  let input: InputColorMap;
+  let output: ColorWithLayers[];
+
   afterEach(() => {
-    expect(mapColorMapToColors(input)).toEqual(output);
+    expect(transformSketchColorMap(input)).toEqual(output);
   });
 
   test('transform color map with no layers to an array of colors with no layers', () => {

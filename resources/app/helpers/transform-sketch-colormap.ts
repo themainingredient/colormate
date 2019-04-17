@@ -1,9 +1,9 @@
 import { omit } from 'lodash';
-import { Layer } from '../models/color-tree/color-with-layers.model';
-import { ColorWithLayers } from '../models/color-tree/color-with-layers.model';
-import { InputColorMap, InputColorMapLayer } from '../models/color-tree/input-color-map.model';
+import { Layer } from '../models/color-with-layers.model';
+import { ColorWithLayers } from '../models/color-with-layers.model';
+import { InputColorMap, InputColorMapLayer } from '../models/input-color-map.model';
 
-export const mapColorMapToColors = (colorsObject: InputColorMap): ColorWithLayers[] => {
+export const transformSketchColorMap = (colorsObject: InputColorMap): ColorWithLayers[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
     layers: inputLayers.reduce((acc: Layer[], cur: InputColorMapLayer) => addLayerWithGrouping(acc, cur), [])
@@ -42,7 +42,7 @@ const mapInputLayerToLayer = (inputLayer: InputColorMapLayer): Layer => {
   return getChild(hierarchy);
 } 
 
-const getHierarchy = (inputLayer: InputLayer): Layer[] => {
+const getHierarchy = (inputLayer: InputColorMapLayer): Layer[] => {
   if (inputLayer.parents.length) {
     return [...inputLayer.parents, omit(inputLayer, 'parents')];
   }
