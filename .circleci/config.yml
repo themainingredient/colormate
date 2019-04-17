@@ -216,8 +216,8 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export GOROOT=/usr/lib/go"' >> $BASH_ENV
-            echo 'export GOPATH=$HOME/repo/"' >> $BASH_ENV
+            echo 'export GOROOT=/usr/lib/go' >> $BASH_ENV
+            echo 'export GOPATH=$HOME/repo/' >> $BASH_ENV
             echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
 
       - run: go get github.com/aktau/github-release
