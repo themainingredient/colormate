@@ -121,12 +121,12 @@ describe('createTreeStructure', () => {
     ];
   });
 
-    test('transform color map with common parents to an array of colors with grouped layers', () => {
-      input = {
-        red: [
-          createInputLayer('Rectangle1', 'ShapePath', [{name: 'Page', type: 'Page'}, {name: 'Artboard', type: 'Artboard'}]),
-          createInputLayer('Rectangle2', 'ShapePath', [{name: 'Page', type: 'Page'}, {name: 'Artboard', type: 'Artboard'}]),
-        ],
+  test('transform color map with common parents to an array of colors with grouped layers', () => {
+    input = {
+      red: [
+        createInputLayer('Rectangle1', 'ShapePath', [{name: 'Page', type: 'Page'}, {name: 'Artboard', type: 'Artboard'}]),
+        createInputLayer('Rectangle2', 'ShapePath', [{name: 'Page', type: 'Page'}, {name: 'Artboard', type: 'Artboard'}]),
+      ],
     };
 
     output = [
@@ -145,6 +145,74 @@ describe('createTreeStructure', () => {
                 children: [
                   {id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill' },
                   {id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: 'fill' }
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+  });
+
+  test('transform color map with partially common parents to an array of colors with grouped layers', () => {
+    input = {
+      red: [
+        createInputLayer('Rectangle2', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+        ]),
+        createInputLayer('Rectangle1', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+          { name: 'Group', type: 'Group' },
+        ]),
+        createInputLayer('Rectangle3', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+          { name: 'Group', type: 'Group' },
+        ]),
+      ],
+    };
+
+    output = [
+      {
+        color: 'red',
+        children: [
+          {
+            name: 'Page',
+            id: 'id-Page',
+            type: 'Page',
+            children: [
+              {
+                name: 'Artboard',
+                id: 'id-Artboard',
+                type: 'Artboard',
+                children: [
+                  {
+                    id: 'id-Rectangle2',
+                    name: 'Rectangle2',
+                    type: 'ShapePath',
+                    colorType: 'fill',
+                  },
+                  {
+                    name: 'Group',
+                    id: 'id-Group',
+                    type: 'Group',
+                    children: [
+                      {
+                        id: 'id-Rectangle1',
+                        name: 'Rectangle1',
+                        type: 'ShapePath',
+                        colorType: 'fill',
+                      },
+                      {
+                        id: 'id-Rectangle3',
+                        name: 'Rectangle3',
+                        type: 'ShapePath',
+                        colorType: 'fill',
+                      },
+                    ],
+                  },
                 ],
               },
             ],
