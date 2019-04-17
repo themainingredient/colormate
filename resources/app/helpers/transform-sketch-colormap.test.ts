@@ -1,18 +1,18 @@
 import { ColorWithLayers } from '../models/color-with-layers.model';
-import { InputColorMap, InputColorMapLayer, InputColorMapLayerParent } from '../models/input-color-map.model';
+import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
 
 const createInputLayer = (
   name: string,
   type: string,
   parentNames: { name: string; type: string }[] = [],
-): InputColorMapLayer => {
+): SketchColorMapLayer => {
   const inputLayer = {
     id: `id-${name}`,
     name,
     type,
     colorType: 'fill',
-    parents: [] as InputColorMapLayerParent[],
+    parents: [] as SketchColorMapLayerParent[],
   };
 
   if (parentNames.length) {
@@ -26,7 +26,7 @@ const createInputLayer = (
 };
 
 describe('createTreeStructure', () => {
-  let input: InputColorMap;
+  let input: SketchColorMap;
   let output: ColorWithLayers[];
 
   afterEach(() => {
