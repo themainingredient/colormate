@@ -1,6 +1,6 @@
 export interface ColorWithLayers {
     color: string;
-    layers: Layer[];
+    children: Layer[]; //TODO: rename to layers
 }
 
 export interface Layer {

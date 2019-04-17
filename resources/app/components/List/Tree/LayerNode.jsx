@@ -9,6 +9,7 @@ import {
 
 import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
+import Group from '../../../assets/group.svg';
 
 const LayerNode = ({ layer, generation, children }) => {
   const [isOpen, setOpen] = useState(true);
@@ -49,6 +50,8 @@ const LayerNode = ({ layer, generation, children }) => {
               return null;
             case 'Artboard':
               return <Artboard />;
+            case 'Group':
+              return <Group />;
             case 'ShapePath':
               return <ShapePath />;
             default:
@@ -67,7 +70,11 @@ const LayerNode = ({ layer, generation, children }) => {
 LayerNode.propTypes = {
   layer: PropTypes.object.isRequired,
   generation: PropTypes.number.isRequired,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.array,
+};
+
+LayerNode.defaultProps = {
+  children: [],
 };
 
 export default LayerNode;

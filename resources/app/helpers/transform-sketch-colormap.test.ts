@@ -33,7 +33,7 @@ describe('createTreeStructure', () => {
   test('transform color map with no layers to an array of colors with no layers', () => {
     input = { red: [], yellow: []};
 
-    output = [{ color: 'red', layers: [] }, { color: 'yellow', layers: [] }];
+    output = [{ color: 'red', children: [] }, { color: 'yellow', children: [] }];
   });
 
   test('transform color map with no parents to an array of colors with a layer without children', () => {
@@ -44,7 +44,7 @@ describe('createTreeStructure', () => {
     output = [
       {
         color: 'red',
-        layers: [
+        children: [
           { id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill' },
         ],
       },
@@ -63,7 +63,7 @@ describe('createTreeStructure', () => {
     output = [
       {
         color: 'red',
-        layers: [
+        children: [
           { id: 'id-Page', name: 'Page', type: 'Page', children: [
               { id: 'id-Group', name: 'Group', type: 'Group', children: [
                 { id: 'id-Rectangle', name: 'Rectangle', type: 'ShapePath', colorType: 'fill' }
@@ -87,7 +87,7 @@ describe('createTreeStructure', () => {
     output = [
       {
         color: 'red',
-        layers: [
+        children: [
           {
             name: 'Page1',
             id: 'id-Page1',
@@ -132,7 +132,7 @@ describe('createTreeStructure', () => {
     output = [
       {
         color: 'red',
-        layers: [
+        children: [
           {
             name: 'Page',
             id: 'id-Page',

@@ -1,3 +1,5 @@
+//TODO: rename prefix input to sketch
+
 export interface InputColorMap {
     [hexColor: string]: InputColorMapLayer[]
 }

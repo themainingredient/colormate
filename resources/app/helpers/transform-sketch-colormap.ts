@@ -3,14 +3,15 @@ import { Layer } from '../models/color-with-layers.model';
 import { ColorWithLayers } from '../models/color-with-layers.model';
 import { InputColorMap, InputColorMapLayer } from '../models/input-color-map.model';
 
+
 export const transformSketchColorMap = (colorsObject: InputColorMap): ColorWithLayers[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers.reduce((acc: Layer[], cur: InputColorMapLayer) => addLayerWithGrouping(acc, cur), [])
+    children: inputLayers.reduce((acc: Layer[], cur: InputColorMapLayer) => addLayerWithGrouping(acc, cur), [])
   }));
 };
 
-const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputColorMapLayer | Layer): Layer[]  => {
+const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputColorMapLayer | Layer): Layer[]  => {
   let layer: Layer = isInputColorMapLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
 
   if (!groupedLayers.length) {
