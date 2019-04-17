@@ -210,6 +210,9 @@ jobs:
       #       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
       #       echo go version
 
+      # - run: go get github.com/aktau/github-release
+      - run: git fetch
+
       - run:
           name: Setup Environment Variables
           command: |
