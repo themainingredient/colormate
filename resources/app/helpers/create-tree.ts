@@ -2,13 +2,19 @@ interface ColorMap {
   [hexColor: string]: InputLayer[]
 }
 
-interface InputLayer {
+export interface InputLayer {
+  id: string;
   name: string;
-  parents?: {name: string}[];
+  type: string;
+  colorType?: string;
+  parents: InputLayer[];
 }
 
-interface Layer {
+export interface Layer {
+  id: string;
   name: string;
+  type: string;
+  colorType?: string;
   children?: Layer[];
 }
 
@@ -38,6 +44,8 @@ const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | L
                   // each child layer needs to be added with grouping to the children of the current layer
                   const updatedLayers: Layer[] = layer.children!.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), groupedLayer.children!)
                   return {
+                      id: groupedLayer.id,
+                      type: groupedLayer.type,
                       name: groupedLayer.name,
                       children: updatedLayers
                   }
@@ -56,21 +64,40 @@ const mapInputLayerToLayer = (inputLayer: InputLayer): Layer => {
   return getLayers(hierarchy);
 } 
 
-const getHierarchy = (layer: InputLayer): Layer[] => {
-  if ('parents' in layer && layer.parents!.length) {
-    return [...layer.parents, { name: layer.name }];
+const getHierarchy = (inputLayer: InputLayer): Layer[] => {
+  if (inputLayer.parents.length) {
+    return [...inputLayer.parents, doMapping(inputLayer)];
   }
 
-  return [{ name: layer.name }];
+  return [doMapping(inputLayer)];
 };
 
-const getLayers = (hierarchy: { name: string }[]): Layer => {
+
+//TODO: rename
+const doMapping = (inputLayer: InputLayer): Layer => {
+  const temp = {
+    id: inputLayer.id,
+    name: inputLayer.name,
+    type: inputLayer.type,
+  };
+
+  if ('colorType' in inputLayer) {
+    return {
+      ...temp,
+      colorType: inputLayer.colorType
+    }
+  }
+
+  return temp;
+}
+
+const getLayers = (hierarchy: Layer[]): Layer => {
   if (hierarchy.length === 1) {
     return hierarchy[0];
   }
 
   return {
-    name: hierarchy[0].name,
+    ...hierarchy[0],
     children: [getLayers(hierarchy.splice(1))],
   };
 };
