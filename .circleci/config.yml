@@ -207,10 +207,10 @@ jobs:
             echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
 
       - run:
-        name: Prepare dist files
-        command: |
-          jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
-          jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
+          name: Prepare dist files
+          command: |
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
 
       # - run:
       #     name: Get appcast.xml from S3
@@ -269,9 +269,15 @@ workflows:
   version: 2
   deploy-staging:
     jobs:
-      - install
-      - testing
-      - linting
+      - install:
+          branches:
+            ignore: ci/github-hosting
+      - testing:
+          branches:
+            ignore: ci/github-hosting
+      - linting:
+          branches:
+            ignore: ci/github-hosting
       - pre-build-staging:
           requires:
             - install
@@ -293,9 +299,15 @@ workflows:
 
   untagged-build:
     jobs:
-      - install
-      - testing
-      - linting
+      - install:
+          branches:
+            ignore: ci/github-hosting
+      - testing:
+          branches:
+            ignore: ci/github-hosting
+      - linting:
+          branches:
+            ignore: ci/github-hosting
       - release:
           requires:
             - install
