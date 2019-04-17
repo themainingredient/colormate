@@ -9,8 +9,8 @@ const ListItemTreeWrapper = styled.div`
 `;
 
 const renderLayer = (tree, generation = 0) => {
-  if (!('name' in tree)) {
-    return tree.children.map(page => renderLayer(page, generation + 1));
+  if ('layers' in tree) {
+    return tree.layers.map(page => renderLayer(page, generation + 1));
   }
 
   if (!('children' in tree)) {
