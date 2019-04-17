@@ -222,6 +222,9 @@ jobs:
 
       - run: go get github.com/aktau/github-release
 
+      - run: echo $REACT_APP_VERSION
+      - run: echo $(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')
+
       - run:
           name: Prepare dist files
           command: |
