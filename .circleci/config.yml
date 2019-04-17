@@ -220,7 +220,7 @@ jobs:
           name: Prepare dist files
           command: |
             jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
-            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge src/manifest.json
 
       # - run:
       #     name: Get appcast.xml from S3
