@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import Globals from '../Global.styles';
 import useHover from '../hooks/useHover';
-import { closeWindow } from '../helpers';
+import { closeWindow } from '../helpers/window.ts';
 
 const { colors, fonts } = Globals;
 

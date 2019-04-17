@@ -1,11 +1,11 @@
-import * as helpers from './helpers'; // eslint-disable-line import/no-self-import
+import * as calculations from './calculations'; // eslint-disable-line import/no-self-import
 
-export const calcOpacityPercentage = (hexColor) => {
+export const calcOpacityPercentage = (hexColor: string) => {
   const hexOpacity = hexColor.substr(-2);
   return Math.round(parseInt(hexOpacity, 16) / 2.55);
 };
 
-export const calculateLuminance = (color) => {
+export const calculateLuminance = (color: string) => {
   // Rebasing the incoming hex color to a value between 0 and 1, 0 being 0% intensity, and 1 being 100% intensity
   const rebasedColor = parseInt(color, 16) / 255;
 
@@ -22,7 +22,7 @@ export const calculateLuminance = (color) => {
   return Math.pow((rebasedColor + 0.055) / 1.055, 2.4); // eslint-disable-line no-restricted-properties
 };
 
-export const calculateCombinedLuminance = (hexColor) => {
+export const calculateCombinedLuminance = (hexColor: string) => {
   const cleanedColor = hexColor.substr(1); // Remove the # of the incoming hex color
   const R = cleanedColor.substr(0, 2); // Grab the first and second chars in the color, representing the red value
   const G = cleanedColor.substr(2, 2); // Grab the third and fourth chars in the color, representing the green value
@@ -36,13 +36,13 @@ export const calculateCombinedLuminance = (hexColor) => {
    * More info here: https://en.wikipedia.org/wiki/Relative_luminance
    */
   return (
-    0.2126 * helpers.calculateLuminance(R)
-    + 0.7152 * helpers.calculateLuminance(G)
-    + 0.0722 * helpers.calculateLuminance(B)
+    0.2126 * calculations.calculateLuminance(R)
+    + 0.7152 * calculations.calculateLuminance(G)
+    + 0.0722 * calculations.calculateLuminance(B)
   );
 };
 
-export const calculateContrast = (color) => {
+export const calculateContrast = (color: string) => {
   const colorLuminance = calculateCombinedLuminance(color);
   /**
    * The luminance of a color is represented by a color between 0 and 1.
