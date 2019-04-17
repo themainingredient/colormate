@@ -270,14 +270,17 @@ workflows:
   deploy-staging:
     jobs:
       - install:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - testing:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - linting:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - pre-build-staging:
           requires:
             - install
@@ -300,14 +303,17 @@ workflows:
   untagged-build:
     jobs:
       - install:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - testing:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - linting:
-          branches:
-            ignore: ci/github-hosting
+          filters:
+            branches:
+              ignore: /ci/github-hosting/
       - release:
           requires:
             - install
@@ -322,7 +328,6 @@ workflows:
     jobs:
       - deploy-production:
           filters:
-            # tags:
-            # only: /^v.*/
             branches:
-              only: ci/github-hosting
+              only:
+                - ci/github-hosting
