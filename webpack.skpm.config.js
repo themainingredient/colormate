@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 
 module.exports = config => {
-  config.resolve.extensions = ['.sketch.js', '.js', '.jsx'];
+  config.resolve.extensions = ['.sketch.js', '.js', '.jsx', '.ts', '.tsx'];
   config.module.rules.push({
     test: /\.(html)$/,
     use: [

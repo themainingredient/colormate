@@ -1,5 +1,5 @@
 interface ColorMap {
-  [hexColor: string]: InputLayer[]
+  [hexColor: string]: InputLayer[];
 }
 
 export interface InputLayer {
@@ -20,49 +20,52 @@ export interface Layer {
 
 interface Color {
   color: string;
-  layers: Layer[];
+  children: Layer[];
 }
 
 export const mapColorMapToColors = (colorsObject: ColorMap): Color[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers.reduce((acc: Layer[], cur: InputLayer) => addLayerWithGrouping(acc, cur), [])
+    children: inputLayers.reduce((acc: Layer[], cur: InputLayer) => addLayerWithGrouping(acc, cur), []),
   }));
 };
 
-const addLayerWithGrouping = (groupedLayers: Layer[], layerToAdd: InputLayer | Layer): Layer[]  => {
+const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputLayer | Layer): Layer[] => {
   let layer: Layer = isInputLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
 
   if (!groupedLayers.length) {
     return [layer];
   }
 
-  const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.name === layer.name)
+  const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.name === layer.name);
   if (filteredGroupedLayers.length) {
-      return groupedLayers.map(groupedLayer => {
-              if ('children' in layer) {
-                  // each child layer needs to be added with grouping to the children of the current layer
-                  const updatedLayers: Layer[] = layer.children!.reduce((acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur), groupedLayer.children!)
-                  return {
-                      id: groupedLayer.id,
-                      type: groupedLayer.type,
-                      name: groupedLayer.name,
-                      children: updatedLayers
-                  }
-              } else {
-                  // layers have same name and layer to insert has no children: nothing to change 
-                  return groupedLayer;
-              }
-      })
-  } 
+    return groupedLayers.map(groupedLayer => {
+      if ('children' in layer) {
+        // each child layer needs to be added with grouping to the children of the current layer
+        const updatedLayers: Layer[] = layer.children!.reduce(
+          (acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur),
+          groupedLayer.children!,
+        );
+        return {
+          id: groupedLayer.id,
+          type: groupedLayer.type,
+          name: groupedLayer.name,
+          children: updatedLayers,
+        };
+      } else {
+        // layers have same name and layer to insert has no children: nothing to change
+        return groupedLayer;
+      }
+    });
+  }
 
-  return groupedLayers.concat([layer])
-}
+  return groupedLayers.concat([layer]);
+};
 
 const mapInputLayerToLayer = (inputLayer: InputLayer): Layer => {
   const hierarchy = getHierarchy(inputLayer);
   return getLayers(hierarchy);
-} 
+};
 
 const getHierarchy = (inputLayer: InputLayer): Layer[] => {
   if (inputLayer.parents.length) {
@@ -71,7 +74,6 @@ const getHierarchy = (inputLayer: InputLayer): Layer[] => {
 
   return [doMapping(inputLayer)];
 };
-
 
 //TODO: rename
 const doMapping = (inputLayer: InputLayer): Layer => {
@@ -84,12 +86,12 @@ const doMapping = (inputLayer: InputLayer): Layer => {
   if ('colorType' in inputLayer) {
     return {
       ...temp,
-      colorType: inputLayer.colorType
-    }
+      colorType: inputLayer.colorType,
+    };
   }
 
   return temp;
-}
+};
 
 const getLayers = (hierarchy: Layer[]): Layer => {
   if (hierarchy.length === 1) {
@@ -104,4 +106,4 @@ const getLayers = (hierarchy: Layer[]): Layer => {
 
 const isInputLayerType = (layer: InputLayer | Layer): layer is InputLayer => {
   return (<InputLayer>layer).parents !== undefined;
-}
+};
