@@ -271,6 +271,7 @@ jobs:
           name: Update Release on GitHub
           command: |
             github-release upload \
+                --security-token $GH_TOKEN
                 --user themainingredient \
                 --repo colormate \
                 --tag v1.0.0 \
