@@ -1,8 +1,8 @@
-import MockSketchDocument from '../__mocks__/MockSketchDocument';
+import MockSketchDocument from '../__mocks__/MockSketchDocument.json';
 import { traverse } from './traverse';
 
 describe('Helpers / traverse', () => {
-  let layers;
+  let layers: any[];
 
   beforeEach(() => {
     layers = traverse(MockSketchDocument.pages[0]);

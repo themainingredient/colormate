@@ -1,20 +1,14 @@
 import { getParents } from './get-colors';
 
 //TODO: move
-interface Layer {
+export interface Layer {
   type: string;
   id: string;
   frame: {x: number; y: number; width: number; height: number; };
   name: string;
   selected: boolean;
   sharedStyleId: string | null;
-  layers?: SubLayer[]
-}
-
-interface SubLayer extends Layer {
-  exportFormats: any[];
-  flowStartPoint: boolean;
-  background: Object;
+  layers?: (Layer & any)[]
 }
 
 export const traverse = (layer: Layer, layers: any[] = [], parents: any[] = []) => {  
