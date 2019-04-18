@@ -15,5 +15,5 @@
     "title": "Colormate",
     "items": ["listAll"]
   },
-  "appcast": "https://s3.eu-central-1.amazonaws.com/colormate-testing/appcast.xml"
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast"
 }
