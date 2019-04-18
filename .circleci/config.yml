@@ -1,28 +1,40 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: nikolaik/python-nodejs:python3.7-nodejs11
+
 version: 2
 jobs:
-  testing:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+  install:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
-      - run: npm install
       - run:
-          name: Run tests
-          command: npm run test
+          name: Run install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dep-{{ checksum "package.json" }}
 
+  testing:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run tests
+          command: npm run test
+
   linting:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -33,10 +45,8 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  deploy-staging:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+  pre-build-staging:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -46,47 +56,122 @@ jobs:
 
       - run: apt-get update
       - run: apt-get -y install jq zip moreutils
-      - run: pip install awscli
 
       - run:
-          name: "Run semantic-release"
+          name: Run semantic-release
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+      - run: mkdir -p workspace
+
+      - run: |
+          cat .env > workspace/.env
+          cat package.json > workspace/package.json
+          cat src/manifest.json > workspace/manifest.json
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - package.json
+            - manifest.json
+
+  build-staging:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: cat workspace/.env > .env
+      - run: cat workspace/package.json > package.json
+      - run: cat workspace/manifest.json > manifest.json
 
       - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       - run:
           name: Build project
           command: npm run build
 
+      - run: mkdir -p workspace/build
+      - run: cp -R colormate.sketchplugin/*  workspace/build
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - build/
+
+  zip-staging:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: apt-get update
+      - run: apt-get -y install zip
+
       - run:
           name: Zipping project
           command: |
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
-            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+            zip -r colormate_${REACT_APP_VERSION}.zip workspace/build
+
+      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}.zip
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .
+
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run semantic-release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release
+
+  deploy-staging:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: cat workspace/.env >> $BASH_ENV
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+      - run: pip install awscli
 
       - run:
           name: Deploy to S3
-          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
+          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
 
       - run:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
 
   deploy-production:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -94,21 +179,20 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
       - run: apt-get update
-      - run: apt-get -y install jq zip moreutils xmlstarlet
+      - run: apt-get -y install jq zip moreutils xmlstarlet git
       - run: pip install awscli
-
-      - run:
-          name: Release
-          command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
 
       - run:
           name: Setup Environment Variables
           command: |
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+
+      - run:
+        name: Prepare dist files
+        command: |
+          jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
+          jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge public/manifest.json
 
       - run:
           name: Get appcast.xml from S3
@@ -149,24 +233,50 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  deploy-staging:
     jobs:
+      - install
       - testing
       - linting
-      - deploy-staging:
+      - pre-build-staging:
           requires:
+            - install
             - testing
             - linting
           filters:
             branches:
               only:
                 - /release/.*/
-
-      - deploy-production:
+      - build-staging:
           requires:
+            - pre-build-staging
+      - zip-staging:
+          requires:
+            - build-staging
+      - deploy-staging:
+          requires:
+            - zip-staging
+
+  untagged-build:
+    jobs:
+      - install
+      - testing
+      - linting
+      - release:
+          requires:
+            - install
             - testing
             - linting
           filters:
             branches:
               only:
                 - master
+
+  tagged-build:
+    jobs:
+      - deploy-production:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
