@@ -240,9 +240,9 @@ jobs:
       - attach_workspace:
           at: workspace
       - restore_cache:
-        keys:
-          - v1-dep-{{ checksum "package.json" }}
-          - v1-dep-
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
 
       - run: apt-get update
       - run: apt-get -y install xmlstarlet
