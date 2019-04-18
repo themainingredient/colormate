@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+// eslint-disable-next-line import/no-unresolved
 import { Settings } from 'sketch';
 
 const kUUIDKey = 'google.analytics.uuid';
