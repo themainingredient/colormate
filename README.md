@@ -1,6 +1,6 @@
 # Colormate Sketch Plugin 🌈
 
-This free plugin gives you an impression of _all the colours_ being used in your Sketch file, _how many times_ a certain colour is being used and gives you the opportunity to see _where_ the colours are being used.   
+This free plugin gives you an impression of _all the colours_ in your Sketch file and _how many times_ a certain colour is being used.
 
 ## Why this Plugin? 🤔
 
@@ -24,15 +24,15 @@ Open your Sketch file and run the plugin by using the shortcut "CMD+Shift+8" on 
 
 The plugin starts with scanning every layer in the file and gathering all the colours that are being used in text, symbols & objects. This may take some seconds if you have a really big file. (But we provided you with a nice gif to look at while waiting 😎) 
 
-When the plugin is done scanning your file, you will get an overview of all the colours you've used in the document. You will be able to see the colour number, how many times this colour has been used and if this colour has an opacity value.
-
-Let's say you see that there are two types of red that you're using: #CC0000 has been used 117 times, but #C50909 has only been used 3 times. If you click on the #C50909 row it will expand and gives you a breakdown of the instances where this colour is being used. If you then click on a layer, it will center it on the screen and select it for you, so the only thing that you have to do is replace it with the right colour! Easypeasy Lemonsqueezy!
+When the plugin is done scanning your file, you will get an overview of all the colours you've used in the document. You will be able to see the colour number, how many times this colour has been used and if this colour has an opacity value. Now you're able to see that there are two types of red that you're using: #CC0000 has been used 117 times, but #C50909 has only been used 3 times.
 
 
 ## Future plans 🚀
 
 We're not going to sit back and let the plugin work its magic. We're continously working on developping new features. The following features are on our planning:
 
+- Seeing where the colours are being used
+- Being able to select a certain colour from the plugin in your file
 - Being able to replace a colour with another colour, within the plugin
 - Run the plugin on a specific selection, instead of the whole file 
 
