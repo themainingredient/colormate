@@ -289,12 +289,6 @@ jobs:
 
       - run: apt-get update
       - run: apt-get -y install git golang-go
-      - run: go get github.com/aktau/github-release
-      # - run: pip install awscli
-
-      - add_ssh_keys:
-          fingerprints:
-            - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
       - run:
           name: Setup Environment Variables
@@ -304,6 +298,13 @@ jobs:
             echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             cat workspace/.env >> $BASH_ENV
             source $BASH_ENV
+
+      - run: go get github.com/aktau/github-release
+      # - run: pip install awscli
+
+      - add_ssh_keys:
+          fingerprints:
+            - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
       #TODO: update version to REACT_APP_VERSION
       - run:
