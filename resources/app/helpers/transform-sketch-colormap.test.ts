@@ -1,18 +1,18 @@
 import { ColorWithLayers } from '../models/color-with-layers.model';
-import { InputColorMap, InputColorMapLayer, InputColorMapLayerParent } from '../models/input-color-map.model';
+import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
 
 const createInputLayer = (
   name: string,
   type: string,
   parentNames: { name: string; type: string }[] = [],
-): InputColorMapLayer => {
+): SketchColorMapLayer => {
   const inputLayer = {
     id: `id-${name}`,
     name,
     type,
     colorType: 'fill',
-    parents: [] as InputColorMapLayerParent[],
+    parents: [] as SketchColorMapLayerParent[],
   };
 
   if (parentNames.length) {
@@ -26,7 +26,7 @@ const createInputLayer = (
 };
 
 describe('createTreeStructure', () => {
-  let input: InputColorMap;
+  let input: SketchColorMap;
   let output: ColorWithLayers[];
 
   afterEach(() => {
@@ -171,6 +171,74 @@ describe('createTreeStructure', () => {
                   },
                   {
                     id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: 'fill',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+  });
+
+  test('transform color map with partially common parents to an array of colors with grouped layers', () => {
+    input = {
+      red: [
+        createInputLayer('Rectangle2', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+        ]),
+        createInputLayer('Rectangle1', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+          { name: 'Group', type: 'Group' },
+        ]),
+        createInputLayer('Rectangle3', 'ShapePath', [
+          { name: 'Page', type: 'Page' },
+          { name: 'Artboard', type: 'Artboard' },
+          { name: 'Group', type: 'Group' },
+        ]),
+      ],
+    };
+
+    output = [
+      {
+        color: 'red',
+        layers: [
+          {
+            name: 'Page',
+            id: 'id-Page',
+            type: 'Page',
+            children: [
+              {
+                name: 'Artboard',
+                id: 'id-Artboard',
+                type: 'Artboard',
+                children: [
+                  {
+                    id: 'id-Rectangle2',
+                    name: 'Rectangle2',
+                    type: 'ShapePath',
+                    colorType: 'fill',
+                  },
+                  {
+                    name: 'Group',
+                    id: 'id-Group',
+                    type: 'Group',
+                    children: [
+                      {
+                        id: 'id-Rectangle1',
+                        name: 'Rectangle1',
+                        type: 'ShapePath',
+                        colorType: 'fill',
+                      },
+                      {
+                        id: 'id-Rectangle3',
+                        name: 'Rectangle3',
+                        type: 'ShapePath',
+                        colorType: 'fill',
+                      },
+                    ],
                   },
                 ],
               },

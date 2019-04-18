@@ -1,17 +1,17 @@
 import { omit } from 'lodash';
 import { Layer } from '../models/color-with-layers.model';
 import { ColorWithLayers } from '../models/color-with-layers.model';
-import { InputColorMap, InputColorMapLayer } from '../models/input-color-map.model';
+import { SketchColorMap, SketchColorMapLayer } from '../models/sketch-color-map.model';
 
-export const transformSketchColorMap = (colorsObject: InputColorMap): ColorWithLayers[] => {
+export const transformSketchColorMap = (colorsObject: SketchColorMap): ColorWithLayers[] => {
   return Object.entries(colorsObject).map(([color, inputLayers]) => ({
     color,
-    layers: inputLayers.reduce((acc: Layer[], cur: InputColorMapLayer) => addLayerWithGrouping(acc, cur), []),
+    layers: inputLayers.reduce((acc: Layer[], cur: SketchColorMapLayer) => addLayerWithGrouping(acc, cur), []),
   }));
 };
 
-const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputColorMapLayer | Layer): Layer[] => {
-  let layer: Layer = isInputColorMapLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
+const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: SketchColorMapLayer | Layer): Layer[] => {
+  let layer: Layer = isSketchColorMapLayerType(layerToAdd) ? mapInputLayerToLayer(layerToAdd) : layerToAdd;
 
   if (!groupedLayers.length) {
     return [layer];
@@ -31,7 +31,7 @@ const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputColo
           children: updatedLayers,
         };
       } else {
-        // layers have same name and layer to insert has no children: nothing to change
+        // layers have different name or layer to insert has no children: nothing to change for the current grouped layer
         return groupedLayer;
       }
     });
@@ -40,12 +40,12 @@ const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputColo
   return groupedLayers.concat([layer]);
 };
 
-const mapInputLayerToLayer = (inputLayer: InputColorMapLayer): Layer => {
+const mapInputLayerToLayer = (inputLayer: SketchColorMapLayer): Layer => {
   const hierarchy = getHierarchy(inputLayer);
   return getChild(hierarchy);
 };
 
-const getHierarchy = (inputLayer: InputColorMapLayer): Layer[] => {
+const getHierarchy = (inputLayer: SketchColorMapLayer): Layer[] => {
   if (inputLayer.parents.length) {
     return [...inputLayer.parents, omit(inputLayer, 'parents')];
   }
@@ -65,6 +65,6 @@ const getChild = (hierarchy: Layer[]): Layer => {
   };
 };
 
-const isInputColorMapLayerType = (layer: InputColorMapLayer | Layer): layer is InputColorMapLayer => {
-  return (<InputColorMapLayer>layer).parents !== undefined;
+const isSketchColorMapLayerType = (layer: SketchColorMapLayer | Layer): layer is SketchColorMapLayer => {
+  return (<SketchColorMapLayer>layer).parents !== undefined;
 };
