@@ -2,10 +2,10 @@ import { ColorWithLayers } from '../models/color-with-layers.model';
 import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
 
-const createInputLayer = (
+const createSketchColorMapLayer = (
   name: string,
   type: string,
-  parentNames: { name: string; type: string }[] = [],
+  parents: { name: string; type: string }[] = [],
 ): SketchColorMapLayer => {
   const inputLayer = {
     id: `id-${name}`,
@@ -15,8 +15,8 @@ const createInputLayer = (
     parents: [] as SketchColorMapLayerParent[],
   };
 
-  if (parentNames.length) {
-    parentNames.forEach(({ name, type }) => {
+  if (parents.length) {
+    parents.forEach(({ name, type }) => {
       const parent = { id: `id-${name}`, name, type };
       inputLayer.parents.push(parent);
     });
@@ -41,7 +41,7 @@ describe('createTreeStructure', () => {
 
   test('transform color map with no parents to an array of colors with a layer without children', () => {
     input = {
-      red: [createInputLayer('Rectangle1', 'ShapePath')],
+      red: [createSketchColorMapLayer('Rectangle1', 'ShapePath')],
     };
 
     output = [
@@ -57,7 +57,7 @@ describe('createTreeStructure', () => {
   test('transform color map with parents to an array of colors with layers', () => {
     input = {
       red: [
-        createInputLayer('Rectangle', 'ShapePath', [{ name: 'Page', type: 'Page' }, { name: 'Group', type: 'Group' }]),
+        createSketchColorMapLayer('Rectangle', 'ShapePath', [{ name: 'Page', type: 'Page' }, { name: 'Group', type: 'Group' }]),
       ],
     };
 
@@ -88,11 +88,11 @@ describe('createTreeStructure', () => {
   test('transform color map with different parents to an array of colors with layers', () => {
     input = {
       red: [
-        createInputLayer('Rectangle1', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle1', 'ShapePath', [
           { name: 'Page1', type: 'Page' },
           { name: 'Artboard1', type: 'Artboard' },
         ]),
-        createInputLayer('Rectangle2', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle2', 'ShapePath', [
           { name: 'Page2', type: 'Page' },
           { name: 'Artboard2', type: 'Artboard' },
         ]),
@@ -141,11 +141,11 @@ describe('createTreeStructure', () => {
   test('transform color map with common parents to an array of colors with grouped layers', () => {
     input = {
       red: [
-        createInputLayer('Rectangle1', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle1', 'ShapePath', [
           { name: 'Page', type: 'Page' },
           { name: 'Artboard', type: 'Artboard' },
         ]),
-        createInputLayer('Rectangle2', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle2', 'ShapePath', [
           { name: 'Page', type: 'Page' },
           { name: 'Artboard', type: 'Artboard' },
         ]),
@@ -184,16 +184,16 @@ describe('createTreeStructure', () => {
   test('transform color map with partially common parents to an array of colors with grouped layers', () => {
     input = {
       red: [
-        createInputLayer('Rectangle2', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle2', 'ShapePath', [
           { name: 'Page', type: 'Page' },
           { name: 'Artboard', type: 'Artboard' },
         ]),
-        createInputLayer('Rectangle1', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle1', 'ShapePath', [
           { name: 'Page', type: 'Page' },
           { name: 'Artboard', type: 'Artboard' },
           { name: 'Group', type: 'Group' },
         ]),
-        createInputLayer('Rectangle3', 'ShapePath', [
+        createSketchColorMapLayer('Rectangle3', 'ShapePath', [
           { name: 'Page', type: 'Page' },
           { name: 'Artboard', type: 'Artboard' },
           { name: 'Group', type: 'Group' },
