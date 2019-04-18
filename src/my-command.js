@@ -2,7 +2,6 @@ import BrowserWindow from 'sketch-module-web-view';
 import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
-import { TRACKING_ID } from './constants.ts';
 
 const webview = require('../resources/webview.html');
 
@@ -16,7 +15,6 @@ export default function () {
     alwaysOnTop: true,
     acceptsFirstMouse: true,
   };
-
 
   const browserWindow = new BrowserWindow(options);
 
@@ -52,5 +50,5 @@ export default function () {
 
   browserWindow.loadURL(webview);
 
-  trackAppStart(TRACKING_ID);
+  trackAppStart();
 }

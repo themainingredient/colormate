@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
-import { Settings } from 'sketch'; // eslint-disable-line import/no-unresolved
-import { isProd } from './environment';
+import { Settings } from 'sketch';
 
 const kUUIDKey = 'google.analytics.uuid';
 let uuid = Settings.globalSettingForKey(kUUIDKey);
@@ -9,27 +8,23 @@ if (!uuid) {
   Settings.setGlobalSettingForKey(uuid, kUUIDKey);
 }
 
-function jsonToQueryString(json) {
+const jsonToQueryString = (json) => {
   return Object.keys(json)
     .map((key) => {
       return `${encodeURIComponent(key)}=${encodeURIComponent(json[key])}`;
     })
     .join('&');
-}
+};
 
-const track = (trackingId, hitType, props) => {
-  if (!isProd()) {
-    return;
-  }
-
+const track = (hitType, props) => {
   if (!Settings.globalSettingForKey('analyticsEnabled')) {
     // the user didn't enable sharing analytics
     return;
   }
-
+  const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID;
   const payload = {
     v: 1,
-    tid: trackingId,
+    tid: TRACKING_ID,
     cid: uuid,
     t: hitType,
   };
@@ -49,8 +44,8 @@ const track = (trackingId, hitType, props) => {
   }
 };
 
-const trackAppStart = (trackingId) => {
-  track(trackingId, 'event', {
+const trackAppStart = () => {
+  track('event', {
     ec: 'application',
     ea: 'start',
   });
