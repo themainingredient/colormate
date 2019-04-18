@@ -1,19 +1,21 @@
 defaults: &defaults
   working_directory: ~/repo
+  docker:
+    - image: nikolaik/python-nodejs:python3.7-nodejs11
 
 version: 2
 jobs:
   install:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
-      - run: npm install
+      - run:
+          name: Run install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
@@ -21,8 +23,6 @@ jobs:
 
   testing:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -35,8 +35,6 @@ jobs:
 
   linting:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -49,8 +47,6 @@ jobs:
 
   pre-build-staging:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -84,8 +80,6 @@ jobs:
 
   build-staging:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - attach_workspace:
@@ -119,8 +113,6 @@ jobs:
 
   zip-staging:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - attach_workspace:
           at: workspace
@@ -143,8 +135,6 @@ jobs:
 
   release:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -160,8 +150,6 @@ jobs:
 
   deploy-staging:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - attach_workspace:
           at: workspace
@@ -183,9 +171,7 @@ jobs:
             $SLACK_WEBHOOK_URL
 
   deploy-production:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
