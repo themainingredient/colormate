@@ -199,6 +199,7 @@ jobs:
           command: |
             touch .env
             echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
+            echo REACT_APP_GA_TRACKING_ID=$GA_TRACKING_ID >> .env
 
       - run:
           name: Prepare workspace
