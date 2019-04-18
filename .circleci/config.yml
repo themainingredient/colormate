@@ -243,7 +243,7 @@ jobs:
 
       - run:
           name: Update appcast file
-          command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
+          command: bash ./updateAppcast.sh $REACT_APP_VERSION ${SKETCHPACKS_APPCAST_URL}
 
       - run: mkdir -p workspace/build
       - run:
