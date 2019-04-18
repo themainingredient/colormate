@@ -399,6 +399,9 @@ workflows:
 
   tagged-build:
     jobs:
+      - install
+      - testing
+      - linting
       - pre-build-production:
           requires:
             - install
