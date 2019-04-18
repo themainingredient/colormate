@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer.jsx renders and displays correctly 1`] = `
+.c4 {
+  height: 37px;
+  width: 92px;
+  font-family: SFProBold;
+  font-size: 14px;
+  color: #FFFFFF;
+  border-radius: 23px;
+  background-color: #4E41FF;
+  border: none;
+}
+
+.c4:hover {
+  background-color: #3B2EEB;
+  cursor: pointer;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 18px;
+  height: 78px;
+  width: 320px;
+  background-color: #E8E9EF;
+}
+
+.c2 {
+  color: #B5B8C6;
+  font-family: SFProRegular;
+  font-size: 11px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c2:hover {
+  color: #4E41FF;
+  cursor: pointer;
+}
+
+.c3 {
+  font-family: SFProBold;
+}
+
+.c1 {
+  font-family: SFProBold;
+  color: #4d4f59;
+  font-size: 12px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:hover {
+  color: #4E41FF;
+}
+
+<div
+  class="c0"
+>
+  <div
+    class=""
+  >
+    <a
+      class="c1"
+      href="mailto:colormate@themainingredient.co"
+    >
+      <span
+        aria-label="letter-with-heart"
+        role="img"
+      >
+        💌
+      </span>
+       
+      Report & support here
+    </a>
+    <br />
+    <a
+      class="c2"
+    >
+      Made by 
+      <span
+        class="c3"
+      >
+        The Main Ingredient
+      </span>
+    </a>
+  </div>
+  <button
+    class="c4"
+    type="button"
+  >
+    Done
+  </button>
+</div>
+`;
