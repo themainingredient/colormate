@@ -1,5 +1,5 @@
 {
   "schema_version": "1.0.0",
-  "manifest_path": "srcmanifest.json",
+  "manifest_path": "src/manifest.json",
   "appcast_path": "appcast.xml"
 }
