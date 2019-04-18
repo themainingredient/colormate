@@ -12,7 +12,10 @@
   ],
   "menu": {
     "title": "Colormate",
-    "items": ["listAll"]
+    "items": [
+      "listAll"
+    ]
   },
-  "appcast": "https://s3.eu-central-1.amazonaws.com/colormate-testing/appcast.xml"
+  "appcast": "https://s3.eu-central-1.amazonaws.com/colormate-testing/appcast.xml",
+  "version": "1.2.0"
 }

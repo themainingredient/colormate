@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" 
-  xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Hello World Sketch Test Plugin</title>
     <link>http://sparkle-project.org/files/sparkletestcast.xml</link>
     <description>Brilliant Hello World Plugin</description>
     <language>en</language>
+    <item>
+      <title>Version v1.2.0</title>
+      <enclosure url="https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate_1.2.0.zip" sparkle:version="1.2.0"/>
+    </item>
   </channel>
 </rss>
