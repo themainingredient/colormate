@@ -1,5 +1,5 @@
 import BrowserWindow from 'sketch-module-web-view';
-import { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
+import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
 import { TRACKING_ID } from './constants.ts';
@@ -33,6 +33,13 @@ export default function () {
     UI.message(s);
     webContents.executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
       .catch(console.error); // eslint-disable-line no-console
+  });
+
+  webContents.on('selectLayer', (layerID) => {
+    const document = sketch.getDocuments()[0];
+    const sketchLayer = document.getLayerWithID(layerID);
+    document.centerOnLayer(sketchLayer);
+    document.selectedLayers = [sketchLayer];
   });
 
   webContents.on('openUrlInBrowser', (url) => {

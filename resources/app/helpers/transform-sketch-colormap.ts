@@ -20,7 +20,7 @@ const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: InputColo
   const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.name === layer.name);
   if (filteredGroupedLayers.length) {
     return groupedLayers.map(groupedLayer => {
-      if ('children' in layer) {
+      if (groupedLayer.name === layer.name && 'children' in layer) {
         // each child layer needs to be added with grouping to the children of the current layer
         const updatedLayers: Layer[] = layer.children!.reduce(
           (acc: Layer[], cur: Layer) => addLayerWithGrouping(acc, cur),

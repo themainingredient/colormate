@@ -30,9 +30,14 @@ const LayerNode = ({ layer, generation, children }) => {
     setSelected(selectedLayer === id);
   }, [selectedLayer]);
 
+  const handleClick = () => {
+    setSelectedLayer(id);
+    window.postMessage('selectLayer', id);
+  };
+
   return (
     <>
-      <NodeWrapper ref={hoverRef} generation={generation} onClick={() => setSelectedLayer(id)} isSelected={isSelected}>
+      <NodeWrapper ref={hoverRef} generation={generation} onClick={() => handleClick()} isSelected={isSelected}>
         {!isLastNode ? (
           <StyledArrow
             isOpen={isOpen}

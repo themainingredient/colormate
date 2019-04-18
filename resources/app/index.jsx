@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import { GlobalFonts } from './Global.styles';
 
+import ListContext, { ListProvider } from './ListContext';
 import Header from './components/Header';
 import List from './components/List/List';
 import Footer from './components/Footer';
@@ -20,6 +21,7 @@ const PluginWrapper = styled.div`
 const App = () => {
   const [colors, setColors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const { selectedLayer } = useContext(ListContext);
 
   useEffect(() => {
     window.sendUsedColors = (incomingColors) => {
@@ -30,6 +32,10 @@ const App = () => {
     // Call function to get all used colors
     window.postMessage('getColors', 'Loading all colors');
   }, []);
+
+  useEffect(() => {
+    window.postMessage('selectLayer', selectedLayer);
+  }, [selectedLayer]);
 
   const content = Object.keys(colors).length !== 0 ? (
     <>
@@ -44,9 +50,14 @@ const App = () => {
   return (
     <PluginWrapper>
       <GlobalFonts />
-      {isLoading ? <Loader /> : content }
+      {isLoading ? <Loader /> : content}
     </PluginWrapper>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <ListProvider>
+    <App />
+  </ListProvider>,
+  document.getElementById('root'),
+);
