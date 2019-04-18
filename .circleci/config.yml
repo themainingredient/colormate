@@ -157,8 +157,6 @@ jobs:
 
   release:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -174,8 +172,6 @@ jobs:
 
   pre-build-production:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - restore_cache:
@@ -223,8 +219,6 @@ jobs:
 
   build-production:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - attach_workspace:
@@ -264,8 +258,6 @@ jobs:
 
   deploy-production:
     <<: *defaults
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
     steps:
       - checkout
       - attach_workspace:
