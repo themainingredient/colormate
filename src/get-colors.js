@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/no-unresolved
 import sketch from 'sketch';
-import { traverse } from './helpers/traverse';
+import { traverse } from './helpers/traverse.ts';
 import {
   hasBorder,
   hasFill,
   hasTextColor,
   createDataStructure,
   getColorArray,
-} from './helpers/get-colors';
+} from './helpers/get-colors.ts';
 
 export default function () {
   const colorsObject = {};
