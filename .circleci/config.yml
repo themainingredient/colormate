@@ -256,8 +256,6 @@ jobs:
           name: Build project for version $REACT_APP_VERSION
           command: npm run build
 
-      #TODO: create own appcast update job
-
       - run:
           name: Update appcast file
           command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
@@ -300,13 +298,11 @@ jobs:
             source $BASH_ENV
 
       - run: go get github.com/aktau/github-release
-      # - run: pip install awscli
 
       - add_ssh_keys:
           fingerprints:
             - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
-      #TODO: update version to REACT_APP_VERSION
       - run:
           name: Update Release on GitHub
           command: |
@@ -314,7 +310,7 @@ jobs:
                 --security-token $GH_TOKEN \
                 --user themainingredient \
                 --repo colormate \
-                --tag v1.0.0 \
+                --tag ${REACT_APP_VERSION} \
                 --name "colormate.zip" \
                 --file workspace/colormate_${REACT_APP_VERSION}.zip
       - run:
@@ -332,29 +328,20 @@ jobs:
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push origin HEAD
 
-      # - run:
-      #     name: Notify slack channel
-      #     command: |
-      #       curl --header "Content-Type: application/json" --request POST --data \
-      #       '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
-      #       $SLACK_WEBHOOK_URL
+      - run:
+          name: Notify slack channel
+          command: |
+            curl --header "Content-Type: application/json" --request POST --data \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'"$AWS_S3_URL_PRODUCTION"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
+            $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2
   deploy-staging:
     jobs:
-      - install:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
-      - testing:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
-      - linting:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
+      - install
+      - testing
+      - linting
       - pre-build-staging:
           requires:
             - install
@@ -376,18 +363,9 @@ workflows:
 
   untagged-build:
     jobs:
-      - install:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
-      - testing:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
-      - linting:
-          filters:
-            branches:
-              ignore: /ci/github-hosting/
+      - install
+      - testing
+      - linting
       - release:
           requires:
             - install
@@ -409,12 +387,10 @@ workflows:
             - testing
             - linting
           filters:
-            # tags:
-            #   only: /^v.*/
+            tags:
+              only: /^v.*/
             branches:
-              #   ignore: /.*/
-              only:
-                - ci/github-hosting
+              ignore: /.*/
       - build-production:
           requires:
             - pre-build-production
