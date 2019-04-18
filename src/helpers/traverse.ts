@@ -1,15 +1,5 @@
+import { Layer } from './../models/layer.model';
 import { getParents } from './get-colors';
-
-//TODO: move
-export interface Layer {
-  type: string;
-  id: string;
-  frame: {x: number; y: number; width: number; height: number; };
-  name: string;
-  selected: boolean;
-  sharedStyleId: string | null;
-  layers?: (Layer & any)[]
-}
 
 export const traverse = (layer: Layer, layers: any[] = [], parents: any[] = []) => {  
   if (('layers' in layer) && layer.layers!.length) {
