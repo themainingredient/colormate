@@ -332,50 +332,40 @@ workflows:
     jobs:
       - install:
           filters:
-            tags:
-              only: /.*/
+            branches:
+              only:
+                - master
       - testing:
           filters:
-            tags:
-              only: /.*/
+            branches:
+              only:
+                - master
       - linting:
           filters:
-            tags:
-              only: /.*/
-      - pre-build-production:
+            branches:
+              only:
+                - master
+      - release:
           requires:
             - install
             - testing
             - linting
+      - pre-build-production:
+          requires:
+            - release
           filters:
-            tags:
-              only: /^v.*/
             branches:
-              ignore: /.*/
+              only:
+                - master
       - build-production:
           requires:
             - pre-build-production
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
       - zip-build:
           requires:
             - build-production
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
       - deploy-production:
           requires:
             - zip-build
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
 
   deploy-staging:
     jobs:
@@ -412,30 +402,3 @@ workflows:
       - deploy-staging:
           requires:
             - zip-build
-
-  untagged-build:
-    jobs:
-      - install:
-          filters:
-            branches:
-              only:
-                - master
-      - testing:
-          filters:
-            branches:
-              only:
-                - master
-      - linting:
-          filters:
-            branches:
-              only:
-                - master
-      - release:
-          requires:
-            - install
-            - testing
-            - linting
-          filters:
-            branches:
-              only:
-                - master
