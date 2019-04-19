@@ -65,6 +65,8 @@
   ],
   "dependencies": {
     "@types/lodash": "^4.14.123",
+    "@types/react": "^16.8.13",
+    "@types/react-dom": "^16.8.4",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
