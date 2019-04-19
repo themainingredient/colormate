@@ -293,7 +293,7 @@ jobs:
                 --security-token $GH_TOKEN \
                 --user themainingredient \
                 --repo colormate \
-                --tag ${REACT_APP_VERSION} \
+                --tag "v${REACT_APP_VERSION}" \
                 --name "colormate.sketchplugin.zip" \
                 --file workspace/colormate_${REACT_APP_VERSION}.zip
       - run:
