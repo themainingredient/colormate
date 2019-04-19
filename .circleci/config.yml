@@ -328,11 +328,57 @@ jobs:
 
 workflows:
   version: 2
+  tagged-build:
+    jobs:
+      - install:
+          filters:
+            tags:
+              only: /.*/
+      - testing:
+          filters:
+            tags:
+              only: /.*/
+      - linting:
+          filters:
+            tags:
+              only: /.*/
+      - pre-build-production:
+          requires:
+            - install
+            - testing
+            - linting
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build-production:
+          requires:
+            - pre-build-production
+      - zip-build:
+          requires:
+            - build-production
+      - deploy-production:
+          requires:
+            - zip-build
+
   deploy-staging:
     jobs:
-      - install
-      - testing
-      - linting
+      - install:
+          filters:
+            branches:
+              only:
+                - /release/.*/
+      - testing:
+          filters:
+            branches:
+              only:
+                - /release/.*/
+      - linting:
+          filters:
+            branches:
+              only:
+                - /release/.*/
       - pre-build-staging:
           requires:
             - install
@@ -354,9 +400,21 @@ workflows:
 
   untagged-build:
     jobs:
-      - install
-      - testing
-      - linting
+      - install:
+          filters:
+            branches:
+              only:
+                - master
+      - testing:
+          filters:
+            branches:
+              only:
+                - master
+      - linting:
+          filters:
+            branches:
+              only:
+                - master
       - release:
           requires:
             - install
@@ -366,37 +424,3 @@ workflows:
             branches:
               only:
                 - master
-
-tagged-build:
-  jobs:
-    - install:
-        filters:
-          tags:
-            only: /.*/
-    - testing:
-        filters:
-          tags:
-            only: /.*/
-    - linting:
-        filters:
-          tags:
-            only: /.*/
-    - pre-build-production:
-        requires:
-          - install
-          - testing
-          - linting
-        filters:
-          tags:
-            only: /^v.*/
-          branches:
-            ignore: /.*/
-    - build-production:
-        requires:
-          - pre-build-production
-    - zip-build:
-        requires:
-          - build-production
-    - deploy-production:
-        requires:
-          - zip-build
