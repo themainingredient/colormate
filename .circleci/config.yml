@@ -243,7 +243,7 @@ jobs:
 
       - run:
           name: Generate new appcast item
-          command: bash ./updateAppcast.sh $REACT_APP_VERSION $SKETCHPACKS_APPCAST_URL
+          command: bash ./updateAppcast.sh $REACT_APP_VERSION
 
       - run: mkdir -p workspace/build
       - run:

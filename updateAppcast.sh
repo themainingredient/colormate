@@ -1,9 +1,8 @@
 #!/bin/sh
 
 echo 'Version: ' $1
-echo 'URL: ' $2
 
-URL=$2$1
+URL="https://github.com/themainingredient/colormate/releases/download/v"$1"/colormate.sketchplugin.zip"
 
 xmlstarlet ed -L -s "/rss/channel" -t elem -n itemTmp -v "" \
             -s //itemTmp -t elem -n title -v "Version v$1" \
