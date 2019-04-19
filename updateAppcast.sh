@@ -1,7 +1,6 @@
 #!/bin/sh
 
 echo 'Version: ' $1
-echo 'URL: ' $2
 
 URL="https://github.com/themainingredient/colormate/releases/download/v"$1"/colormate.sketchplugin.zip"
 
