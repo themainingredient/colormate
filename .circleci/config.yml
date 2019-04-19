@@ -367,27 +367,36 @@ workflows:
               only:
                 - master
 
-  tagged-build:
-    jobs:
-      - install
-      - testing
-      - linting
-      - pre-build-production:
-          requires:
-            - install
-            - testing
-            - linting
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
-      - build-production:
-          requires:
-            - pre-build-production
-      - zip-build:
-          requires:
-            - build-production
-      - deploy-production:
-          requires:
-            - zip-build
+tagged-build:
+  jobs:
+    - install:
+        filters:
+          tags:
+            only: /.*/
+    - testing:
+        filters:
+          tags:
+            only: /.*/
+    - linting:
+        filters:
+          tags:
+            only: /.*/
+    - pre-build-production:
+        requires:
+          - install
+          - testing
+          - linting
+        filters:
+          tags:
+            only: /^v.*/
+          branches:
+            only: /.*/
+    - build-production:
+        requires:
+          - pre-build-production
+    - zip-build:
+        requires:
+          - build-production
+    - deploy-production:
+        requires:
+          - zip-build
