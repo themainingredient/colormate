@@ -1,5 +1,6 @@
 import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
+import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
 
 const webview = require('../resources/webview.html');
@@ -28,8 +29,7 @@ export default function () {
   webContents.on('getColors', (s) => {
     const colors = getColors();
     UI.message(s);
-    webContents
-      .executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
+    webContents.executeJavaScript(`sendUsedColors(${JSON.stringify(colors)})`)
       .catch(console.error); // eslint-disable-line no-console
   });
 
@@ -42,4 +42,6 @@ export default function () {
   });
 
   browserWindow.loadURL(webview);
+
+  trackAppStart();
 }
