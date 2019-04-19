@@ -301,13 +301,21 @@ jobs:
           command: cat workspace/appcast.xml > appcast.xml
 
       - run:
+          name: Update package.json
+          command: cat workspace/package.json > package.json
+
+      - run:
+          name: Update package.json
+          command: cat workspace/manifest.json > src/manifest.json
+
+      - run:
           name: Push files
           command: |
             echo """Host *
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
-            git add appcast.xml
+            git add appcast.xml package.json src/manifest.json
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push origin HEAD
 
@@ -359,27 +367,36 @@ workflows:
               only:
                 - master
 
-  tagged-build:
-    jobs:
-      - install
-      - testing
-      - linting
-      - pre-build-production:
-          requires:
-            - install
-            - testing
-            - linting
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
-      - build-production:
-          requires:
-            - pre-build-production
-      - zip-build:
-          requires:
-            - build-production
-      - deploy-production:
-          requires:
-            - zip-build
+tagged-build:
+  jobs:
+    - install:
+        filters:
+          tags:
+            only: /.*/
+    - testing:
+        filters:
+          tags:
+            only: /.*/
+    - linting:
+        filters:
+          tags:
+            only: /.*/
+    - pre-build-production:
+        requires:
+          - install
+          - testing
+          - linting
+        filters:
+          tags:
+            only: /^v*/
+          branches:
+            only: /.*/
+    - build-production:
+        requires:
+          - pre-build-production
+    - zip-build:
+        requires:
+          - build-production
+    - deploy-production:
+        requires:
+          - zip-build
