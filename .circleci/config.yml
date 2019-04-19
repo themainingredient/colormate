@@ -355,12 +355,27 @@ workflows:
       - build-production:
           requires:
             - pre-build-production
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - zip-build:
           requires:
             - build-production
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - deploy-production:
           requires:
             - zip-build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
 
   deploy-staging:
     jobs:
