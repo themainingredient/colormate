@@ -388,7 +388,7 @@ tagged-build:
           - linting
         filters:
           tags:
-            only: /^v*/
+            only: /^v.*/
           branches:
             ignore: /.*/
     - build-production:
