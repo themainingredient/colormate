@@ -6,7 +6,7 @@ import Arrow from '../../../assets/arrowGrey.svg';
 
 const { colors, fonts } = GlobalStyles;
 
-export const NodeWrapper = styled.div`
+export const NodeWrapper = styled.div<{ generation: number, isSelected: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,7 +22,7 @@ export const StyledArrow = styled(props => <Arrow {...omit(props, ['isOpen'])} /
   transition: transform 150ms ease-in-out;
 `;
 
-export const Name = styled.p`
+export const Name = styled.p<{ isHovered: boolean, isSelected: boolean }>`
   font-family: ${fonts.SFPro.reg};
   font-size: 14px;
   color: ${({ isSelected }) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
@@ -30,11 +30,11 @@ export const Name = styled.p`
   border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-export const ColorType = styled.div`
+export const ColorType = styled.div<{ type: any }>`
   height: 8px;
   width: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.DarkGrey};
-  background-color: ${colorType => (colorType.type === 'fill' ? colors.DarkGrey : '')};
+  background-color: ${colorType => (colorType.type === '' ? colors.DarkGrey : '')};
   margin-right: 16px;
 `;
