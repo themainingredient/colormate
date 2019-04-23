@@ -1,26 +1,26 @@
 // eslint-disable-next-line import/no-unresolved
 import sketch from 'sketch';
-import { traverse } from './helpers/traverse.ts';
+import { traverse } from './helpers/traverse';
 import {
   hasBorder,
   hasFill,
   hasTextColor,
   createDataStructure,
   getColorArray,
-} from './helpers/get-colors.ts';
+} from './helpers/get-colors';
 
 export default function () {
   const colorsObject = {};
   const documentPages = sketch.getSelectedDocument().pages;
 
-  const traversedPages = [];
+  const traversedPages: any[] = [];
 
   documentPages.forEach((page) => {
     const traversedPage = traverse(page);
     traversedPages.push(traversedPage);
   });
 
-  traversedPages.forEach((pageWithLayers) => {
+  traversedPages.forEach((pageWithLayers: any[]) => {
     pageWithLayers.forEach((layerWithParents) => {
       const { layer, parents } = layerWithParents;
 

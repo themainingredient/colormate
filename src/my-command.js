@@ -1,7 +1,7 @@
 import BrowserWindow from 'sketch-module-web-view';
 import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
-import { trackAppStart } from './helpers/analytics';
-import getColors from './get-colors';
+import { trackAppStart } from './helpers/analytics.ts';
+import getColors from './get-colors.ts';
 
 const webview = require('../resources/webview.html');
 
