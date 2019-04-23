@@ -8,7 +8,7 @@ import Arrow from '../../assets/arrowWhite.svg';
 
 const { colors, fonts } = Globals;
 
-export const ListItemWrapper = styled.div`
+export const ListItemWrapper = styled.div<{isActive: boolean}>`
   border-bottom: 1px solid ${colors.LightGrey};
   padding-left: 16px;
   padding-right: 16px;
@@ -40,7 +40,7 @@ export const DotBG = styled(CheckeredBackground)`
   border-radius: 39px;
 `;
 
-export const DotColor = styled.div`
+export const DotColor = styled.div<{isBorderNeeded: boolean}>`
   position: absolute;
   top: 0px;
   left: 0px;
@@ -58,7 +58,7 @@ export const DotColor = styled.div`
   }};
 `;
 
-export const Title = styled.p`
+export const Title = styled.p<{isActive: boolean}>`
   margin-left: 8px;
   color: ${({ isActive }) => (isActive ? colors.White : colors.TMIBlue)};
   font-size: 16px;
@@ -69,7 +69,7 @@ export const Title = styled.p`
   }
 `;
 
-export const Instances = styled.p`
+export const Instances = styled.p<{isActive: boolean}>`
   color: ${({ isActive }) => (isActive ? colors.White : colors.DarkGrey)};
   font-size: 14px;
   font-family: ${fonts.SFPro.reg};
@@ -91,7 +91,7 @@ export const Spacer = styled.div`
   flex: 1;
 `;
 
-export const Label = styled.p`
+export const Label = styled.p<{isActive: boolean}>`
   color: ${({ isActive }) => (isActive ? colors.TMIBlue : colors.DarkGrey)};
   font-family: ${fonts.SFPro.bold};
   font-size: 11px;

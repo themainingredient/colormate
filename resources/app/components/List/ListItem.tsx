@@ -14,13 +14,13 @@ import {
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
-import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap.ts';
+import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap';
 
-import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations.ts';
+import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations';
 
-const isColorContrasting = color => calculateContrast(color) > 1.2;
+const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
-const ListItem = ({ color, instances, index }) => {
+const ListItem = ({ color, instances, index }: { color: string, instances: any[], index: any }) => {
   const [isSelected, setSelected] = useState();
   const [realLayers, setRealLayers] = useState();
   const { selectedColor, setSelectedColor } = useContext(ListContext);
@@ -35,7 +35,7 @@ const ListItem = ({ color, instances, index }) => {
     setSelected(selectedColor === index);
   }, [selectedColor]);
 
-  const handleListItemClick = (itemIndex) => {
+  const handleListItemClick = (itemIndex: any) => {
     setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
   };
 
