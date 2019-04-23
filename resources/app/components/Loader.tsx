@@ -4,8 +4,7 @@ import Globals, { flexCenter } from '../Global.styles';
 
 import LoaderTitle from '../assets/text1Loader.svg';
 import LoaderContent from '../assets/text2Loader.svg';
-
-const loader = require('../assets/washingTransparent.gif');
+import loader from '../assets/washingTransparent.gif';
 
 const { colors } = Globals;
 
