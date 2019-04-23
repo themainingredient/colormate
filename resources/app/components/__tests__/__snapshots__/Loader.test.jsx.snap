@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader.jsx renders and displays correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #4E41FF;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.c1 {
+  height: 195px;
+  margin: 50px 0;
+}
+
+<div
+  class="c0"
+>
+  <text-one-loader />
+  <img
+    alt="Loading..."
+    class="c1"
+    src="test-file-stub"
+  />
+  <text-two-loader />
+</div>
+`;
