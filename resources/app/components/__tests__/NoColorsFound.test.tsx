@@ -1,17 +1,18 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
 import NoColorsFound from '../NoColorsFound';
-import { closeWindow } from '../../helpers/window'; // eslint-disable-line import/no-unresolved
+import { closeWindow } from '../../helpers/window'; 
 
 jest.mock('../../assets/minimilistBubbles.svg', () => 'bubbles-img');
 jest.mock('../../helpers/window.ts', () => {
+
   return {
     closeWindow: jest.fn(),
   };
 });
 
 afterEach(cleanup);
-afterAll(closeWindow.mockReset());
+afterAll(() => (closeWindow as jest.Mock).mockReset());
 
 describe('NoColorsFound.jsx', () => {
   test('renders and displays correctly', () => {
