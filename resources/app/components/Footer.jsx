@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Button from './Button';
 import Globals from '../Global.styles';
 import useHover from '../hooks/useHover';
-import { closeWindow } from '../helpers/window.ts';
+import { closeWindow, openUrlInBrowser } from '../helpers/window.ts';
+import { tmiUrl } from '../constants';
 
 const { colors, fonts } = Globals;
 
@@ -48,10 +49,6 @@ const Feedback = styled.a`
   }
 `;
 
-const openUrlInBrowser = (url) => {
-  window.postMessage('openUrlInBrowser', url);
-};
-
 const Footer = () => {
   const [isHovered, hoverRef] = useHover();
 
@@ -65,7 +62,7 @@ const Footer = () => {
           Report & support here
         </Feedback>
         <br />
-        <MadeBy onClick={() => openUrlInBrowser('https://www.themainingredient.co')}>
+        <MadeBy onClick={() => openUrlInBrowser(tmiUrl)}>
           Made by <Bold>The Main Ingredient</Bold>
         </MadeBy>
       </FeedbackMadeByWrapper>

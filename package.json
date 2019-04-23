@@ -25,6 +25,7 @@
     "start": "skpm-build --watch",
     "postinstall": "npm run build && skpm-link",
     "test": "jest",
+    "test:coverage": "jest --coverage && open coverage/lcov-report/index.html",
     "test:watch": "jest --watch",
     "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0",
     "log": "skpm log -f"
