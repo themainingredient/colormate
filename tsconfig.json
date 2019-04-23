@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "jsx": "react",
+    "noImplicitAny": false
   },
   "include": [
     "src/**/*", 
