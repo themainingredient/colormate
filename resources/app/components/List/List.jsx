@@ -23,11 +23,11 @@ const List = ({ colorList }) => {
 
   return (
     <ListWrapper>
-      {Object.keys(colorList).map((color, index) => (
+      {Object.entries(colorList).map(([color, instances], index) => (
         <ListItem
           key={index}
           color={color}
-          instances={colorList[color]}
+          instances={instances}
           clickHandler={(itemIndex) => {
             handleColorClick(itemIndex);
           }}

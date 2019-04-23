@@ -1,116 +1,43 @@
-# Colormate
+# Colormate Sketch Plugin 🌈
 
-_This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
+This free plugin gives you an impression of _all the colours_ in your Sketch file and _how many times_ a certain colour is being used.
 
-## Installation
+## Why this Plugin? 🤔
 
-Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip).\_, unzip then double-click find-and-replace-text.sketchplugin to install.
+During designing we often found ourselves ending up with fifty different shades of grey. (and of course other colours) Sometimes we would just lose ourselves in designing and don't keep track of all the colours that we used. But this is not ideal when you have to hand it over to the development team. 
 
-## Getting started
+That's why we've created this plugin to help designers keep track of the colours in the file, _without_ having to add the colours to the document colours first!
 
-- copy and rename the .env.example, adjusting the keys to your needs.
+Did we peak your interest already? 🧐
 
-## Usage
+## Installation ⚙️
 
-Install the dependencies
+1. Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip)
+2. Unzip the file
+3. Double-click Colormate.sketchplugin to install 
 
-```bash
-npm install
-```
+## Getting started 💪
 
-Once the installation is done, you can run some commands inside the project folder:
+Did you already download the plugin? Good. Let's get started then!
 
-```bash
-npm run build
-```
+Open your Sketch file and run the plugin by using the shortcut "CMD+Shift+8" on Mac or "CTRL+Shift+8" on Windows. You're also able to run the plugin by going to "Plugins" in the top nav bar and then select the Colormate plugin. 
 
-To watch for changes:
+The plugin starts with scanning every layer in the file and gathering all the colours that are being used in text, symbols & objects. This may take some seconds if you have a really big file. (But we provided you with a nice gif to look at while waiting 😎) 
 
-```bash
-npm run watch
-```
+When the plugin is done scanning your file, you will get an overview of all the colours you've used in the document. You will be able to see the colour number, how many times this colour has been used and if this colour has an opacity value. Now you're able to see that there are two types of red that you're using: #CC0000 has been used 117 times, but #C50909 has only been used 3 times.
 
-## Custom Configuration
 
-### Babel
+## Future plans 🚀
 
-To customize Babel, you have two options:
+We're not going to sit back and let the plugin work its magic. We're continously working on developping new features. The following features are on our planning:
 
-- You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in your project's root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a "presets" object, it will replace & reset all Babel presets that skpm defaults to.
+- Seeing where the colours are being used
+- Being able to select a certain colour from the plugin in your file
+- Being able to replace a colour with another colour, within the plugin
+- Run the plugin on a specific selection, instead of the whole file 
 
-- If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more info.
+If you can think of any other functionalities, please let us know! 🤩
 
-### Webpack
 
-To customize webpack create `webpack.skpm.config.js` file which exports function that will change webpack's config.
+Made with ❤️ by [The Main Ingredient](https://themainingredient.co)
 
-```js
-/**
- * Function that mutates original webpack config.
- * Supports asynchronous changes when promise is returned.
- *
- * @param {object} config - original webpack config.
- * @param {boolean} isPluginCommand - whether the config is for a plugin command or a resource
- **/
-module.exports = function(config, isPluginCommand) {
-  /** you can change config here **/
-};
-```
-
-## Debugging
-
-To view the output of your `console.log`, you have a few different options:
-
-- Use the [`sketch-dev-tools`](https://github.com/skpm/sketch-dev-tools)
-- Open `Console.app` and look for the sketch logs
-- Look at the `~/Library/Logs/com.bohemiancoding.sketch3/Plugin Output.log` file
-
-Skpm provides a convenient way to do the latter:
-
-```bash
-skpm log
-```
-
-The `-f` option causes `skpm log` to not stop when the end of logs is reached, but rather to wait for additional data to be appended to the input
-
-## Publishing your plugin
-
-```bash
-skpm publish <bump>
-```
-
-(where `bump` can be `patch`, `minor` or `major`)
-
-`skpm publish` will create a new release on your GitHub repository and create an appcast file in order for Sketch users to be notified of the update.
-
-You will need to specify a `repository` in the `package.json`:
-
-```diff
-...
-+ "repository" : {
-+   "type": "git",
-+   "url": "git+https://github.com/ORG/NAME.git"
-+  }
-...
-```
-
-## Deployment
-
-For deployments we are using git-flow with circleci to execute the CI/CD strategy.
-
-For this purpose we have two pipelines
-
-- deploy-staging
-  - will setup a `beta` tag within the version being build
-  - will setup the versions within the files
-- deploy-production
-  - will setup the app for production
-  - deploys to Sketch environment
-
-### Branch guidelines
-
-To execute a new production deployment follow the following steps:
-
-- create a release branch out of develop `release/THE_RELEASE_NAME_OR_VERSION_HERE`
-- this will trigger a new beta build and notify internal testers
-- merge release branch into master to trigger a production build

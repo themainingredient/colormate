@@ -1,4 +1,4 @@
-import MockLayer from '../__mocks__/MockLayer';
+import MockLayer from '../__mocks__/MockLayer.json';
 import MockTextLayer from '../__mocks__/MockTextLayer.json';
 import {
   getParents,
@@ -12,7 +12,7 @@ import {
 describe('Helpers / get-colors', () => {
   test('getParents returns an array of the parents and the current layer id', () => {
     const parents = ['grandfatherID', 'motherID'];
-    const currentLayer = 'myID';
+    const currentLayer = { id: 'foo', type: 'foo', name: 'foo' };
     const expectedParentsArray = [...parents, currentLayer];
     const parentsArray = getParents(parents, currentLayer);
 
@@ -83,11 +83,11 @@ describe('Helpers / get-colors', () => {
   });
 
   describe('getColorArray', () => {
-    let colorsObject;
-    let includedColor;
-    let excludedColor;
-    let includedColorArray;
-    let dataStructureValue;
+    let colorsObject: any;
+    let includedColor: any;
+    let excludedColor: any;
+    let includedColorArray: any;
+    let dataStructureValue: any;
 
     beforeEach(() => {
       includedColor = '#123456';

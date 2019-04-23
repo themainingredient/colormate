@@ -57,11 +57,19 @@ module.exports = config => {
     ],
   });
 
+  // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
   config.module.rules.push({
     test: /\.tsx?$/,
     exclude: /node_modules/,
     loader: 'ts-loader'
   });
+
+  // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+  config.module.rules.push({ 
+    enforce: "pre", 
+    test: /\.js$/, 
+    loader: "source-map-loader"
+  })
 
   const env = dotenv.config().parsed;
 
@@ -72,6 +80,8 @@ module.exports = config => {
   }, {});
 
   config.plugins.push(new webpack.DefinePlugin(envKeys));
+
+  config.devtool = "source-map"
 };
 
 /* eslint-enable */

@@ -1,28 +1,40 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: nikolaik/python-nodejs:python3.7-nodejs11
+
 version: 2
 jobs:
-  testing:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+  install:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
-      - run: npm install
       - run:
-          name: Run tests
-          command: npm run test
+          name: Run install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dep-{{ checksum "package.json" }}
 
+  testing:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run tests
+          command: npm run test
+
   linting:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -33,10 +45,8 @@ jobs:
           name: Run ESLint
           command: npm run lint
 
-  deploy-staging:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+  pre-build-staging:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -46,99 +56,260 @@ jobs:
 
       - run: apt-get update
       - run: apt-get -y install jq zip moreutils
-      - run: pip install awscli
 
       - run:
-          name: "Run semantic-release"
+          name: Run semantic-release
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --branch ${CIRCLE_BRANCH} --dry-run
 
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+      - run: mkdir -p workspace
+
+      - run: |
+          cat .env > workspace/.env
+          cat package.json > workspace/package.json
+          cat src/manifest.json > workspace/manifest.json
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - package.json
+            - manifest.json
+
+  build-staging:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: cat workspace/.env > .env
+      - run: cat workspace/package.json > package.json
+      - run: cat workspace/manifest.json > manifest.json
 
       - run: echo "REACT_APP_VERSION:" $REACT_APP_VERSION
       - run:
           name: Build project
           command: npm run build
 
+      - run: mkdir -p workspace/build
+      - run: cp -R colormate.sketchplugin/*  workspace/build
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .env
+            - build/
+
+  zip-build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: apt-get update
+      - run: apt-get -y install zip
+
       - run:
           name: Zipping project
           command: |
             echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
-            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+            zip -r colormate_${REACT_APP_VERSION}.zip workspace/build
+
+      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}.zip
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .
+
+  deploy-staging:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: cat workspace/.env >> $BASH_ENV
+
+      - run: apt-get update
+      - run: apt-get -y install jq zip moreutils
+      - run: pip install awscli
 
       - run:
           name: Deploy to S3
-          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
+          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
 
       - run:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: '"${AWS_S3_URL_STAGING}/colormate_${REACT_APP_VERSION}.zip"'"}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
 
-  deploy-production:
-    docker:
-      - image: nikolaik/python-nodejs:python3.7-nodejs11
-    working_directory: ~/repo
+  release:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
-      - run: apt-get update
-      - run: apt-get -y install jq zip moreutils xmlstarlet
-      - run: pip install awscli
-
       - run:
-          name: Release
+          name: Run semantic-release
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release
 
+  pre-build-production:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install jq moreutils git
+
       - run:
           name: Setup Environment Variables
           command: |
-            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-            echo 'export REACT_APP_VERSION="$(jq --raw-output '.version' package.json)"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+            source $BASH_ENV
 
       - run:
-          name: Get appcast.xml from S3
-          command: aws s3 cp s3://colormate-testing/appcast.xml appcast.xml
+          name: Prepare dist files
+          command: |
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge src/manifest.json
+
+      - run:
+          name: create env file
+          command: |
+            touch .env
+            echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
+            echo REACT_APP_GA_TRACKING_ID=$GA_TRACKING_ID >> .env
+
+      - run:
+          name: Prepare workspace
+          command: |
+            mkdir -p workspace
+
+      - run:
+          name: Save files to workspace
+          command: |
+            cat .env > workspace/.env
+            cat package.json > workspace/package.json
+            cat src/manifest.json > workspace/manifest.json
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .
+
+  build-production:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install xmlstarlet
+
+      - run: cat workspace/.env >> $BASH_ENV
+      - run: cat workspace/.env > .env
+      - run: cat workspace/package.json > package.json
+      - run: cat workspace/manifest.json > manifest.json
+
+      - run:
+          name: Build project for version $REACT_APP_VERSION
+          command: npm run build
 
       - run:
           name: Update appcast file
           command: bash ./updateAppcast.sh $REACT_APP_VERSION ${AWS_S3_URL_PRODUCTION}/colormate_${REACT_APP_VERSION}.zip
 
+      - run: mkdir -p workspace/build
       - run:
-          name: Update appcast.xml in S3 with updated version
-          command: aws s3 cp appcast.xml s3://colormate-testing/
-
-      - run:
-          name: Build project
-          command: npm run build
-
-      - run:
-          name: Zipping project
+          name: Save build files to workspace
           command: |
-            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
-            zip -r colormate_${REACT_APP_VERSION}.zip colormate.sketchplugin
+            cat appcast.xml > workspace/appcast.xml
+            cp -R colormate.sketchplugin/*  workspace/build
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .
+
+  deploy-production:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+
+      - run: apt-get update
+      - run: apt-get -y install git golang-go
 
       - run:
-          name: "Deploy colormate_${REACT_APP_VERSION}.zip to S3"
-          command: aws s3 cp colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/production/
+          name: Setup Environment Variables
+          command: |
+            echo 'export GOROOT="/usr/lib/go"' >> $BASH_ENV
+            echo 'export GOPATH="$HOME/repo/"' >> $BASH_ENV
+            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+            cat workspace/.env >> $BASH_ENV
+            source $BASH_ENV
+
+      - run: go get github.com/aktau/github-release
+
+      - add_ssh_keys:
+          fingerprints:
+            - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
       - run:
-          name: Deploy colormate.zip to S3
-          command: aws s3 cp colormate.zip s3://colormate-testing/production/
+          name: Update Release on GitHub
+          command: |
+            github-release upload -R \
+                --security-token $GH_TOKEN \
+                --user themainingredient \
+                --repo colormate \
+                --tag ${REACT_APP_VERSION} \
+                --name "colormate.zip" \
+                --file workspace/colormate_${REACT_APP_VERSION}.zip
+      - run:
+          name: Update Appcast.xml
+          command: cat workspace/appcast.xml > appcast.xml
+
+      - run:
+          name: Push files
+          command: |
+            echo """Host *
+              StrictHostKeyChecking no""" >> ~/.ssh/config
+            git config --global user.email "ci@circleci.com"
+            git config --global user.name "Ci Server"
+            git add appcast.xml
+            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
+            git push origin HEAD
 
       - run:
           name: Notify slack channel
@@ -149,24 +320,66 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  deploy-staging:
     jobs:
+      - install
       - testing
       - linting
-      - deploy-staging:
+      - pre-build-staging:
           requires:
+            - install
             - testing
             - linting
           filters:
             branches:
               only:
                 - /release/.*/
-
-      - deploy-production:
+      - build-staging:
           requires:
+            - pre-build-staging
+      - zip-build:
+          requires:
+            - build-staging
+      - deploy-staging:
+          requires:
+            - zip-build
+
+  untagged-build:
+    jobs:
+      - install
+      - testing
+      - linting
+      - release:
+          requires:
+            - install
             - testing
             - linting
           filters:
             branches:
               only:
                 - master
+
+  tagged-build:
+    jobs:
+      - install
+      - testing
+      - linting
+      - pre-build-production:
+          requires:
+            - install
+            - testing
+            - linting
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build-production:
+          requires:
+            - pre-build-production
+      - zip-build:
+          requires:
+            - build-production
+      - deploy-production:
+          requires:
+            - zip-build
