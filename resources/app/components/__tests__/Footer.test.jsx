@@ -1,14 +1,12 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import Header from './Header';
-
-jest.mock('../assets/colormateLogo.svg', () => 'img');
+import Footer from '../Footer';
 
 afterEach(cleanup);
 
-describe('Header.jsx', () => {
+describe('Footer.jsx', () => {
   test('renders and displays correctly', () => {
-    const { container } = render(<Header />);
+    const { container } = render(<Footer />);
 
     expect(container.firstChild).toMatchSnapshot();
   });

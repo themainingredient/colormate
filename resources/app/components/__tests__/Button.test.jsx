@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import Button from './Button';
-import Globals from '../Global.styles';
+import Button from '../Button';
+import Globals from '../../Global.styles';
 
 const { colors } = Globals;
 

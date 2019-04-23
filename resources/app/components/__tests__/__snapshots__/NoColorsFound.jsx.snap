@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoColorsFound.jsx renders and displays correctly 1`] = `
+.c3 {
+  height: 37px;
+  width: 92px;
+  font-family: SFProBold;
+  font-size: 14px;
+  color: #FFFFFF;
+  border-radius: 23px;
+  background-color: #4E41FF;
+  border: none;
+}
+
+.c3:hover {
+  background-color: #3B2EEB;
+  cursor: pointer;
+}
+
+.c0 {
+  background-color: #E8E9EF;
+  height: 100%;
+  width: 100%;
+}
+
+.c1 {
+  margin-top: 37px;
+  color: #4E41FF;
+  font-family: FuturaBold;
+  font-size: 21.68px;
+  -webkit-letter-spacing: 0.13px;
+  -moz-letter-spacing: 0.13px;
+  -ms-letter-spacing: 0.13px;
+  letter-spacing: 0.13px;
+  text-align: center;
+}
+
+.c2 {
+  position: absolute;
+  bottom: 21px;
+  right: 26px;
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  >
+    <div>
+      No colours found.
+    </div>
+    <div>
+      Now that’s minimilist.
+    </div>
+  </div>
+  <bubbles-img
+    classname="sc-bxivhb dGZrxe"
+  />
+  <div
+    class="c2"
+  >
+    <button
+      class="c3"
+      type="button"
+    >
+      Close
+    </button>
+  </div>
+</div>
+`;
