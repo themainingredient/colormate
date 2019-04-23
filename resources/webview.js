@@ -1,5 +1,5 @@
-import './app';
-import { isDev } from '../src/helpers/environment';
+import './app/index.tsx';
+import { isDev } from '../src/helpers/environment.ts';
 
 // Disable the context menu to have a more native feel
 if (!isDev()) {
