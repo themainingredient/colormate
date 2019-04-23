@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import Globals from '../Global.styles';
 import useHover from '../hooks/useHover';
-import { closeWindow } from '../helpers/window.ts';
+import { closeWindow } from '../helpers/window';
 
 const { colors, fonts } = Globals;
 
@@ -48,7 +48,7 @@ const Feedback = styled.a`
   }
 `;
 
-const openUrlInBrowser = (url) => {
+const openUrlInBrowser = (url: any) => {
   window.postMessage('openUrlInBrowser', url);
 };
 

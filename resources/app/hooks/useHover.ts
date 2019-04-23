@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-export default () => {
+export default (): any[] => {
   const [value, setValue] = useState(false);
 
   const ref = useRef(null);
@@ -9,7 +9,7 @@ export default () => {
   const handleMouseOut = () => setValue(false);
 
   useEffect(() => {
-    const node = ref.current;
+    const node = ref.current as any;
 
     if (node) {
       node.addEventListener('mouseover', handleMouseOver);
