@@ -1,7 +1,8 @@
 import { css, createGlobalStyle } from 'styled-components';
-import SFProRegular from './assets/SFCompactDisplay-Regular.otf';
-import SFProBold from './assets/SFCompactDisplay-Bold.otf';
-import FuturaBold from './assets/Futura-Bold.otf';
+
+const SFProRegular = require('./assets/SFCompactDisplay-Regular.otf');
+const SFProBold = require('./assets/SFCompactDisplay-Bold.otf');
+const FuturaBold = require('./assets/Futura-Bold.otf');
 
 export const GlobalFonts = createGlobalStyle`
   @font-face {
