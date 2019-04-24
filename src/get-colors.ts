@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import sketch from 'sketch';
+import sketch, { Document } from 'sketch';
 import { traverse } from './helpers/traverse';
 import {
   hasBorder,
@@ -9,9 +9,20 @@ import {
   getColorArray,
 } from './helpers/get-colors';
 
+const isSelectionActive = (selectedDocument: Document) => {
+  const selectedLayers = selectedDocument.selectedLayers;
+  return !!selectedLayers.length;
+}
+
+// from selectedLayers construct the page with only selected layers
+const getSelectedPages = (selectedDocument: Document) => {
+  return selectedDocument.pages; //TODO: implement
+}
+
 export default function () {
   const colorsObject = {};
-  const documentPages = sketch.getSelectedDocument().pages;
+  const selectedDocument = sketch.getSelectedDocument();
+  const documentPages = isSelectionActive(selectedDocument) ? getSelectedPages(selectedDocument) : selectedDocument.pages;
 
   const traversedPages: any[] = [];
 
