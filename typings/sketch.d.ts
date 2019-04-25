@@ -1,11 +1,7 @@
 // these interfaces are not complete
 // add a prop if needed (https://developer.sketch.com/reference/api/)
 declare module 'sketch' {
-    export enum LayerType {
-        Document = 'Document',
-        Page = 'Page',
-        ShapePath = 'ShapePath',
-    }
+    export type LayerType = "Document" | "Page" | "Group" | "ShapePath";
 
     export interface Layer {
         id: string;
@@ -40,6 +36,9 @@ declare module 'sketch' {
         layers: Layer[];
         readonly length: number;
         readonly isEmpty: boolean;
+        map(layer: any): any[];
+        forEach(layer: any): void;
+        reduce(acc: any, layer: any): any;
     }
 
     export function getSelectedDocument(): Document
