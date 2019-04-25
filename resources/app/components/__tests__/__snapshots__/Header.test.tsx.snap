@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header.jsx renders and displays correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 87px;
+  width: 320px;
+  background-color: #E8E9EF;
+  box-shadow: 0 5px 10px 2px #00000040;
+}
+
+.c2 {
+  height: 22px;
+  width: 39px;
+  background-color: #4E41FF;
+  border-radius: 11px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #FFFFFF;
+  font-family: SFProRegular;
+  font-size: 11px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.c1 {
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+<div
+  class="c0"
+>
+  <img
+    class="c1"
+    height="66"
+    width="186"
+  />
+  <div
+    class="c2"
+  />
+</div>
+`;

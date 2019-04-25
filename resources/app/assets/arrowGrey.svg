@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="6px" viewBox="0 0 8 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="colorRowExpandedHover-Copy" transform="translate(-24.000000, -104.000000)" fill="#4D4F59" fill-rule="nonzero">
+            <g id="color2Clicked" transform="translate(24.000000, 97.000000)">
+                <g id="Group" transform="translate(0.185000, 0.330000)">
+                    <g id="artboard-1">
+                        <g id="triangle-down" transform="translate(0.000000, 6.930000)">
+                            <path d="M6.64125,0 L0.28875,0 C0.181574216,4.82509944e-05 0.0832394609,0.0660505879 0.0333327031,0.171436217 C-0.0165740548,0.276821847 -0.00984150741,0.404251357 0.05082,0.502425 L3.22707,5.63575833 C3.28093958,5.72280648 3.36992314,5.77481077 3.465,5.77481077 C3.56007686,5.77481077 3.64906042,5.72280648 3.70293,5.63575833 L6.87918,0.502425 C6.93984151,0.404251357 6.94657405,0.276821847 6.8966673,0.171436217 C6.84676054,0.0660505879 6.74842578,4.82509944e-05 6.64125,0 Z" id="Path"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

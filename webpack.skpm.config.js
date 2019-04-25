@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 
 module.exports = config => {
-  config.resolve.extensions = ['.sketch.js', '.js', '.jsx'];
+  config.resolve.extensions = ['.sketch.js', '.js', '.jsx', '.ts', '.tsx'];
   config.module.rules.push({
     test: /\.(html)$/,
     use: [
@@ -57,6 +57,20 @@ module.exports = config => {
     ],
   });
 
+  // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    loader: 'ts-loader'
+  });
+
+  // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+  config.module.rules.push({ 
+    enforce: "pre", 
+    test: /\.js$/, 
+    loader: "source-map-loader"
+  })
+
   const env = dotenv.config().parsed;
 
   // reduce it to a nice object, the same as before
@@ -66,6 +80,8 @@ module.exports = config => {
   }, {});
 
   config.plugins.push(new webpack.DefinePlugin(envKeys));
+
+  config.devtool = "source-map"
 };
 
 /* eslint-enable */
