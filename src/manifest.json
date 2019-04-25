@@ -1,4 +1,5 @@
 {
+  "identifier": "com.colormate.plugin",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
@@ -12,7 +13,10 @@
   ],
   "menu": {
     "title": "Colormate",
-    "items": ["listAll"]
+    "items": [
+      "listAll"
+    ]
   },
-  "appcast": "https://s3.eu-central-1.amazonaws.com/colormate-testing/appcast.xml"
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
+  "version": "1.4.4"
 }
