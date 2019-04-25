@@ -58,6 +58,7 @@ const LayerNode = ({ layer, generation, children }) => {
             case 'Group':
               return <Group />;
             case 'ShapePath':
+            case 'Shape':
               return <ShapePath />;
             default:
               return <p>Unknown type</p>;
