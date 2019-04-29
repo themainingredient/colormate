@@ -1,6 +1,5 @@
 import sketch from 'sketch';
 
-// TODO: test
 export const replaceColorInLayers = (colorToReplace: string, targetColor: string, layerIds: string[]): void => {
     const doc = sketch.getSelectedDocument();
 
