@@ -45,6 +45,9 @@ export default function () {
   }) => {
     UI.message(message);
     replaceColorInLayers(colorToReplace, targetColor, layerIds);
+
+    const args = { colorToReplace, targetColor };
+    webContents.executeJavaScript(`replaceColor(${JSON.stringify(args)})`);
   });
 
   webContents.on('openUrlInBrowser', (url) => {

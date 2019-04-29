@@ -20,6 +20,7 @@ import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculat
 
 const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
+// TODO: replace dummy button
 const ListItem = ({ color, instances, index }: { color: string, instances: any[], index: any }) => {
   const [isSelected, setSelected] = useState();
   const [realLayers, setRealLayers] = useState();
@@ -62,7 +63,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
           {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
         <IndicatorArrow isActive={isSelected} />
-        <button onClick={() => {replaceColor(color, '#000000', instances)}}>Replace</button>
+        <button onClick={() => {replaceColor(color, '#000000ff', instances)}}>Replace</button>
         <Instances isActive={isSelected}>{instances.length}x</Instances>
       </ListItemWrapper>
       {isSelected && <ListItemTree tree={realLayers} />}

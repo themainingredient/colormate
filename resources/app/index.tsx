@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import { omit } from 'lodash';
 
 import { GlobalFonts } from './Global.styles';
 
@@ -36,6 +37,23 @@ const App = () => {
   useEffect(() => {
     window.postMessage('selectLayer', selectedLayer);
   }, [selectedLayer]);
+
+  useEffect(() => {
+    window.replaceColor = ({colorToReplace, targetColor}: {colorToReplace: string, targetColor: string}) => {
+      colorToReplace = colorToReplace.toLowerCase();
+      targetColor = targetColor.toLowerCase();
+      const targetAdditionalLayers = colors[colorToReplace];
+
+      const targetLayers = !colors[targetColor] ? targetAdditionalLayers : [...colors[targetColor], ...targetAdditionalLayers];
+
+      const updatedColors = {
+        ...omit(colors, colorToReplace),
+        [targetColor]: targetLayers
+      }
+      
+      setColors(updatedColors);
+    }
+  }, [colors]);
 
   const content = Object.keys(colors).length !== 0 ? (
     <>
