@@ -7,12 +7,12 @@ declare module 'sketch' {
         id: string;
         type: LayerType;
         name: string;
-        parent: Group | Document
+        parent: Group | Document;
+        style: Style;
       }
 
     export interface Group extends Layer {
         layers?: Layer[];
-        style: Style;
     }
 
     export interface Page extends Group {
@@ -24,12 +24,27 @@ declare module 'sketch' {
         pages: Page[];
         selectedPage: Page;
         selectedLayers: Selection;
-        type: LayerType
+        type: LayerType;
+        sharedLayerStyles: any;
+        sharedTextStyles: any;
+        colors: ColorAsset[];
+        gradients: any;
+        getLayerWithID(id: string): Layer | undefined;
+    }
+
+    export interface ColorAsset {
+        name: string;
+        color: string;
     }
 
     export interface Style {
         opacity: number;
         textColor: string;
+        fills: Fill[];
+    }
+
+    export interface Fill {
+        color: string;
     }
 
     export interface Selection {

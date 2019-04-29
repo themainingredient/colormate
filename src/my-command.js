@@ -1,6 +1,7 @@
 import BrowserWindow from 'sketch-module-web-view';
 import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { trackAppStart } from './helpers/analytics.ts';
+import { replaceColorInLayers } from './helpers/replace-color-in-layers.ts';
 import getColors from './get-colors.ts';
 import webview from '../resources/webview.html';
 
@@ -37,6 +38,13 @@ export default function () {
     const sketchLayer = document.getLayerWithID(layerID);
     document.centerOnLayer(sketchLayer);
     document.selectedLayers = [sketchLayer];
+  });
+
+  webContents.on('replaceColor', ({
+    message, colorToReplace, targetColor, layerIds,
+  }) => {
+    UI.message(message);
+    replaceColorInLayers(colorToReplace, targetColor, layerIds);
   });
 
   webContents.on('openUrlInBrowser', (url) => {

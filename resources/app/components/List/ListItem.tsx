@@ -39,6 +39,16 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
   };
 
+  const replaceColor = (colorToReplace: string, targetColor: string, instances: {id: string}[]) => {
+    const layerIds = instances.map(instance => instance.id);
+    window.postMessage('replaceColor', {
+      message: 'Replacing the color',
+      colorToReplace,
+      targetColor,
+      layerIds
+    });
+  }
+
   return (
     <>
       <ListItemWrapper isActive={isSelected} onClick={() => handleListItemClick(index)}>
@@ -52,6 +62,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
           {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
         <IndicatorArrow isActive={isSelected} />
+        <button onClick={() => {replaceColor(color, '#000000', instances)}}>Replace</button>
         <Instances isActive={isSelected}>{instances.length}x</Instances>
       </ListItemWrapper>
       {isSelected && <ListItemTree tree={realLayers} />}
