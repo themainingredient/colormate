@@ -41,9 +41,14 @@ declare module 'sketch' {
         opacity: number;
         textColor: string;
         fills: Fill[];
+        borders: Border[]
     }
 
     export interface Fill {
+        color: string;
+    }
+
+    export interface Border {
         color: string;
     }
 
