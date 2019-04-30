@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import styled from 'styled-components';
-import { omit } from 'lodash';
 
 import { GlobalFonts } from '../Global.styles';
 
@@ -11,6 +10,7 @@ import List from './List/List';
 import Footer from './Footer';
 import Loader from './Loader';
 import NoColorsFound from './NoColorsFound';
+import { replaceColor } from '../helpers/replace-color';
 
 const PluginWrapper = styled.div`
   height: 534px;
@@ -39,25 +39,10 @@ export default function () {
     }, [selectedLayer]);
   
     useEffect(() => {
-      window.replaceColor = ({colorToReplace, targetColor}: {colorToReplace: string, targetColor: string}) => {
-        colorToReplace = colorToReplace.toLowerCase();
-        targetColor = targetColor.toLowerCase();
-  
-        if (colorToReplace === targetColor) {
-          return;
-        }
-  
-        const updatedColorLayers = colors[colorToReplace];
-  
-        const targetLayers = !colors[targetColor] ? updatedColorLayers : [...colors[targetColor], ...updatedColorLayers];
-  
-        const updatedColors = {
-          ...omit(colors, colorToReplace),
-          [targetColor]: targetLayers
-        }
-        
+      window.replaceColor = ({colorToReplace, targetColor}) => {
+        const updatedColors = replaceColor(colors, colorToReplace, targetColor);
         setColors(updatedColors);
-      }
+      };
     }, [colors]);
   
     const content = Object.keys(colors).length !== 0 ? (
