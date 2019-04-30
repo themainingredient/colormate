@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import Header from '../Header';
+import Header from './Header';
 
-jest.mock('../../assets/colormateLogo.svg', () => 'img');
+jest.mock('../assets/colormateLogo.svg', () => 'img');
 
 afterEach(cleanup);
 

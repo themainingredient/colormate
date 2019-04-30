@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import Footer from '../Footer';
-import { closeWindow, openUrlInBrowser } from '../../helpers/window';
+import Footer from './Footer';
+import { closeWindow, openUrlInBrowser } from '../helpers/window';
 
-jest.mock('../../helpers/window', () => {
+jest.mock('../helpers/window', () => {
   return {
     closeWindow: jest.fn(),
     openUrlInBrowser: jest.fn(),

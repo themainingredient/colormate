@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import Loader from '../Loader';
+import Loader from './Loader';
 
-jest.mock('../../assets/text1Loader.svg', () => 'text-one-loader');
-jest.mock('../../assets/text2Loader.svg', () => 'text-two-loader');
+jest.mock('../assets/text1Loader.svg', () => 'text-one-loader');
+jest.mock('../assets/text2Loader.svg', () => 'text-two-loader');
 
 afterEach(cleanup);
 
