@@ -42,9 +42,14 @@ const App = () => {
     window.replaceColor = ({colorToReplace, targetColor}: {colorToReplace: string, targetColor: string}) => {
       colorToReplace = colorToReplace.toLowerCase();
       targetColor = targetColor.toLowerCase();
-      const targetAdditionalLayers = colors[colorToReplace];
 
-      const targetLayers = !colors[targetColor] ? targetAdditionalLayers : [...colors[targetColor], ...targetAdditionalLayers];
+      if (colorToReplace === targetColor) {
+        return;
+      }
+
+      const updatedColorLayers = colors[colorToReplace];
+
+      const targetLayers = !colors[targetColor] ? updatedColorLayers : [...colors[targetColor], ...updatedColorLayers];
 
       const updatedColors = {
         ...omit(colors, colorToReplace),

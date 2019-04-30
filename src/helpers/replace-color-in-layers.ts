@@ -1,6 +1,10 @@
 import sketch from 'sketch';
 
 export const replaceColorInLayers = (colorToReplace: string, targetColor: string, layerIds: string[]): void => {
+    if (colorToReplace.toLowerCase() === targetColor.toLowerCase()) {
+        return;
+    }
+
     const doc = sketch.getSelectedDocument();
 
     layerIds.forEach((id) => {

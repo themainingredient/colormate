@@ -43,6 +43,10 @@ export default function () {
   webContents.on('replaceColor', ({
     message, colorToReplace, targetColor, layerIds,
   }) => {
+    if (colorToReplace.toLowerCase() === targetColor.toLowerCase()) {
+      return;
+    }
+
     UI.message(message);
     replaceColorInLayers(colorToReplace, targetColor, layerIds);
 

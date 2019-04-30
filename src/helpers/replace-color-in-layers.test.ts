@@ -26,6 +26,14 @@ describe('replaceColorInLayers', () => {
         const layerId = 'a';
         expect(() => replaceColorInLayers('#000000', '#ffffff', [layerId])).toThrowError(`Layer with ID ${layerId} not found!`);
     })
+
+    test('should not select the document for the replacement if the colors are the same', () => {
+        replaceColorInLayers('#000000', '#000000', ['firstMatch']);
+        replaceColorInLayers('#abcdef', '#ABCDEF', ['firstMatch']);
+
+        expect(getSelectedDocument).not.toHaveBeenCalled();
+    });
+
     describe('in all the matching layer ids', () => {
         it('if the colorToReplace match,  should replace the fill, text and borders color', () => {
             replaceColorInLayers('red', 'blue', ['firstMatch', 'secondMatch']);
