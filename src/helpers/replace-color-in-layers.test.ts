@@ -10,7 +10,7 @@ describe('replaceColorInLayers', () => {
 
     beforeAll(() => {
         (getSelectedDocument as jest.Mock).mockImplementation(() => ({
-            getLayerWithID: (id) => layers.find(layer => id === layer.id);
+            getLayerWithID: (id) => layers.find(layer => id === layer.id)
         }));
     })
 
