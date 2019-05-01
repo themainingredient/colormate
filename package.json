@@ -5,7 +5,7 @@
     "type": "git",
     "url": "git+https://github.com/themainingredient/colormate.git"
   },
-  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover. Oops :flushed:",
+  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover",
   "engines": {
     "sketch": ">=3.0"
   },

@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Hello World Sketch Test Plugin</title>
+    <title>Colormate</title>
     <link>
 http://sparkle-project.org/files/sparkletestcast.xml
     </link>
-    <description>Brilliant Hello World Plugin</description>
+    <description>Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover</description>
     <language>en</language>
     <item>
       <title>Version v1.2.0</title>
