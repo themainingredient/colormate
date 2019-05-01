@@ -27,5 +27,9 @@ http://sparkle-project.org/files/sparkletestcast.xml
       <title>Version v1.4.5</title>
       <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.5/colormate.sketchplugin.zip" sparkle:version="1.4.5"/>
     </item>
+    <item>
+      <title>Version v1.4.6</title>
+      <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.6/colormate.sketchplugin.zip" sparkle:version="1.4.6"/>
+    </item>
   </channel>
 </rss>
