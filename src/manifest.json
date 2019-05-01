@@ -1,4 +1,5 @@
 {
+  "name": "Colormate",
   "identifier": "com.colormate.plugin",
   "compatibleVersion": 3,
   "bundleVersion": 1,
@@ -17,6 +18,6 @@
       "listAll"
     ]
   },
-  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
+  "appcast": "https://raw.githubusercontent.com/themainingredient/colormate/master/.appcast.xml",
   "version": "1.4.7"
 }
