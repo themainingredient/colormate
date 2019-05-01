@@ -250,7 +250,7 @@ jobs:
           name: Save build files to workspace
           command: |
             cat appcast.xml > workspace/appcast.xml
-            cp -R colormate.sketchplugin/*  workspace/build
+            cp -R colormate.sketchplugin  workspace/build
 
       - persist_to_workspace:
           root: workspace
