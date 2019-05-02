@@ -11,7 +11,10 @@
   },
   "skpm": {
     "name": "colormate",
+    "title": "Colormate",
     "manifest": "src/manifest.json",
+    "identifier": "com.colormate.plugin",
+    "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
     "main": "colormate.sketchplugin",
     "assets": [
       "assets/**/*",

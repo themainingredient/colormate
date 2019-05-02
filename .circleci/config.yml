@@ -249,7 +249,7 @@ jobs:
       - run:
           name: Save build files to workspace
           command: |
-            cat .appcast.xml > workspace/.appcast.xml
+            cat appcast.xml > workspace/appcast.xml
             cp -R colormate.sketchplugin  workspace/build
 
       - persist_to_workspace:
@@ -288,21 +288,15 @@ jobs:
 
       - run:
           name: Update Appcast.xml
-          command: cat workspace/.appcast.xml > .appcast.xml
+          command: cat workspace/appcast.xml > appcast.xml
 
       - run:
           name: Update package.json
           command: cat workspace/package.json > package.json
 
       - run:
-          name: Update manifest.json
+          name: Update package.json
           command: cat workspace/manifest.json > src/manifest.json
-
-      - run:
-          name: Update build
-          command: |
-            rm -rf colormate.sketchplugin
-            cp -R workspace/build/ .
 
       - run:
           name: Push files
@@ -311,7 +305,7 @@ jobs:
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
-            git add .appcast.xml package.json src/manifest.json colormate.sketchplugin
+            git add appcast.xml package.json src/manifest.json
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push origin HEAD
 

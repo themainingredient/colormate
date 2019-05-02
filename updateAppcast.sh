@@ -11,6 +11,6 @@ xmlstarlet ed -L -s "/rss/channel" -t elem -n itemTmp -v "" \
             -s //enclosureTmp -t attr -n sparkle:version -v $1 \
             -r //enclosureTmp -v enclosure \
             -r //itemTmp -v item \
-            ..xml
+            appcast.xml
 
-cat .appcast.xml
+cat appcast.xml
