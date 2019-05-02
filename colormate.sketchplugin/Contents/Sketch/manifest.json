@@ -1,5 +1,6 @@
 {
   "identifier": "com.colormate.plugin",
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
@@ -17,10 +18,9 @@
       "listAll"
     ]
   },
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover",
   "name": "Colormate",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com/themainingredient/colormate/master/.appcast.xml",
   "author": "The Main Ingredient"
 }
