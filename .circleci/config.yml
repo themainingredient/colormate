@@ -287,16 +287,6 @@ jobs:
             - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
       - run:
-          name: Update Release on GitHub
-          command: |
-            github-release upload -R \
-                --security-token $GH_TOKEN \
-                --user themainingredient \
-                --repo colormate \
-                --tag "v${REACT_APP_VERSION}" \
-                --name "colormate.sketchplugin.zip" \
-                --file workspace/colormate_${REACT_APP_VERSION}.zip
-      - run:
           name: Update Appcast.xml
           command: cat workspace/.appcast.xml > .appcast.xml
 
@@ -324,6 +314,17 @@ jobs:
             git add .appcast.xml package.json src/manifest.json colormate.sketchplugin
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push origin HEAD
+
+      - run:
+          name: Update Release on GitHub
+          command: |
+            github-release upload -R \
+                --security-token $GH_TOKEN \
+                --user themainingredient \
+                --repo colormate \
+                --tag "v${REACT_APP_VERSION}" \
+                --name "colormate.sketchplugin.zip" \
+                --file workspace/colormate_${REACT_APP_VERSION}.zip
 
       - run:
           name: Notify slack channel
