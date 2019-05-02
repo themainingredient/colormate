@@ -18,5 +18,5 @@
     ]
   },
   "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
-  "version": "1.4.7"
+  "version": "1.4.8"
 }
