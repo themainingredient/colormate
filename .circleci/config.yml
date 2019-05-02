@@ -299,15 +299,25 @@ jobs:
           command: cat workspace/manifest.json > src/manifest.json
 
       - run:
-          name: Push files
+          name: Commit files
           command: |
             echo """Host *
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
             git add .appcast.xml package.json src/manifest.json
-            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
+            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"            
+
+      - run:
+          name: Force update Github tag
+          command: |
+            git tag -f -a v${REACT_APP_VERSION} -m 'release v${REACT_APP_VERSION}' #TODO: improve tag msg
+
+      - run:
+          name: Push files and updated tag
+          command: |
             git push origin HEAD
+            git push -f --tags
 
       - run:
           name: Update Release on GitHub
