@@ -295,7 +295,7 @@ jobs:
           command: cat workspace/package.json > package.json
 
       - run:
-          name: Update package.json
+          name: Update manifest.json
           command: cat workspace/manifest.json > src/manifest.json
 
       - run:
