@@ -185,7 +185,7 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo 'export REACT_APP_VERSION="$(git describe --tags $(git rev-list --tags --max-count=1))"' >> $BASH_ENV
+            echo 'export REACT_APP_VERSION="$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
             source $BASH_ENV
 
       - run:
