@@ -302,7 +302,7 @@ jobs:
           name: Update build
           command: |
             rm -rf colormate.sketchplugin
-            cp workspace/build .
+            cp -R workspace/build/* .
 
       - run:
           name: Commit files
