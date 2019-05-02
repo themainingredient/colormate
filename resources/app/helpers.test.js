@@ -12,7 +12,7 @@ describe('React | Helpers', () => {
   });
 
   describe('calculateCombinedLuminance', () => {
-    test.skip('it transforms a hex color to a relative luminance value', () => {
+    test('it transforms a hex color to a relative luminance value', () => {
       const originalImplementation = fromHelpers.calculateLuminance;
       fromHelpers.calculateLuminance = jest.fn()
         .mockReturnValueOnce(0.730)
