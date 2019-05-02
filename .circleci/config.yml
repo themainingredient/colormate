@@ -168,7 +168,7 @@ jobs:
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
+            npx semantic-release --dry-run
 
   pre-build-production:
     <<: *defaults
@@ -328,6 +328,12 @@ jobs:
       - run:
           name: Update Release on GitHub
           command: |
+            github-release release \
+                --security-token $GH_TOKEN \
+                --user themainingredient \
+                --repo colormate \
+                --tag "v${REACT_APP_VERSION}" \
+                --pre-release
             github-release upload -R \
                 --security-token $GH_TOKEN \
                 --user themainingredient \
