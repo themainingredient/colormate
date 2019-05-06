@@ -18,7 +18,7 @@
       "listAll"
     ]
   },
-  "version": "1.4.16",
+  "version": "1.4.18",
   "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover",
   "name": "Colormate",
   "disableCocoaScriptPreprocessor": true,
