@@ -325,6 +325,10 @@ workflows:
               only:
                 - master
       - pre-build-production:
+          requires:
+            - install
+            - testing
+            - linting
           filters:
             branches:
               only:
