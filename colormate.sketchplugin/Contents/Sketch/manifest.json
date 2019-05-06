@@ -1,0 +1,26 @@
+{
+  "identifier": "com.colormate.plugin",
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "List all used colors",
+      "identifier": "listAll",
+      "shortcut": "cmd shift 8",
+      "script": "my-command.js"
+    }
+  ],
+  "menu": {
+    "title": "Colormate",
+    "items": [
+      "listAll"
+    ]
+  },
+  "version": "1.4.16",
+  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover",
+  "name": "Colormate",
+  "disableCocoaScriptPreprocessor": true,
+  "author": "The Main Ingredient"
+}
