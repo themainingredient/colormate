@@ -168,12 +168,9 @@ jobs:
       - run: apt-get -y install jq moreutils
 
       - run:
-          name: Determine next version (available as environment variable)
+          name: Set next version in .env by using prepareRelease.sh
           command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release --dry-run
-            source $BASH_ENV
 
       - run:
           name: update env file
