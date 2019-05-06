@@ -7,7 +7,7 @@
       "@semantic-release/github",
       {
         "assets": [
-          {"path": "workspace/build/*", "label": "To install: download this file, unzip and double click on the .sketchplugin"}
+          {"path": "workspace/colormate_${nextRelease.version}.zip", "label": "To install: download this file, unzip and double click on the .sketchplugin"}
         ]
       }
     ],
