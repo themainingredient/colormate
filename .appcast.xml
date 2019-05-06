@@ -6,6 +6,9 @@
     <description>Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover</description>
     <language>en</language>
     <item>
+      <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.22/colormate.sketchplugin.zip" sparkle:version="1.4.22"/>
+    </item>
+    <item>
       <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.20/colormate.sketchplugin.zip" sparkle:version="1.4.20"/>
     </item>
     <item>
