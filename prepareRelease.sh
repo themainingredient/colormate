@@ -13,7 +13,7 @@ then
   echo REACT_APP_IS_BETA=true >> .env
 fi
 
-if [[ "$2" === 'master' ]]
+if [[ "$2" == 'master' ]]
 then
   jq --arg h "$1" '.version=$h' package.json | sponge package.json
   jq --arg h "$1" '.version=$h' src/manifest.json | sponge src/manifest.json
