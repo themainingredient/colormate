@@ -244,6 +244,9 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
 
+      - run: apt-get update
+      - run: apt-get -y install jq moreutils
+
       - run:
           name: Setup Environment Variables
           command: |
