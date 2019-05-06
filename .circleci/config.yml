@@ -165,11 +165,12 @@ jobs:
             - v1-dep-
 
       - run: apt-get update
-      - run: apt-get -y install jq
+      - run: apt-get -y install jq moreutils git
 
       - run:
           name: Determine next version (available as environment variable)
           command: |
+            npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             echo 'export REACT_APP_VERSION="$(npx semantic-release --dry-run | sed -n -e '/^Building APP with version:  /p' | sed "s/^.*Building APP with version:  \([0-9.]*\).*/\1/")"' >> $BASH_ENV
             source $BASH_ENV
@@ -295,6 +296,7 @@ jobs:
       - run:
           name: Tag and release
           command: |
+            npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
             npx semantic-release
 
