@@ -281,7 +281,7 @@ jobs:
 
       - run:
           name: Update Appcast.xml
-          command: cat workspace/appcast.xml > appcast.xml
+          command: cat workspace/.appcast.xml > .appcast.xml
 
       - run:
           name: Update package.json
@@ -298,7 +298,7 @@ jobs:
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
-            git add appcast.xml package.json src/manifest.json
+            git add .appcast.xml package.json src/manifest.json
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push origin HEAD
 
