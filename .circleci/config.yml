@@ -123,15 +123,15 @@ jobs:
       - run:
           name: Zipping project
           command: |
-            echo "creating zip file:" colormate.zip
-            cd workspace/build && zip -r ../../colormate.zip *
+            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
+            cd workspace/build && zip -r ../../colormate_${REACT_APP_VERSION}.zip *
 
-      - run: cp colormate.zip workspace/colormate.zip
+      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}.zip
 
       - persist_to_workspace:
           root: workspace
           paths:
-            - .
+            - .     
 
   deploy-staging:
     <<: *defaults
@@ -146,7 +146,7 @@ jobs:
 
       - run:
           name: Deploy to S3
-          command: aws s3 cp workspace/colormate.zip s3://colormate-testing/staging/
+          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
 
       - run:
           name: Notify slack channel
@@ -154,6 +154,21 @@ jobs:
             curl --header "Content-Type: application/json" --request POST --data \
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
+
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dep-{{ checksum "package.json" }}
+            - v1-dep-
+      - run:
+          name: Run semantic-release
+          command: |
+            npm i
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release   
 
   pre-build-production:
     <<: *defaults
@@ -165,16 +180,23 @@ jobs:
             - v1-dep-
 
       - run: apt-get update
-      - run: apt-get -y install jq moreutils
+      - run: apt-get -y install jq moreutils git
 
       - run:
-          name: Set next version in .env by using prepareRelease.sh
+          name: Setup Environment Variables
           command: |
-            npx semantic-release --dry-run
-
+            echo 'export REACT_APP_VERSION="$(git describe --abbrev=0 --tags | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+            source $BASH_ENV
       - run:
-          name: update env file
+          name: Prepare dist files
           command: |
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
+            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge src/manifest.json
+      - run:
+          name: create env file
+          command: |
+            touch .env
+            echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
             echo REACT_APP_GA_TRACKING_ID=$GA_TRACKING_ID >> .env
 
       - run:
@@ -245,52 +267,56 @@ jobs:
             - v1-dep-
 
       - run: apt-get update
-      - run: apt-get -y install jq moreutils
+      - run: apt-get -y install git golang-go
 
       - run:
           name: Setup Environment Variables
           command: |
+            echo 'export GOROOT="/usr/lib/go"' >> $BASH_ENV
+            echo 'export GOPATH="$HOME/repo/"' >> $BASH_ENV
+            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             cat workspace/.env >> $BASH_ENV
             source $BASH_ENV
+      - run: go get github.com/aktau/github-release
 
       - add_ssh_keys:
           fingerprints:
             - "14:80:8a:23:90:81:f4:28:16:ee:47:ef:14:ec:72:27"
 
       - run:
-          name: Update .appcast.xml
-          command: cat workspace/.appcast.xml > .appcast.xml
+          name: Update Appcast.xml
+          command: cat workspace/appcast.xml > appcast.xml
 
       - run:
           name: Update package.json
           command: cat workspace/package.json > package.json
 
       - run:
-          name: Update manifest.json
+          name: Update package.json
           command: cat workspace/manifest.json > src/manifest.json
 
       - run:
-          name: Update build
-          command: |
-            rm -rf colormate.sketchplugin
-            cp -R workspace/build/* .
-
-      - run:
-          name: Commit files
+          name: Push files
           command: |
             echo """Host *
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
-            git add .appcast.xml package.json src/manifest.json colormate.sketchplugin
-            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"   
-            git push
-            
-      - run:
-          name: Release
-          command: |
-            npx skpm publish ${REACT_APP_VERSION}
+            git add appcast.xml package.json src/manifest.json
+            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
+            git push origin HEAD
 
+      - run:
+          name: Update Release on GitHub
+          command: |
+            github-release upload -R \
+                --security-token $GH_TOKEN \
+                --user themainingredient \
+                --repo colormate \
+                --tag "v${REACT_APP_VERSION}" \
+                --name "colormate.sketchplugin.zip" \
+                --file workspace/colormate_${REACT_APP_VERSION}.zip
+                
       - run:
           name: Notify slack channel
           command: |
