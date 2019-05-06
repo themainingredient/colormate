@@ -284,6 +284,7 @@ jobs:
             git config --global user.name "Ci Server"
             git add .appcast.xml package.json src/manifest.json colormate.sketchplugin
             git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"   
+            git push
             
       - run:
           name: Tag and release
