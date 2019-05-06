@@ -287,11 +287,9 @@ jobs:
             git push
             
       - run:
-          name: Tag and release
+          name: Release
           command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release
+            npx skpm publish ${REACT_APP_VERSION}
 
       - run:
           name: Notify slack channel
