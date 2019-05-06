@@ -77,5 +77,9 @@
       <title>Version v1.4.16</title>
       <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.16/colormate.sketchplugin.zip" sparkle:version="1.4.16"/>
     </item>
+    <item>
+      <title>Version v1.4.17</title>
+      <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.17/colormate.sketchplugin.zip" sparkle:version="1.4.17"/>
+    </item>
   </channel>
 </rss>
