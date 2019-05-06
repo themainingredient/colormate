@@ -123,10 +123,10 @@ jobs:
       - run:
           name: Zipping project
           command: |
-            echo "creating zip file:" colormate_${REACT_APP_VERSION}.zip
-            cd workspace/build && zip -r ../../colormate_${REACT_APP_VERSION}.zip *
+            echo "creating zip file:" colormate.zip
+            cd workspace/build && zip -r ../../colormate.zip *
 
-      - run: cp colormate_${REACT_APP_VERSION}.zip workspace/colormate_${REACT_APP_VERSION}.zip
+      - run: cp colormate.zip workspace/colormate.zip
 
       - persist_to_workspace:
           root: workspace
@@ -146,7 +146,7 @@ jobs:
 
       - run:
           name: Deploy to S3
-          command: aws s3 cp workspace/colormate_${REACT_APP_VERSION}.zip s3://colormate-testing/staging/
+          command: aws s3 cp workspace/colormate.zip s3://colormate-testing/staging/
 
       - run:
           name: Notify slack channel
@@ -165,27 +165,19 @@ jobs:
             - v1-dep-
 
       - run: apt-get update
-      - run: apt-get -y install jq moreutils git
+      - run: apt-get -y install jq moreutils
 
       - run:
           name: Determine next version (available as environment variable)
           command: |
             npm i
             mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            echo 'export REACT_APP_VERSION="$(npx semantic-release --dry-run | sed -n -e '/^Building APP with version:  /p' | sed "s/^.*Building APP with version:  \([0-9.]*\).*/\1/")"' >> $BASH_ENV
+            npx semantic-release --dry-run
             source $BASH_ENV
 
       - run:
-          name: Prepare dist files
+          name: update env file
           command: |
-            jq --arg h "$REACT_APP_VERSION" '.version=$h' package.json | sponge package.json
-            jq --arg h "$REACT_APP_VERSION" '.version=$h' src/manifest.json | sponge src/manifest.json
-
-      - run:
-          name: create env file
-          command: |
-            touch .env
-            echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
             echo REACT_APP_GA_TRACKING_ID=$GA_TRACKING_ID >> .env
 
       - run:
