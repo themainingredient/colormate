@@ -1,10 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Colormate</title>
     <link>http://sparkle-project.org/files/sparkletestcast.xml</link>
     <description>Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover</description>
     <language>en</language>
+    <item>
+      <enclosure url="https://github.com/themainingredient/colormate/releases/download/v1.4.20/colormate.sketchplugin.zip" sparkle:version="1.4.20"/>
+    </item>
     <item>
       <title>Version v1.2.0</title>
       <enclosure url="https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate_1.2.0.zip" sparkle:version="1.2.0"/>
