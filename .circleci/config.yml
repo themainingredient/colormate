@@ -155,21 +155,6 @@ jobs:
             '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'>"}' \
             $SLACK_WEBHOOK_URL
 
-  release:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dep-{{ checksum "package.json" }}
-            - v1-dep-
-      - run:
-          name: Run semantic-release
-          command: |
-            npm i
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            npx semantic-release --dry-run
-
   pre-build-production:
     <<: *defaults
     steps:
@@ -180,12 +165,13 @@ jobs:
             - v1-dep-
 
       - run: apt-get update
-      - run: apt-get -y install jq moreutils git
+      - run: apt-get -y install jq
 
       - run:
-          name: Setup Environment Variables
+          name: Determine next version (available as environment variable)
           command: |
-            echo 'export REACT_APP_VERSION="$(git describe --tags $(git rev-list --tags --max-count=1) | cut -d- -f1 | sed 's/^v//')"' >> $BASH_ENV
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            echo 'export REACT_APP_VERSION="$(npx semantic-release --dry-run | sed -n -e '/^Building APP with version:  /p' | sed "s/^.*Building APP with version:  \([0-9.]*\).*/\1/")"' >> $BASH_ENV
             source $BASH_ENV
 
       - run:
@@ -268,19 +254,11 @@ jobs:
             - v1-dep-{{ checksum "package.json" }}
             - v1-dep-
 
-      - run: apt-get update
-      - run: apt-get -y install git golang-go
-
       - run:
           name: Setup Environment Variables
           command: |
-            echo 'export GOROOT="/usr/lib/go"' >> $BASH_ENV
-            echo 'export GOPATH="$HOME/repo/"' >> $BASH_ENV
-            echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
             cat workspace/.env >> $BASH_ENV
             source $BASH_ENV
-
-      - run: go get github.com/aktau/github-release
 
       - add_ssh_keys:
           fingerprints:
@@ -312,35 +290,13 @@ jobs:
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
             git add .appcast.xml package.json src/manifest.json colormate.sketchplugin
-            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"            
-
+            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"   
+            
       - run:
-          name: Force update Github tag
+          name: Tag and release
           command: |
-            git tag -f -a v${REACT_APP_VERSION} -m 'release v${REACT_APP_VERSION}' #TODO: improve tag msg
-
-      - run:
-          name: Push files and updated tag
-          command: |
-            git push origin HEAD
-            git push -f --tags
-
-      - run:
-          name: Update Release on GitHub
-          command: |
-            github-release release \
-                --security-token $GH_TOKEN \
-                --user themainingredient \
-                --repo colormate \
-                --tag "v${REACT_APP_VERSION}" \
-                --pre-release
-            github-release upload -R \
-                --security-token $GH_TOKEN \
-                --user themainingredient \
-                --repo colormate \
-                --tag "v${REACT_APP_VERSION}" \
-                --name "colormate.sketchplugin.zip" \
-                --file workspace/colormate_${REACT_APP_VERSION}.zip
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            npx semantic-release
 
       - run:
           name: Notify slack channel
@@ -368,14 +324,7 @@ workflows:
             branches:
               only:
                 - master
-      - release:
-          requires:
-            - install
-            - testing
-            - linting
       - pre-build-production:
-          requires:
-            - release
           filters:
             branches:
               only:
