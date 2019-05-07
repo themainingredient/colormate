@@ -14,9 +14,9 @@ Did we peak your interest already? 🧐
 
 ## Installation ⚙️
 
-1. Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip)
+1. Download the latest [Colormate release](https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/download)
 2. Unzip the file
-3. Double-click Colormate.sketchplugin to install
+3. Double-click `colormate.sketchplugin` to install
 
 ## Getting started 💪
 
@@ -30,14 +30,13 @@ When the plugin is done scanning your file, you will get an overview of all the 
 
 
 # Features
-- Get colors overview on the entire Sketch file
+- Get colors overview on the entire Sketch file, seeing where each color is being used
 - Get colors overview on a specific selection
 
 ## Future plans 🚀
 
 We're not going to sit back and let the plugin work its magic. We're continously working on developing new features. The following features are on our planning:
 
-- Seeing where the colours are being used
 - Being able to select a certain colour from the plugin in your file
 - Being able to replace a colour with another colour, within the plugin
 

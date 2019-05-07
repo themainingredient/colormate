@@ -3,7 +3,14 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {"path": "workspace/colormate.zip", "label": "To install: download this file, unzip and double click on the .sketchplugin"}
+        ]
+      }
+    ],
     [
       "@semantic-release/exec",
       {

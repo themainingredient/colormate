@@ -1,5 +1,6 @@
 {
   "identifier": "com.colormate.plugin",
+  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
@@ -17,6 +18,5 @@
       "listAll"
     ]
   },
-  "appcast": "https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/appcast",
-  "version": "1.4.4"
+  "version": "1.4.26"
 }
