@@ -10,6 +10,7 @@ import {
 import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
 import Group from '../../../assets/group.svg';
+import Text from '../../../assets/textIcon.svg';
 
 const LayerNode = ({ layer, generation, children }) => {
   const [isOpen, setOpen] = useState(true);
@@ -51,16 +52,18 @@ const LayerNode = ({ layer, generation, children }) => {
         )}
         {(() => {
           switch (type) {
-            case 'Page':
-              return null;
             case 'Artboard':
               return <Artboard />;
             case 'Group':
               return <Group />;
             case 'ShapePath':
               return <ShapePath />;
+            case 'Text':
+              return <Text />;
+            case 'Page':
+            case 'Shape':
             default:
-              return <p>Unknown type</p>;
+              return null;
           }
         })()}
         <Name isHovered={isHovered} isSelected={isSelected}>
