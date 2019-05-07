@@ -4,7 +4,7 @@ import NoColorsFound from '../NoColorsFound';
 import { closeWindow } from '../../helpers/window'; 
 
 jest.mock('../../assets/minimilistBubbles.svg', () => 'bubbles-img');
-jest.mock('../../helpers/window.ts', () => {
+jest.mock('../../helpers/window', () => {
 
   return {
     closeWindow: jest.fn(),

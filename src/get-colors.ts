@@ -1,3 +1,4 @@
+import { Page, Selection } from 'sketch';
 // eslint-disable-next-line import/no-unresolved
 import sketch from 'sketch';
 import { traverse } from './helpers/traverse';
@@ -7,11 +8,17 @@ import {
   hasTextColor,
   createDataStructure,
   getColorArray,
+  getPagesWithSelectedLayers,
 } from './helpers/get-colors';
 
 export default function () {
   const colorsObject = {};
-  const documentPages = sketch.getSelectedDocument().pages;
+  const selectedDocument = sketch.getSelectedDocument();
+  const selectedLayers: Selection = selectedDocument.selectedLayers;
+
+  const documentPages: Page[] = selectedLayers.isEmpty ? 
+    selectedDocument.pages : 
+    getPagesWithSelectedLayers(selectedLayers);
 
   const traversedPages: any[] = [];
 
