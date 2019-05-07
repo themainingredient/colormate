@@ -1,17 +1,18 @@
 {
   "name": "colormate",
-  "version": "1.4.4",
+  "version": "1.4.26",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/themainingredient/colormate.git"
   },
-  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover. Oops :flushed:",
+  "description": "Colormate is a kickass sketch plugin that will help you figure out how in the hell you ended up with 457 different greys, instead of the 1 grey Mandy gave you in the handover",
   "engines": {
     "sketch": ">=3.0"
   },
   "skpm": {
     "name": "Colormate",
     "manifest": "src/manifest.json",
+    "identifier": "com.colormate.plugin",
     "main": "colormate.sketchplugin",
     "assets": [
       "assets/**/*",
@@ -28,12 +29,14 @@
     "test:coverage": "jest --coverage && open coverage/lcov-report/index.html",
     "test:watch": "jest --watch",
     "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0",
-    "log": "skpm log -f"
+    "log": "skpm log -f",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
-    "@semantic-release/exec": "^3.3.2",
+    "@semantic-release/exec": "^3.3.3",
+    "@semantic-release/github": "^5.3.2",
     "@skpm/builder": "^0.5.11",
     "@skpm/extract-loader": "^2.0.2",
     "@types/jest": "^24.0.11",
@@ -57,11 +60,11 @@
     "react-hooks-testing-library": "^0.4.0",
     "react-svg-loader": "^2.1.0",
     "react-testing-library": "^6.1.2",
-    "semantic-release": "^15.13.3",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.3",
+    "semantic-release": "^15.13.12"
   },
   "resources": [
     "resources/**/*.js"
