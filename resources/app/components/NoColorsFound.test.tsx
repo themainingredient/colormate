@@ -3,7 +3,7 @@ import { render, cleanup, fireEvent } from 'react-testing-library';
 import NoColorsFound from './NoColorsFound';
 import { closeWindow } from '../helpers/window'; 
 
-jest.mock('../assets/minimilistBubbles.svg', () => 'bubbles-img');
+jest.mock('../assets/minimilistBubbles.svg', () => 'img');
 jest.mock('../helpers/window', () => {
 
   return {

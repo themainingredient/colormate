@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoColorsFound.jsx renders and displays correctly 1`] = `
-.c3 {
+.c4 {
   height: 37px;
   width: 92px;
   font-family: SFProBold;
@@ -12,7 +12,7 @@ exports[`NoColorsFound.jsx renders and displays correctly 1`] = `
   border: none;
 }
 
-.c3:hover {
+.c4:hover {
   background-color: #3B2EEB;
   cursor: pointer;
 }
@@ -36,6 +36,11 @@ exports[`NoColorsFound.jsx renders and displays correctly 1`] = `
 }
 
 .c2 {
+  margin-top: 42px;
+  margin-left: 76px;
+}
+
+.c3 {
   position: absolute;
   bottom: 21px;
   right: 26px;
@@ -54,14 +59,14 @@ exports[`NoColorsFound.jsx renders and displays correctly 1`] = `
       Now that’s minimilist.
     </div>
   </div>
-  <bubbles-img
-    classname="sc-bxivhb dGZrxe"
+  <img
+    class="c2"
   />
   <div
-    class="c2"
+    class="c3"
   >
     <button
-      class="c3"
+      class="c4"
       type="button"
     >
       Close
