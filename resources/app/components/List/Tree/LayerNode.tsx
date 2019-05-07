@@ -56,12 +56,12 @@ const LayerNode = ({ layer, generation, children }) => {
               return <Artboard />;
             case 'Group':
               return <Group />;
-            case 'Shape':
+            case 'ShapePath':
               return <ShapePath />;
             case 'Text':
               return <Text />;
             case 'Page':
-            case 'ShapePath':
+            case 'Shape':
             default:
               return null;
           }
