@@ -11,12 +11,15 @@ import {
   Label,
   Spacer,
   IndicatorArrow,
+  ColorPickerWrapper,
+  ColorPickerBackground
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
 import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap';
 
 import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations';
+import { SketchPicker, ColorResult } from 'react-color';
 
 const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
@@ -24,6 +27,7 @@ const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 const ListItem = ({ color, instances, index }: { color: string, instances: any[], index: any }) => {
   const [isSelected, setSelected] = useState();
   const [realLayers, setRealLayers] = useState();
+  const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const { selectedColor, setSelectedColor } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
 
@@ -40,6 +44,15 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
   };
 
+  const toggleColorPicker = () => {
+    setIsColorPickerVisible(!isColorPickerVisible);
+  }
+
+  const handleReplaceColorComplete = (targetColor: ColorResult) => {
+    replaceColor(color, targetColor.hex, instances)
+    toggleColorPicker()
+  }
+
   const replaceColor = (colorToReplace: string, targetColor: string, instances: {id: string}[]) => {
     const layerIds = instances.map(instance => instance.id);
     window.postMessage('replaceColor', {
@@ -52,7 +65,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
   return (
     <>
-      <ListItemWrapper isActive={isSelected} onClick={() => handleListItemClick(index)}>
+      <ListItemWrapper isActive={isSelected}>
         <ColorDataWrapper>
           <DotWrapper>
             <DotBG />
@@ -62,11 +75,16 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
           <Spacer />
           {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
-        <IndicatorArrow isActive={isSelected} />
-        <button onClick={() => {replaceColor(color, '#000000ff', instances)}}>Replace</button>
+        <IndicatorArrow isActive={isSelected} onClick={() => handleListItemClick(index)}/>
+        <button onClick={() => toggleColorPicker()}>Replace</button>
         <Instances isActive={isSelected}>{instances.length}x</Instances>
       </ListItemWrapper>
       {isSelected && <ListItemTree tree={realLayers} />}
+      { isColorPickerVisible ? 
+        <ColorPickerWrapper>
+          <ColorPickerBackground onClick={ () => toggleColorPicker() }/>
+          <SketchPicker width="200px" presetColors={[]} onChangeComplete={(color: ColorResult) => handleReplaceColorComplete(color) } />
+        </ColorPickerWrapper> : null }
     </>
   );
 };

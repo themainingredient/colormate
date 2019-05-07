@@ -112,3 +112,18 @@ export const IndicatorArrow = styled(props => <Arrow {...omit(props, ['isActive'
   transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
   transition: transform 150ms ease-in-out;
 `;
+
+export const ColorPickerWrapper = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  right: 0px;
+`;
+
+export const ColorPickerBackground = styled.div`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+`;
