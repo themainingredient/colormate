@@ -12,7 +12,7 @@ describe('closeWindow', () => {
     closeWindow();
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('closeWindow', '*');
+    expect(spy).toHaveBeenCalledWith('closeWindow');
   });
 
   afterEach(() => {

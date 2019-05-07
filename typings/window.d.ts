@@ -1,4 +1,4 @@
-interface Window extends Window {
+interface Window {
     postMessage(message: string, body: any): void;
     postMessage(message: string, ...args: any): void;
 
