@@ -1,3 +1,5 @@
+[![Install PLUGIN NAME with Sketchpacks](http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png "Install Colormate with Sketchpacks")](https://sketchpacks.com/themainingredient/colormate/install)
+
 # Colormate Sketch Plugin 🌈
 
 This free plugin gives you an impression of _all the colours_ in your Sketch file and _how many times_ a certain colour is being used.
@@ -12,7 +14,7 @@ Did we peak your interest already? 🧐
 
 ## Installation ⚙️
 
-1. Download the latest [Colormate release](https://github.com/themainingredient/colormate/releases) (`colormate.sketchplugin.zip`)
+1. Download the latest [Colormate release](https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/download)
 2. Unzip the file
 3. Double-click `colormate.sketchplugin` to install
 
@@ -38,4 +40,3 @@ We're not going to sit back and let the plugin work its magic. We're continously
 If you can think of any other functionalities, please let us know! 🤩
 
 Made with ❤️ by [The Main Ingredient](https://themainingredient.co)
-
