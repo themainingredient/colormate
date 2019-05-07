@@ -1,11 +1,12 @@
 import MockSketchDocument from '../__mocks__/MockSketchDocument.json';
 import { traverse } from './traverse';
+import { Page } from 'sketch';
 
 describe('Helpers / traverse', () => {
   let layers: any[];
 
   beforeEach(() => {
-    layers = traverse(MockSketchDocument.pages[0]);
+    layers = traverse(MockSketchDocument.pages[0] as unknown as Page);
   });
   test('it should return an array with all the layers of the given input', () => {
     expect(layers.length).toEqual(16);
