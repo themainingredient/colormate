@@ -28,7 +28,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "./node_modules/.bin/eslint src/ resources/ --ext .jsx,.js --max-warnings 0",
-    "log": "skpm log -f"
+    "log": "skpm log -f",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
