@@ -14,9 +14,9 @@ Did we peak your interest already? 🧐
 
 ## Installation ⚙️
 
-1. Download the latest [Colormate release](https://s3.eu-central-1.amazonaws.com/colormate-testing/production/colormate.zip)
+1. Download the latest [Colormate release](https://api.sketchpacks.com/v1/plugins/com.colormate.plugin/download)
 2. Unzip the file
-3. Double-click Colormate.sketchplugin to install
+3. Double-click `colormate.sketchplugin` to install
 
 ## Getting started 💪
 
