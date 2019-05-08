@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="11px" viewBox="0 0 9 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="colorRowHover2" transform="translate(-143.000000, -31.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M152.083487,32 L142.916513,32 C142.761853,32.0000752 142.619951,32.1029394 142.547933,32.2671821 C142.475915,32.4314248 142.48563,32.6300228 142.573168,32.7830257 L147.156655,40.7832878 C147.234392,40.9189517 147.362799,41 147.5,41 C147.637201,41 147.765608,40.9189517 147.843345,40.7832878 L152.426832,32.7830257 C152.51437,32.6300228 152.524085,32.4314248 152.452067,32.2671821 C152.380049,32.1029394 152.238147,32.0000752 152.083487,32 Z" id="Path" transform="translate(147.500000, 36.500000) rotate(-90.000000) translate(-147.500000, -36.500000) "></path>
+        </g>
+    </g>
+</svg>

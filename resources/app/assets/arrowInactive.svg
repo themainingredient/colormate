@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="10px" viewBox="0 0 9 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>Path Copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="colorRowOpacity" transform="translate(-143.000000, -32.000000)" fill="#4E41FF" fill-rule="nonzero">
+            <path d="M152.083487,32.5 L142.916513,32.5 C142.761853,32.5000752 142.619951,32.6029394 142.547933,32.7671821 C142.475915,32.9314248 142.48563,33.1300228 142.573168,33.2830257 L147.156655,41.2832878 C147.234392,41.4189517 147.362799,41.5 147.5,41.5 C147.637201,41.5 147.765608,41.4189517 147.843345,41.2832878 L152.426832,33.2830257 C152.51437,33.1300228 152.524085,32.9314248 152.452067,32.7671821 C152.380049,32.6029394 152.238147,32.5000752 152.083487,32.5 Z" id="Path-Copy" transform="translate(147.500000, 37.000000) rotate(-90.000000) translate(-147.500000, -37.000000) "></path>
+        </g>
+    </g>
+</svg>

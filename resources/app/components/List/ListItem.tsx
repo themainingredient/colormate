@@ -99,7 +99,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
             <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
           </DotWrapper>
           <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>   
-          <IndicatorArrow isActive={isSelected} onClick={() => handleListItemClick(index)}/>       
+          <IndicatorArrow isActive={isSelected || isHovered} onClick={() => handleListItemClick(index)}/>       
         </ColorDataWrapper>
 
         <Spacer />

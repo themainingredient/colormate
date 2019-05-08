@@ -4,7 +4,8 @@ import { omit } from 'lodash';
 import Globals from '../../Global.styles';
 
 import CheckeredBackground from '../../assets/checkered_small.svg';
-import Arrow from '../../assets/arrowWhite.svg';
+import ArrowActive from '../../assets/arrowActive.svg';
+import ArrowInactive from '../../assets/arrowInactive.svg';
 
 const { colors, fonts } = Globals;
 
@@ -111,8 +112,15 @@ export const OpacityLabelWrapper = styled.div`
   height: 24px;
 `;
 
-export const IndicatorArrow = styled(props => <Arrow {...omit(props, ['isActive'])} />)`
-  transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
+export const IndicatorArrow = styled(props => {
+  const filteredProps = omit(props, ['isActive']);
+  if (props.isActive) {
+    return <ArrowActive {...filteredProps} />
+  }
+
+  return <ArrowInactive {...filteredProps} /> 
+})`
+  transform: ${({ isActive }) => (isActive ? 'rotate(90deg)' : 'rotate(0deg)')};
   transition: transform 150ms ease-in-out;
   cursor: pointer;
   margin-left: 10px;
