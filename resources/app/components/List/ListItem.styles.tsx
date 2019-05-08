@@ -86,6 +86,7 @@ export const ColorDataWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   width: 50%;
+  cursor: pointer;
 `;
 
 export const Spacer = styled.div`
@@ -122,7 +123,6 @@ export const IndicatorArrow = styled(props => {
 })`
   transform: ${({ isActive }) => (isActive ? 'rotate(90deg)' : 'rotate(0deg)')};
   transition: transform 150ms ease-in-out;
-  cursor: pointer;
   margin-left: 10px;
 `;
 
@@ -149,6 +149,6 @@ export const LabelsWrapper = styled.div`
 `;
 
 export const InstancesWrapper = styled.div`
-  width: 50px;
+  width: 30px;
   text-align: right;
 `;

@@ -45,7 +45,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     setSelected(selectedColor === index);
   }, [selectedColor]);
 
-  const handleListItemClick = (itemIndex: any) => {
+  const updateSelectedColor = (itemIndex: any) => {
     setSelectedColor(itemIndex === selectedColor ? null : itemIndex);
   };
 
@@ -93,13 +93,13 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)}>
 
-        <ColorDataWrapper>
+        <ColorDataWrapper onClick={() => updateSelectedColor(index)}>
           <DotWrapper>
             <DotBG />
             <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
           </DotWrapper>
           <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>   
-          <IndicatorArrow isActive={isSelected || isHovered} onClick={() => handleListItemClick(index)}/>       
+          <IndicatorArrow isActive={isSelected || isHovered}/>       
         </ColorDataWrapper>
 
         <Spacer />
