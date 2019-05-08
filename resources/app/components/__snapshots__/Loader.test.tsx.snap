@@ -24,8 +24,8 @@ exports[`Loader.jsx renders and displays correctly 1`] = `
 }
 
 .c1 {
-  height: 195px;
-  margin: 50px 0;
+  height: 250px;
+  margin: 40px 0;
 }
 
 <div
