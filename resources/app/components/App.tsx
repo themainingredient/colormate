@@ -11,9 +11,10 @@ import Footer from './Footer';
 import Loader from './Loader';
 import NoColorsFound from './NoColorsFound';
 import { replaceColor } from '../helpers/replace-color';
+import {browserWindowSize} from '../../../constants'
 
 const PluginWrapper = styled.div`
-  height: 534px;
+  height: ${browserWindowSize.height}px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

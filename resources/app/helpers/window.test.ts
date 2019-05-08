@@ -1,5 +1,4 @@
 import { closeWindow, openUrlInBrowser } from './window';
-import { tmiUrl } from '../constants';
 
 describe('closeWindow', () => {
   let spy: jest.SpyInstance;
@@ -20,9 +19,10 @@ describe('closeWindow', () => {
   });
 
   test('it posts a openUrlInBrowser message with URL', () => {
-    openUrlInBrowser(tmiUrl);
+    const url = 'url';
+    openUrlInBrowser(url);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('openUrlInBrowser', tmiUrl);
+    expect(spy).toHaveBeenCalledWith('openUrlInBrowser', url);
   });
 });

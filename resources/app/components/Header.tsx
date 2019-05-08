@@ -11,7 +11,7 @@ const VERSION = isBeta ? `${process.env.REACT_APP_VERSION}-beta` : process.env.R
 const HeaderWrapper = styled.div`
   ${flexCenter};
   height: 87px;
-  width: 320px;
+  width: 100%;
   background-color: ${colors.LightGrey};
   box-shadow: 0 5px 10px 2px ${colors.Black25};
 `;

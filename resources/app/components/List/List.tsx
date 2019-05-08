@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ListItem from './ListItem';
 
 const ListWrapper = styled.div`
-  height: 369px;
+  height: 509px; 
   overflow-y: scroll;
 `;
 

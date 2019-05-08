@@ -4,7 +4,7 @@ import Button from './Button';
 import Globals from '../Global.styles';
 import useHover from '../hooks/useHover';
 import { closeWindow, openUrlInBrowser } from '../helpers/window';
-import { tmiUrl } from '../constants';
+import { tmiUrl } from '../../../constants';
 
 const { colors, fonts } = Globals;
 
@@ -16,7 +16,7 @@ const FooterWrapper = styled.div`
   padding-left: 24px;
   padding-right: 18px;
   height: 78px;
-  width: 320px;
+  width: 100%;
   background-color: ${colors.LightGrey};
 `;
 

@@ -24,7 +24,7 @@ const Header = styled.div`
 `;
 
 const StyledMinimalistBubbles = styled(MinimalistBubbles)`
-  margin-top: 42px;
+  margin-top: 99px;
   margin-left: 76px;
 `;
 
