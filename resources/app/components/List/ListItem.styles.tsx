@@ -114,14 +114,14 @@ export const OpacityLabelWrapper = styled.div`
 `;
 
 export const IndicatorArrow = styled(props => {
-  const filteredProps = omit(props, ['isActive']);
-  if (props.isActive) {
+  const filteredProps = omit(props, ['isSelected', 'isHovered']);
+  if (props.isSelected || props.isHovered) {
     return <ArrowActive {...filteredProps} />
   }
 
   return <ArrowInactive {...filteredProps} /> 
 })`
-  transform: ${({ isActive }) => (isActive ? 'rotate(90deg)' : 'rotate(0deg)')};
+  transform: ${({ isSelected }) => (isSelected ? 'rotate(90deg)' : 'rotate(0deg)')};
   transition: transform 150ms ease-in-out;
   margin-left: 10px;
 `;
