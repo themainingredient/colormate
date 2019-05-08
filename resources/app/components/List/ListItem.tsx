@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { SketchPicker, ColorResult } from 'react-color';
 import {
   ListItemWrapper,
   ColorDataWrapper,
@@ -19,15 +20,16 @@ import ListContext from '../../ListContext';
 import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap';
 
 import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations';
-import { SketchPicker, ColorResult } from 'react-color';
+import ReplaceBtn from '../../assets/ReplaceBtn.svg';
+import ReplaceBtnHover from '../../assets/ReplaceBtnHover.svg';
 
 const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
-// TODO: replace dummy button
 const ListItem = ({ color, instances, index }: { color: string, instances: any[], index: any }) => {
   const [isSelected, setSelected] = useState();
   const [realLayers, setRealLayers] = useState();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const { selectedColor, setSelectedColor } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
 
@@ -65,7 +67,11 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
   return (
     <>
-      <ListItemWrapper isActive={isSelected}>
+      <ListItemWrapper 
+        isActive={isSelected} 
+        onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)}>
+
         <ColorDataWrapper>
           <DotWrapper>
             <DotBG />
@@ -75,10 +81,13 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
           <Spacer />
           {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
         </ColorDataWrapper>
+
         <IndicatorArrow isActive={isSelected} onClick={() => handleListItemClick(index)}/>
-        <button onClick={() => toggleColorPicker()}>Replace</button>
+        {isSelected || isHovered ? <ReplaceBtnHover style={{cursor: 'pointer'}} onClick={() => toggleColorPicker()}/> : <ReplaceBtn style={{cursor: 'pointer'}} onClick={() => toggleColorPicker()}/>}
         <Instances isActive={isSelected}>{instances.length}x</Instances>
+
       </ListItemWrapper>
+
       {isSelected && <ListItemTree tree={realLayers} />}
       { isColorPickerVisible ? 
         <ColorPickerWrapper>

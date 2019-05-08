@@ -8,7 +8,7 @@ import Arrow from '../../assets/arrowWhite.svg';
 
 const { colors, fonts } = Globals;
 
-export const ListItemWrapper = styled.div<{isActive: boolean}>`
+export const ListItemWrapper = styled.div<{isActive: boolean; onMouseEnter(): void; onMouseLeave(): void}>`
   border-bottom: 1px solid ${colors.LightGrey};
   padding-left: 16px;
   padding-right: 16px;
@@ -111,6 +111,7 @@ export const Label = styled.p<{isActive: boolean}>`
 export const IndicatorArrow = styled(props => <Arrow {...omit(props, ['isActive'])} />)`
   transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
   transition: transform 150ms ease-in-out;
+  cursor: pointer;
 `;
 
 export const ColorPickerWrapper = styled.div`
