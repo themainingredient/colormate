@@ -9,11 +9,14 @@ import {
   DotColor,
   Title,
   Instances,
-  Label,
+  OpacityLabel,
   Spacer,
   IndicatorArrow,
   ColorPickerWrapper,
-  ColorPickerBackground
+  ColorPickerBackground,
+  LabelsWrapper,
+  OpacityLabelWrapper,
+  InstancesWrapper
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
@@ -65,6 +68,24 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     });
   }
 
+  const OpacityIcon = ({opacityPercentage, isActive}: {opacityPercentage: number, isActive: boolean}) => {
+    return (
+      <OpacityLabelWrapper>
+        {opacityPercentage < 100 && <OpacityLabel isActive={isActive}>{opacityPercentage}%</OpacityLabel>}
+      </OpacityLabelWrapper>
+    )
+  }
+
+  const ReplaceColorIcon = ({isActive}: {isActive: boolean}) => {
+    const style = {cursor: 'pointer'};
+
+    if (isActive) {
+      return <ReplaceBtnHover style={style} onClick={() => toggleColorPicker()}/> 
+    }
+
+    return <ReplaceBtn style={style} onClick={() => toggleColorPicker()}/>
+  }
+
   return (
     <>
       <ListItemWrapper 
@@ -77,14 +98,21 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
             <DotBG />
             <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
           </DotWrapper>
-          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>
-          <Spacer />
-          {opacityPercentage < 100 && <Label isActive={isSelected}>{opacityPercentage}%</Label>}
+          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>   
+          <IndicatorArrow isActive={isSelected} onClick={() => handleListItemClick(index)}/>       
         </ColorDataWrapper>
 
-        <IndicatorArrow isActive={isSelected} onClick={() => handleListItemClick(index)}/>
-        {isSelected || isHovered ? <ReplaceBtnHover style={{cursor: 'pointer'}} onClick={() => toggleColorPicker()}/> : <ReplaceBtn style={{cursor: 'pointer'}} onClick={() => toggleColorPicker()}/>}
-        <Instances isActive={isSelected}>{instances.length}x</Instances>
+        <Spacer />
+
+
+        <LabelsWrapper>
+          <OpacityIcon opacityPercentage={opacityPercentage} isActive={isSelected}/>
+          <ReplaceColorIcon isActive={isSelected || isHovered}/>
+          <InstancesWrapper>
+            <Instances isActive={isSelected}>{instances.length}x</Instances>
+          </InstancesWrapper>
+        </LabelsWrapper>
+        
 
       </ListItemWrapper>
 

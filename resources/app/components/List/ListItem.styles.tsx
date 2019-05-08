@@ -84,19 +84,17 @@ export const ColorDataWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 172px;
+  width: 50%;
 `;
 
 export const Spacer = styled.div`
   flex: 1;
 `;
 
-export const Label = styled.p<{isActive: boolean}>`
+export const OpacityLabel = styled.p<{isActive: boolean}>`
   color: ${({ isActive }) => (isActive ? colors.TMIBlue : colors.DarkGrey)};
   font-family: ${fonts.SFPro.bold};
   font-size: 11px;
-  width: 36px;
-  height: 24px;
   line-height: 26px;
   text-align: center;
   background-color: ${({ isActive }) => (isActive ? colors.White : colors.LightGrey)};
@@ -108,10 +106,16 @@ export const Label = styled.p<{isActive: boolean}>`
   }
 `;
 
+export const OpacityLabelWrapper = styled.div`
+  width: 36px;
+  height: 24px;
+`;
+
 export const IndicatorArrow = styled(props => <Arrow {...omit(props, ['isActive'])} />)`
   transform: ${({ isActive }) => (isActive ? 'rotate(0deg)' : 'rotate(-90deg)')};
   transition: transform 150ms ease-in-out;
   cursor: pointer;
+  margin-left: 10px;
 `;
 
 export const ColorPickerWrapper = styled.div`
@@ -127,4 +131,16 @@ export const ColorPickerBackground = styled.div`
   right: 0px;
   bottom: 0px;
   left: 0px;
+`;
+
+export const LabelsWrapper = styled.div`
+  justify-content: space-between;
+  display: flex;
+  width: 50%;
+  align-items: center;
+`;
+
+export const InstancesWrapper = styled.div`
+  width: 50px;
+  text-align: right;
 `;
