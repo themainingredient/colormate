@@ -18,8 +18,8 @@ const LoaderWrapper = styled.div`
 `;
 
 const LoaderImage = styled.img`
-  height: 195px;
-  margin: 50px 0;
+  height: 250px;
+  margin: 40px 0;
 `;
 
 const Loader = () => (
