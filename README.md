@@ -32,13 +32,11 @@ When the plugin is done scanning your file, you will get an overview of all the 
 # Features
 - Get colors overview on the entire Sketch file, seeing where each color is being used
 - Get colors overview on a specific selection
+- Replace all the occurences of a color
 
 ## Future plans 🚀
 
-We're not going to sit back and let the plugin work its magic. We're continously working on developing new features. The following features are on our planning:
-
-- Being able to select a certain colour from the plugin in your file
-- Being able to replace a colour with another colour, within the plugin
+We're not going to sit back and let the plugin work its magic. We're continously working on developing new features.
 
 If you can think of any other functionalities, please let us know! 🤩
 
