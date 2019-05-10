@@ -1,6 +1,5 @@
 import BrowserWindow from 'sketch-module-web-view';
 import { UI } from 'sketch';
-import { trackAppStart } from './helpers/analytics';
 import getColors from './get-colors';
 
 const webview = require('../resources/webview.html');
@@ -42,6 +41,4 @@ export default function () {
   });
 
   browserWindow.loadURL(webview);
-
-  trackAppStart();
 }
