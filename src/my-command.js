@@ -1,7 +1,6 @@
 import BrowserWindow from 'sketch-module-web-view';
 import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { browserWindowSize } from '../constants.ts';
-import { trackAppStart } from './helpers/analytics.ts';
 import { replaceColorInLayers } from './helpers/replace-color-in-layers.ts';
 import getColors from './get-colors.ts';
 import webview from '../resources/webview.html';
@@ -64,6 +63,4 @@ export default function () {
   });
 
   browserWindow.loadURL(webview);
-
-  trackAppStart();
 }
