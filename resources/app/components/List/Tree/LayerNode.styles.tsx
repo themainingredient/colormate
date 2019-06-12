@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React from 'react';
 import styled from 'styled-components';
 import { omit } from 'lodash';
