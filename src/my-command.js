@@ -33,10 +33,12 @@ export default function () {
       .catch(console.error); // eslint-disable-line no-console
   });
 
-  webContents.on('selectLayer', (layerID) => {
+  webContents.on('selectLayer', (layerID, shouldCenter) => {
     const document = sketch.getDocuments()[0];
     const sketchLayer = document.getLayerWithID(layerID);
-    document.centerOnLayer(sketchLayer);
+    if (shouldCenter) {
+      document.centerOnLayer(sketchLayer);
+    }
     document.selectedLayers = [sketchLayer];
   });
 

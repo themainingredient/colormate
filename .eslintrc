@@ -2,6 +2,13 @@
   "extends": "airbnb",
   "parser": "babel-eslint",
   "plugins": ["jest"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
@@ -25,7 +32,7 @@
       "props": "always",
       "children": "off"
     },
-    "react/jsx-filename-extension": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "react/no-array-index-key": "off",
     "react/prop-types": 1,
     "react/jsx-one-expression-per-line": "off",
