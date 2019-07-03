@@ -287,8 +287,6 @@ workflows:
     jobs:
       - install
       - testing
-      - linting
-
   tagged-build:
     jobs:
       - install:
@@ -310,7 +308,6 @@ workflows:
           requires:
             - install
             - testing
-            - linting
           filters:
             branches:
               only:
@@ -346,7 +343,6 @@ workflows:
           requires:
             - install
             - testing
-            - linting
           filters:
             branches:
               only:
