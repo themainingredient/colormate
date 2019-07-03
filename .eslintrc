@@ -1,7 +1,9 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "rules": {
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
@@ -15,11 +17,18 @@
     ],
     "import/prefer-default-export": "off",
     "import/no-named-as-default": "off",
-    "max-len": [1, 120],
+    "max-len": [
+      1,
+      120
+    ],
     "no-else-return": 1,
+    "no-param-reassign": 0,
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
-    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
     "react/forbid-prop-types": "off",
     "react/jsx-curly-brace-presence": {
       "props": "always",
@@ -38,15 +47,25 @@
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
-        "components": ["Link"],
-        "specialLink": ["hrefLeft", "hrefRight"],
-        "aspects": ["invalidHref", "preferButton"]
+        "components": [
+          "Link"
+        ],
+        "specialLink": [
+          "hrefLeft",
+          "hrefRight"
+        ],
+        "aspects": [
+          "invalidHref",
+          "preferButton"
+        ]
       }
     ]
   },
   "overrides": [
     {
-      "files": ["src/containers/**/*Container.jsx"],
+      "files": [
+        "src/containers/**/*Container.jsx"
+      ],
       "rules": {
         "react/prop-types": false
       }
@@ -64,5 +83,20 @@
   },
   "parserOptions": {
     "sourceType": "module"
-  }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "paths": [
+          "typings"
+        ]
+      }
+    }
+  },
 }

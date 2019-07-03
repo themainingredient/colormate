@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import sketch from 'sketch';
 
 export const replaceColorInLayers = (colorToReplace: string, targetColor: string, layerIds: string[]): void => {
