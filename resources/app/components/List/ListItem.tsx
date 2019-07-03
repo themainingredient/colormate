@@ -16,7 +16,7 @@ import {
   ColorPickerBackground,
   LabelsWrapper,
   OpacityLabelWrapper,
-  InstancesWrapper
+  InstancesWrapper,
 } from './ListItem.styles';
 import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
@@ -51,12 +51,12 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
   const toggleColorPicker = () => {
     setIsColorPickerVisible(!isColorPickerVisible);
-  }
+  };
 
   const handleReplaceColorComplete = (targetColor: ColorResult) => {
-    replaceColor(color, targetColor.hex, instances)
-    toggleColorPicker()
-  }
+    replaceColor(color, targetColor.hex, instances);
+    toggleColorPicker();
+  };
 
   const replaceColor = (colorToReplace: string, targetColor: string, instances: {id: string}[]) => {
     const layerIds = instances.map(instance => instance.id);
@@ -64,64 +64,67 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
       message: 'Replacing the color',
       colorToReplace,
       targetColor,
-      layerIds
+      layerIds,
     });
-  }
+  };
 
-  const OpacityIcon = ({opacityPercentage, isActive}: {opacityPercentage: number, isActive: boolean}) => {
+  const OpacityIcon = ({ opacityPercentage, isActive }: {opacityPercentage: number, isActive: boolean}) => {
     return (
       <OpacityLabelWrapper>
         {opacityPercentage < 100 && <OpacityLabel isActive={isActive}>{opacityPercentage}%</OpacityLabel>}
       </OpacityLabelWrapper>
-    )
-  }
+    );
+  };
 
-  const ReplaceColorIcon = ({isActive}: {isActive: boolean}) => {
-    const style = {cursor: 'pointer'};
+  const ReplaceColorIcon = ({ isActive }: {isActive: boolean}) => {
+    const style = { cursor: 'pointer' };
 
     if (isActive) {
-      return <ReplaceBtnHover style={style} onClick={() => toggleColorPicker()}/> 
+      return <ReplaceBtnHover style={style} onClick={() => toggleColorPicker()} />;
     }
 
-    return <ReplaceBtn style={style} onClick={() => toggleColorPicker()}/>
-  }
+    return <ReplaceBtn style={style} onClick={() => toggleColorPicker()} />;
+  };
 
   return (
     <>
-      <ListItemWrapper 
-        isActive={isSelected} 
-        onMouseEnter={() => setIsHovered(true)} 
-        onMouseLeave={() => setIsHovered(false)}>
+      <ListItemWrapper
+        isActive={isSelected}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
 
         <ColorDataWrapper onClick={() => updateSelectedColor(index)}>
           <DotWrapper>
             <DotBG />
             <DotColor color={color} isBorderNeeded={isColorContrasting(color)} />
           </DotWrapper>
-          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>   
-          <IndicatorArrow isSelected={isSelected} isHovered={isHovered}/>       
+          <Title isActive={isSelected}>{color.toUpperCase().slice(0, -2)}</Title>
+          <IndicatorArrow isSelected={isSelected} isHovered={isHovered} />
         </ColorDataWrapper>
 
         <Spacer />
 
 
         <LabelsWrapper>
-          <OpacityIcon opacityPercentage={opacityPercentage} isActive={isSelected}/>
-          <ReplaceColorIcon isActive={isSelected || isHovered}/>
+          <OpacityIcon opacityPercentage={opacityPercentage} isActive={isSelected} />
+          <ReplaceColorIcon isActive={isSelected || isHovered} />
           <InstancesWrapper>
             <Instances isActive={isSelected}>{instances.length}x</Instances>
           </InstancesWrapper>
         </LabelsWrapper>
-        
+
 
       </ListItemWrapper>
 
       {isSelected && <ListItemTree tree={realLayers} />}
-      { isColorPickerVisible ? 
-        <ColorPickerWrapper>
-          <ColorPickerBackground onClick={ () => toggleColorPicker() }/>
-          <SketchPicker width="200px" presetColors={[]} onChangeComplete={(color: ColorResult) => handleReplaceColorComplete(color) } />
-        </ColorPickerWrapper> : null }
+      { isColorPickerVisible
+        ? (
+          <ColorPickerWrapper>
+            <ColorPickerBackground onClick={() => toggleColorPicker()} />
+            <SketchPicker width='200px' presetColors={[]} onChangeComplete={(color: ColorResult) => handleReplaceColorComplete(color)} />
+          </ColorPickerWrapper>
+        ) : null }
     </>
   );
 };

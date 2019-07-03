@@ -115,27 +115,41 @@ describe('Helpers / get-colors', () => {
   describe('getPagesWithSelectedLayers', () => {
     test('should map the layers to pages with only the selected layers, preserving the layer itself', () => {
       const layer = {
-        id: 'Rectangle', name: 'Rectangle', type: 'ShapePath', style: {}, parent: {
-          id: 'Group', name: 'Group', type: 'Group', parent: {
-            id: 'Page', name: 'Page', type: 'Page', parent: {
+        id: 'Rectangle',
+        name: 'Rectangle',
+        type: 'ShapePath',
+        style: {},
+        parent: {
+          id: 'Group',
+          name: 'Group',
+          type: 'Group',
+          parent: {
+            id: 'Page',
+            name: 'Page',
+            type: 'Page',
+            parent: {
               name: 'Document', type: 'Document',
-            }
-          }
-        }  
-      }
+            },
+          },
+        },
+      };
       const input: any = {
-        layers: [layer]
-      }
+        layers: [layer],
+      };
 
       const output = [{
-        id: 'Page', name: 'Page', type: 'Page',
+        id: 'Page',
+        name: 'Page',
+        type: 'Page',
         layers: [{
-          id: 'Group', name: 'Group', type: 'Group',
-          layers: [layer]
-        }]
-      }]
+          id: 'Group',
+          name: 'Group',
+          type: 'Group',
+          layers: [layer],
+        }],
+      }];
 
       expect(getPagesWithSelectedLayers(input)).toEqual(output);
-    })
-  })
+    });
+  });
 });

@@ -28,7 +28,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage && open coverage/lcov-report/index.html",
     "test:watch": "jest --watch",
-    "lint": "./node_modules/.bin/eslint .src/ ./resources/ --ext .ts --ext .tsx",
+    "lint": "./node_modules/.bin/eslint ./src/ ./resources/ --ext .ts --ext .tsx",
     "log": "skpm log -f",
     "semantic-release": "semantic-release"
   },
