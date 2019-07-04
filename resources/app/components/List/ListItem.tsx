@@ -55,10 +55,9 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
   const handleReplaceColorComplete = (targetColor: ColorResult) => {
     replaceColor(color, targetColor.hex, instances);
-    toggleColorPicker();
   };
 
-  const replaceColor = (colorToReplace: string, targetColor: string, instances: {id: string}[]) => {
+  const replaceColor = (colorToReplace: string, targetColor: string, instances: { id: string }[]) => {
     const layerIds = instances.map(instance => instance.id);
     window.postMessage('replaceColor', {
       message: 'Replacing the color',
@@ -68,7 +67,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     });
   };
 
-  const OpacityIcon = ({ opacityPercentage, isActive }: {opacityPercentage: number, isActive: boolean}) => {
+  const OpacityIcon = ({ opacityPercentage, isActive }: { opacityPercentage: number, isActive: boolean }) => {
     return (
       <OpacityLabelWrapper>
         {opacityPercentage < 100 && <OpacityLabel isActive={isActive}>{opacityPercentage}%</OpacityLabel>}
@@ -76,7 +75,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     );
   };
 
-  const ReplaceColorIcon = ({ isActive }: {isActive: boolean}) => {
+  const ReplaceColorIcon = ({ isActive }: { isActive: boolean }) => {
     const style = { cursor: 'pointer' };
 
     if (isActive) {
@@ -118,13 +117,13 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
       </ListItemWrapper>
 
       {isSelected && <ListItemTree tree={realLayers} />}
-      { isColorPickerVisible
+      {isColorPickerVisible
         ? (
           <ColorPickerWrapper>
             <ColorPickerBackground onClick={() => toggleColorPicker()} />
             <SketchPicker width='200px' presetColors={[]} onChangeComplete={(color: ColorResult) => handleReplaceColorComplete(color)} />
           </ColorPickerWrapper>
-        ) : null }
+        ) : null}
     </>
   );
 };

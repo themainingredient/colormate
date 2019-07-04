@@ -1,8 +1,11 @@
 import * as calculations from './calculations'; // eslint-disable-line import/no-self-import
 
 export const calcOpacityPercentage = (hexColor: string) => {
-  const hexOpacity = hexColor.substr(-2);
-  return Math.round(parseInt(hexOpacity, 16) / 2.55);
+  if (hexColor.length > 7) {
+    const hexOpacity = hexColor.substr(7, 9);
+    return Math.round(parseInt(hexOpacity, 16) / 2.55);
+  }
+  return 100;
 };
 
 export const calculateLuminance = (color: string) => {

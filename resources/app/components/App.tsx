@@ -10,7 +10,6 @@ import List from './List/List';
 import Footer from './Footer';
 import Loader from './Loader';
 import NoColorsFound from './NoColorsFound';
-import { replaceColor } from '../helpers/replace-color';
 import { browserWindowSize } from '../../../constants';
 
 const PluginWrapper = styled.div`
@@ -40,9 +39,14 @@ export default function () {
   }, [selectedLayer]);
 
   useEffect(() => {
-    window.replaceColor = ({ colorToReplace, targetColor }) => {
-      const updatedColors = replaceColor(colors, colorToReplace, targetColor);
-      setColors(updatedColors);
+    window.replaceColor = (args) => {
+      const { colorToReplace, targetColor } = args
+      var newState = { ...colors }
+
+      newState[`${targetColor}ff`] = newState[`${colorToReplace}`]; //TODO: Remove FF from color
+      delete newState[colorToReplace];
+
+      setColors(newState);
     };
   }, [colors]);
 
@@ -53,8 +57,8 @@ export default function () {
       <Footer />
     </>
   ) : (
-    <NoColorsFound />
-  );
+      <NoColorsFound />
+    );
 
   return (
     <PluginWrapper>
