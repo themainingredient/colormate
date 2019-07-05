@@ -1,4 +1,11 @@
+import { ColorResult } from 'react-color';
 import * as calculations from './calculations'; // eslint-disable-line import/no-self-import
+
+export const calculateColorWithAlpha = (targetColor: ColorResult): string => {
+  const { rgb: { a: alpha = 100 } } = targetColor;
+  const alphaBase16 = Math.round(alpha * 255).toString(16).padStart(2, '0');
+  return `${targetColor.hex}${alphaBase16}`;
+};
 
 export const calcOpacityPercentage = (hexColor: string) => {
   if (hexColor.length > 7) {

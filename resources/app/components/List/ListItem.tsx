@@ -22,9 +22,9 @@ import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
 import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap';
 
-import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations';
-import ReplaceBtn from '../../assets/ReplaceBtn.svg';
-import ReplaceBtnHover from '../../assets/ReplaceBtnHover.svg';
+import { calcOpacityPercentage, calculateContrast, calculateColorWithAlpha } from '../../helpers/calculations';
+import ReplaceBtn from '../../assets/replaceBtn.svg';
+import ReplaceBtnHover from '../../assets/replaceBtnHover.svg';
 
 const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
@@ -53,10 +53,6 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     setIsColorPickerVisible(!isColorPickerVisible);
   };
 
-  const handleReplaceColorComplete = (targetColor: ColorResult) => {
-    replaceColor(color, targetColor.hex, instances);
-  };
-
   const replaceColor = (colorToReplace: string, targetColor: string, instances: { id: string }[]) => {
     const layerIds = instances.map(instance => instance.id);
     window.postMessage('replaceColor', {
@@ -65,6 +61,10 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
       targetColor,
       layerIds,
     });
+  };
+
+  const handleReplaceColorComplete = (targetColor: ColorResult) => {
+    replaceColor(color, calculateColorWithAlpha(targetColor), instances);
   };
 
   const OpacityIcon = ({ opacityPercentage, isActive }: { opacityPercentage: number, isActive: boolean }) => {
@@ -121,7 +121,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
         ? (
           <ColorPickerWrapper>
             <ColorPickerBackground onClick={() => toggleColorPicker()} />
-            <SketchPicker width='200px' presetColors={[]} onChangeComplete={(color: ColorResult) => handleReplaceColorComplete(color)} />
+            <SketchPicker width='200px' presetColors={[]} color={color} onChangeComplete={(newColor: ColorResult) => handleReplaceColorComplete(newColor)} />
           </ColorPickerWrapper>
         ) : null}
     </>

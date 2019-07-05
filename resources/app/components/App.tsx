@@ -40,11 +40,18 @@ export default function () {
 
   useEffect(() => {
     window.replaceColor = (args) => {
-      const { colorToReplace, targetColor } = args
-      var newState = { ...colors }
+      const { colorToReplace, targetColor } = args;
+      const newState = Object.entries(colors).reduce((acc, keyValue) => {
+        const [key, value] = keyValue;
 
-      newState[`${targetColor}ff`] = newState[`${colorToReplace}`]; //TODO: Remove FF from color
-      delete newState[colorToReplace];
+        if (keyValue[0] !== colorToReplace) {
+          acc[key] = value;
+          return acc;
+        }
+
+        acc[targetColor] = value;
+        return acc;
+      }, {});
 
       setColors(newState);
     };
@@ -57,8 +64,8 @@ export default function () {
       <Footer />
     </>
   ) : (
-      <NoColorsFound />
-    );
+    <NoColorsFound />
+  );
 
   return (
     <PluginWrapper>
