@@ -1,6 +1,6 @@
 {
   "extends": "airbnb",
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "plugins": [
     "jest"
   ],
@@ -25,6 +25,7 @@
     "no-param-reassign": 0,
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
+    "no-unused-vars": "off",
     "jsx-quotes": [
       "error",
       "prefer-single"
@@ -34,7 +35,7 @@
       "props": "always",
       "children": "off"
     },
-    "react/jsx-filename-extension": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/no-array-index-key": "off",
     "react/prop-types": 1,
     "react/jsx-one-expression-per-line": "off",

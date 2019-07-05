@@ -5,7 +5,7 @@ export const replaceColor = (colors: any, colorToReplace: string, targetColor: s
   targetColor = targetColor.toLowerCase();
 
   if (colorToReplace === targetColor) {
-    return;
+    return null;
   }
   const updatedColorLayers = colors[colorToReplace];
 

@@ -16,8 +16,8 @@ const createSketchColorMapLayer = (
   };
 
   if (parents.length) {
-    parents.forEach(({ name, type }) => {
-      const parent = { id: `id-${name}`, name, type };
+    parents.forEach(({ name: parentName, type: parentType }) => {
+      const parent = { id: `id-${parentName}`, parentName, parentType };
       inputLayer.parents.push(parent);
     });
   }
@@ -57,7 +57,13 @@ describe('createTreeStructure', () => {
   test('transform color map with parents to an array of colors with layers', () => {
     input = {
       red: [
-        createSketchColorMapLayer('Rectangle', 'ShapePath', [{ name: 'Page', type: 'Page' }, { name: 'Group', type: 'Group' }]),
+        createSketchColorMapLayer(
+          'Rectangle',
+          'ShapePath',
+          [
+            { name: 'Page', type: 'Page' },
+            { name: 'Group', type: 'Group' },
+          ]),
       ],
     };
 

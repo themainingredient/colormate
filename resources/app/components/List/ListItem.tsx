@@ -53,8 +53,8 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     setIsColorPickerVisible(!isColorPickerVisible);
   };
 
-  const replaceColor = (colorToReplace: string, targetColor: string, instances: { id: string }[]) => {
-    const layerIds = instances.map(instance => instance.id);
+  const replaceColor = (colorToReplace: string, targetColor: string, colorInstances: { id: string }[]) => {
+    const layerIds = colorInstances.map(instance => instance.id);
     window.postMessage('replaceColor', {
       message: 'Replacing the color',
       colorToReplace,
@@ -67,10 +67,10 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
     replaceColor(color, calculateColorWithAlpha(targetColor), instances);
   };
 
-  const OpacityIcon = ({ opacityPercentage, isActive }: { opacityPercentage: number, isActive: boolean }) => {
+  const OpacityIcon = ({ percentage, isActive }: { percentage: number, isActive: boolean }) => {
     return (
       <OpacityLabelWrapper>
-        {opacityPercentage < 100 && <OpacityLabel isActive={isActive}>{opacityPercentage}%</OpacityLabel>}
+        {percentage < 100 && <OpacityLabel isActive={isActive}>{percentage}%</OpacityLabel>}
       </OpacityLabelWrapper>
     );
   };
@@ -121,7 +121,12 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
         ? (
           <ColorPickerWrapper>
             <ColorPickerBackground onClick={() => toggleColorPicker()} />
-            <SketchPicker width='200px' presetColors={[]} color={color} onChangeComplete={(newColor: ColorResult) => handleReplaceColorComplete(newColor)} />
+            <SketchPicker
+              width='200px'
+              presetColors={[]} // We can fetch the documentcolors and put them here to have them in the colorpicker
+              color={color}
+              onChangeComplete={(newColor: ColorResult) => handleReplaceColorComplete(newColor)}
+            />
           </ColorPickerWrapper>
         ) : null}
     </>

@@ -1,4 +1,7 @@
-import { Layer, Page, Group, Selection } from 'sketch';
+import {
+  Layer, Page, Group, Selection,
+} from 'sketch'; // eslint-disable-line import/no-unresolved
+
 export const getParents = (parents: any[], id: { id: string, type: string, name: string }) => [...parents, id];
 
 export const hasBorder = (layer: any) => !!layer.style.borders.length;
@@ -19,12 +22,6 @@ export const getColorArray = (colorsObject: any, color: any, dataStructure: any)
   colorsObject[color] ? [...colorsObject[color], dataStructure] : [dataStructure]
 );
 
-export const getPagesWithSelectedLayers = (selectedLayers: Selection): Page[] => {
-  return selectedLayers.layers.map((layer: Layer) => mapLayerToPageWithOnlyLayer(layer)) as Page[];
-}
-
-const mapLayerToPageWithOnlyLayer = (layer: Layer): Partial<Page> => mapLayerToPageWithOnlyLayerAcc(null, layer);
-
 const mapLayerToPageWithOnlyLayerAcc = (accLayer: Partial<Page> | Partial<Group> | Layer | null, layer: Layer) => {
   let mappedLayer: Partial<Page> | Partial<Group> | Layer;
 
@@ -36,14 +33,19 @@ const mapLayerToPageWithOnlyLayerAcc = (accLayer: Partial<Page> | Partial<Group>
       id: layer.id,
       type: layer.type,
       name: layer.name,
-      layers: [accLayer]
-    } as Partial<Page> | Partial<Group>
+      layers: [accLayer],
+    } as Partial<Page> | Partial<Group>;
   }
-  
-  if(layer.parent.type === 'Document') {
+
+  if (layer.parent.type === 'Document') {
     return mappedLayer;
   }
 
   return mapLayerToPageWithOnlyLayerAcc(mappedLayer, layer.parent as Layer);
-}
+};
 
+const mapLayerToPageWithOnlyLayer = (layer: Layer): Partial<Page> => mapLayerToPageWithOnlyLayerAcc(null, layer);
+
+export const getPagesWithSelectedLayers = (selectedLayers: Selection): Page[] => {
+  return selectedLayers.layers.map((layer: Layer) => mapLayerToPageWithOnlyLayer(layer)) as Page[];
+};

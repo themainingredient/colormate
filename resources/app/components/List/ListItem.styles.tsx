@@ -6,7 +6,6 @@ import Globals from '../../Global.styles';
 import CheckeredBackground from '../../assets/checkered_small.svg';
 import ArrowActive from '../../assets/arrowActive.svg';
 import ArrowInactive from '../../assets/arrowInactive.svg';
-import { SketchPicker } from 'react-color';
 
 const { colors, fonts } = Globals;
 
@@ -114,13 +113,13 @@ export const OpacityLabelWrapper = styled.div`
   height: 24px;
 `;
 
-export const IndicatorArrow = styled(props => {
+export const IndicatorArrow = styled((props) => {
   const filteredProps = omit(props, ['isSelected', 'isHovered']);
   if (props.isSelected || props.isHovered) {
-    return <ArrowActive {...filteredProps} />
+    return <ArrowActive {...filteredProps} />;
   }
 
-  return <ArrowInactive {...filteredProps} /> 
+  return <ArrowInactive {...filteredProps} />;
 })`
   transform: ${({ isSelected }) => (isSelected ? 'rotate(90deg)' : 'rotate(0deg)')};
   transition: transform 150ms ease-in-out;

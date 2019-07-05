@@ -10,7 +10,6 @@ const ListWrapper = styled.div`
 `;
 
 const List = ({ colorList }) => {
-
   return (
     <ListWrapper>
       {Object.entries(colorList).map(([color, instances], index) => (

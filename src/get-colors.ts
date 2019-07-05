@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import sketch, { Page } from 'sketch';
+import sketch, { Page } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { traverse } from './helpers/traverse';
 import {
   hasBorder,
