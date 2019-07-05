@@ -6,6 +6,7 @@ import Globals from '../../Global.styles';
 import CheckeredBackground from '../../assets/checkered_small.svg';
 import ArrowActive from '../../assets/arrowActive.svg';
 import ArrowInactive from '../../assets/arrowInactive.svg';
+import { SketchPicker } from 'react-color';
 
 const { colors, fonts } = Globals;
 
@@ -127,9 +128,9 @@ export const IndicatorArrow = styled(props => {
 `;
 
 export const ColorPickerWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  top: 0px;
+  top: 84px;
   right: 0px;
 `;
 
