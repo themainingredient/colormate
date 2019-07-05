@@ -17,7 +17,7 @@ const createSketchColorMapLayer = (
 
   if (parents.length) {
     parents.forEach(({ name: parentName, type: parentType }) => {
-      const parent = { id: `id-${parentName}`, parentName, parentType };
+      const parent = { id: `id-${parentName}`, name: parentName, type: parentType };
       inputLayer.parents.push(parent);
     });
   }
