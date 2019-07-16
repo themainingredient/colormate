@@ -106,7 +106,7 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
 
         <LabelsWrapper>
-          <OpacityIcon opacityPercentage={opacityPercentage} isActive={isSelected} />
+          <OpacityIcon percentage={opacityPercentage} isActive={isSelected} />
           <ReplaceColorIcon isActive={isSelected || isHovered} />
           <InstancesWrapper>
             <Instances isActive={isSelected}>{instances.length}x</Instances>
