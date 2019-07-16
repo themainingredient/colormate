@@ -1,6 +1,4 @@
-import { Page, Selection } from 'sketch';
-// eslint-disable-next-line import/no-unresolved
-import sketch from 'sketch';
+import sketch, { Page } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { traverse } from './helpers/traverse';
 import {
   hasBorder,
@@ -14,11 +12,11 @@ import {
 export default function () {
   const colorsObject = {};
   const selectedDocument = sketch.getSelectedDocument();
-  const selectedLayers: Selection = selectedDocument.selectedLayers;
+  const { selectedLayers } = selectedDocument;
 
-  const documentPages: Page[] = selectedLayers.isEmpty ? 
-    selectedDocument.pages : 
-    getPagesWithSelectedLayers(selectedLayers);
+  const documentPages: Page[] = selectedLayers.isEmpty
+    ? selectedDocument.pages
+    : getPagesWithSelectedLayers(selectedLayers);
 
   const traversedPages: any[] = [];
 

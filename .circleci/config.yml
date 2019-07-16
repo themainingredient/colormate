@@ -265,10 +265,10 @@ jobs:
               StrictHostKeyChecking no""" >> ~/.ssh/config
             git config --global user.email "ci@circleci.com"
             git config --global user.name "Ci Server"
-            git add .appcast.xml package.json src/manifest.json 
-            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"   
+            git add .appcast.xml package.json src/manifest.json
+            git commit -m "New version released ${REACT_APP_VERSION} [ci skip]"
             git push
-            
+
       - run:
           name: Tag and release
           command: |
@@ -283,6 +283,11 @@ jobs:
             $SLACK_WEBHOOK_URL
 workflows:
   version: 2
+  untagged-build:
+    jobs:
+      - install
+      - testing
+      - linting
   tagged-build:
     jobs:
       - install:

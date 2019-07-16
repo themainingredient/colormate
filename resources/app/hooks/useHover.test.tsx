@@ -17,23 +17,23 @@ describe('Button', () => {
   let button: any;
   beforeEach(() => {
     const { container } = render(<Footer />);
-  
+
     button = container.querySelector('button');
-  })
+  });
 
   it('expects the button to render done', () => {
     expect(button.textContent).toBe('Done');
   });
-  
+
   it('it expects the button to render 👍 emoji on mouseOver', () => {
     fireEvent.mouseOver(button);
 
     expect(button.textContent).toBe('👍');
   });
-  
+
   it('it expects the button to render done on mouseOut', () => {
     fireEvent.mouseOut(button);
 
     expect(button.textContent).toBe('Done');
   });
-})
+});

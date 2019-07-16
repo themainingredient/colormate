@@ -1,8 +1,18 @@
+import { ColorResult } from 'react-color';
 import * as calculations from './calculations'; // eslint-disable-line import/no-self-import
 
+export const calculateColorWithAlpha = (targetColor: ColorResult): string => {
+  const { rgb: { a: alpha = 100 } } = targetColor;
+  const alphaBase16 = Math.round(alpha * 255).toString(16).padStart(2, '0');
+  return `${targetColor.hex}${alphaBase16}`;
+};
+
 export const calcOpacityPercentage = (hexColor: string) => {
-  const hexOpacity = hexColor.substr(-2);
-  return Math.round(parseInt(hexOpacity, 16) / 2.55);
+  if (hexColor.length > 7) {
+    const hexOpacity = hexColor.substr(7, 9);
+    return Math.round(parseInt(hexOpacity, 16) / 2.55);
+  }
+  return 100;
 };
 
 export const calculateLuminance = (color: string) => {

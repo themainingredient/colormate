@@ -1,6 +1,6 @@
+import { Page } from 'sketch'; // eslint-disable-line import/no-unresolved
 import MockSketchDocument from '../__mocks__/MockSketchDocument.json';
 import { traverse } from './traverse';
-import { Page } from 'sketch';
 
 describe('Helpers / traverse', () => {
   let layers: any[];

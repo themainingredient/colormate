@@ -5,13 +5,13 @@ export const replaceColor = (colors: any, colorToReplace: string, targetColor: s
   targetColor = targetColor.toLowerCase();
 
   if (colorToReplace === targetColor) {
-    return;
+    return null;
   }
   const updatedColorLayers = colors[colorToReplace];
 
   if (!updatedColorLayers) {
     throw new Error(
-      `colorToReplace ${colorToReplace} not present in colors ${JSON.stringify(colors, null, 2)}`
+      `colorToReplace ${colorToReplace} not present in colors ${JSON.stringify(colors, null, 2)}`,
     );
   }
 
@@ -19,6 +19,6 @@ export const replaceColor = (colors: any, colorToReplace: string, targetColor: s
 
   return {
     ...omit(colors, colorToReplace),
-    [targetColor]: targetLayers
-  }
-}
+    [targetColor]: targetLayers,
+  };
+};
