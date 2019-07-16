@@ -1,9 +1,7 @@
 {
   "extends": "airbnb",
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "jest"
-  ],
+  "plugins": ["jest"],
   "rules": {
     "arrow-body-style": "off",
     "class-methods-use-this": "off",

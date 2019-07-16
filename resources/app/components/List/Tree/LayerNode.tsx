@@ -12,7 +12,9 @@ import ShapePath from '../../../assets/Rectangle.svg';
 import Group from '../../../assets/group.svg';
 import Text from '../../../assets/textIcon.svg';
 
-const LayerNode = ({ layer, generation, children }) => {
+const LayerNode = ({
+  layer, generation, children,
+}) => {
   const [isOpen, setOpen] = useState(true);
   const [isSelected, setSelected] = useState();
   const [isLastNode, setLastNode] = useState();
@@ -32,8 +34,9 @@ const LayerNode = ({ layer, generation, children }) => {
   }, [selectedLayer]);
 
   const handleClick = () => {
+    const shouldCenter = type === 'Artboard';
     setSelectedLayer(id);
-    window.postMessage('selectLayer', id);
+    window.postMessage('selectLayer', id, shouldCenter);
   };
 
   return (
@@ -48,7 +51,7 @@ const LayerNode = ({ layer, generation, children }) => {
             }}
           />
         ) : (
-          <ColorType type={colorType} />
+          <ColorType colorType={colorType} />
         )}
         {(() => {
           switch (type) {

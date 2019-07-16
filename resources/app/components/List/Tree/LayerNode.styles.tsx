@@ -6,14 +6,28 @@ import Arrow from '../../../assets/arrowGrey.svg';
 
 const { colors, fonts } = GlobalStyles;
 
-export const NodeWrapper = styled.div < { generation: number, isSelected: boolean } >`
+interface NodeWrapperProps {
+  generation: number,
+  isSelected: boolean
+}
+
+interface NameProps {
+  isHovered: boolean,
+  isSelected: boolean
+}
+
+interface ColorTypeProps {
+  colorType: string
+}
+
+export const NodeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: ${({ generation }) => 16 * generation}px;
+  padding-left: ${({ generation }: NodeWrapperProps) => 16 * generation}px;
   padding-top: 8px;
   padding-bottom: 8px;
-  background-color: ${({ isSelected }) => (isSelected ? colors.TMIBlueLight : '')};
+  background-color: ${({ isSelected }: NodeWrapperProps) => (isSelected ? colors.TMIBlueLight : '')};
 `;
 
 export const StyledArrow = styled(props => <Arrow {...omit(props, ['isOpen'])} />)`
@@ -22,19 +36,19 @@ export const StyledArrow = styled(props => <Arrow {...omit(props, ['isOpen'])} /
   transition: transform 150ms ease-in-out;
 `;
 
-export const Name = styled.p < { isHovered: boolean, isSelected: boolean } >`
+export const Name = styled.p`
   font-family: ${fonts.SFPro.reg};
   font-size: 14px;
-  color: ${({ isSelected }) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
+  color: ${({ isSelected }: NameProps) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
   margin-left: 8px;
-  border-bottom: ${({ isHovered }) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
+  border-bottom: ${({ isHovered }: NameProps) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
 `;
 
-export const ColorType = styled.div < { type: any } >`
+export const ColorType = styled.div`
   height: 8px;
   width: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.DarkGrey};
-  background-color: ${colorType => (colorType.type === '' ? colors.DarkGrey : '')};
+  background-color: ${({ colorType }: ColorTypeProps) => (colorType === '' ? colors.DarkGrey : '')};
   margin-right: 16px;
 `;
