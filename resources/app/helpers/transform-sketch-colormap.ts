@@ -39,7 +39,7 @@ const addLayerWithGrouping = (groupedLayers: Layer[] = [], layerToAdd: SketchCol
     return [layer];
   }
 
-  const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.name === layer.name);
+  const filteredGroupedLayers = groupedLayers.filter(groupedLayer => groupedLayer.id === layer.id);
   if (filteredGroupedLayers.length) {
     return groupedLayers.map((groupedLayer) => {
       if (groupedLayer.name === layer.name && 'children' in layer) {
