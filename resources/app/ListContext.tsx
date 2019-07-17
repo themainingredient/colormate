@@ -6,11 +6,14 @@ const ListContext = React.createContext({
   setSelectedColor: '' as unknown as Dispatch<any>,
   selectedLayer: '',
   setSelectedLayer: '' as unknown as Dispatch<any>,
+  colors: {},
+  setColors: '' as unknown as Dispatch<any>,
 });
 
 export const ListProvider = ({ children }) => {
   const [selectedColor, setSelectedColor] = useState();
   const [selectedLayer, setSelectedLayer] = useState();
+  const [colors, setColors] = useState();
 
   return (
     <ListContext.Provider
@@ -19,6 +22,8 @@ export const ListProvider = ({ children }) => {
         setSelectedColor,
         selectedLayer,
         setSelectedLayer,
+        colors,
+        setColors,
       }}
     >
       {children}

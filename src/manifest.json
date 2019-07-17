@@ -6,8 +6,8 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "List all used colors",
-      "identifier": "listAll",
+      "name": "Run Colormate in this document",
+      "identifier": "listColors",
       "shortcut": "cmd shift 8",
       "script": "./my-command.js"
     }
@@ -15,7 +15,7 @@
   "menu": {
     "title": "Colormate",
     "items": [
-      "listAll"
+      "listColors"
     ]
   },
   "version": "1.4.27"
