@@ -21,7 +21,7 @@ const LayerNode = ({
   const [isOpen, setOpen] = useState(true);
   const [isSelected, setSelected] = useState();
   const [isLastNode, setLastNode] = useState();
-  const { selectedLayer, setSelectedLayer } = useContext(ListContext);
+  const { selectedLayer, setSelectedLayer, colors } = useContext(ListContext);
   const [isHovered, hoverRef] = useHover();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
 
@@ -38,9 +38,19 @@ const LayerNode = ({
   }, [selectedLayer]);
 
   const handleClick = () => {
-    const shouldCenter = type === 'Artboard';
+    if (type === 'Group') return;
+
+    const shouldCenterOnSelf: boolean = type === 'Artboard' || type === 'Page';
     setSelectedLayer(id);
-    window.postMessage('selectLayer', id, shouldCenter);
+
+    const idToCenterOn = shouldCenterOnSelf ? id : Object.entries(colors)
+      .reduce((acc: any, keyValue: any) => ([...acc, ...keyValue[1]]), [])
+      .find(innerLayer => innerLayer.id === id)
+      .parents
+      .find(parent => parent.type === 'Artboard')
+      .id;
+
+    window.postMessage('selectLayer', id, idToCenterOn);
   };
 
   const toggleColorPicker = () => {

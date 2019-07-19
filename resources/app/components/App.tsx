@@ -20,9 +20,8 @@ const PluginWrapper = styled.div`
 `;
 
 export default function () {
-  const [colors, setColors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const { selectedLayer } = useContext(ListContext);
+  const { selectedLayer, colors = {}, setColors } = useContext(ListContext);
 
   useEffect(() => {
     window.sendUsedColors = (incomingColors) => {
@@ -33,10 +32,6 @@ export default function () {
     // Call function to get all used colors
     window.postMessage('getColors', 'Loading all colors');
   }, []);
-
-  useEffect(() => {
-    window.postMessage('selectLayer', selectedLayer);
-  }, [selectedLayer]);
 
   useEffect(() => {
     window.replaceColor = (args) => {
