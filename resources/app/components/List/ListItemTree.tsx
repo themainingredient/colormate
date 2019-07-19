@@ -29,7 +29,6 @@ const renderLayer = (tree, color, generation = 0) => {
 };
 
 const ListItemTree = ({ tree, color }) => {
-  console.log(color);
   return <ListItemTreeWrapper>{renderLayer(tree, color)}</ListItemTreeWrapper>;
 };
 

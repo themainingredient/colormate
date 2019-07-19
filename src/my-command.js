@@ -53,7 +53,7 @@ export default function () {
     UI.message(message);
     replaceColorInLayers(colorToReplace, targetColor, layerIds);
 
-    const args = { colorToReplace, targetColor };
+    const args = { colorToReplace, targetColor, layerIds };
     webContents.executeJavaScript(`replaceColor(${JSON.stringify(args)})`);
   });
 

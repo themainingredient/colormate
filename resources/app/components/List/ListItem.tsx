@@ -31,13 +31,13 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
   const [realLayers, setRealLayers] = useState();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const { selectedColor, setSelectedColor } = useContext(ListContext);
+  const { selectedColor, setSelectedColor, colors } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
 
   useEffect(() => {
     const layers = transformSketchColorMap({ [color]: instances });
     setRealLayers(layers[0]);
-  }, []);
+  }, [colors]);
 
   useEffect(() => {
     setSelected(selectedColor === index);

@@ -27,6 +27,7 @@ export default function () {
     window.sendUsedColors = (incomingColors) => {
       setIsLoading(false);
       setColors(incomingColors);
+      console.log('App.tsx - incomingColors ', incomingColors);
     };
 
     // Call function to get all used colors
@@ -35,16 +36,24 @@ export default function () {
 
   useEffect(() => {
     window.replaceColor = (args) => {
-      const { colorToReplace, targetColor } = args;
+      const { colorToReplace, targetColor, layerIds } = args;
       const newState = Object.entries(colors).reduce((acc, keyValue) => {
-        const [key, value] = keyValue;
+        const colorKey = keyValue[0];
+        const instances = keyValue[1] as any[];
 
         if (keyValue[0] !== colorToReplace) {
-          acc[key] = value;
+          acc[colorKey] = instances;
           return acc;
         }
 
-        acc[targetColor] = value;
+        const changedLayers = instances.filter(layer => layerIds.includes(layer.id));
+        const untouchedLayers = instances.filter(layer => !layerIds.includes(layer.id));
+
+        acc[targetColor] = changedLayers;
+
+        if (untouchedLayers.length !== 0) {
+          acc[colorKey] = untouchedLayers;
+        }
         return acc;
       }, {});
 
