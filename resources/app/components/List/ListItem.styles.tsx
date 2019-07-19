@@ -126,21 +126,6 @@ export const IndicatorArrow = styled((props) => {
   margin-left: 10px;
 `;
 
-export const ColorPickerWrapper = styled.div`
-  position: fixed;
-  z-index: 2;
-  top: 84px;
-  right: 0px;
-`;
-
-export const ColorPickerBackground = styled.div`
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-`;
-
 export const LabelsWrapper = styled.div`
   justify-content: space-between;
   display: flex;
