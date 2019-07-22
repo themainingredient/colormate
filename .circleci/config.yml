@@ -148,7 +148,7 @@ jobs:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate_"$REACT_APP_VERSION".zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> New testing version deployed you can download it here: <'"$AWS_S3_URL_STAGING"/colormate.zip'|'colormate_"$REACT_APP_VERSION".zip'> "}' \
             $SLACK_WEBHOOK_URL
   pre-build-production:
     <<: *defaults
