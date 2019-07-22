@@ -33,6 +33,7 @@ When the plugin is done scanning your file, you will get an overview of all the 
 - Get colors overview on the entire Sketch file, seeing where each color is being used
 - Get colors overview on a specific selection
 - Replace all the occurences of a color
+- Replace colors of a single layer
 
 ## Future plans 🚀
 
