@@ -25,8 +25,7 @@ export const NodeWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   padding-left: ${({ generation }: NodeWrapperProps) => 16 * generation}px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  height: 33px;
   background-color: ${({ isSelected }: NodeWrapperProps) => (isSelected ? colors.TMIBlueLight : '')};
 `;
 
@@ -42,6 +41,10 @@ export const Name = styled.p`
   color: ${({ isSelected }: NameProps) => (isSelected ? colors.TMIBlue : colors.DarkGrey)};
   margin-left: 8px;
   border-bottom: ${({ isHovered }: NameProps) => (isHovered ? `1px solid ${colors.TMIBlue}` : '1px solid #00000000')};
+`;
+
+export const Spacer = styled.div`
+  flex-grow: 1;
 `;
 
 export const ColorType = styled.div`

@@ -2,24 +2,28 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useHover from '../../../hooks/useHover';
 import ListContext from '../../../ListContext';
+import ReplaceBtn from '../../../assets/replaceBtn.svg';
+import ReplaceBtnHover from '../../../assets/replaceBtnHover.svg';
 
 import {
-  NodeWrapper, StyledArrow, Name, ColorType,
+  NodeWrapper, StyledArrow, Name, ColorType, Spacer,
 } from './LayerNode.styles';
 
 import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
 import Group from '../../../assets/group.svg';
 import Text from '../../../assets/textIcon.svg';
+import ColorPicker from '../../ColorPicker';
 
 const LayerNode = ({
-  layer, generation, children,
+  layer, generation, children, color,
 }) => {
   const [isOpen, setOpen] = useState(true);
   const [isSelected, setSelected] = useState();
   const [isLastNode, setLastNode] = useState();
-  const { selectedLayer, setSelectedLayer } = useContext(ListContext);
+  const { selectedLayer, setSelectedLayer, colors } = useContext(ListContext);
   const [isHovered, hoverRef] = useHover();
+  const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
 
   const {
     name, id, type, colorType,
@@ -34,9 +38,38 @@ const LayerNode = ({
   }, [selectedLayer]);
 
   const handleClick = () => {
-    const shouldCenter = type === 'Artboard';
+    if (type === 'Group') return;
+
+    const shouldCenterOnSelf: boolean = type === 'Artboard' || type === 'Page';
     setSelectedLayer(id);
-    window.postMessage('selectLayer', id, shouldCenter);
+
+    const idToCenterOn = shouldCenterOnSelf ? id : Object.entries(colors)
+      .reduce((acc: any, keyValue: any) => ([...acc, ...keyValue[1]]), [])
+      .find(innerLayer => innerLayer.id === id)
+      .parents
+      .find(parent => parent.type === 'Artboard')
+      .id;
+
+    window.postMessage('selectLayer', id, idToCenterOn);
+  };
+
+  const toggleColorPicker = () => {
+    setIsColorPickerVisible(!isColorPickerVisible);
+  };
+
+  const ReplaceColorIcon = () => {
+    const style = {
+      cursor: 'pointer',
+      height: 25,
+      width: 25,
+      marginRight: 8,
+    };
+
+    if (isColorPickerVisible) {
+      return <ReplaceBtnHover style={style} onClick={() => toggleColorPicker()} />;
+    }
+
+    return <ReplaceBtn style={style} onClick={() => toggleColorPicker()} />;
   };
 
   return (
@@ -72,6 +105,13 @@ const LayerNode = ({
         <Name isHovered={isHovered} isSelected={isSelected}>
           {name}
         </Name>
+
+        <Spacer />
+
+        {isLastNode && <ReplaceColorIcon />}
+
+        {isColorPickerVisible && <ColorPicker color={color} ids={[id]} onBackgroundClick={toggleColorPicker} />}
+
       </NodeWrapper>
       {!isLastNode && isOpen && <>{children || null}</>}
     </>
@@ -82,10 +122,12 @@ LayerNode.propTypes = {
   layer: PropTypes.object.isRequired,
   generation: PropTypes.number.isRequired,
   children: PropTypes.array,
+  color: PropTypes.string,
 };
 
 LayerNode.defaultProps = {
   children: [],
+  color: '',
 };
 
 export default LayerNode;

@@ -8,19 +8,19 @@ const ListItemTreeWrapper = styled.div`
   margin: 16px 0;
 `;
 
-const renderLayer = (tree, generation = 0) => {
+const renderLayer = (tree, color, generation = 0) => {
   if ('layers' in tree) {
-    return tree.layers.map(page => renderLayer(page, generation + 1));
+    return tree.layers.map(page => renderLayer(page, color, generation + 1));
   }
 
   if (!('children' in tree)) {
-    return <LayerNode key={tree.id} layer={tree} generation={generation} />;
+    return <LayerNode key={tree.id} layer={tree} generation={generation} color={color} />;
   }
 
   if ('children' in tree && tree.children.length) {
     return (
-      <LayerNode key={tree.id} layer={tree} generation={generation}>
-        {tree.children.map(child => renderLayer(child, generation + 1))}
+      <LayerNode key={tree.id} layer={tree} generation={generation} color={color}>
+        {tree.children.map(child => renderLayer(child, color, generation + 1))}
       </LayerNode>
     );
   }
@@ -28,8 +28,8 @@ const renderLayer = (tree, generation = 0) => {
   return null;
 };
 
-const ListItemTree = ({ tree }) => {
-  return <ListItemTreeWrapper>{renderLayer(tree)}</ListItemTreeWrapper>;
+const ListItemTree = ({ tree, color }) => {
+  return <ListItemTreeWrapper>{renderLayer(tree, color)}</ListItemTreeWrapper>;
 };
 
 ListItemTree.propTypes = {

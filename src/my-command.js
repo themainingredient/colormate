@@ -33,12 +33,13 @@ export default function () {
       .catch(console.error); // eslint-disable-line no-console
   });
 
-  webContents.on('selectLayer', (layerID, shouldCenter) => {
+  webContents.on('selectLayer', (layerID, idToCenterOn) => {
     const document = sketch.getDocuments()[0];
+
     const sketchLayer = document.getLayerWithID(layerID);
-    if (shouldCenter) {
-      document.centerOnLayer(sketchLayer);
-    }
+    const layerToCenterOn = document.getLayerWithID(idToCenterOn);
+
+    document.centerOnLayer(layerToCenterOn);
     document.selectedLayers = [sketchLayer];
   });
 
@@ -52,7 +53,7 @@ export default function () {
     UI.message(message);
     replaceColorInLayers(colorToReplace, targetColor, layerIds);
 
-    const args = { colorToReplace, targetColor };
+    const args = { colorToReplace, targetColor, layerIds };
     webContents.executeJavaScript(`replaceColor(${JSON.stringify(args)})`);
   });
 

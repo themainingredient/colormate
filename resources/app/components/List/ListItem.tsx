@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { SketchPicker, ColorResult } from 'react-color';
 import {
   ListItemWrapper,
   ColorDataWrapper,
@@ -12,8 +11,6 @@ import {
   OpacityLabel,
   Spacer,
   IndicatorArrow,
-  ColorPickerWrapper,
-  ColorPickerBackground,
   LabelsWrapper,
   OpacityLabelWrapper,
   InstancesWrapper,
@@ -22,9 +19,10 @@ import ListItemTree from './ListItemTree';
 import ListContext from '../../ListContext';
 import { transformSketchColorMap } from '../../helpers/transform-sketch-colormap';
 
-import { calcOpacityPercentage, calculateContrast, calculateColorWithAlpha } from '../../helpers/calculations';
+import { calcOpacityPercentage, calculateContrast } from '../../helpers/calculations';
 import ReplaceBtn from '../../assets/replaceBtn.svg';
 import ReplaceBtnHover from '../../assets/replaceBtnHover.svg';
+import ColorPicker from '../ColorPicker';
 
 const isColorContrasting = (color: any) => calculateContrast(color) > 1.2;
 
@@ -33,13 +31,13 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
   const [realLayers, setRealLayers] = useState();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const { selectedColor, setSelectedColor } = useContext(ListContext);
+  const { selectedColor, setSelectedColor, colors } = useContext(ListContext);
   const opacityPercentage = calcOpacityPercentage(color);
 
   useEffect(() => {
     const layers = transformSketchColorMap({ [color]: instances });
     setRealLayers(layers[0]);
-  }, []);
+  }, [colors]);
 
   useEffect(() => {
     setSelected(selectedColor === index);
@@ -51,20 +49,6 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
   const toggleColorPicker = () => {
     setIsColorPickerVisible(!isColorPickerVisible);
-  };
-
-  const replaceColor = (colorToReplace: string, targetColor: string, colorInstances: { id: string }[]) => {
-    const layerIds = colorInstances.map(instance => instance.id);
-    window.postMessage('replaceColor', {
-      message: 'Replacing the color',
-      colorToReplace,
-      targetColor,
-      layerIds,
-    });
-  };
-
-  const handleReplaceColorComplete = (targetColor: ColorResult) => {
-    replaceColor(color, calculateColorWithAlpha(targetColor), instances);
   };
 
   const OpacityIcon = ({ percentage, isActive }: { percentage: number, isActive: boolean }) => {
@@ -116,19 +100,8 @@ const ListItem = ({ color, instances, index }: { color: string, instances: any[]
 
       </ListItemWrapper>
 
-      {isSelected && <ListItemTree tree={realLayers} />}
-      {isColorPickerVisible
-        ? (
-          <ColorPickerWrapper>
-            <ColorPickerBackground onClick={() => toggleColorPicker()} />
-            <SketchPicker
-              width='200px'
-              presetColors={[]} // We can fetch the documentcolors and put them here to have them in the colorpicker
-              color={color}
-              onChangeComplete={(newColor: ColorResult) => handleReplaceColorComplete(newColor)}
-            />
-          </ColorPickerWrapper>
-        ) : null}
+      {isSelected && <ListItemTree color={color} tree={realLayers} />}
+      {isColorPickerVisible && <ColorPicker color={color} ids={instances.map(instance => instance.id)} onBackgroundClick={toggleColorPicker} />}
     </>
   );
 };
