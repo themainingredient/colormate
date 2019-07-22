@@ -27,7 +27,6 @@ export default function () {
     window.sendUsedColors = (incomingColors) => {
       setIsLoading(false);
       setColors(incomingColors);
-      console.log('App.tsx - incomingColors ', incomingColors);
     };
 
     // Call function to get all used colors
