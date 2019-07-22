@@ -279,7 +279,7 @@ jobs:
           name: Notify slack channel
           command: |
             curl --header "Content-Type: application/json" --request POST --data \
-            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'https://github.com/themainingredient/colormate/releases/download/v"$REACT_APP_VERSION"/colormate.sketchplugin.zip'> "}' \
+            '{"text": "<'"$CIRCLE_BUILD_URL"'|#'"$CIRCLE_BUILD_NUM"'> :rocket: Colormate *v'"$REACT_APP_VERSION"'* deployed :rocket: \n Download it here <'https://github.com/themainingredient/colormate/releases/download/v"$REACT_APP_VERSION"/colormate.zip'> "}' \
             $SLACK_WEBHOOK_URL
 workflows:
   version: 2
