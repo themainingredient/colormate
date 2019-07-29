@@ -5,4 +5,4 @@ export enum LayerType {
     shapePath = 'ShapePath',
     text = 'Text',
     shape = 'Shape',
-} 
+}
