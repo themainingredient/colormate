@@ -9,6 +9,7 @@ import {
   hasTextColor,
   getPagesWithSelectedLayers,
 } from './get-colors';
+import { LayerType } from '../../resources/app/enums/layer-type.enum.js';
 
 describe('Helpers / get-colors', () => {
   test('getParents returns an array of the parents and the current layer id', () => {
@@ -117,16 +118,16 @@ describe('Helpers / get-colors', () => {
       const layer = {
         id: 'Rectangle',
         name: 'Rectangle',
-        type: 'ShapePath',
+        type: LayerType.shapePath,
         style: {},
         parent: {
-          id: 'Group',
-          name: 'Group',
-          type: 'Group',
+          id: LayerType.group,
+          name: LayerType.group,
+          type: LayerType.group,
           parent: {
-            id: 'Page',
-            name: 'Page',
-            type: 'Page',
+            id: LayerType.page,
+            name: LayerType.page,
+            type: LayerType.page,
             parent: {
               name: 'Document', type: 'Document',
             },
@@ -138,13 +139,13 @@ describe('Helpers / get-colors', () => {
       };
 
       const output = [{
-        id: 'Page',
-        name: 'Page',
-        type: 'Page',
+        id: LayerType.page,
+        name: LayerType.page,
+        type: LayerType.page,
         layers: [{
-          id: 'Group',
-          name: 'Group',
-          type: 'Group',
+          id: LayerType.group,
+          name: LayerType.group,
+          type: LayerType.group,
           layers: [layer],
         }],
       }];

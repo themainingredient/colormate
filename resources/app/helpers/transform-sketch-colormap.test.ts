@@ -1,6 +1,7 @@
 import { ColorWithLayers } from '../models/color-with-layers.model';
 import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
+import { LayerType } from '../enums/layer-type.enum';
 
 const createSketchColorMapLayer = (
   name: string,
@@ -61,8 +62,8 @@ describe('createTreeStructure', () => {
           'Rectangle',
           'ShapePath',
           [
-            { name: 'Page', type: 'Page' },
-            { name: 'Group', type: 'Group' },
+            { name: LayerType.page, type: LayerType.page },
+            { name: LayerType.group, type: LayerType.group },
           ]),
       ],
     };
@@ -73,13 +74,13 @@ describe('createTreeStructure', () => {
         layers: [
           {
             id: 'id-Page',
-            name: 'Page',
-            type: 'Page',
+            name: LayerType.page,
+            type: LayerType.page,
             children: [
               {
                 id: 'id-Group',
-                name: 'Group',
-                type: 'Group',
+                name: LayerType.group,
+                type: LayerType.group,
                 children: [{
                   id: 'id-Rectangle', name: 'Rectangle', type: 'ShapePath', colorType: 'fill',
                 }],
@@ -95,12 +96,12 @@ describe('createTreeStructure', () => {
     input = {
       red: [
         createSketchColorMapLayer('Rectangle1', 'ShapePath', [
-          { name: 'Page1', type: 'Page' },
-          { name: 'Artboard1', type: 'Artboard' },
+          { name: 'Page1', type: LayerType.page },
+          { name: 'Artboard1', type: LayerType.artboard },
         ]),
         createSketchColorMapLayer('Rectangle2', 'ShapePath', [
-          { name: 'Page2', type: 'Page' },
-          { name: 'Artboard2', type: 'Artboard' },
+          { name: 'Page2', type: LayerType.page },
+          { name: 'Artboard2', type: LayerType.artboard },
         ]),
       ],
     };
@@ -112,12 +113,12 @@ describe('createTreeStructure', () => {
           {
             name: 'Page1',
             id: 'id-Page1',
-            type: 'Page',
+            type: LayerType.page,
             children: [
               {
                 name: 'Artboard1',
                 id: 'id-Artboard1',
-                type: 'Artboard',
+                type: LayerType.artboard,
                 children: [{
                   id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill',
                 }],
@@ -127,12 +128,12 @@ describe('createTreeStructure', () => {
           {
             id: 'id-Page2',
             name: 'Page2',
-            type: 'Page',
+            type: LayerType.page,
             children: [
               {
                 id: 'id-Artboard2',
                 name: 'Artboard2',
-                type: 'Artboard',
+                type: LayerType.artboard,
                 children: [{
                   id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: 'fill',
                 }],
@@ -148,12 +149,12 @@ describe('createTreeStructure', () => {
     input = {
       red: [
         createSketchColorMapLayer('Rectangle1', 'ShapePath', [
-          { name: 'Page', type: 'Page' },
-          { name: 'Artboard', type: 'Artboard' },
+          { name: LayerType.page, type: LayerType.page },
+          { name: LayerType.artboard, type: LayerType.artboard },
         ]),
         createSketchColorMapLayer('Rectangle2', 'ShapePath', [
-          { name: 'Page', type: 'Page' },
-          { name: 'Artboard', type: 'Artboard' },
+          { name: LayerType.page, type: LayerType.page },
+          { name: LayerType.artboard, type: LayerType.artboard },
         ]),
       ],
     };
@@ -163,14 +164,14 @@ describe('createTreeStructure', () => {
         color: 'red',
         layers: [
           {
-            name: 'Page',
+            name: LayerType.page,
             id: 'id-Page',
-            type: 'Page',
+            type: LayerType.page,
             children: [
               {
-                name: 'Artboard',
+                name: LayerType.artboard,
                 id: 'id-Artboard',
-                type: 'Artboard',
+                type: LayerType.artboard,
                 children: [
                   {
                     id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill',
@@ -191,18 +192,18 @@ describe('createTreeStructure', () => {
     input = {
       red: [
         createSketchColorMapLayer('Rectangle2', 'ShapePath', [
-          { name: 'Page', type: 'Page' },
-          { name: 'Artboard', type: 'Artboard' },
+          { name: LayerType.page, type: LayerType.page },
+          { name: LayerType.artboard, type: LayerType.artboard },
         ]),
         createSketchColorMapLayer('Rectangle1', 'ShapePath', [
-          { name: 'Page', type: 'Page' },
-          { name: 'Artboard', type: 'Artboard' },
-          { name: 'Group', type: 'Group' },
+          { name: LayerType.page, type: LayerType.page },
+          { name: LayerType.artboard, type: LayerType.artboard },
+          { name: LayerType.group, type: LayerType.group },
         ]),
         createSketchColorMapLayer('Rectangle3', 'ShapePath', [
-          { name: 'Page', type: 'Page' },
-          { name: 'Artboard', type: 'Artboard' },
-          { name: 'Group', type: 'Group' },
+          { name: LayerType.page, type: LayerType.page },
+          { name: LayerType.artboard, type: LayerType.artboard },
+          { name: LayerType.group, type: LayerType.group },
         ]),
       ],
     };
@@ -212,14 +213,14 @@ describe('createTreeStructure', () => {
         color: 'red',
         layers: [
           {
-            name: 'Page',
+            name: LayerType.page,
             id: 'id-Page',
-            type: 'Page',
+            type: LayerType.page,
             children: [
               {
-                name: 'Artboard',
+                name: LayerType.artboard,
                 id: 'id-Artboard',
-                type: 'Artboard',
+                type: LayerType.artboard,
                 children: [
                   {
                     id: 'id-Rectangle2',
@@ -228,9 +229,9 @@ describe('createTreeStructure', () => {
                     colorType: 'fill',
                   },
                   {
-                    name: 'Group',
+                    name: LayerType.group,
                     id: 'id-Group',
-                    type: 'Group',
+                    type: LayerType.group,
                     children: [
                       {
                         id: 'id-Rectangle1',

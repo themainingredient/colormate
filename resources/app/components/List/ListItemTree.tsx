@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import LayerNode from './Tree/LayerNode';
+import { LayerType } from '../../enums/layer-type.enum';
 
 const ListItemTreeWrapper = styled.div`
   margin: 16px 0;
@@ -18,7 +19,7 @@ const renderLayer = (tree, color, generation = 0) => {
   }
 
   if ('children' in tree && tree.children.length) {
-    if (tree.type !== 'Page' && tree.type !== 'Artboard') {
+    if (tree.type !== LayerType.page && tree.type !== LayerType.artboard) {
       return tree.children.map(child => renderLayer(child, color, generation + 1))
     }
     return (
