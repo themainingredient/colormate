@@ -18,6 +18,9 @@ const renderLayer = (tree, color, generation = 0) => {
   }
 
   if ('children' in tree && tree.children.length) {
+    if (tree.type !== 'Page' && tree.type !== 'Artboard') {
+      return tree.children.map(child => renderLayer(child, color, generation + 1))
+    }
     return (
       <LayerNode key={tree.id} layer={tree} generation={generation} color={color}>
         {tree.children.map(child => renderLayer(child, color, generation + 1))}

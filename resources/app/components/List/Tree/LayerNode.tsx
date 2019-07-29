@@ -11,7 +11,6 @@ import {
 
 import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
-import Group from '../../../assets/group.svg';
 import Text from '../../../assets/textIcon.svg';
 import ColorPicker from '../../ColorPicker';
 
@@ -90,8 +89,6 @@ const LayerNode = ({
           switch (type) {
             case 'Artboard':
               return <Artboard />;
-            case 'Group':
-              return <Group />;
             case 'ShapePath':
               return <ShapePath />;
             case 'Text':
