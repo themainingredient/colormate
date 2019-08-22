@@ -1,5 +1,5 @@
 import BrowserWindow from 'sketch-module-web-view';
-import sketch, { UI } from 'sketch'; // eslint-disable-line import/no-unresolved
+import sketch, { UI, Settings } from 'sketch'; // eslint-disable-line import/no-unresolved
 import { browserWindowSize } from '../constants.ts';
 import { replaceColorInLayers } from './helpers/replace-color-in-layers.ts';
 import getColors from './get-colors.ts';
@@ -63,6 +63,18 @@ export default function () {
 
   webContents.on('closeWindow', () => {
     browserWindow.close();
+  });
+
+  webContents.on('isPopUpVisible', () => {
+    let isVisible = Settings.settingForKey('isPopUpVisible');
+    if (isVisible === undefined) {
+      isVisible = true;
+    }
+    webContents.executeJavaScript(`isPopUpVisible(${JSON.stringify(isVisible)})`);
+  });
+
+  webContents.on('hidePopUp', () => {
+    Settings.setSettingForKey('isPopUpVisible', false);
   });
 
   browserWindow.loadURL(webview);
