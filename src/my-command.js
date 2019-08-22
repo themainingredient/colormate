@@ -65,16 +65,30 @@ export default function () {
     browserWindow.close();
   });
 
-  webContents.on('isPopUpVisible', () => {
-    let isVisible = Settings.settingForKey('isPopUpVisible');
-    if (isVisible === undefined) {
-      isVisible = true;
+  webContents.on('isBannerVisible', () => {
+    let showBannerFromDate = Settings.settingForKey('showBannerFromDate');
+    if (showBannerFromDate === undefined) {
+      showBannerFromDate = Date.now();
+      Settings.setSettingForKey('showBannerFromDate', showBannerFromDate);
     }
-    webContents.executeJavaScript(`isPopUpVisible(${JSON.stringify(isVisible)})`);
+
+    const currentDate = Date.now();
+    const isVisible = currentDate > showBannerFromDate;
+    webContents.executeJavaScript(`isBannerVisible(${JSON.stringify(isVisible)})`);
   });
 
-  webContents.on('hidePopUp', () => {
-    Settings.setSettingForKey('isPopUpVisible', false);
+  const postponeBannerWithDays = (extraDays) => {
+    const showBannerFromDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * extraDays).getTime();
+
+    Settings.setSettingForKey('showBannerFromDate', showBannerFromDate);
+  };
+
+  webContents.on('hideBanner', () => {
+    postponeBannerWithDays(365 * 100);
+  });
+
+  webContents.on('postponeBanner', () => {
+    postponeBannerWithDays(2);
   });
 
   browserWindow.loadURL(webview);

@@ -6,5 +6,5 @@ interface Window {
     // custom functions 
     sendUsedColors: any;
     replaceColor: any
-    isPopUpVisible: (isVisible: boolean) => void
+    isBannerVisible: (isVisible: boolean) => void
   }

@@ -11,42 +11,43 @@ const BannerWrapper = styled.div`
 `;
 
 export const Banner  = () => {
-    const [isPopUpVisible, showPopUp] = useState(false);
+    const [isBannerVisible, showBanner] = useState(false);
     
     useEffect(() => {
-        window.isPopUpVisible = (isVisible: boolean) => {
-            showPopUp(isVisible);
+        window.isBannerVisible = (isVisible: boolean) => {
+            showBanner(isVisible);
         }
 
-        window.postMessage('isPopUpVisible');
+        window.postMessage('isBannerVisible');
     }, [])
     
     const handleYes = () => {
         // TODO: go to url
         const url = 'https://google.com'
         // openUrlInBrowser(url);
-        window.postMessage('hidePopUp')
-        showPopUp(false);
+        window.postMessage('hideBanner')
+        showBanner(false);
     }
 
     const handleNo = () => {
-        window.postMessage('hidePopUp')
-        showPopUp(false);
+        window.postMessage('hideBanner')
+        showBanner(false);
     }
 
     const handleAskAgain = () => {
-        // TODO: handleAskAgain
+        window.postMessage('postponeBanner')
+        showBanner(false);
     }
 
-    if (!isPopUpVisible) {
+    if (!isBannerVisible) {
         return null;
     }
 
     return (
         <BannerWrapper>
-            <button onClick={handleYes}>feedback</button>
-            <button onClick={handleNo}>feedback</button>
-            <button onClick={handleAskAgain}>feedback</button>
+            <button onClick={handleYes}>yes</button>
+            <button onClick={handleNo}>no</button>
+            <button onClick={handleAskAgain}>postpone</button>
         </BannerWrapper>
     )
 }
