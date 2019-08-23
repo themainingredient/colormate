@@ -6,7 +6,7 @@ This free plugin gives you an impression of _all the colours_ in your Sketch fil
 
 ## Why this Plugin? 🤔
 
-During designing we often found ourselves ending up with fifty different shades of grey (and of course other colours). Sometimes we would just lose ourselves in designing and don't keep track of all the colours that we used. But this is not ideal when you have to hand it over to the development team. 
+During designing we often found ourselves ending up with fifty different shades of grey (and of course other colours). Sometimes we would just lose ourselves in designing and don't keep track of all the colours that we used. But this is not ideal when you have to hand it over to the development team.
 
 That's why we've created this plugin to help designers keep track of the colours in the file, _without_ having to add the colours to the document colours first!
 
@@ -42,3 +42,11 @@ We're not going to sit back and let the plugin work its magic. We're continously
 If you can think of any other functionalities, please let us know! 🤩
 
 Made with ❤️ by [The Main Ingredient](https://themainingredient.co)
+
+## Join the community!
+
+Helps us improve by joining our community!
+
+Click below to join our Slack.
+
+[Join slack community](https://themainingredient.typeform.com/to/X65bqg)
