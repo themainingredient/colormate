@@ -5,7 +5,6 @@ import { openUrlInBrowser } from '../helpers/window';
 
 const {colors, fonts} = Globals;
 
-// TODO: add url from env
 const BannerWrapper = styled.div`
     background-color: ${colors.Navy};
     height: 100px;
@@ -64,9 +63,7 @@ export const Banner  = () => {
     }, [])
     
     const handleYes = () => {
-        // TODO: go to url
-        const url = 'https://google.com'
-        // openUrlInBrowser(url);
+        openUrlInBrowser(`${process.env.REACT_APP_TYPEFORM_URL}`);
         window.postMessage('hideBanner')
         showBanner(false);
     }
