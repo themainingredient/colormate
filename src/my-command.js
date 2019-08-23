@@ -66,15 +66,28 @@ export default function () {
   });
 
   webContents.on('isBannerVisible', () => {
+    // showBannerFromDate is a unix timestamp or false (in the case should never show)
     let showBannerFromDate = Settings.settingForKey('showBannerFromDate');
+
     if (showBannerFromDate === undefined) {
       showBannerFromDate = Date.now();
       Settings.setSettingForKey('showBannerFromDate', showBannerFromDate);
     }
 
-    const currentDate = Date.now();
-    const isVisible = currentDate > showBannerFromDate;
+
+    let isVisible;
+    if (showBannerFromDate === false) {
+      isVisible = false;
+    } else {
+      const currentDate = Date.now();
+      isVisible = currentDate > showBannerFromDate;
+    }
+
     webContents.executeJavaScript(`isBannerVisible(${JSON.stringify(isVisible)})`);
+  });
+
+  webContents.on('hideBanner', () => {
+    Settings.setSettingForKey('showBannerFromDate', false);
   });
 
   const postponeBannerWithDays = (extraDays) => {
@@ -83,12 +96,9 @@ export default function () {
     Settings.setSettingForKey('showBannerFromDate', showBannerFromDate);
   };
 
-  webContents.on('hideBanner', () => {
-    postponeBannerWithDays(365 * 100);
-  });
-
   webContents.on('postponeBanner', () => {
-    postponeBannerWithDays(2);
+    const extraDays = 2;
+    postponeBannerWithDays(extraDays);
   });
 
   browserWindow.loadURL(webview);
