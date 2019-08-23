@@ -1,7 +1,8 @@
 import { css, createGlobalStyle } from 'styled-components';
 
-import SFProRegular from './assets/SFCompactDisplay-Regular.otf';
-import SFProBold from './assets/SFCompactDisplay-Bold.otf';
+import SFProRegular from './assets/SFProDisplay-Regular.otf';
+import SFProBold from './assets/SFProDisplay-Bold.otf';
+import SFProHeavy from './assets/SFProDisplay-Heavy.otf';
 import FuturaBold from './assets/Futura-Bold.otf';
 
 export const GlobalFonts = createGlobalStyle`
@@ -13,6 +14,11 @@ export const GlobalFonts = createGlobalStyle`
   @font-face {
     font-family: 'SFProBold';
     src: url(${SFProBold});
+  }
+
+  @font-face {
+    font-family: 'SFProHeavy';
+    src: url(${SFProHeavy});
   }
 
   @font-face {
@@ -31,11 +37,15 @@ export default {
     MediumGrey: '#B5B8C6',
     DarkGrey: '#4d4f59',
     Black25: '#00000040',
+    Cyan: '#00FFFF',
+    CyanDark: '#00DDDD',
+    Navy: '#0D0166',
   },
   fonts: {
     SFPro: {
       reg: 'SFProRegular',
       bold: 'SFProBold',
+      heavy: 'SFProHeavy',
     },
     Futura: {
       bold: 'FuturaBold',

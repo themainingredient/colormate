@@ -29,13 +29,13 @@ The plugin starts with scanning every layer in the file and gathering all the co
 When the plugin is done scanning your file, you will get an overview of all the colours you've used in the document. You will be able to see the colour number, how many times this colour has been used (and where!) and if this colour has an opacity value. Now you're able to see that there are two types of red that you're using: #CC0000 has been used 117 times, but #C50909 has only been used 3 times.
 
 
-# Features
+## Features
 - Get colors overview on the entire Sketch file, seeing where each color is being used
 - Get colors overview on a specific selection
 - Replace all the occurences of a color
 - Replace colors of a single layer
 
-## Future plans 🚀
+### Future plans 🚀
 
 We're not going to sit back and let the plugin work its magic. We're continously working on developing new features.
 
