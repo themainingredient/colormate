@@ -58,7 +58,8 @@
           "preferButton"
         ]
       }
-    ]
+    ],
+    "jsx-a11y/accessible-emoji": "off"
   },
   "overrides": [
     {

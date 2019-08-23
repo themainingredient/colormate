@@ -2,7 +2,7 @@ import { css, createGlobalStyle } from 'styled-components';
 
 import SFProRegular from './assets/SFProDisplay-Regular.otf';
 import SFProBold from './assets/SFProDisplay-Bold.otf';
-import SFProHeavy from './assets/SFProDisplay-Heavy.otf'
+import SFProHeavy from './assets/SFProDisplay-Heavy.otf';
 import FuturaBold from './assets/Futura-Bold.otf';
 
 export const GlobalFonts = createGlobalStyle`
@@ -39,13 +39,13 @@ export default {
     Black25: '#00000040',
     Cyan: '#00FFFF',
     CyanDark: '#00DDDD',
-    Navy: `#0D0166`
+    Navy: '#0D0166',
   },
   fonts: {
     SFPro: {
       reg: 'SFProRegular',
       bold: 'SFProBold',
-      heavy: 'SFProHeavy'
+      heavy: 'SFProHeavy',
     },
     Futura: {
       bold: 'FuturaBold',

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Globals from '../Global.styles';
 import { openUrlInBrowser } from '../helpers/window';
 
-const {colors, fonts} = Globals;
+const { colors, fonts } = Globals;
 
 const BannerWrapper = styled.div`
     background-color: ${colors.Navy};
@@ -49,49 +49,49 @@ const Button = styled.button`
 const Emoji = styled.span`
     font-size: 33px;
     height: 0px; /* remove default extra whitespace from emoji */
-`
+`;
 
-export const Banner  = () => {
-    const [isBannerVisible, showBanner] = useState(false);
-    
-    useEffect(() => {
-        window.isBannerVisible = (isVisible: boolean) => {
-            showBanner(isVisible);
-        }
+export const Banner = () => {
+  const [isBannerVisible, showBanner] = useState(false);
 
-        window.postMessage('isBannerVisible');
-    }, [])
-    
-    const handleYes = () => {
-        openUrlInBrowser(`${process.env.REACT_APP_TYPEFORM_URL}`);
-        window.postMessage('hideBanner')
-        showBanner(false);
-    }
+  useEffect(() => {
+    window.isBannerVisible = (isVisible: boolean) => {
+      showBanner(isVisible);
+    };
 
-    const handleNo = () => {
-        window.postMessage('hideBanner')
-        showBanner(false);
-    }
+    window.postMessage('isBannerVisible');
+  }, []);
 
-    const handleAskAgain = () => {
-        window.postMessage('postponeBanner')
-        showBanner(false);
-    }
+  const handleYes = () => {
+    openUrlInBrowser(`${process.env.REACT_APP_TYPEFORM_URL}`);
+    window.postMessage('hideBanner');
+    showBanner(false);
+  };
 
-    if (!isBannerVisible) {
-        return null;
-    }
+  const handleNo = () => {
+    window.postMessage('hideBanner');
+    showBanner(false);
+  };
 
-    return (
-        <BannerWrapper>
-            <Text>Help us with a 2 minute questionnaire?</Text>
-            
-            <ButtonsWrapper>
-                <Emoji>🎱</Emoji> 
-                <Button onClick={handleYes}>Yes</Button>
-                <Button onClick={handleNo}>No</Button>
-                <Button onClick={handleAskAgain}>Ask again later</Button>
-            </ButtonsWrapper>
-        </BannerWrapper>
-    )
-}
+  const handleAskAgain = () => {
+    window.postMessage('postponeBanner');
+    showBanner(false);
+  };
+
+  if (!isBannerVisible) {
+    return null;
+  }
+
+  return (
+    <BannerWrapper>
+      <Text>Help us with a 2 minute questionnaire?</Text>
+
+      <ButtonsWrapper>
+        <Emoji>🎱</Emoji>
+        <Button onClick={handleYes}>Yes</Button>
+        <Button onClick={handleNo}>No</Button>
+        <Button onClick={handleAskAgain}>Ask again later</Button>
+      </ButtonsWrapper>
+    </BannerWrapper>
+  );
+};

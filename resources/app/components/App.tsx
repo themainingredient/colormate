@@ -11,7 +11,7 @@ import Footer from './Footer';
 import Loader from './Loader';
 import NoColorsFound from './NoColorsFound';
 import { browserWindowSize } from '../../../constants';
-import {Banner} from './Banner';
+import { Banner } from './Banner';
 
 const PluginWrapper = styled.div`
   height: ${browserWindowSize.height}px;
@@ -64,7 +64,7 @@ export default function () {
   const content = Object.keys(colors).length !== 0 ? (
     <>
       <Header />
-      <Banner/>
+      <Banner />
       <List colorList={colors} />
       <Footer />
     </>
