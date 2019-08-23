@@ -6,7 +6,7 @@ This free plugin gives you an impression of _all the colours_ in your Sketch fil
 
 ## Why this Plugin? 🤔
 
-During designing we often found ourselves ending up with fifty different shades of grey (and of course other colours). Sometimes we would just lose ourselves in designing and don't keep track of all the colours that we used. But this is not ideal when you have to hand it over to the development team. 
+During designing we often found ourselves ending up with fifty different shades of grey (and of course other colours). Sometimes we would just lose ourselves in designing and don't keep track of all the colours that we used. But this is not ideal when you have to hand it over to the development team.
 
 That's why we've created this plugin to help designers keep track of the colours in the file, _without_ having to add the colours to the document colours first!
 
@@ -29,16 +29,24 @@ The plugin starts with scanning every layer in the file and gathering all the co
 When the plugin is done scanning your file, you will get an overview of all the colours you've used in the document. You will be able to see the colour number, how many times this colour has been used (and where!) and if this colour has an opacity value. Now you're able to see that there are two types of red that you're using: #CC0000 has been used 117 times, but #C50909 has only been used 3 times.
 
 
-# Features
+## Features
 - Get colors overview on the entire Sketch file, seeing where each color is being used
 - Get colors overview on a specific selection
 - Replace all the occurences of a color
 - Replace colors of a single layer
 
-## Future plans 🚀
+### Future plans 🚀
 
 We're not going to sit back and let the plugin work its magic. We're continously working on developing new features.
 
 If you can think of any other functionalities, please let us know! 🤩
 
 Made with ❤️ by [The Main Ingredient](https://themainingredient.co)
+
+## Join the community!
+
+Helps us improve by joining our community!
+
+Click below to join our Slack.
+
+[Join slack community](https://themainingredient.typeform.com/to/X65bqg)

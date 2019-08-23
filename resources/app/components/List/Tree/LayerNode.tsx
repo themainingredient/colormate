@@ -11,9 +11,9 @@ import {
 
 import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
-import Group from '../../../assets/group.svg';
 import Text from '../../../assets/textIcon.svg';
 import ColorPicker from '../../ColorPicker';
+import { LayerType } from '../../../enums/layer-type.enum';
 
 const LayerNode = ({
   layer, generation, children, color,
@@ -38,16 +38,16 @@ const LayerNode = ({
   }, [selectedLayer]);
 
   const handleClick = () => {
-    if (type === 'Group') return;
+    if (type === LayerType.group) return;
 
-    const shouldCenterOnSelf: boolean = type === 'Artboard' || type === 'Page';
+    const shouldCenterOnSelf: boolean = type === LayerType.artboard || type === LayerType.page;
     setSelectedLayer(id);
 
     const idToCenterOn = shouldCenterOnSelf ? id : Object.entries(colors)
       .reduce((acc: any, keyValue: any) => ([...acc, ...keyValue[1]]), [])
       .find(innerLayer => innerLayer.id === id)
       .parents
-      .find(parent => parent.type === 'Artboard')
+      .find(parent => parent.type === LayerType.artboard)
       .id;
 
     window.postMessage('selectLayer', id, idToCenterOn);
@@ -88,16 +88,14 @@ const LayerNode = ({
         )}
         {(() => {
           switch (type) {
-            case 'Artboard':
+            case LayerType.artboard:
               return <Artboard />;
-            case 'Group':
-              return <Group />;
-            case 'ShapePath':
+            case LayerType.shapePath:
               return <ShapePath />;
-            case 'Text':
+            case LayerType.text:
               return <Text />;
-            case 'Page':
-            case 'Shape':
+            case LayerType.page:
+            case LayerType.shape:
             default:
               return null;
           }
