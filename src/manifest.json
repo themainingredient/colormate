@@ -6,14 +6,14 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "Run Colormate in this document",
+      "name": "Colormate",
       "identifier": "listColors",
       "shortcut": "cmd shift 8",
       "script": "./my-command.js"
     }
   ],
   "menu": {
-    "title": "Colormate",
+    "isRoot": true,
     "items": [
       "listColors"
     ]
