@@ -30,12 +30,12 @@ const Button = styled.button`
     padding: 10px 16px;
     background: ${colors.TMIBlue};
     border-radius: 4.53px;
-
     color: ${colors.Cyan};
     font-size: 14px;
     font-family: ${fonts.SFPro.heavy};
     text-align: center;
     border: none;
+    cursor: pointer;
 
     &:hover {
         background: ${colors.TMIBlueDark};
