@@ -17,6 +17,7 @@
   "include": [
     "src/**/*", 
     "resources/**/*",
-    "typings/**/*.d.ts"
+    "typings/**/*.d.ts", 
+    "enums/**/*"
   ]
 }

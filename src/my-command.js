@@ -1,5 +1,6 @@
 import BrowserWindow from 'sketch-module-web-view';
 import sketch, { UI, Settings } from 'sketch'; // eslint-disable-line import/no-unresolved
+import { getPage } from './helpers/get-page';
 import { browserWindowSize } from '../constants.ts';
 import { replaceColorInLayers } from './helpers/replace-color-in-layers.ts';
 import getColors from './get-colors.ts';
@@ -38,6 +39,11 @@ export default function () {
 
     const sketchLayer = document.getLayerWithID(layerID);
     const layerToCenterOn = document.getLayerWithID(idToCenterOn);
+    const page = getPage(layerToCenterOn);
+
+    if (document.selectedPage !== page) {
+      document.selectedPage = page;
+    }
 
     document.centerOnLayer(layerToCenterOn);
     document.selectedLayers = [sketchLayer];

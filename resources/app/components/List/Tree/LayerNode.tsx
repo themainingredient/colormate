@@ -13,7 +13,7 @@ import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
 import Text from '../../../assets/textIcon.svg';
 import ColorPicker from '../../ColorPicker';
-import { LayerType } from '../../../enums/layer-type.enum';
+import { LayerType } from '../../../../../enums/layer-type.enum';
 
 const LayerNode = ({
   layer, generation, children, color,
@@ -43,7 +43,7 @@ const LayerNode = ({
     const shouldCenterOnSelf: boolean = type === LayerType.artboard || type === LayerType.page;
     setSelectedLayer(id);
 
-    const idToCenterOn = shouldCenterOnSelf ? id : Object.entries(colors)
+    const idToCenterOn: string = shouldCenterOnSelf ? id : Object.entries(colors)
       .reduce((acc: any, keyValue: any) => ([...acc, ...keyValue[1]]), [])
       .find(innerLayer => innerLayer.id === id)
       .parents
