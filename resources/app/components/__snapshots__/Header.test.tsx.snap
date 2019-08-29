@@ -49,8 +49,6 @@ exports[`Header.jsx renders and displays correctly 1`] = `
 >
   <img
     class="c1"
-    height="66"
-    width="186"
   />
   <div
     class="c2"

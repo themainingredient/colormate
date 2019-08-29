@@ -1,12 +1,12 @@
 import {
-  Layer, Page, Group, Selection,
+  Layer, Page, Group, Selection, Fill, Border,
 } from 'sketch'; // eslint-disable-line import/no-unresolved
 
 export const getParents = (parents: any[], id: { id: string, type: string, name: string }) => [...parents, id];
 
-export const hasBorder = (layer: any) => !!layer.style.borders.length;
+export const hasBorder = (layer: any): boolean => !!layer.style.borders.filter((border: Border) => border.enabled).length;
 
-export const hasFill = (layer: any) => !!layer.style.fills.length;
+export const hasFill = (layer: any): boolean => !!layer.style.fills.filter((fill: Fill) => fill.enabled).length;
 
 export const hasTextColor = (layer: any) => !!layer.style.textColor;
 

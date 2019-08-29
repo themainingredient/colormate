@@ -40,7 +40,7 @@ const StyledColormateLogo = styled(ColormateLogo)`
 
 const Header = () => (
   <HeaderWrapper>
-    <StyledColormateLogo height={66} width={186} />
+    <StyledColormateLogo />
     <Tag>{VERSION}</Tag>
   </HeaderWrapper>
 );
