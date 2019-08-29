@@ -13,7 +13,7 @@ import Artboard from '../../../assets/artboard.svg';
 import ShapePath from '../../../assets/Rectangle.svg';
 import Text from '../../../assets/textIcon.svg';
 import ColorPicker from '../../ColorPicker';
-import { LayerType } from '../../../enums/layer-type.enum';
+import { LayerType } from '../../../../../enums/layer-type.enum';
 
 const LayerNode = ({
   layer, generation, children, color,

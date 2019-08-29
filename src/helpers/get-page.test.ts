@@ -1,7 +1,7 @@
 
 import { Layer } from 'sketch';
 import {getPage} from './get-page';
-import { LayerType } from '../../resources/app/enums/layer-type.enum';
+import { LayerType } from '../../enums/layer-type.enum';
 
 describe('getPage', () => {
     test('should return the layer if is a page', () => {

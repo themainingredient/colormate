@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import LayerNode from './Tree/LayerNode';
-import { LayerType } from '../../enums/layer-type.enum';
+import { LayerType } from '../../../../enums/layer-type.enum';
 
 const ListItemTreeWrapper = styled.div`
   margin: 16px 0;

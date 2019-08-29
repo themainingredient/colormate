@@ -1,5 +1,5 @@
 import { Page, Layer } from 'sketch';
-import { LayerType } from '../../resources/app/enums/layer-type.enum';
+import { LayerType } from '../../enums/layer-type.enum';
 
 export const getPage = (layer: Layer): Page => {
     if (layer.type === LayerType.page) {

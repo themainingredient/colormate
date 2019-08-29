@@ -1,7 +1,7 @@
 import { ColorWithLayers } from '../models/color-with-layers.model';
 import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
-import { LayerType } from '../enums/layer-type.enum';
+import { LayerType } from '../../../enums/layer-type.enum';
 
 const createSketchColorMapLayer = (
   name: string,
