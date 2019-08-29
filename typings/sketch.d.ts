@@ -46,10 +46,12 @@ declare module 'sketch' {
 
     export interface Fill {
         color: string;
+        enabled: boolean;
     }
 
     export interface Border {
         color: string;
+        enabled: boolean;
     }
 
     export interface Selection {
