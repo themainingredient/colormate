@@ -1,5 +1,5 @@
 import {
-  Layer, Page, Group, Selection, Fill, Border
+  Layer, Page, Group, Selection, Fill, Border,
 } from 'sketch'; // eslint-disable-line import/no-unresolved
 
 export const getParents = (parents: any[], id: { id: string, type: string, name: string }) => [...parents, id];
