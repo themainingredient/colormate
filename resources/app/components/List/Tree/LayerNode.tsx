@@ -43,7 +43,7 @@ const LayerNode = ({
     const shouldCenterOnSelf: boolean = type === LayerType.artboard || type === LayerType.page;
     setSelectedLayer(id);
 
-    const idToCenterOn = shouldCenterOnSelf ? id : Object.entries(colors)
+    const idToCenterOn: string = shouldCenterOnSelf ? id : Object.entries(colors)
       .reduce((acc: any, keyValue: any) => ([...acc, ...keyValue[1]]), [])
       .find(innerLayer => innerLayer.id === id)
       .parents
