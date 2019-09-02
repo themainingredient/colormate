@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 module.exports = config => {
   config.resolve.extensions = ['.sketch.js', '.js', '.jsx', '.ts', '.tsx'];
+
   config.module.rules.push({
     test: /\.(html)$/,
     use: [
@@ -19,6 +20,7 @@ module.exports = config => {
       },
     ],
   });
+
   config.module.rules.push({
     test: /\.(css)$/,
     use: [
@@ -30,6 +32,7 @@ module.exports = config => {
       },
     ],
   });
+
   config.module.rules.push({
     test: /\.svg$/,
     use: [
@@ -40,10 +43,18 @@ module.exports = config => {
         loader: 'react-svg-loader',
         options: {
           jsx: true, // true outputs JSX tags
+          svgo: {
+            plugins: [
+              {
+                removeViewBox: false,
+              },
+            ],
+          }
         },
       },
     ],
   });
+  
   config.module.rules.push({
     test: /\.(gif|png|otf)$/,
     use: [
