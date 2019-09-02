@@ -19,5 +19,8 @@
     "resources/**/*",
     "typings/**/*.d.ts", 
     "enums/**/*"
+  ],
+  "exclude": [
+    "**/*.test.*"
   ]
 }
