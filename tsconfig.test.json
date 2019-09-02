@@ -1,6 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "include": [
+        "setupTest.ts",
         "src/**/*.test.ts",
         "resources/**/*.test.ts",
         "typings/**/*.d.ts", 
