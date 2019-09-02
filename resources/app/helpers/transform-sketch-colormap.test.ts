@@ -2,6 +2,7 @@ import { ColorWithLayers } from '../models/color-with-layers.model';
 import { SketchColorMap, SketchColorMapLayer, SketchColorMapLayerParent } from '../models/sketch-color-map.model';
 import { transformSketchColorMap } from './transform-sketch-colormap';
 import { LayerType } from '../../../enums/layer-type.enum';
+import { ColorType } from '../../../enums/color-type.enum';
 
 const createSketchColorMapLayer = (
   name: string,
@@ -12,7 +13,7 @@ const createSketchColorMapLayer = (
     id: `id-${name}`,
     name,
     type,
-    colorType: 'fill',
+    colorType: ColorType.fill,
     parents: [] as SketchColorMapLayerParent[],
   };
 
@@ -49,7 +50,7 @@ describe('createTreeStructure', () => {
       {
         color: 'red',
         layers: [{
-          id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill',
+          id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: ColorType.fill,
         }],
       },
     ];
@@ -82,7 +83,7 @@ describe('createTreeStructure', () => {
                 name: LayerType.group,
                 type: LayerType.group,
                 children: [{
-                  id: 'id-Rectangle', name: 'Rectangle', type: 'ShapePath', colorType: 'fill',
+                  id: 'id-Rectangle', name: 'Rectangle', type: 'ShapePath', colorType: ColorType.fill,
                 }],
               },
             ],
@@ -120,7 +121,7 @@ describe('createTreeStructure', () => {
                 id: 'id-Artboard1',
                 type: LayerType.artboard,
                 children: [{
-                  id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill',
+                  id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: ColorType.fill,
                 }],
               },
             ],
@@ -135,7 +136,7 @@ describe('createTreeStructure', () => {
                 name: 'Artboard2',
                 type: LayerType.artboard,
                 children: [{
-                  id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: 'fill',
+                  id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: ColorType.fill,
                 }],
               },
             ],
@@ -174,10 +175,10 @@ describe('createTreeStructure', () => {
                 type: LayerType.artboard,
                 children: [
                   {
-                    id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: 'fill',
+                    id: 'id-Rectangle1', name: 'Rectangle1', type: 'ShapePath', colorType: ColorType.fill,
                   },
                   {
-                    id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: 'fill',
+                    id: 'id-Rectangle2', name: 'Rectangle2', type: 'ShapePath', colorType: ColorType.fill,
                   },
                 ],
               },
@@ -226,7 +227,7 @@ describe('createTreeStructure', () => {
                     id: 'id-Rectangle2',
                     name: 'Rectangle2',
                     type: 'ShapePath',
-                    colorType: 'fill',
+                    colorType: ColorType.fill,
                   },
                   {
                     name: LayerType.group,
@@ -237,13 +238,13 @@ describe('createTreeStructure', () => {
                         id: 'id-Rectangle1',
                         name: 'Rectangle1',
                         type: 'ShapePath',
-                        colorType: 'fill',
+                        colorType: ColorType.fill,
                       },
                       {
                         id: 'id-Rectangle3',
                         name: 'Rectangle3',
                         type: 'ShapePath',
-                        colorType: 'fill',
+                        colorType: ColorType.fill,
                       },
                     ],
                   },

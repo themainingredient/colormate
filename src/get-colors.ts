@@ -8,6 +8,7 @@ import {
   getColorArray,
   getPagesWithSelectedLayers,
 } from './helpers/get-colors';
+import { ColorType } from '../enums/color-type.enum';
 
 export default function () {
   const colorsObject = {};
@@ -33,21 +34,21 @@ export default function () {
         if (hasBorder(layer)) {
           const { color } = layer.style.borders[0];
 
-          const dataStructure = createDataStructure(layer, 'border', parents);
+          const dataStructure = createDataStructure(layer, ColorType.border, parents);
           colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
         }
 
         if (hasFill(layer)) {
           const { color } = layer.style.fills[0];
 
-          const dataStructure = createDataStructure(layer, 'fill', parents);
+          const dataStructure = createDataStructure(layer, ColorType.fill, parents);
           colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
         }
 
         if (hasTextColor(layer)) {
           const color = layer.style.textColor;
 
-          const dataStructure = createDataStructure(layer, 'text', parents);
+          const dataStructure = createDataStructure(layer, ColorType.text, parents);
           colorsObject[color] = getColorArray(colorsObject, color, dataStructure);
         }
       }

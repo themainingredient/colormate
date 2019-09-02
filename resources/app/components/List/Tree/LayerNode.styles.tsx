@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { omit } from 'lodash';
 import GlobalStyles from '../../../Global.styles';
 import Arrow from '../../../assets/arrowGrey.svg';
+import { ColorType as ColorTypeEnum } from '../../../../../enums/color-type.enum';
 
 const { colors, fonts } = GlobalStyles;
 
@@ -17,7 +18,7 @@ interface NameProps {
 }
 
 interface ColorTypeProps {
-  colorType: string
+  colorType: ColorTypeEnum
 }
 
 export const NodeWrapper = styled.div`
@@ -52,6 +53,6 @@ export const ColorType = styled.div`
   width: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.DarkGrey};
-  background-color: ${({ colorType }: ColorTypeProps) => (colorType === '' ? colors.DarkGrey : '')};
+  background-color: ${({ colorType }: ColorTypeProps) => (colorType === ColorTypeEnum.fill || colorType === ColorTypeEnum.text ? colors.DarkGrey : '')};
   margin-right: 16px;
 `;

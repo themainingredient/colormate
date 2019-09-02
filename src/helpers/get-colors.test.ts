@@ -9,6 +9,7 @@ import {
   hasTextColor,
   getPagesWithSelectedLayers,
 } from './get-colors';
+import { ColorType } from '../../enums/color-type.enum';
 
 describe('Helpers / get-colors', () => {
   test('getParents returns an array of the parents and the current layer id', () => {
@@ -76,7 +77,7 @@ describe('Helpers / get-colors', () => {
 
   test('createDataStructure returns an object containing layer.id as id, colorType and parents', () => {
     const layer = { id: 'imalayer' };
-    const colorType = 'border';
+    const colorType = ColorType.border;
     const parents = ['id1', 'id2'];
     const dataStructure = createDataStructure(layer, colorType, parents);
 
