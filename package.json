@@ -64,7 +64,7 @@
     "react-hooks-testing-library": "^0.4.0",
     "react-svg-loader": "^3.0.3",
     "react-testing-library": "^6.1.2",
-    "semantic-release": "^15.13.24",
+    "semantic-release": "^17.2.3",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
